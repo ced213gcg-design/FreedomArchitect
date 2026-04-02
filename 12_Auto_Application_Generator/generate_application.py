@@ -1,47 +1,48 @@
 from pathlib import Path
+import re
 
-# --- Ensure directories exist ---
 base = Path.home() / "FreedomArchitect/12_Auto_Application_Generator"
 output_dir = base / "output"
-templates_dir = base / "templates"
-
 output_dir.mkdir(parents=True, exist_ok=True)
-templates_dir.mkdir(parents=True, exist_ok=True)
 
-# --- Input ---
+def clean(text):
+    text = text.lower()
+    text = re.sub(r"(salary|salaries|unknown|ref|\\(.*?\\))", "", text)
+    text = re.sub(r"[^a-z0-9]+", "_", text)
+    text = re.sub(r"_+", "_", text)
+    return text.strip("_")
+
 job = input("Enter Job Title: ").strip()
 company = input("Enter Company Name: ").strip()
 
-# --- Clean inputs ---
-job = job.replace("/", "").replace("\\", "")
-company = company.replace("/", "").replace("\\", "")
+job_clean = clean(job)
+company_clean = clean(company)
 
-# --- Templates ---
-cover = f"""My background is centered around cybersecurity operations, including SOC analysis, packet inspection, network defense, and system-level troubleshooting.
+cover = f"""Hello,
 
-I have built hands-on lab environments that demonstrate real-world analyst workflows such as alert triage, traffic analysis, and service exposure assessment.
+I am applying for the {job} position.
+
+My background is centered around cybersecurity operations, including SOC analysis, packet inspection, network defense, and system-level troubleshooting.
+
+I have built hands-on lab environments demonstrating real-world workflows: alert triage, traffic analysis, and threat investigation.
 
 My work is structured, evidence-based, and focused on defensive execution.
-
-I would value the opportunity to contribute to your team and continue growing within your environment.
 
 Best regards,
 Cedrick Green
 """
 
-resume = """- Conducted SOC-style alert investigations using structured workflows
-- Performed packet analysis to identify suspicious traffic patterns
-- Built network defense labs using Nmap and traffic inspection tools
-- Developed investigation reports and documentation for simulated incidents
+resume = """- Conducted SOC-style alert investigations
+- Performed packet analysis on suspicious traffic
+- Executed Nmap scans for network exposure
+- Built structured cybersecurity lab environments
+- Produced investigation reports with clear findings
 """
 
-# --- Write files ---
-cover_file = output_dir / f"{company}_{job}_cover.txt"
-resume_file = output_dir / f"{company}_{job}_resume.txt"
+cover_file = output_dir / f"{company_clean}_{job_clean}_cover.txt"
+resume_file = output_dir / f"{company_clean}_{job_clean}_resume.txt"
 
 cover_file.write_text(cover)
 resume_file.write_text(resume)
 
-print("\nApplication Generated Successfully:")
-print(f"Cover Letter: {cover_file}")
-print(f"Resume Bullets: {resume_file}")
+print(f"\nGenerated:\n{cover_file}\n{resume_file}")
