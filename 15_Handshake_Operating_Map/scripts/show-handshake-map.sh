@@ -1,0 +1,18 @@
+#!/bin/bash
+clear
+echo "=================================================="
+echo "          FREEDOM ARCHITECT HANDSHAKE MAP         "
+echo "=================================================="
+echo ""
+cat "$HOME/FreedomArchitect/15_Handshake_Operating_Map/maps/system-handshake-map.md"
+echo ""
+echo "=================================================="
+echo "Rules File:"
+echo "  nano ~/FreedomArchitect/15_Handshake_Operating_Map/rules/communication-rules.md"
+echo "Assignments File:"
+echo "  nano ~/FreedomArchitect/15_Handshake_Operating_Map/rules/assignment-rules.md"
+echo "Escalation File:"
+echo "  nano ~/FreedomArchitect/15_Handshake_Operating_Map/rules/escalation-logic.md"
+echo "Daily Chain File:"
+echo "  nano ~/FreedomArchitect/15_Handshake_Operating_Map/maps/daily-operating-chain.md"
+echo "=================================================="
