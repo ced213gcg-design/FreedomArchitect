@@ -1,0 +1,6 @@
+- Conducted SOC-style alert investigations using structured workflows
+- Performed packet analysis to identify suspicious traffic patterns
+- Executed Nmap scans to assess network exposure and active services
+- Built structured network defense and packet analysis labs
+- Documented findings clearly with defensive recommendations
+- Worked across Linux and Windows environments for operational support

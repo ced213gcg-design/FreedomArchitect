@@ -1,0 +1,14 @@
+Hello,
+
+I am applying for the Jr. Security Operations Center (SOC) Analyst salaries in Remote position at Unknown.
+
+My background is centered around cybersecurity operations, including SOC analysis, packet inspection, network defense, and system-level troubleshooting.
+
+I have built hands-on lab environments that demonstrate real-world analyst workflows such as alert triage, traffic analysis, service exposure assessment, packet inspection, and defensive analysis.
+
+My work is structured, evidence-based, and focused on defensive execution.
+
+I would value the opportunity to contribute to your team and continue growing within your environment.
+
+Best regards,
+Cedrick Green
