@@ -44,3 +44,5 @@ Role: Jr. Security Operations Center (SOC) Analyst salaries in Remote
 Source: https://www.indeed.com/jobs?q=cybersecurity+analyst&l=Remote
 Link: https://www.indeed.com/career/gsoc-operator/salaries?campaignid=serp-more&amp;fromjk=b2d928c3b20d3ef6&amp;from=serp-more
 Action: Application package generated
+
+2026-04-02 09:41:10.665641 | Unknown | Associate Cybersecurity Analyst
