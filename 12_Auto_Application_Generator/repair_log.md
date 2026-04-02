@@ -1,0 +1,12 @@
+
+## Repair Run - 2026-04-02 10:24:08
+- _associate_cybersecurity_analyst_cover.txt -> associate_cybersecurity_analyst_cover.txt
+- _associate_cybersecurity_analyst_resume.txt -> associate_cybersecurity_analyst_resume.txt
+- _cybersecurity_analyst_soc_analyst_threat_monitoring_response_cover.txt -> cybersecurity_analyst_soc_analyst_threat_monitoring_response_cover.txt
+- _cybersecurity_analyst_soc_analyst_threat_monitoring_response_resume.txt -> cybersecurity_analyst_soc_analyst_threat_monitoring_response_resume.txt
+- amazon_soc_analyst_cover_txt -> amazon_soc_analyst_cover.txt
+- amazon_soc_analyst_resume_txt -> amazon_soc_analyst_resume.txt
+- unknown_cyber_security_analyst_cover_txt -> unknown_cyber_security_analyst_cover.txt
+- unknown_cyber_security_analyst_resume_txt -> unknown_cyber_security_analyst_resume.txt
+- unknown_jr_security_operations_center_analyst_in_remote_cover_txt -> unknown_jr_security_operations_center_analyst_in_remote_cover.txt
+- unknown_jr_security_operations_center_analyst_in_remote_resume_txt -> unknown_jr_security_operations_center_analyst_in_remote_resume.txt
