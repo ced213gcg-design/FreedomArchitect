@@ -1,0 +1,31 @@
+{
+  "mode": "CONTROLLED_AUTO",
+  "system_name": "Freedom Architect",
+  "authority_chain": {
+    "commander": "Cedrick Green",
+    "overseer": "ChatGPT",
+    "execution_layer": "Sintra workforce"
+  },
+  "confidence_thresholds": {
+    "auto_execute": 90,
+    "review_required": 70,
+    "block_below": 70
+  },
+  "release_rules": {
+    "public_output_requires_audit": true,
+    "recruiter_outreach_requires_approval_if_confidence_below": 90,
+    "applications_require_role_alignment_check": true,
+    "duplicate_suppression": true
+  },
+  "daily_targets": {
+    "applications": 5,
+    "recruiter_messages": 5,
+    "follow_ups": 3
+  },
+  "alert_options": [
+    "EDIT",
+    "REVISE",
+    "APPROVE",
+    "HOLD"
+  ]
+}

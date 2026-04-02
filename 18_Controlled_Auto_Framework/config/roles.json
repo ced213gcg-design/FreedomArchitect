@@ -1,0 +1,174 @@
+{
+  "OVERSEER": {
+    "owner": "ChatGPT",
+    "purpose": "Design systems, refine logic, enforce standards, diagnose faults",
+    "allowed": [
+      "architecture",
+      "workflow_design",
+      "templates",
+      "qa_logic",
+      "gap_analysis"
+    ],
+    "forbidden": [
+      "unreviewed_public_release",
+      "mechanical_repetition"
+    ]
+  },
+  "COMMAND_AUTHORITY": {
+    "owner": "Cedrick Green",
+    "purpose": "Approve direction, authorize release, override strategic choices",
+    "allowed": [
+      "approve",
+      "reject",
+      "reprioritize",
+      "override"
+    ],
+    "forbidden": [
+      "manual_repetition_as_default"
+    ]
+  },
+  "SCOUT": {
+    "owner": "Sintra",
+    "purpose": "Find jobs, grants, partnerships, opportunities",
+    "input": [
+      "keywords",
+      "location",
+      "target domain"
+    ],
+    "output": [
+      "clean opportunity list"
+    ],
+    "forbidden": [
+      "writing",
+      "outreach"
+    ]
+  },
+  "ANALYST": {
+    "owner": "Sintra",
+    "purpose": "Score and filter opportunities",
+    "input": [
+      "opportunity list",
+      "criteria"
+    ],
+    "output": [
+      "ranked top targets"
+    ],
+    "forbidden": [
+      "asset generation",
+      "sending"
+    ]
+  },
+  "FORGE": {
+    "owner": "Sintra",
+    "purpose": "Generate applications and draft assets",
+    "input": [
+      "job target",
+      "base profile",
+      "proof links"
+    ],
+    "output": [
+      "resume draft",
+      "cover draft",
+      "support text"
+    ],
+    "forbidden": [
+      "sending",
+      "final approval"
+    ]
+  },
+  "AUDITOR": {
+    "owner": "Sintra",
+    "purpose": "QA/QC gatekeeper",
+    "input": [
+      "draft output",
+      "rules",
+      "recent outputs"
+    ],
+    "output": [
+      "APPROVED",
+      "REVISE",
+      "BLOCK"
+    ],
+    "forbidden": [
+      "original drafting",
+      "sending"
+    ]
+  },
+  "CONNECTOR": {
+    "owner": "Sintra",
+    "purpose": "Send outreach and follow-ups after approval",
+    "input": [
+      "approved assets",
+      "contact target"
+    ],
+    "output": [
+      "sent outreach",
+      "follow-up package"
+    ],
+    "forbidden": [
+      "independent approval",
+      "job searching"
+    ]
+  },
+  "LOGGER": {
+    "owner": "Sintra",
+    "purpose": "Record actions and state changes",
+    "input": [
+      "events"
+    ],
+    "output": [
+      "logs",
+      "counts",
+      "history"
+    ],
+    "forbidden": [
+      "decision making"
+    ]
+  },
+  "EXECUTIVE": {
+    "owner": "Sintra",
+    "purpose": "Summarize health, bottlenecks, and next moves",
+    "input": [
+      "logs",
+      "metrics",
+      "dashboards"
+    ],
+    "output": [
+      "executive alerts",
+      "performance summary"
+    ],
+    "forbidden": [
+      "execution"
+    ]
+  },
+  "BUILDER": {
+    "owner": "Sintra",
+    "purpose": "Books, courses, nonprofit production support",
+    "input": [
+      "outline",
+      "standards",
+      "priority"
+    ],
+    "output": [
+      "draft components"
+    ],
+    "forbidden": [
+      "final publication without audit"
+    ]
+  },
+  "CAPITAL": {
+    "owner": "Sintra",
+    "purpose": "Funding pathways, grants, monetization tracking",
+    "input": [
+      "venture list",
+      "funding goals"
+    ],
+    "output": [
+      "capital opportunities",
+      "funding logs"
+    ],
+    "forbidden": [
+      "legal conclusions"
+    ]
+  }
+}
