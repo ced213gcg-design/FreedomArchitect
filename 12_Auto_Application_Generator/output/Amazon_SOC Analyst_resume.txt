@@ -1,0 +1,4 @@
+- Conducted SOC-style alert investigations using structured workflows
+- Performed packet analysis to identify suspicious traffic patterns
+- Built network defense labs using Nmap and traffic inspection tools
+- Developed investigation reports and documentation for simulated incidents
