@@ -1,0 +1,45 @@
+{
+  "target_keywords": [
+    "cybersecurity",
+    "soc",
+    "security analyst",
+    "threat",
+    "incident response",
+    "network defense",
+    "packet analysis",
+    "wireshark",
+    "nmap",
+    "linux",
+    "siem",
+    "security operations"
+  ],
+  "negative_keywords": [
+    "senior director",
+    "principal architect",
+    "sales",
+    "insurance sales",
+    "physician",
+    "nurse",
+    "unrelated"
+  ],
+  "preferred_locations": [
+    "remote",
+    "austin",
+    "texas"
+  ],
+  "weights": {
+    "target_keyword": 8,
+    "preferred_location": 3,
+    "remote_bonus": 5,
+    "entry_bonus": 4,
+    "negative_penalty": -10
+  },
+  "entry_keywords": [
+    "entry",
+    "junior",
+    "associate",
+    "analyst",
+    "level 1",
+    "tier 1"
+  ]
+}
