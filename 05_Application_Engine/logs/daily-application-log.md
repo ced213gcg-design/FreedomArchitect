@@ -65,3 +65,20 @@ Platform: email
 Action: Recruiter message + follow-up generated
 
 2026-04-02 10:37:46.512423 | Unknown | Jr. Security Operations Center (SOC) Analyst salaries in Remote
+## RECRUITER OUTREACH ENTRY
+Time: 2026-04-02 10:38
+Recruiter: Jr. Security Operations Center (SOC) Analyst salaries in Remote
+Company: SOC FINDER
+Role: Jr. Security Operations
+Platform: email
+Action: Recruiter message + follow-up generated
+
+## RECRUITER OUTREACH ENTRY
+Time: 2026-04-02 10:42
+Recruiter: faexec[201~
+Company: Company
+Role: Cybersecurity Role
+Platform: LinkedIn
+Action: Recruiter message + follow-up generated
+
+2026-04-02 10:42:41.286100 | Unknown | Cybersecurity Analyst

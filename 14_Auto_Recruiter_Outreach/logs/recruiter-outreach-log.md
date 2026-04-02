@@ -13,3 +13,17 @@ Company: NA
 Role: NA
 Platform: email
 Action: Outreach package generated
+
+## 2026-04-02 10:38
+Name: Jr. Security Operations Center (SOC) Analyst salaries in Remote
+Company: SOC FINDER
+Role: Jr. Security Operations
+Platform: email
+Action: Outreach package generated
+
+## 2026-04-02 10:42
+Name: faexec[201~
+Company: Company
+Role: Cybersecurity Role
+Platform: LinkedIn
+Action: Outreach package generated
