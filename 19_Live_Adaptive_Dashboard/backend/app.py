@@ -11,13 +11,17 @@ from state_store import manifest,hosts,agents,ledger_path,repo_path,read_yaml
 from soc_adapter import SocAdapter
 from ledger_adapter import recent as ledger_recent
 from agent_registry import public_view
-from economics_gate import internal_evidence_decision
+from economics_gate import internal_evidence_decision,evaluate_mechanism
 from revenue_flywheel import get_revenue_flywheel
 from exception_adapter import get_exceptions,get_high_priority
 from soc_mission_adapter import five_missions,mission_trace
 from soc_scenario_adapter import scenario_summary,scenario_trace,bridge_status,sensor_inventory
 from vm_state_adapter import vm_portals
 from interaction_api import interaction_contract,normalize_interaction
+from infinity_adapter import state as infinity_state,lifecycle as infinity_lifecycle,workers as constitutional_workers,handoffs as constitutional_handoffs
+from crayola_adapter import current as crayola_current
+from game_theory_adapter import analyze as game_theory_analyze,recent as game_theory_recent
+from reinjection_adapter import current as reinjection_current
 
 def _load(name,path):
     s=importlib.util.spec_from_file_location(name,path); m=importlib.util.module_from_spec(s); s.loader.exec_module(m); return m
@@ -31,13 +35,13 @@ def _organ_scores(organ):
 def _pressure():
     rows=[]
     for organ in manifest().get("organs",[]):
-        p=pressure_mod.calculate(_organ_scores(organ)); rows.append({"organ":organ["id"],**p,"evidence_basis":"DECLARED_CONFIG_NOT_RUNTIME","next_action":"COLLECT_RUNTIME_EVIDENCE"})
-    weakest=min(rows,key=lambda r:r["PressureLoss"]) if rows else None; return {"state":"VERIFY","organs":rows,"system_weakest":weakest}
+        p=pressure_mod.calculate(_organ_scores(organ)); rows.append({"organ":organ["id"],**p,"evidence_basis":"DECLARED_CONFIG_NOT_RUNTIME","constraint":"Weakest verified material dimension constrains promotion until evidence improves.","owner":"mission_control","state_change_evidence":"COLLECT_RUNTIME_EVIDENCE","next_action":"COLLECT_RUNTIME_EVIDENCE"})
+    weakest=min(rows,key=lambda r:r["PressureLoss"]) if rows else None; return {"state":"VERIFY","principle":"WEAKEST_VERIFIED_MATERIAL_DIMENSION","organs":rows,"system_weakest":weakest,"hard_control_override":True}
 def _sphere():
     nodes=[]
     for idx,o in enumerate(manifest().get("organs",[])):
         s=_organ_scores(o); nodes.append({"id":o["id"],"label":o["name"],"state":o["state"],"x":idx%5,"y":s["EconomicValue"],"w":100 if o.get("criticality")=="TIER_0" else 60,"s":s["Evidence"],"importance":100 if o.get("criticality")=="TIER_0" else 60,"activity":0,"confidence":s["Evidence"],"data_quality":"DECLARED_CONFIG"})
-    return {"dimensions":{"X":"Capability","Y":"Productive Value","W":"Strategic Will / Authorization","S":"Verified Operating State"},"nodes":nodes,"edges":[],"exception_constellation":get_high_priority(),"symbolic_heartbeat_ms":963}
+    return {"dimensions":{"X":"Capability","Y":"Productive Value","W":"Strategic Will / Authorization","S":"Verified Operating State"},"nodes":nodes,"edges":[],"exception_constellation":get_high_priority(),"symbolic_heartbeat_ms":963,"telemetry_independent":True}
 def _revenue_flywheel(): return get_revenue_flywheel(repo_path("config","revenue-stream-registry.yaml"),repo_path("22_CCC_Ledger","economics","revenue-flywheel-policy.yaml"))
 
 def _append_interaction(event):
@@ -72,17 +76,18 @@ def _frontend_payload(fp,path):
 def route_request(method,path,body=None):
     m=manifest(); static={
         "/":"index.html","/index.html":"index.html","/app.js":"app.js","/sphere.js":"sphere.js","/exception_constellation.js":"exception_constellation.js","/styles.css":"styles.css",
-        "/ccc_multiverse.css":"ccc_multiverse.css","/interaction_telemetry.js":"interaction_telemetry.js","/context_lens.js":"context_lens.js","/command_deck.js":"command_deck.js","/ccc_horizon.js":"ccc_horizon.js","/object_cards.js":"object_cards.js","/executive_mode.js":"executive_mode.js","/soc_physical_evidence.js":"soc_physical_evidence.js"
+        "/ccc_multiverse.css":"ccc_multiverse.css","/interaction_telemetry.js":"interaction_telemetry.js","/context_lens.js":"context_lens.js","/command_deck.js":"command_deck.js","/ccc_horizon.js":"ccc_horizon.js","/object_cards.js":"object_cards.js","/executive_mode.js":"executive_mode.js","/soc_physical_evidence.js":"soc_physical_evidence.js",
+        "/infinity_composition.js":"infinity_composition.js","/ccc_infinity.css":"ccc_infinity.css"
     }
     if method=="GET" and path in static:
         fp=repo_path("19_Live_Adaptive_Dashboard","frontend",static[path])
         if not fp.exists(): return _json(404,{"error":"frontend_missing"})
         ctype="text/html; charset=utf-8" if fp.suffix==".html" else "text/javascript; charset=utf-8" if fp.suffix==".js" else "text/css; charset=utf-8"; return 200,{"Content-Type":ctype},_frontend_payload(fp,path)
-    if method=="GET" and path=="/api/health": return _json(200,{"status":"PASS","state":"VERIFY","service":"ccc-living-dashboard","version":"10.1-P0","release":"SOC-LIVE-P0","physical_patch":"TAPER-ONE-DROP-v1","timestamp":datetime.now(timezone.utc).isoformat()})
+    if method=="GET" and path=="/api/health": return _json(200,{"status":"PASS","state":"BUILD","service":"ccc-living-dashboard","version":"10.1-P0","release":"CCC-INFINITY-COMPOSITION-v1","physical_patch":"TAPER-ONE-DROP-v1","frozen_physical_candidate_sha":"7bf932c5aac08d31979761e28c5d9218e002f6ad","timestamp":datetime.now(timezone.utc).isoformat()})
     if method=="GET" and path=="/api/manifest": return _json(200,m)
     if method=="GET" and path=="/api/hosts": return _json(200,hosts())
     if method=="GET" and path=="/api/organs": return _json(200,{"organs":m.get("organs",[])})
-    if method=="GET" and path=="/api/mission": return _json(200,{"state":m.get("status"),"branch":"hotfix/ccc-soc-five-live-evidence-v1","next_action":"PROVE_CONTROL_GATES_AND_FIVE_DETECTION_SCENARIOS_WITH_PHYSICAL_EVIDENCE","validation":"DECLARED_MISSION_BRANCH"})
+    if method=="GET" and path=="/api/mission": return _json(200,{"state":m.get("status"),"branch":"upgrade/ccc-infinity-composition-v1","frozen_physical_candidate":"hotfix/ccc-soc-five-live-evidence-v1@7bf932c5aac08d31979761e28c5d9218e002f6ad","next_action":"COMPOSE_INFINITY_WITHOUT_DISTURBING_PHYSICAL_ACCEPTANCE","validation":"DECLARED_INFINITY_BRANCH"})
     if method=="GET" and path=="/api/pressure-loss": return _json(200,_pressure())
     if method=="GET" and path=="/api/soc/state": return _json(200,SocAdapter().get_state())
     if method=="GET" and path in {"/api/soc/missions","/api/soc/control-gates"}: return _json(200,five_missions())
@@ -99,7 +104,18 @@ def route_request(method,path,body=None):
     if method=="GET" and path=="/api/sphere": return _json(200,_sphere())
     if method=="GET" and path=="/api/economics/technology-choice": return _json(200,internal_evidence_decision(repo_path("22_CCC_Ledger","economics","technology-choice-matrix.yaml")))
     if method=="GET" and path=="/api/economics/revenue-flywheel": return _json(200,_revenue_flywheel())
+    if method=="GET" and path=="/api/infinity/state": return _json(200,infinity_state())
+    if method=="GET" and path=="/api/infinity/lifecycle": return _json(200,infinity_lifecycle())
+    if method=="GET" and path=="/api/infinity/reinjection": return _json(200,reinjection_current())
+    if method=="GET" and path=="/api/crayola/current": return _json(200,crayola_current())
+    if method=="GET" and path=="/api/game-theory/recent": return _json(200,game_theory_recent())
+    if method=="GET" and path=="/api/workers/constitutional": return _json(200,constitutional_workers())
+    if method=="GET" and path=="/api/workers/handoffs": return _json(200,constitional_handoffs())
     if method=="GET" and path=="/api/interaction/contract": return _json(200,interaction_contract())
+    if method=="POST" and path=="/api/game-theory/analyze":
+        payload=body if isinstance(body,dict) else json.loads(body or "{}"); result=game_theory_analyze(payload); return _json(200 if result.get("status")!="HOLD" else 422,result)
+    if method=="POST" and path=="/api/economics/mechanism-gate":
+        payload=body if isinstance(body,dict) else json.loads(body or "{}"); result=evaluate_mechanism(repo_path("22_CCC_Ledger","economics","technology-choice-matrix.yaml"),payload); return _json(200,result)
     if method=="POST" and path=="/api/interaction-event":
         payload=body if isinstance(body,dict) else json.loads(body or "{}"); event=normalize_interaction(payload)
         if not event.get("accepted"): return _json(400,event)
@@ -125,5 +141,5 @@ class Handler(BaseHTTPRequestHandler):
     def do_POST(self): self._send("POST")
     def log_message(self,fmt,*args): return
 def main():
-    host=os.getenv("CCC_DASHBOARD_HOST","127.0.0.1"); port=int(os.getenv("CCC_DASHBOARD_PORT","8787")); print(f"CCC Living Dashboard SOC Physical Patch: http://{host}:{port}"); ThreadingHTTPServer((host,port),Handler).serve_forever()
+    host=os.getenv("CCC_DASHBOARD_HOST","127.0.0.1"); port=int(os.getenv("CCC_DASHBOARD_PORT","8787")); print(f"CCC Living Dashboard Infinity Composition: http://{host}:{port}"); ThreadingHTTPServer((host,port),Handler).serve_forever()
 if __name__=="__main__": main()
