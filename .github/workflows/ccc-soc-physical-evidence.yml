@@ -21,6 +21,26 @@ jobs:
           python scripts/validate_ccc_repo.py
       - name: Physical evidence unit tests
         run: pytest -q --import-mode=importlib
+      - name: Machine-readable evidence package dry run
+        run: |
+          python scripts/warroom/export_physical_artifacts.py
+          test -f artifacts/soc-live-five/control-gates.json
+          test -f artifacts/soc-live-five/scenario-summary.json
+          test -f artifacts/soc-live-five/scenario-runs.jsonl
+          test -f artifacts/soc-live-five/sensor-inventory.json
+          test -f artifacts/soc-live-five/evidence-index.json
+          test -f artifacts/soc-live-five/sha256sums.txt
+          test -f artifacts/soc-live-five/report/CCC_SOC_PHYSICAL_LIVE_EVIDENCE_REPORT.md
+          python - <<'PY'
+          import json
+          gates=json.load(open('artifacts/soc-live-five/control-gates.json'))
+          scenarios=json.load(open('artifacts/soc-live-five/scenario-summary.json'))
+          sensors=json.load(open('artifacts/soc-live-five/sensor-inventory.json'))
+          assert gates['proven_count']==0
+          assert scenarios['real_scenario_count']==0
+          assert sensors['state']=='UNKNOWN'
+          print('machine-readable physical evidence package PASS')
+          PY
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
@@ -43,6 +63,7 @@ jobs:
           if ($parseErrors.Count -gt 0) { $parseErrors | Format-Table | Out-String | Write-Error; exit 1 }
       - name: Dashboard negative-evidence smoke
         run: |
+          rm -rf artifacts/soc-live-five runtime/soc
           python 19_Live_Adaptive_Dashboard/backend/app.py >/tmp/ccc-physical.log 2>&1 &
           sleep 2
           python - <<'PY'
