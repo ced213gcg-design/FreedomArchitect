@@ -12,6 +12,7 @@ from soc_adapter import SocAdapter
 from ledger_adapter import recent as ledger_recent
 from agent_registry import public_view
 from economics_gate import internal_evidence_decision
+from revenue_flywheel import get_revenue_flywheel
 
 def _load(name,path):
     s=importlib.util.spec_from_file_location(name,path); m=importlib.util.module_from_spec(s); s.loader.exec_module(m); return m
@@ -37,6 +38,11 @@ def _sphere():
     for idx,o in enumerate(manifest().get("organs",[])):
         s=_organ_scores(o); nodes.append({"id":o["id"],"label":o["name"],"state":o["state"],"x":idx%5,"y":s["EconomicValue"],"w":100 if o.get("criticality")=="TIER_0" else 60,"s":s["Evidence"],"importance":100 if o.get("criticality")=="TIER_0" else 60,"activity":0,"confidence":s["Evidence"],"data_quality":"DECLARED_CONFIG"})
     return {"dimensions":{"X":"Capability","Y":"Productive Value","W":"Strategic Will / Authorization","S":"Verified Operating State"},"nodes":nodes,"edges":[],"symbolic_heartbeat_ms":963}
+def _revenue_flywheel():
+    return get_revenue_flywheel(
+        repo_path("config","revenue-stream-registry.yaml"),
+        repo_path("22_CCC_Ledger","economics","revenue-flywheel-policy.yaml"),
+    )
 def route_request(method,path,body=None):
     m=manifest()
     static={"/":"index.html","/index.html":"index.html","/app.js":"app.js","/sphere.js":"sphere.js","/styles.css":"styles.css"}
@@ -56,6 +62,7 @@ def route_request(method,path,body=None):
     if method=="GET" and path=="/api/agents": return _json(200,{"agents":public_view(repo_path("23_CCC_Agent_Mesh","registry.yaml"))})
     if method=="GET" and path=="/api/sphere": return _json(200,_sphere())
     if method=="GET" and path=="/api/economics/technology-choice": return _json(200,internal_evidence_decision(repo_path("22_CCC_Ledger","economics","technology-choice-matrix.yaml")))
+    if method=="GET" and path=="/api/economics/revenue-flywheel": return _json(200,_revenue_flywheel())
     if method=="POST" and path=="/api/action-request":
         payload=body if isinstance(body,dict) else json.loads(body or "{}")
         action=payload.get("action_type"); requester=payload.get("requester","dashboard-agent")
