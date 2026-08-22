@@ -1,6 +1,5 @@
 from __future__ import annotations
 from datetime import datetime, timezone
-from pathlib import Path
 from typing import Any
 
 from state_store import repo_path, read_yaml
@@ -56,9 +55,10 @@ def five_missions() -> dict:
     for definition in registry.get("missions", []):
         wanted = {str(definition.get("id", "")).upper(), str(definition.get("key", "")).upper()}
         evidence = next((row for row in records if wanted & _record_keys(row)), None)
+        common = {**definition, "object_class": "CONTROL_GATE", "group": "SOC_CONTROL_GATES"}
         if evidence is None:
             missions.append({
-                **definition,
+                **common,
                 "state": "UNKNOWN",
                 "result": None,
                 "run_id": soc.get("last_valid_run_id"),
@@ -71,7 +71,7 @@ def five_missions() -> dict:
             continue
 
         missions.append({
-            **definition,
+            **common,
             "state": _explicit_state(evidence, bool(soc.get("stale", True))),
             "result": evidence.get("result") or evidence.get("status"),
             "run_id": evidence.get("run_id") or soc.get("last_valid_run_id"),
@@ -89,11 +89,14 @@ def five_missions() -> dict:
         "state": "VERIFY" if soc.get("connected") else "UNKNOWN",
         "source_state": soc.get("validation"),
         "run_id": soc.get("last_valid_run_id"),
+        "group": "SOC_CONTROL_GATES",
+        "title": "SOC Control Gates",
         "count": len(missions),
         "proven_count": proven,
         "missions": missions,
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "truth_rule": "NO_LIVE_EVIDENCE_NO_PASS",
+        "purpose": "Prove the SOC pipeline can support trustworthy evidence; these are not detection scenarios.",
     }
 
 
@@ -107,7 +110,7 @@ def mission_trace() -> dict:
             "timestamp": mission.get("last_verified"),
             "source": "dell-soc-live-state",
             "target": mission.get("id"),
-            "type": "SOC_MISSION_EVIDENCE",
+            "type": "SOC_CONTROL_GATE_EVIDENCE",
             "state": mission.get("state"),
             "validation": mission.get("validation"),
             "evidence_ref": mission.get("evidence_ref"),
@@ -116,6 +119,7 @@ def mission_trace() -> dict:
     return {
         "state": payload["state"],
         "run_id": payload["run_id"],
+        "group": "SOC_CONTROL_GATES",
         "events": events,
         "validation": "TRACE_FROM_BOUND_LIVE_EVIDENCE_ONLY",
     }
