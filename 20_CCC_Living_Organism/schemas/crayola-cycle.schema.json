@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ccc://schemas/crayola-cycle.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["cycle_id", "question", "current_assumption", "cross_examination", "sources", "analysis", "yielded_evidence", "observation", "lesson", "amendment", "terminal_output_type", "confidence", "authority", "validated"],
+  "properties": {
+    "cycle_id": {"type": "string", "minLength": 1},
+    "question": {"type": "string", "minLength": 1},
+    "current_assumption": {"type": "string"},
+    "cross_examination": {"type": "array", "items": {"type": "string"}},
+    "sources": {"type": "array", "items": {"type": "string"}},
+    "analysis": {"type": "string"},
+    "yielded_evidence": {"type": "array", "items": {"type": "string"}},
+    "observation": {"type": "string"},
+    "lesson": {"type": "string"},
+    "amendment": {"type": "string"},
+    "terminal_output_type": {"enum": ["EVIDENCE", "CAPABILITY", "MEMORY", "SEED", "DOCUMENTED_REJECTION"]},
+    "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+    "authority": {"enum": ["ADVISORY", "VALIDATED_EVIDENCE"]},
+    "validated": {"type": "boolean"},
+    "ledger_truth_allowed": {"type": "boolean"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"validated": {"const": false}}},
+      "then": {"properties": {"authority": {"const": "ADVISORY"}, "ledger_truth_allowed": {"const": false}}}
+    }
+  ]
+}
