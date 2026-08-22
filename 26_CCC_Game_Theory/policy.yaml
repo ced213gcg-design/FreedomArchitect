@@ -1,0 +1,27 @@
+version: infinity-v1
+authority: ADVISORY_ONLY
+required_questions:
+  - WILL_THIS_WORK
+  - WHAT_HAPPENS_AFTER_WE_ACT
+recommendations:
+  - ACT
+  - HOLD
+  - DEFER
+  - NO_PLAY
+  - SEEK_EVIDENCE
+  - COUNTERMOVE
+  - RETURN_TO_BETA
+hard_control_precedence:
+  - SECURITY_LEGAL_HUMAN
+  - VERIFIED_LEDGER_LIVE_EVIDENCE
+  - RATIFIED_CANON_MANIFEST
+  - RELEASE_TEST_EVIDENCE
+  - WORKER_ANALYSIS
+  - UNVERIFIED_INFERENCE
+forbidden:
+  - consequential_execution
+  - direct_verified_ledger_write
+  - security_bypass
+  - legal_bypass
+  - human_authority_override
+  - numeric_payoff_override_of_hard_control
