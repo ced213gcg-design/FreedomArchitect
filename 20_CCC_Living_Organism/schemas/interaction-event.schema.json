@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ccc.interaction-event.v1",
+  "type": "object",
+  "required": ["action_type", "source_context", "target_object"],
+  "properties": {
+    "operator_session": {"type": "string", "maxLength": 160},
+    "action_type": {"enum": ["SELECT_OBJECT","OPEN_WORLD","OPEN_VM","OPEN_EVIDENCE","OPEN_COMMAND_DECK","CLOSE_COMMAND_DECK","OPEN_CONTEXT_LENS","CLOSE_CONTEXT_LENS","RETURN_HOME","CHANGE_PERFORMANCE_MODE","OPEN_EXECUTIVE_MODE","OPEN_OPERATOR_MODE","REQUEST_SOC_TEST","REQUEST_VM_START","REQUEST_VM_STOP","APPROVAL_REQUEST","APPROVAL_RESULT"]},
+    "source_context": {"type": "string", "maxLength": 160},
+    "target_object": {"type": "string", "maxLength": 220},
+    "requested_effect": {"type": ["string","null"], "maxLength": 500},
+    "authority_required": {"type": "boolean"},
+    "state_before": {"type": ["string","null"]},
+    "state_after": {"type": ["string","null"]},
+    "evidence_ref": {"type": ["string","null"], "maxLength": 500},
+    "run_id": {"type": ["string","null"], "maxLength": 220}
+  },
+  "additionalProperties": false
+}
