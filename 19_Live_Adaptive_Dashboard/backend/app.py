@@ -14,6 +14,9 @@ from agent_registry import public_view
 from economics_gate import internal_evidence_decision
 from revenue_flywheel import get_revenue_flywheel
 from exception_adapter import get_exceptions,get_high_priority
+from soc_mission_adapter import five_missions,mission_trace
+from vm_state_adapter import vm_portals
+from interaction_api import interaction_contract,normalize_interaction
 
 def _load(name,path):
     s=importlib.util.spec_from_file_location(name,path); m=importlib.util.module_from_spec(s); s.loader.exec_module(m); return m
@@ -35,26 +38,61 @@ def _sphere():
         s=_organ_scores(o); nodes.append({"id":o["id"],"label":o["name"],"state":o["state"],"x":idx%5,"y":s["EconomicValue"],"w":100 if o.get("criticality")=="TIER_0" else 60,"s":s["Evidence"],"importance":100 if o.get("criticality")=="TIER_0" else 60,"activity":0,"confidence":s["Evidence"],"data_quality":"DECLARED_CONFIG"})
     return {"dimensions":{"X":"Capability","Y":"Productive Value","W":"Strategic Will / Authorization","S":"Verified Operating State"},"nodes":nodes,"edges":[],"exception_constellation":get_high_priority(),"symbolic_heartbeat_ms":963}
 def _revenue_flywheel(): return get_revenue_flywheel(repo_path("config","revenue-stream-registry.yaml"),repo_path("22_CCC_Ledger","economics","revenue-flywheel-policy.yaml"))
+
+def _append_interaction(event):
+    ledger_event={
+        "event_id":event["interaction_id"],
+        "timestamp":event["timestamp"],
+        "source":"living-dashboard",
+        "owner":"human-operator",
+        "organ":"living_intelligence",
+        "run_id":event.get("run_id") or event["interaction_id"],
+        "event_type":"INTERACTION_REQUEST",
+        "previous_state":event.get("state_before") or "VERIFY",
+        "new_state":event.get("state_after") or "HOLD",
+        "change":event["action_type"],
+        "validation":"SEMANTIC_INTERACTION_RECORDED_NOT_EXECUTED",
+        "provenance":"POST /api/interaction-event",
+        "artifact_hashes":[event["evidence_ref"]] if event.get("evidence_ref") else [],
+        "synthetic":False,
+        "financial_classification":"NON_FINANCIAL",
+        "notes":f"Target={event['target_object']}; requested_effect={event.get('requested_effect')}; authority_required={event.get('authority_required')}. No underlying consequential action executed by this endpoint."
+    }
+    ledger_mod.append_event(ledger_path(),ledger_event)
+
 def route_request(method,path,body=None):
-    m=manifest(); static={"/":"index.html","/index.html":"index.html","/app.js":"app.js","/sphere.js":"sphere.js","/exception_constellation.js":"exception_constellation.js","/styles.css":"styles.css"}
+    m=manifest(); static={
+        "/":"index.html","/index.html":"index.html","/app.js":"app.js","/sphere.js":"sphere.js","/exception_constellation.js":"exception_constellation.js","/styles.css":"styles.css",
+        "/ccc_multiverse.css":"ccc_multiverse.css","/interaction_telemetry.js":"interaction_telemetry.js","/context_lens.js":"context_lens.js","/command_deck.js":"command_deck.js","/ccc_horizon.js":"ccc_horizon.js","/object_cards.js":"object_cards.js","/executive_mode.js":"executive_mode.js"
+    }
     if method=="GET" and path in static:
         fp=repo_path("19_Live_Adaptive_Dashboard","frontend",static[path])
         if not fp.exists(): return _json(404,{"error":"frontend_missing"})
         ctype="text/html; charset=utf-8" if fp.suffix==".html" else "text/javascript; charset=utf-8" if fp.suffix==".js" else "text/css; charset=utf-8"; return 200,{"Content-Type":ctype},fp.read_bytes()
-    if method=="GET" and path=="/api/health": return _json(200,{"status":"PASS","state":"VERIFY","service":"ccc-living-dashboard","version":"10.1-P0","timestamp":datetime.now(timezone.utc).isoformat()})
+    if method=="GET" and path=="/api/health": return _json(200,{"status":"PASS","state":"VERIFY","service":"ccc-living-dashboard","version":"10.1-SOC-LIVE-P0","timestamp":datetime.now(timezone.utc).isoformat()})
     if method=="GET" and path=="/api/manifest": return _json(200,m)
     if method=="GET" and path=="/api/hosts": return _json(200,hosts())
     if method=="GET" and path=="/api/organs": return _json(200,{"organs":m.get("organs",[])})
-    if method=="GET" and path=="/api/mission": return _json(200,{"state":m.get("status"),"branch":m.get("release",{}).get("branch"),"next_action":m.get("next_action"),"validation":"DECLARED_MANIFEST"})
+    if method=="GET" and path=="/api/mission": return _json(200,{"state":m.get("status"),"branch":"hotfix/ccc-soc-five-live-evidence-v1","next_action":"PROVE_FIVE_SOC_MISSIONS_WITH_LIVE_EVIDENCE","validation":"DECLARED_MISSION_BRANCH"})
     if method=="GET" and path=="/api/pressure-loss": return _json(200,_pressure())
     if method=="GET" and path=="/api/soc/state": return _json(200,SocAdapter().get_state())
-    if method=="GET" and path=="/api/ledger/recent": return _json(200,{"events":ledger_recent(ledger_path())})
+    if method=="GET" and path=="/api/soc/missions": return _json(200,five_missions())
+    if method=="GET" and path=="/api/soc/trace": return _json(200,mission_trace())
+    if method=="GET" and path=="/api/vms": return _json(200,vm_portals())
+    if method=="GET" and path in {"/api/ledger/recent","/api/evidence/recent"}: return _json(200,{"events":ledger_recent(ledger_path())})
     if method=="GET" and path=="/api/agents": return _json(200,{"agents":public_view(repo_path("23_CCC_Agent_Mesh","registry.yaml"))})
     if method=="GET" and path=="/api/exceptions": return _json(200,get_exceptions())
     if method=="GET" and path=="/api/exceptions/high-priority": return _json(200,get_high_priority())
     if method=="GET" and path=="/api/sphere": return _json(200,_sphere())
     if method=="GET" and path=="/api/economics/technology-choice": return _json(200,internal_evidence_decision(repo_path("22_CCC_Ledger","economics","technology-choice-matrix.yaml")))
     if method=="GET" and path=="/api/economics/revenue-flywheel": return _json(200,_revenue_flywheel())
+    if method=="GET" and path=="/api/interaction/contract": return _json(200,interaction_contract())
+    if method=="POST" and path=="/api/interaction-event":
+        payload=body if isinstance(body,dict) else json.loads(body or "{}"); event=normalize_interaction(payload)
+        if not event.get("accepted"): return _json(400,event)
+        if event.get("route")=="LEDGER_REQUIRED":
+            _append_interaction(event); event["ledger_recorded"]=True; return _json(202,event)
+        event["ledger_recorded"]=False; return _json(200,event)
     if method=="POST" and path=="/api/action-request":
         payload=body if isinstance(body,dict) else json.loads(body or "{}"); action=payload.get("action_type"); requester=payload.get("requester","dashboard-agent")
         if action not in REGISTERED_ACTIONS: return _json(400,{"status":"REJECTED","reason":"unregistered_action_type"})
@@ -74,5 +112,5 @@ class Handler(BaseHTTPRequestHandler):
     def do_POST(self): self._send("POST")
     def log_message(self,fmt,*args): return
 def main():
-    host=os.getenv("CCC_DASHBOARD_HOST","127.0.0.1"); port=int(os.getenv("CCC_DASHBOARD_PORT","8787")); print(f"CCC Living Dashboard v10.1: http://{host}:{port}"); ThreadingHTTPServer((host,port),Handler).serve_forever()
+    host=os.getenv("CCC_DASHBOARD_HOST","127.0.0.1"); port=int(os.getenv("CCC_DASHBOARD_PORT","8787")); print(f"CCC Living Dashboard SOC Live P0: http://{host}:{port}"); ThreadingHTTPServer((host,port),Handler).serve_forever()
 if __name__=="__main__": main()
