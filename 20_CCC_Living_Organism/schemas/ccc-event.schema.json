@@ -1,0 +1,19 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"ccc-event.schema.json",
+  "type":"object",
+  "additionalProperties":false,
+  "required":["event_id","event_type","source","target","timestamp","run_id","state","severity","payload","evidence"],
+  "properties":{
+    "event_id":{"type":"string","minLength":1},
+    "event_type":{"type":"string","minLength":1},
+    "source":{"type":"string","minLength":1},
+    "target":{"type":"string","minLength":1},
+    "timestamp":{"type":"string","format":"date-time"},
+    "run_id":{"type":"string","minLength":1},
+    "state":{"type":"string"},
+    "severity":{"enum":["INFO","LOW","MEDIUM","HIGH","CRITICAL"]},
+    "payload":{"type":"object"},
+    "evidence":{"type":"object","required":["sha256","source_ref","validation"],"properties":{"sha256":{"type":"string"},"source_ref":{"type":"string"},"validation":{"type":"string"}},"additionalProperties":true}
+  }
+}

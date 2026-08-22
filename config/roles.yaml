@@ -1,0 +1,9 @@
+default_policy: deny
+self_registration: false
+roles:
+  github-agent: [read_code, emit_code_events, create_scoped_branch, create_reviewable_pr]
+  codex-agent: [read_scoped_repo, edit_scoped_branch, run_tests, report_evidence, open_pr]
+  ledger-agent: [append_validated_event, verify_chain, read_evidence]
+  orchestra-agent: [evaluate_state, evaluate_pressure_loss, evaluate_release_gate, return_defect]
+  dashboard-agent: [read_approved_state, render_state, submit_action_request]
+  slack-sink: [receive_sanitized_summary, receive_approval_request]

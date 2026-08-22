@@ -1,0 +1,10 @@
+hosts:
+  ccc-hp-dev-01:
+    platform: ChromeOS/Crostini Linux
+    roles: [git, github, python, dashboard-development, sigma, stix-taxii, documentation, local-ledger-development, local-orchestra-development]
+    authority: [code-development, local-tests, non-destructive-simulations]
+  ccc-dell-compute-01:
+    platform: Windows 11 Pro / PowerShell 5.1 / Hyper-V
+    roles: [hyperv, soc-range, windows-runtime-validation, soc-live-state-producer]
+    authority: [approved-local-vm-orchestration, approved-soc-lab-runtime]
+    state_source: 'C:\CCC\State\ccc-soc-live-state.json'

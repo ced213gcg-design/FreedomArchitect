@@ -1,0 +1,12 @@
+github:
+  authority: CODE
+codex:
+  authority: IMPLEMENTATION_REPAIR
+ledger:
+  authority: EVIDENCE
+orchestra:
+  authority: PLACEMENT_INTEGRATION_RELEASE
+slack:
+  authority: NOTIFICATION_ONLY
+  allowed_types: [BUILD, TEST, SIMULATION, SECURITY, RELEASE, APPROVAL_REQUEST, INCIDENT]
+  prohibit: [secrets, credentials, customer_private_data, malware_binary, arbitrary_shell_command]

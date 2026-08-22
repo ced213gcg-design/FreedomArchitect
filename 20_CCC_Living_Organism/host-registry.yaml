@@ -1,0 +1,22 @@
+version: 10.0-P0
+hosts:
+  ccc-hp-dev-01:
+    lifecycle: CURRENT
+    platform: ChromeOS/Crostini Linux
+    roles: [git, github, python, dashboard-development, sigma, stix-taxii, documentation, local-ledger-development, local-orchestra-development]
+    authority: [code-development, local-tests, non-destructive-simulations]
+  ccc-dell-compute-01:
+    lifecycle: CURRENT
+    platform: Windows 11 Pro / PowerShell 5.1 / Hyper-V
+    roles: [hyperv, soc-range, windows-runtime-validation, soc-live-state-producer]
+    authority: [approved-local-vm-orchestration, approved-soc-lab-runtime]
+    state_source: 'C:\CCC\State\ccc-soc-live-state.json'
+  ccc-core-01:
+    lifecycle: FUTURE
+    roles: [ledger, database, api, mission-control, living-intelligence, ci-runner]
+  ccc-range-01:
+    lifecycle: FUTURE
+    roles: [soc, telemetry, honeypot, malware-analysis-slot, simulation]
+  ccc-pulse-01:
+    lifecycle: FUTURE
+    roles: [cardputer-status, portable-telemetry, approval-display, read-only-emergency-status]

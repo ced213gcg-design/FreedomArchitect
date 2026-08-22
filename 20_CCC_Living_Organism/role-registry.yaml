@@ -1,0 +1,26 @@
+version: 10.0-P0
+principles:
+  default: deny
+  self_registration: false
+  consequential_actions: explicit_human_approval
+roles:
+  human-command-authority:
+    allowed: [approve, reject, reprioritize, authorize_release, authorize_consequential_action]
+  github-agent:
+    allowed: [read_code, emit_code_events, create_scoped_branch, create_reviewable_pr]
+    denied: [silent_merge, secret_exfiltration]
+  codex-agent:
+    allowed: [read_scoped_repo, edit_scoped_branch, run_tests, report_evidence, open_pr]
+    denied: [silent_merge, invent_pass, unscoped_external_action]
+  ledger-agent:
+    allowed: [append_validated_event, verify_chain, read_evidence]
+    denied: [rewrite_history, delete_evidence]
+  orchestra-agent:
+    allowed: [evaluate_state, evaluate_pressure_loss, evaluate_release_gate, return_defect]
+    denied: [invent_capability, fabricate_evidence]
+  dashboard-agent:
+    allowed: [read_approved_state, render_state, submit_action_request]
+    denied: [direct_privileged_execution]
+  slack-sink:
+    allowed: [receive_sanitized_summary, receive_approval_request]
+    denied: [source_of_truth, arbitrary_shell_execution, raw_secret_storage]
