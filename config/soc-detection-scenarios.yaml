@@ -1,0 +1,49 @@
+version: 1
+lab_cidr: 10.69.69.0/24
+run_policy:
+  runs_per_scenario: 3
+  states:
+    pass: 3
+    partial_min: 1
+  truth_rule: NO_REAL_SOURCE_EVIDENCE_NO_PASS
+scenarios:
+  - id: DET-01
+    key: NETWORK_RECON
+    name: Network Recon
+    trigger_class: BOUNDED_NMAP
+    source_role: authorized_red_team_node
+    target_roles: [defensive_monitoring_sensor, honeypot_target]
+    expected_sensors: [Zeek, Suricata, firewall, network_logs]
+    max_events: 1
+  - id: DET-02
+    key: FAILED_SSH_AUTH
+    name: Failed SSH Auth
+    trigger_class: BOUNDED_FAILED_SSH
+    source_role: authorized_red_team_node
+    target_roles: [defensive_monitoring_sensor]
+    expected_sensors: [linux_auth, Wazuh]
+    max_events: 3
+  - id: DET-03
+    key: COWRIE_INTERACTION
+    name: Cowrie Interaction
+    trigger_class: BOUNDED_COWRIE_SSH
+    source_role: authorized_red_team_node
+    target_roles: [honeypot_target]
+    expected_sensors: [Cowrie]
+    max_events: 5
+  - id: DET-04
+    key: FILE_INTEGRITY_CHANGE
+    name: File Integrity Change
+    trigger_class: DISPOSABLE_FIM_FILE
+    source_role: defensive_monitoring_sensor
+    target_roles: [defensive_monitoring_sensor]
+    expected_sensors: [Wazuh_FIM]
+    max_events: 3
+  - id: DET-05
+    key: BENIGN_PROCESS_COMMAND
+    name: Benign Process / Command
+    trigger_class: BENIGN_PROCESS
+    source_role: defensive_monitoring_sensor
+    target_roles: [defensive_monitoring_sensor]
+    expected_sensors: [auditd, Sysmon, Wazuh_process]
+    max_events: 1
