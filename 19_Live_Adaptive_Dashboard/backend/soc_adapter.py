@@ -18,7 +18,8 @@ class SocAdapter:
         return obj
     def _load(self):
         if self.path.exists():
-            return json.loads(self.path.read_text(encoding="utf-8")), self.path, "STATE_FILE"
+            data=json.loads(self.path.read_text(encoding="utf-8"))
+            return data,self.path,str(data.get("bridge_mode") or "STATE_FILE")
         if self.bridge_path.exists():
             payload=json.loads(self.bridge_path.read_text(encoding="utf-8"))
             errors=validate_sanitized_payload(payload)
