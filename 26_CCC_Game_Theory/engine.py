@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
 from uuid import uuid4
 
 ALLOWED_RECOMMENDATIONS = {
@@ -22,10 +21,6 @@ REQUIRED = (
     "no_play_option", "evidence_change_trigger"
 )
 
-@dataclass(frozen=True)
-class AnalysisError(Exception):
-    message: str
-
 
 def _missing(payload: dict) -> list[str]:
     return [field for field in REQUIRED if field not in payload or payload[field] in (None, "", [], {})]
@@ -43,6 +38,7 @@ def analyze(payload: dict) -> dict:
             "authority": "ADVISORY_ONLY",
             "can_execute": False,
             "can_write_verified_ledger_truth": False,
+            "executed": False,
         }
 
     hard_controls = [str(x).upper() for x in payload.get("hard_controls", [])]
