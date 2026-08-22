@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ccc://schemas/strategic-analysis.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "analysis_id", "players", "objectives", "constraints", "information_by_player",
+    "information_asymmetry", "strategies", "costs", "payoffs", "likely_response",
+    "second_order_response", "repeated_game_effects", "reputation_cooperation_effects",
+    "hard_controls", "no_play_option", "evidence_change_trigger", "recommendation",
+    "will_this_work", "what_happens_after_we_act", "authority", "confidence"
+  ],
+  "properties": {
+    "analysis_id": {"type": "string", "minLength": 1},
+    "players": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+    "objectives": {"type": "object", "minProperties": 1, "additionalProperties": {"type": "string"}},
+    "constraints": {"type": "array", "items": {"type": "string"}},
+    "information_by_player": {"type": "object", "minProperties": 1, "additionalProperties": {"type": "array", "items": {"type": "string"}}},
+    "information_asymmetry": {"type": "array", "items": {"type": "string"}},
+    "strategies": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+    "costs": {"type": "object", "additionalProperties": {"type": ["number", "string"]}},
+    "payoffs": {"type": "object", "additionalProperties": {"type": ["number", "string"]}},
+    "likely_response": {"type": "string", "minLength": 1},
+    "second_order_response": {"type": "string", "minLength": 1},
+    "repeated_game_effects": {"type": "string", "minLength": 1},
+    "reputation_cooperation_effects": {"type": "string", "minLength": 1},
+    "hard_controls": {"type": "array", "items": {"type": "string"}},
+    "no_play_option": {"type": "string", "minLength": 1},
+    "evidence_change_trigger": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+    "recommendation": {"enum": ["ACT", "HOLD", "DEFER", "NO_PLAY", "SEEK_EVIDENCE", "COUNTERMOVE", "RETURN_TO_BETA"]},
+    "will_this_work": {"type": "string", "minLength": 1},
+    "what_happens_after_we_act": {"type": "string", "minLength": 1},
+    "authority": {"const": "ADVISORY_ONLY"},
+    "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+    "can_execute": {"const": false},
+    "can_write_verified_ledger_truth": {"const": false}
+  }
+}
