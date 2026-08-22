@@ -1,11 +1,12 @@
+version: 10.1-P0
 hosts:
   ccc-core-01:
     lifecycle: FUTURE
-    roles: [ledger, database, api, mission-control, living-intelligence, ci-runner]
+    roles: [ledger, database, api, mission-control, living-intelligence, exception-intelligence, ci-runner]
   ccc-range-01:
     lifecycle: FUTURE
     roles: [soc, telemetry, honeypot, malware-analysis-slot, simulation]
   ccc-pulse-01:
     lifecycle: FUTURE
-    roles: [cardputer-status, portable-telemetry, approval-display, read-only-emergency-status]
+    roles: [portable-telemetry, status, approval-display, read-only-emergency-status]
 rule: ROLE + CONFIG + TARGET = DEPLOYMENT

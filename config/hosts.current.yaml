@@ -1,7 +1,8 @@
+version: 10.1-P0
 hosts:
   ccc-hp-dev-01:
-    platform: ChromeOS/Crostini Linux
-    roles: [git, github, python, dashboard-development, sigma, stix-taxii, documentation, local-ledger-development, local-orchestra-development]
+    platform: ChromeOS / Crostini Linux
+    roles: [git, github, python, dashboard-development, sigma, stix-taxii, documentation, local-ledger-development, local-orchestra-development, exception-intelligence-development]
     authority: [code-development, local-tests, non-destructive-simulations]
   ccc-dell-compute-01:
     platform: Windows 11 Pro / PowerShell 5.1 / Hyper-V
