@@ -3,11 +3,16 @@ const get=async p=>(await fetch(p)).json();
 function flywheelView(f){
   return {
     state:f.state,
+    policy_version:f.policy_version,
     stream_count:f.stream_count,
     stage_counts:f.stage_counts,
+    class_counts:f.class_counts,
+    recurring_customer_cycle:f.recurring_customer_cycle,
     realized_revenue_status:f.realized_revenue_status,
     realized_revenue_total:f.realized_revenue_total,
     validation:f.realized_revenue_total_validation,
+    customer_success_gate_present:Boolean(f.customer_success_gate && f.customer_success_gate.rule),
+    diversification_gate_present:Boolean(f.diversification_gate && f.diversification_gate.rule),
     control_boundaries:f.control_boundaries
   };
 }
