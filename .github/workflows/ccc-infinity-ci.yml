@@ -1,0 +1,65 @@
+name: CCC Infinity Composition CI
+on:
+  push:
+    branches: ['upgrade/ccc-infinity-composition-v1']
+  pull_request:
+    branches: ['hotfix/ccc-soc-five-live-evidence-v1']
+permissions:
+  contents: read
+jobs:
+  infinity-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+      - name: Compile and validate repository
+        run: |
+          python -m compileall -q 19_Live_Adaptive_Dashboard 20_CCC_Living_Organism 21_CCC_Orchestra 22_CCC_Ledger 23_CCC_Agent_Mesh 25_CCC_Exception_Intelligence 26_CCC_Game_Theory scripts
+          python scripts/validate_ccc_repo.py
+      - name: Full inherited and Infinity pytest suite
+        run: python -m pytest -q --import-mode=importlib
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Frontend regression and Infinity composition
+        run: |
+          node scripts/test_sphere.js
+          node scripts/test_exception_constellation.js
+          node scripts/test_soc_interaction_ui.js
+          node scripts/test_soc_physical_evidence_ui.js
+          node scripts/test_infinity_composition.js
+      - name: Dashboard constitutional API smoke
+        run: |
+          python 19_Live_Adaptive_Dashboard/backend/app.py >/tmp/ccc-infinity.log 2>&1 &
+          sleep 2
+          python - <<'PY'
+          import json, urllib.request
+          base='http://127.0.0.1:8787'
+          def get(path):
+              with urllib.request.urlopen(base+path,timeout=3) as r: return r.status,json.load(r)
+          for p in ['/api/infinity/state','/api/infinity/lifecycle','/api/infinity/reinjection','/api/crayola/current','/api/game-theory/recent','/api/workers/constitutional','/api/workers/handoffs']:
+              status,data=get(p); assert status==200,(p,status,data)
+          status,state=get('/api/infinity/state')
+          assert len(state['decision_triad'])==3
+          assert len(state['evidence_sextet'])==6
+          assert len(state['completion_nonet'])==9
+          assert len(state['creator_alignment'])==9
+          assert state['symbolic_cadence']['telemetry_independent'] is True
+          status,workers=get('/api/workers/constitutional')
+          assert workers['exact_worker_count']==5
+          with urllib.request.urlopen(base+'/',timeout=3) as r:
+              html=r.read().decode()
+          assert 'ccc_infinity.css' in html and 'infinity_composition.js' in html
+          print('Infinity constitutional API smoke PASS')
+          PY
+      - name: Export machine-readable Infinity evidence
+        run: python scripts/export_infinity_evidence.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ccc-infinity-evidence
+          path: artifacts/infinity/
+          if-no-files-found: error

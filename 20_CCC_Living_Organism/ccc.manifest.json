@@ -1,46 +1,254 @@
 {
-  "schema":"ccc.living_organism.manifest.v10.1",
-  "version":"10.1-P0",
-  "status":"BUILD",
-  "governance":{
-    "heartbeat":{"binary":["0011","0110","1001"],"meaning":["Fact","Evidence","Execution"],"symbolic_ui_cadence_ms":963,"critical_telemetry_independent":true},
-    "decision_triad":["FACT","RISK","ACTION"],
-    "evidence_sextet":["SOURCE","TIME","OWNER","CHANGE","VALIDATION","PROVENANCE"],
-    "completion_cycle":["DEFINE","BASELINE","ARCHITECT","BUILD","TEST","MEASURE","AUDIT","REFINE","OPERATIONALIZE","REINVEST"],
-    "lifecycle":["ALPHA","BETA","OMEGA","REINJECTION","NEXT_ALPHA"],
-    "rules":{"build_is_completion":false,"evidence_earns_state":true,"unknown_is_pass":false,"irreversible_actions_require_human_approval":true,"supersession_replaces_deletion":true}
+  "schema": "ccc.living_organism.manifest.v10.1",
+  "version": "10.1-P0",
+  "status": "BUILD",
+  "composition": {
+    "id": "CCC_INFINITY_COMPOSITION",
+    "version": "1.0",
+    "branch": "upgrade/ccc-infinity-composition-v1",
+    "base_sha": "7bf932c5aac08d31979761e28c5d9218e002f6ad",
+    "canonical_checkpoint": "GitHub Issue #5",
+    "preservation_law": "NEVER_OVERWRITE_APPEND_AND_SUPERSEDE"
   },
-  "executive_grading":{"weights":{"fact_evidence_provenance":15,"financial_discipline":15,"strategic_value":10,"risk_security":10,"reliability_recovery":10,"governance_legal":10,"ledger_data_integrity":10,"market_productive_value":5,"dependency_sovereign_optionality":5,"execution_quality":5,"time_to_value":3,"reinjection_value":2},"hard_stop_overrides_score":true},
-  "state_model":{"allowed":["DORMANT","SEED","INCUBATE","BUILD","VERIFY","READY","THRIVE","SCALE","HOLD","ISOLATE","RETIRE"]},
-  "safety":{"authorized_mesh":true,"default_mode":"READ_OBSERVE_REPORT","consequential_action":"EXPLICIT_HUMAN_APPROVAL_STEP_UP_AUTH_LEDGER_ROLLBACK","prohibited":["self_propagation","unauthorized_scanning","credential_theft","persistence_on_unregistered_machines","covert_c2","third_party_exploit_delivery","ddos","autonomous_destructive_action","automatic_money_movement","automatic_contract_submission","automatic_release_approval","malware_execution_outside_isolated_soc_range"]},
-  "authority":{"github":"CODE_AUTHORITY","ledger":"FACTUAL_EVIDENCE_AUTHORITY","orchestra":"INTEGRATION_PLACEMENT_RELEASE_AUTHORITY","mission_control":"PRESSURE_PRIORITY_AUTHORITY","codex":"IMPLEMENTATION_REPAIR_AGENT","slack":"NON_AUTHORITATIVE_NOTIFICATION_SINK","gmail":"NON_AUTHORITATIVE_EXTERNAL_COMMUNICATION_CHANNEL","living_dashboard":"DIGITAL_TWIN_HUMAN_CONTROL_SURFACE","exception_intelligence":"SENSORY_PRIORITY_ORGAN"},
-  "organs":[
-    {"id":"trust_fabric","name":"Trust Fabric","role":"cross_cutting_identity_authorization_immune_system","state":"INCUBATE","criticality":"TIER_0"},
-    {"id":"ledger","name":"Ledger AI","role":"institutional_evidence_memory_authority","state":"BUILD","criticality":"TIER_0"},
-    {"id":"game_theory","name":"Game Theory Engine","role":"strategic_response_layer","state":"READY","criticality":"TIER_2"},
-    {"id":"mission_control","name":"Mission Control","role":"pressure_loss_weakness_and_kill_service","state":"BUILD","criticality":"TIER_0"},
-    {"id":"soc","name":"SOC LAB OS","role":"primary_digital_seed","state":"VERIFY","criticality":"TIER_0"},
-    {"id":"aegis","name":"AEGIS Tor Intelligence OS","role":"lawful_external_sensory_system","state":"INCUBATE","criticality":"TIER_1"},
-    {"id":"data_kernel","name":"Universal Data Kernel + Knowledge Graph","role":"connective_data_tissue","state":"INCUBATE","criticality":"TIER_0"},
-    {"id":"commercial_extraction","name":"Commercial Extraction Engine","role":"capability_to_market_candidate_filter","state":"READY","criticality":"TIER_2"},
-    {"id":"foundry","name":"Product Foundry + Digital Twin","role":"product_integrity_separator","state":"INCUBATE","criticality":"TIER_1"},
-    {"id":"living_intelligence","name":"CCC Living Intelligence","role":"central_operational_and_market_interface","state":"BUILD","criticality":"TIER_0"},
-    {"id":"exception_intelligence","name":"CCC Exception Intelligence","role":"sensory_priority_exception_detection_verification_scoring_routing","state":"BUILD","criticality":"TIER_1"},
-    {"id":"offtake","name":"Demand Distribution & Offtake","role":"market_circulation","state":"INCUBATE","criticality":"TIER_1"},
-    {"id":"commercial_organs","name":"Commercial Organs","role":"commercial_flow","state":"INCUBATE","criticality":"TIER_1"},
-    {"id":"customer_success","name":"Customer Success & Service Delivery","role":"delivery_relationship","state":"INCUBATE","criticality":"TIER_1"},
-    {"id":"revenue_assurance","name":"Revenue Assurance & Accounting","role":"financial_truth_gate","state":"INCUBATE","criticality":"TIER_0"},
-    {"id":"freedom_architect","name":"Freedom Architect","role":"economic_sovereignty_command","state":"INCUBATE","criticality":"TIER_0"},
-    {"id":"dominion","name":"Dominion OS","role":"commercial_federal_capture","state":"INCUBATE","criticality":"TIER_2"},
-    {"id":"sre","name":"Reliability/SRE/Continuity OS","role":"repair_recovery_continuity","state":"INCUBATE","criticality":"TIER_0"},
-    {"id":"legal_ip","name":"Legal/IP/Contract Operations","role":"protective_contract_ip_membrane","state":"INCUBATE","criticality":"TIER_1"},
-    {"id":"legacy","name":"Trust/Legacy/Green Jewel","role":"long_duration_asset_and_governance_layer","state":"INCUBATE","criticality":"TIER_1"}
+  "creator_alignment": [
+    "TRUTH",
+    "CREATION",
+    "STEWARDSHIP",
+    "DISCIPLINE",
+    "LOVE",
+    "RESPONSIBILITY",
+    "FAMILY",
+    "ABUNDANCE",
+    "CONTINUITY"
   ],
-  "hosts":{"current":["ccc-hp-dev-01","ccc-dell-compute-01"],"future":["ccc-core-01","ccc-range-01","ccc-pulse-01"]},
-  "soc":{"state":"VERIFY","authoritative_range":"10.69.69.0/24","superseded_ranges":["10.77.0.0/24"],"live_state_source":"C:\\CCC\\State\\ccc-soc-live-state.json","missing_evidence_state":"UNKNOWN"},
-  "exception_intelligence":{"state":"BUILD","types":["EMPLOYMENT","FEDERAL_OPPORTUNITY","CUSTOMER_LEAD","GRANT","SECURITY","CVE","GITHUB_FAILURE","HARDWARE_PRICE","MARKET","RESEARCH","REGULATORY","FINANCIAL","INFRASTRUCTURE","CAPABILITY_GAP","OTHER"],"freshness_states":["VERIFIED","AGING","STALE","CLOSED","SUPERSEDED"],"flow":["VERIFY","CROSS_EXAMINE","SCORE","LEDGER","GAME_THEORY","MISSION_CONTROL","ORCHESTRA","ACTION_OR_HOLD"],"high_priority_requires":{"freshness_state":"VERIFIED","minimum_exception_score":80}},
-  "dashboard":{"p0_endpoints":["/api/health","/api/manifest","/api/hosts","/api/organs","/api/mission","/api/pressure-loss","/api/soc/state","/api/ledger/recent","/api/agents","/api/exceptions","/api/exceptions/high-priority","/api/sphere","/api/economics/technology-choice","/api/economics/revenue-flywheel","/api/action-request"],"modes":["COACH","PLAN","SIMULATE","PROCEED","PAUSE","DIVE","HALT"],"proceed_behavior":"APPROVAL_REQUEST_ONLY"},
-  "external_organisms":[{"id":"imagination_station","relationship":"SEPARATE_ORGANISM","outbound_to_ccc":false,"backchannel_allowed":false},{"id":"grand_resistance","state":"DORMANT","inference_allowed":false,"execution_allowed":false}],
-  "release":{"branch":"upgrade/ccc-living-dashboard-v10-1","target_state":"READY_FOR_HUMAN_REVIEW","thrive_allowed_in_p0":false,"self_merge_allowed":false},
-  "next_action":"P0-09_IMPLEMENT_EXCEPTION_INTELLIGENCE"
+  "governance": {
+    "heartbeat": {
+      "binary": ["0011", "0110", "1001"],
+      "meaning": ["Fact", "Evidence", "Execution"],
+      "symbolic_ui_cadence_ms": 963,
+      "critical_telemetry_independent": true
+    },
+    "decision_triad": ["FACT", "RISK", "ACTION"],
+    "evidence_sextet": ["SOURCE", "TIME", "OWNER", "CHANGE", "VALIDATION", "PROVENANCE"],
+    "completion_cycle": ["DEFINE", "BASELINE", "ARCHITECT", "BUILD", "TEST", "MEASURE", "AUDIT", "REFINE", "OPERATIONALIZE", "REINVEST"],
+    "lifecycle": ["ALPHA", "BETA", "OMEGA", "REINJECTION", "NEXT_ALPHA"],
+    "rules": {
+      "build_is_completion": false,
+      "evidence_earns_state": true,
+      "unknown_is_pass": false,
+      "irreversible_actions_require_human_approval": true,
+      "supersession_replaces_deletion": true
+    }
+  },
+  "completion_nonet": [
+    "DEFINE",
+    "BASELINE",
+    "ARCHITECT",
+    "BUILD",
+    "TEST",
+    "MEASURE",
+    "AUDIT",
+    "REFINE",
+    "OPERATIONALIZE / REINVEST"
+  ],
+  "lifecycle_infinity": {
+    "sequence": ["ALPHA", "BETA", "GAMMA", "OMEGA", "REINJECTION", "NEXT_ALPHA"],
+    "gamma": {
+      "purpose": "FIELD_INTEGRATION_AND_MACRO_MICRO_RECONCILIATION",
+      "is_pass": false,
+      "checks": [
+        "MICRO_VS_MACRO",
+        "LOCAL_PASS_VS_WIDER_EFFECT",
+        "FIVE_WORKER_PERSPECTIVES",
+        "PRESSURE_LOSS",
+        "TRUST_SECURITY_LEGAL",
+        "LEDGER_EVIDENCE",
+        "GAME_THEORY_SECOND_ORDER_RESPONSE",
+        "PHYSICAL_RUNTIME_EVIDENCE_WHEN_APPLICABLE",
+        "HUMAN_AUTHORITY_BOUNDARY",
+        "ROLLBACK_RECOVERY",
+        "COST_DEPENDENCY_EFFECTS"
+      ],
+      "outcomes": ["PROMOTE_TO_OMEGA_CANDIDATE", "RETURN_TO_BETA", "HOLD", "ISOLATE", "DOCUMENTED_REJECTION"]
+    }
+  },
+  "symbolic_cadence": {
+    "binary": ["0011", "0110", "1001"],
+    "grammar": [3, 6, 9],
+    "ui_cadence_ms": 963,
+    "telemetry_independent": true,
+    "operator_notice": "Symbolic cadence only. Operational telemetry uses evidence-grounded timing."
+  },
+  "crayola_contract": {
+    "stages": ["CORRECT_CROSS_EXAMINE", "RESEARCH", "ANALYZE", "YIELD_EVIDENCE", "OBSERVE", "LEARN", "AMEND_RECYCLE"],
+    "terminal_output_types": ["EVIDENCE", "CAPABILITY", "MEMORY", "SEED", "DOCUMENTED_REJECTION"],
+    "default_authority": "ADVISORY",
+    "ledger_write_requires_validation": true
+  },
+  "game_theory_contract": {
+    "organ_path": "26_CCC_Game_Theory",
+    "authority": "ADVISORY_ONLY",
+    "required_questions": ["WILL_THIS_WORK", "WHAT_HAPPENS_AFTER_WE_ACT"],
+    "recommendations": ["ACT", "HOLD", "DEFER", "NO_PLAY", "SEEK_EVIDENCE", "COUNTERMOVE", "RETURN_TO_BETA"],
+    "hard_control_precedence": ["SECURITY_LEGAL_HUMAN", "VERIFIED_LEDGER_LIVE_EVIDENCE", "RATIFIED_CANON_MANIFEST", "RELEASE_TEST_EVIDENCE", "WORKER_ANALYSIS", "UNVERIFIED_INFERENCE"],
+    "consequential_execution_allowed": false,
+    "direct_verified_ledger_write_allowed": false
+  },
+  "five_worker_constitution": {
+    "workers": ["COMMAND", "INTELLIGENCE", "SECURITY", "REVENUE", "COMMS"],
+    "exact_count": 5,
+    "truth_systems": 1,
+    "consensus_creates_truth": false,
+    "security_hold_can_override_commercial_enthusiasm": true,
+    "registry": "config/ccc-constitutional-workers.yaml"
+  },
+  "reinjection_contract": {
+    "negative_events": ["FAULT", "FAILURE", "DELAY", "RISK", "NEGATIVE_SIGNAL"],
+    "positive_events": ["VICTORY", "MILESTONE", "ACCOLADE", "OMEGA"],
+    "required_terminal_values": ["EVIDENCE", "CAPABILITY", "MEMORY", "SEED", "DOCUMENTED_REJECTION"],
+    "omega_requires": ["PROVED", "USEFUL", "SAFE", "DOCUMENTED", "REPEATABLE", "MEASURED", "EVIDENCE_BOUND"],
+    "next_alpha_required": true
+  },
+  "supersession_history": [
+    {
+      "field": "governance.completion_cycle",
+      "historical_value_count": 10,
+      "status": "PRESERVED_FOR_PROVENANCE",
+      "superseded_for_infinity_execution_by": "completion_nonet",
+      "reason": "Canonical 3-6-9 grammar requires exactly nine completion stages; OPERATIONALIZE and REINVEST are composed as stage nine."
+    },
+    {
+      "field": "governance.lifecycle",
+      "historical_value": ["ALPHA", "BETA", "OMEGA", "REINJECTION", "NEXT_ALPHA"],
+      "status": "PRESERVED_FOR_PROVENANCE",
+      "extended_for_infinity_execution_by": "lifecycle_infinity",
+      "reason": "Gamma adds field integration and macro/micro reconciliation before Omega candidacy."
+    },
+    {
+      "field": "release.branch",
+      "historical_value": "upgrade/ccc-living-dashboard-v10-1",
+      "status": "PRESERVED_FOR_PROVENANCE",
+      "superseded_on_infinity_branch_by": "upgrade/ccc-infinity-composition-v1"
+    }
+  ],
+  "executive_grading": {
+    "weights": {
+      "fact_evidence_provenance": 15,
+      "financial_discipline": 15,
+      "strategic_value": 10,
+      "risk_security": 10,
+      "reliability_recovery": 10,
+      "governance_legal": 10,
+      "ledger_data_integrity": 10,
+      "market_productive_value": 5,
+      "dependency_sovereign_optionality": 5,
+      "execution_quality": 5,
+      "time_to_value": 3,
+      "reinjection_value": 2
+    },
+    "hard_stop_overrides_score": true
+  },
+  "state_model": {
+    "allowed": ["DORMANT", "SEED", "INCUBATE", "BUILD", "VERIFY", "READY", "THRIVE", "SCALE", "HOLD", "ISOLATE", "RETIRE"]
+  },
+  "safety": {
+    "authorized_mesh": true,
+    "default_mode": "READ_OBSERVE_REPORT",
+    "consequential_action": "EXPLICIT_HUMAN_APPROVAL_STEP_UP_AUTH_LEDGER_ROLLBACK",
+    "prohibited": [
+      "self_propagation",
+      "unauthorized_scanning",
+      "credential_theft",
+      "persistence_on_unregistered_machines",
+      "covert_c2",
+      "third_party_exploit_delivery",
+      "ddos",
+      "autonomous_destructive_action",
+      "automatic_money_movement",
+      "automatic_contract_submission",
+      "automatic_release_approval",
+      "malware_execution_outside_isolated_soc_range"
+    ]
+  },
+  "authority": {
+    "github": "CODE_AUTHORITY",
+    "ledger": "FACTUAL_EVIDENCE_AUTHORITY",
+    "orchestra": "INTEGRATION_PLACEMENT_RELEASE_AUTHORITY",
+    "mission_control": "PRESSURE_PRIORITY_AUTHORITY",
+    "codex": "IMPLEMENTATION_REPAIR_AGENT",
+    "slack": "NON_AUTHORITATIVE_NOTIFICATION_SINK",
+    "gmail": "NON_AUTHORITATIVE_EXTERNAL_COMMUNICATION_CHANNEL",
+    "living_dashboard": "DIGITAL_TWIN_HUMAN_CONTROL_SURFACE",
+    "exception_intelligence": "SENSORY_PRIORITY_ORGAN",
+    "game_theory": "ADVISORY_STRATEGIC_LENS"
+  },
+  "organs": [
+    {"id": "trust_fabric", "name": "Trust Fabric", "role": "cross_cutting_identity_authorization_immune_system", "state": "INCUBATE", "criticality": "TIER_0"},
+    {"id": "ledger", "name": "Ledger AI", "role": "institutional_evidence_memory_authority", "state": "BUILD", "criticality": "TIER_0"},
+    {"id": "game_theory", "name": "Game Theory Engine", "role": "strategic_response_layer", "state": "BUILD", "criticality": "TIER_2"},
+    {"id": "mission_control", "name": "Mission Control", "role": "pressure_loss_weakness_and_kill_service", "state": "BUILD", "criticality": "TIER_0"},
+    {"id": "soc", "name": "SOC LAB OS", "role": "primary_digital_seed", "state": "VERIFY", "criticality": "TIER_0"},
+    {"id": "aegis", "name": "AEGIS Tor Intelligence OS", "role": "lawful_external_sensory_system", "state": "INCUBATE", "criticality": "TIER_1"},
+    {"id": "data_kernel", "name": "Universal Data Kernel + Knowledge Graph", "role": "connective_data_tissue", "state": "INCUBATE", "criticality": "TIER_0"},
+    {"id": "commercial_extraction", "name": "Commercial Extraction Engine", "role": "capability_to_market_candidate_filter", "state": "READY", "criticality": "TIER_2"},
+    {"id": "foundry", "name": "Product Foundry + Digital Twin", "role": "product_integrity_separator", "state": "INCUBATE", "criticality": "TIER_1"},
+    {"id": "living_intelligence", "name": "CCC Living Intelligence", "role": "central_operational_and_market_interface", "state": "BUILD", "criticality": "TIER_0"},
+    {"id": "exception_intelligence", "name": "CCC Exception Intelligence", "role": "sensory_priority_exception_detection_verification_scoring_routing", "state": "BUILD", "criticality": "TIER_1"},
+    {"id": "offtake", "name": "Demand Distribution & Offtake", "role": "market_circulation", "state": "INCUBATE", "criticality": "TIER_1"},
+    {"id": "commercial_organs", "name": "Commercial Organs", "role": "commercial_flow", "state": "INCUBATE", "criticality": "TIER_1"},
+    {"id": "customer_success", "name": "Customer Success & Service Delivery", "role": "delivery_relationship", "state": "INCUBATE", "criticality": "TIER_1"},
+    {"id": "revenue_assurance", "name": "Revenue Assurance & Accounting", "role": "financial_truth_gate", "state": "INCUBATE", "criticality": "TIER_0"},
+    {"id": "freedom_architect", "name": "Freedom Architect", "role": "economic_sovereignty_command", "state": "INCUBATE", "criticality": "TIER_0"},
+    {"id": "dominion", "name": "Dominion OS", "role": "commercial_federal_capture", "state": "INCUBATE", "criticality": "TIER_2"},
+    {"id": "sre", "name": "Reliability/SRE/Continuity OS", "role": "repair_recovery_continuity", "state": "INCUBATE", "criticality": "TIER_0"},
+    {"id": "legal_ip", "name": "Legal/IP/Contract Operations", "role": "protective_contract_ip_membrane", "state": "INCUBATE", "criticality": "TIER_1"},
+    {"id": "legacy", "name": "Trust/Legacy/Green Jewel", "role": "long_duration_asset_and_governance_layer", "state": "INCUBATE", "criticality": "TIER_1"}
+  ],
+  "hosts": {
+    "current": ["ccc-hp-dev-01", "ccc-dell-compute-01"],
+    "future": ["ccc-core-01", "ccc-range-01", "ccc-pulse-01"]
+  },
+  "soc": {
+    "state": "VERIFY",
+    "authoritative_range": "10.69.69.0/24",
+    "superseded_ranges": ["10.77.0.0/24"],
+    "live_state_source": "C:\\CCC\\State\\ccc-soc-live-state.json",
+    "missing_evidence_state": "UNKNOWN"
+  },
+  "exception_intelligence": {
+    "state": "BUILD",
+    "types": ["EMPLOYMENT", "FEDERAL_OPPORTUNITY", "CUSTOMER_LEAD", "GRANT", "SECURITY", "CVE", "GITHUB_FAILURE", "HARDWARE_PRICE", "MARKET", "RESEARCH", "REGULATORY", "FINANCIAL", "INFRASTRUCTURE", "CAPABILITY_GAP", "OTHER"],
+    "freshness_states": ["VERIFIED", "AGING", "STALE", "CLOSED", "SUPERSEDED"],
+    "flow": ["VERIFY", "CROSS_EXAMINE", "SCORE", "LEDGER", "GAME_THEORY", "MISSION_CONTROL", "ORCHESTRA", "ACTION_OR_HOLD"],
+    "high_priority_requires": {"freshness_state": "VERIFIED", "minimum_exception_score": 80}
+  },
+  "dashboard": {
+    "p0_endpoints": [
+      "/api/health", "/api/manifest", "/api/hosts", "/api/organs", "/api/mission", "/api/pressure-loss", "/api/soc/state", "/api/ledger/recent", "/api/agents", "/api/exceptions", "/api/exceptions/high-priority", "/api/sphere", "/api/economics/technology-choice", "/api/economics/revenue-flywheel", "/api/action-request"
+    ],
+    "infinity_endpoints": [
+      "/api/infinity/state", "/api/infinity/lifecycle", "/api/infinity/reinjection", "/api/crayola/current", "/api/game-theory/analyze", "/api/game-theory/recent", "/api/workers/constitutional", "/api/workers/handoffs", "/api/economics/mechanism-gate"
+    ],
+    "modes": ["COACH", "PLAN", "SIMULATE", "PROCEED", "PAUSE", "DIVE", "HALT"],
+    "proceed_behavior": "APPROVAL_REQUEST_ONLY"
+  },
+  "external_organisms": [
+    {"id": "imagination_station", "relationship": "SEPARATE_ORGANISM", "outbound_to_ccc": false, "backchannel_allowed": false},
+    {"id": "grand_resistance", "state": "DORMANT", "inference_allowed": false, "execution_allowed": false}
+  ],
+  "release": {
+    "branch": "upgrade/ccc-infinity-composition-v1",
+    "target_state": "READY_FOR_HUMAN_REVIEW",
+    "thrive_allowed_in_p0": false,
+    "self_merge_allowed": false,
+    "frozen_physical_candidate": {
+      "pr": 4,
+      "branch": "hotfix/ccc-soc-five-live-evidence-v1",
+      "sha": "7bf932c5aac08d31979761e28c5d9218e002f6ad",
+      "state": "READY_FOR_PHYSICAL_EVIDENCE",
+      "runtime_state": "VERIFY",
+      "must_remain_unmodified": true
+    }
+  },
+  "next_action": "INFINITY-02_SCHEMA_AND_ENGINE_IMPLEMENTATION"
 }

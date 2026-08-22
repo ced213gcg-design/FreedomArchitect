@@ -1,0 +1,44 @@
+name: CCC Infinity Composition Security
+on:
+  push:
+    branches: ['upgrade/ccc-infinity-composition-v1']
+  pull_request:
+    branches: ['hotfix/ccc-soc-five-live-evidence-v1']
+permissions:
+  contents: read
+  security-events: write
+jobs:
+  secret-pattern-guard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fail on common committed secret forms
+        run: |
+          ! grep -RInE --exclude-dir=.git --exclude='*.md' '(AKIA[0-9A-Z]{16}|-----BEGIN (RSA|OPENSSH|EC|DSA) PRIVATE KEY-----|api[_-]?key[[:space:]]*[:=][[:space:]]*[A-Za-z0-9_\-]{16,}|password[[:space:]]*[:=][[:space:]]*[^[:space:]]+)' .
+      - name: Infinity authority boundary static assertions
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          files=[
+            Path('26_CCC_Game_Theory/engine.py'),
+            Path('19_Live_Adaptive_Dashboard/backend/game_theory_adapter.py'),
+            Path('19_Live_Adaptive_Dashboard/backend/economics_gate.py')
+          ]
+          text='\n'.join(p.read_text() for p in files)
+          assert 'ADVISORY_ONLY' in text
+          assert 'can_execute' in text
+          assert 'can_write_verified_ledger_truth' in text
+          app=Path('19_Live_Adaptive_Dashboard/backend/app.py').read_text()
+          assert '/api/game-theory/analyze' in app
+          assert '/api/economics/mechanism-gate' in app
+          assert 'automatic_money_movement' not in app
+          print('Infinity authority boundary PASS')
+          PY
+  codeql:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: github/codeql-action/init@v3
+        with:
+          languages: python,javascript-typescript
+      - uses: github/codeql-action/analyze@v3
