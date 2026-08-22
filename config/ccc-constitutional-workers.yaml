@@ -1,0 +1,45 @@
+version: infinity-v1
+truth_authority: LEDGER
+exact_worker_count: 5
+consensus_creates_truth: false
+security_hold_can_override_commercial_enthusiasm: true
+workers:
+  - id: COMMAND
+    question: What must happen?
+    authority: ADVISORY_AND_SEQUENCING
+  - id: INTELLIGENCE
+    question: What are we missing?
+    authority: ADVISORY
+  - id: SECURITY
+    question: What can hurt us?
+    authority: HOLD_RECOMMENDATION
+  - id: REVENUE
+    question: What transferable or productive value can this create?
+    authority: ADVISORY
+  - id: COMMS
+    question: What must be understood, preserved, or communicated?
+    authority: ADVISORY
+mid_shift_required:
+  - starting_position
+  - work_completed_so_far
+  - evidence
+  - current_position
+  - blockers
+  - immediate_next_action
+end_shift_required:
+  - starting_position
+  - work_completed
+  - evidence
+  - current_position
+  - blockers
+  - where_work_stopped
+  - next_owner
+  - exact_next_action
+  - expected_next_evidence
+conflict_precedence:
+  - SECURITY_LEGAL_EXPLICIT_HUMAN_AUTHORITY
+  - VERIFIED_LEDGER_LIVE_EVIDENCE
+  - RATIFIED_CANON_MANIFEST
+  - RELEASE_TEST_EVIDENCE
+  - WORKER_ANALYSIS
+  - UNVERIFIED_INFERENCE
