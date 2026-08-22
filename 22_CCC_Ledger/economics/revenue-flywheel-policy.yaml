@@ -1,0 +1,107 @@
+version: 1
+state: VERIFY
+name: CCC Regenerative Revenue Flywheel Policy
+
+principle: >-
+  CCC continuously discovers and tests multiple lawful revenue pathways, but never treats
+  forecasts, symbolic language, invoices, contracts, grants, or dashboard estimates as realized revenue.
+
+closed_loop:
+  - KNOWLEDGE
+  - CAPABILITY
+  - EVIDENCE
+  - PRODUCT_OR_SERVICE
+  - FOUNDRY
+  - MARKET_DEMAND
+  - CONTRACT_OR_SALE
+  - INVOICE
+  - COLLECTION
+  - REVENUE_ASSURANCE
+  - RECONCILED_SURPLUS
+  - FREEDOM_ARCHITECT_ALLOCATION
+  - PRODUCTIVE_CAPACITY
+  - NEXT_ALPHA
+
+realized_revenue_gate:
+  required_stages:
+    - COLLECTED
+    - RECONCILED
+  required_evidence:
+    - source
+    - timestamp
+    - owner
+    - change
+    - validation
+    - provenance
+  rule: >-
+    Only collected and reconciled customer/commercial receipts may enter realized-revenue totals.
+    Restricted grants remain separately classified and internal savings are economic value, not cash revenue.
+
+surplus_gate:
+  rule: >-
+    Only deployable surplus may cross the Freedom Architect capital valve.
+  deductions_or_reservations_required_before_surplus:
+    - direct_delivery_costs
+    - accounts_payable_and_committed_costs
+    - taxes_and_statutory_obligations
+    - operating_reserve
+    - contractual_restrictions
+    - family_progress_floor
+  automatic_money_movement: false
+  human_approval_required: true
+
+allocation_gate:
+  required_fields:
+    - proposed_destination
+    - owner
+    - evidence_basis
+    - expected_productive_output
+    - downside
+    - liquidity_effect
+    - dependency
+    - kill_threshold
+    - review_point
+  priority_rule: >-
+    Allocate verified surplus toward the highest evidence-backed productive bottleneck after critical
+    Trust, Ledger, SRE, SOC, legal, compliance, and customer obligations are satisfied.
+
+branch_result_gate:
+  acceptable_outputs:
+    - REALIZED_REVENUE
+    - RECURRING_REVENUE_POTENTIAL
+    - REUSABLE_IP
+    - VERIFIED_SKILL
+    - EVIDENCE
+    - CUSTOMER_DEMAND
+    - COMPLIANCE_READINESS
+    - OPERATIONAL_EFFICIENCY
+    - PRODUCTIVE_ASSET_VALUE
+    - IMPROVED_NEXT_DECISION
+  no_output_response:
+    - HOLD
+    - MODIFY
+    - KILL
+
+portfolio_metrics:
+  - gross_revenue
+  - contribution_margin
+  - recurring_revenue
+  - customer_acquisition_cost
+  - customer_lifetime_value
+  - intelligence_to_revenue_conversion
+  - knowledge_yield
+  - foundry_yield
+  - capability_to_capital_conversion
+  - reinvestment_efficiency
+  - customer_learning_yield
+  - pressure_loss
+  - next_alpha
+
+control_boundaries:
+  - no_guaranteed_or_infinite_return_claims
+  - no_automatic_money_movement
+  - no_automatic_contract_submission
+  - no_automatic_grant_submission
+  - no_release_bypass
+  - no_customer_data_cross_tenant_exposure
+  - synthetic_and_real_financial_data_must_remain_separate
