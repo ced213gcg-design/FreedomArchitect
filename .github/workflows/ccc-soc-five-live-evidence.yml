@@ -46,7 +46,8 @@ jobs:
                   assert r.status==200,(path,r.status)
                   return json.load(r)
           health=get('/api/health')
-          assert health['version']=='10.1-SOC-LIVE-P0'
+          assert health['version']=='10.1-P0'
+          assert health['release']=='SOC-LIVE-P0'
           missions=get('/api/soc/missions')
           assert missions['count']==5
           assert missions['proven_count']==0
