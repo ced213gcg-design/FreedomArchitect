@@ -6,6 +6,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from state_store import repo_path, read_yaml
+from evidence_bridge import validate_sanitized_payload
+from soc_latency import reconcile_latency
 
 SCENARIO_REGISTRY = repo_path("config", "soc-detection-scenarios.yaml")
 DEFAULT_BRIDGE = repo_path("runtime", "soc", "ccc-soc-bridge-payload.json")
@@ -21,7 +23,9 @@ def _load_bridge() -> dict | None:
         return None
     try:
         payload = json.loads(path.read_text(encoding="utf-8"))
-        return payload if isinstance(payload, dict) else None
+        if not isinstance(payload, dict) or validate_sanitized_payload(payload):
+            return None
+        return payload
     except Exception:
         return None
 
@@ -46,9 +50,10 @@ def _run_has_real_evidence(row: dict) -> bool:
 def _scenario_state(runs: list[dict]) -> str:
     if not runs:
         return "UNKNOWN"
-    if any(str(r.get("state", "")).startswith("HOLD") for r in runs):
-        if not any(_run_has_real_evidence(r) for r in runs):
-            return "HOLD"
+    if any(str(r.get("state", "")).upper() == "VERIFY_CLOCK_SKEW" for r in runs):
+        return "VERIFY_CLOCK_SKEW"
+    if any(str(r.get("state", "")).startswith("HOLD") for r in runs) and not any(_run_has_real_evidence(r) for r in runs):
+        return "HOLD"
     correlated = [r for r in runs if str(r.get("state", "")).upper() == "PASS" and _run_has_real_evidence(r)]
     if len(correlated) >= 3:
         return "PASS"
@@ -56,8 +61,6 @@ def _scenario_state(runs: list[dict]) -> str:
         return "PARTIAL"
     if any(str(r.get("state", "")).upper() == "FAIL" for r in runs):
         return "FAIL"
-    if any(str(r.get("state", "")).upper() == "VERIFY_CLOCK_SKEW" for r in runs):
-        return "VERIFY_CLOCK_SKEW"
     if any(str(r.get("state", "")).startswith("HOLD") for r in runs):
         return "HOLD"
     return "UNKNOWN"
@@ -70,7 +73,7 @@ def scenario_summary() -> dict:
     rows = []
     for definition in registry.get("scenarios", []):
         sid = definition["id"]
-        runs = [r for r in all_runs if isinstance(r, dict) and str(r.get("scenario_id")) == sid]
+        runs = [reconcile_latency(r) for r in all_runs if isinstance(r, dict) and str(r.get("scenario_id")) == sid]
         runs = sorted(runs, key=lambda r: str(r.get("trigger_time") or ""), reverse=True)[:3]
         real_runs = sum(1 for r in runs if _run_has_real_evidence(r))
         latest = runs[0] if runs else {}
@@ -79,6 +82,8 @@ def scenario_summary() -> dict:
         state = _scenario_state(runs)
         rows.append({
             **definition,
+            "object_class": "DETECTION_SCENARIO",
+            "group": "SOC_DETECTION_SCENARIOS",
             "state": state,
             "runs_real": real_runs,
             "runs_required": 3,
@@ -95,6 +100,7 @@ def scenario_summary() -> dict:
     return {
         "state": "VERIFY" if bridge else "UNKNOWN",
         "bridge_present": bridge is not None,
+        "group": "SOC_DETECTION_SCENARIOS",
         "scenario_count": len(rows),
         "real_scenario_count": real_scenarios,
         "pass_count": passed,
@@ -129,8 +135,9 @@ def scenario_trace(scenario_id: str | None = None) -> dict:
 
 def bridge_status() -> dict:
     bridge = _load_bridge()
+    mode = os.getenv("CCC_BRIDGE_MODE", "FILE_FALLBACK")
     if not bridge:
-        return {"state": "UNKNOWN", "mode": os.getenv("CCC_BRIDGE_MODE", "FILE_FALLBACK"), "source": str(_bridge_path()), "last_real_event": None, "current_run": None}
+        return {"state": "UNKNOWN", "mode": mode, "source": str(_bridge_path()), "last_real_event": None, "current_run": None}
     latest_times = []
     for row in bridge.get("scenario_runs", []):
         if isinstance(row, dict):
@@ -138,7 +145,7 @@ def bridge_status() -> dict:
     latest_times = [x for x in latest_times if x]
     return {
         "state": "VERIFY",
-        "mode": os.getenv("CCC_BRIDGE_MODE", "HTTP_LAN"),
+        "mode": mode,
         "source": str(_bridge_path()),
         "timestamp": bridge.get("timestamp"),
         "current_run": bridge.get("run_id"),
