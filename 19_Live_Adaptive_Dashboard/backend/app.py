@@ -1,0 +1,76 @@
+from __future__ import annotations
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from pathlib import Path
+from urllib.parse import urlparse
+from datetime import datetime, timezone
+import importlib.util, json, os, sys, uuid
+
+HERE=Path(__file__).resolve().parent; ROOT=HERE.parents[1]
+sys.path.insert(0,str(HERE))
+from state_store import manifest, hosts, agents, ledger_path, repo_path, read_yaml
+from soc_adapter import SocAdapter
+from ledger_adapter import recent as ledger_recent
+from agent_registry import public_view
+from economics_gate import internal_evidence_decision
+
+def _load(name,path):
+    s=importlib.util.spec_from_file_location(name,path); m=importlib.util.module_from_spec(s); s.loader.exec_module(m); return m
+pressure_mod=_load("pressure_loss",repo_path("21_CCC_Orchestra","pressure_loss.py"))
+ledger_mod=_load("ccc_ledger",repo_path("22_CCC_Ledger","ledger.py"))
+approvals_mod=_load("approvals",repo_path("23_CCC_Agent_Mesh","approvals.py"))
+
+REGISTERED_ACTIONS={"PROCEED_REQUEST","RELEASE_REVIEW_REQUEST","SOC_RUNTIME_START_REQUEST"}
+
+def _json(status, payload): return status,{"Content-Type":"application/json; charset=utf-8"},json.dumps(payload,default=str).encode()
+def _organ_scores(organ):
+    state=organ.get("state","INCUBATE"); base={"DORMANT":10,"SEED":20,"INCUBATE":35,"BUILD":50,"VERIFY":65,"READY":80,"THRIVE":90,"SCALE":95}.get(state,25)
+    return {"Progress":base,"Evidence":max(10,base-10),"Compliance":70 if state not in ("HOLD","ISOLATE") else 35,"Resilience":50 if state in ("BUILD","VERIFY") else 60,"EconomicValue":50}
+def _pressure():
+    rows=[]
+    for organ in manifest().get("organs",[]):
+        p=pressure_mod.calculate(_organ_scores(organ)); rows.append({"organ":organ["id"],**p,"evidence_basis":"DECLARED_CONFIG_NOT_RUNTIME","next_action":"COLLECT_RUNTIME_EVIDENCE"})
+    weakest=min(rows,key=lambda r:r["PressureLoss"]) if rows else None
+    return {"state":"VERIFY","organs":rows,"system_weakest":weakest}
+def _sphere():
+    nodes=[]
+    for idx,o in enumerate(manifest().get("organs",[])):
+        s=_organ_scores(o); nodes.append({"id":o["id"],"label":o["name"],"state":o["state"],"x":idx%5,"y":s["EconomicValue"],"w":100 if o.get("criticality")=="TIER_0" else 60,"s":s["Evidence"],"importance":100 if o.get("criticality")=="TIER_0" else 60,"activity":0,"confidence":s["Evidence"],"data_quality":"DECLARED_CONFIG"})
+    return {"dimensions":{"X":"Capability","Y":"Productive Value","W":"Strategic Will / Authorization","S":"Verified Operating State"},"nodes":nodes,"edges":[],"symbolic_heartbeat_ms":963}
+def route_request(method,path,body=None):
+    m=manifest()
+    if method=="GET" and path=="/api/health": return _json(200,{"status":"PASS","state":"VERIFY","service":"ccc-living-dashboard","timestamp":datetime.now(timezone.utc).isoformat()})
+    if method=="GET" and path=="/api/manifest": return _json(200,m)
+    if method=="GET" and path=="/api/hosts": return _json(200,hosts())
+    if method=="GET" and path=="/api/organs": return _json(200,{"organs":m.get("organs",[])})
+    if method=="GET" and path=="/api/mission": return _json(200,{"state":m.get("status"),"branch":m.get("release",{}).get("branch"),"next_action":m.get("next_action"),"validation":"DECLARED_MANIFEST"})
+    if method=="GET" and path=="/api/pressure-loss": return _json(200,_pressure())
+    if method=="GET" and path=="/api/soc/state": return _json(200,SocAdapter().get_state())
+    if method=="GET" and path=="/api/ledger/recent": return _json(200,{"events":ledger_recent(ledger_path())})
+    if method=="GET" and path=="/api/agents": return _json(200,{"agents":public_view(repo_path("23_CCC_Agent_Mesh","registry.yaml"))})
+    if method=="GET" and path=="/api/sphere": return _json(200,_sphere())
+    if method=="GET" and path=="/api/economics/technology-choice": return _json(200,internal_evidence_decision(repo_path("22_CCC_Ledger","economics","technology-choice-matrix.yaml")))
+    if method=="POST" and path=="/api/action-request":
+        payload=body if isinstance(body,dict) else json.loads(body or "{}")
+        action=payload.get("action_type"); requester=payload.get("requester","dashboard-agent")
+        if action not in REGISTERED_ACTIONS: return _json(400,{"status":"REJECTED","reason":"unregistered_action_type"})
+        req=approvals_mod.create_request(action,requester,payload.get("payload",{}))
+        event={"event_id":str(uuid.uuid4()),"timestamp":datetime.now(timezone.utc).isoformat(),"source":"living-dashboard","owner":requester,"organ":"mission_control","run_id":req["approval_id"],"event_type":"APPROVAL_REQUEST","previous_state":"VERIFY","new_state":"HOLD","change":action,"validation":"PENDING_HUMAN_APPROVAL","provenance":"POST /api/action-request","artifact_hashes":[],"synthetic":False,"financial_classification":"NON_FINANCIAL","notes":"Request recorded; no consequential action executed."}
+        ledger_mod.append_event(ledger_path(),event)
+        return _json(202,{**req,"executed":False})
+    return _json(404,{"error":"not_found"})
+
+class Handler(BaseHTTPRequestHandler):
+    def _send(self,method):
+        path=urlparse(self.path).path; body=None
+        if method=="POST":
+            n=int(self.headers.get("Content-Length","0") or 0); raw=self.rfile.read(n) if n else b"{}"; body=raw.decode()
+        status,headers,payload=route_request(method,path,body); self.send_response(status)
+        for k,v in headers.items(): self.send_header(k,v)
+        self.send_header("Content-Length",str(len(payload))); self.end_headers(); self.wfile.write(payload)
+    def do_GET(self): self._send("GET")
+    def do_POST(self): self._send("POST")
+    def log_message(self,fmt,*args): return
+
+def main():
+    host=os.getenv("CCC_DASHBOARD_HOST","127.0.0.1"); port=int(os.getenv("CCC_DASHBOARD_PORT","8787")); print(f"CCC Living Dashboard: http://{host}:{port}"); ThreadingHTTPServer((host,port),Handler).serve_forever()
+if __name__=="__main__": main()
