@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ccc.object-card.v1",
+  "type": "object",
+  "required": ["id","name","plain_function","state","primary_action","evidence_freshness"],
+  "properties": {
+    "id": {"type":"string"},
+    "name": {"type":"string"},
+    "plain_function": {"type":"string"},
+    "state": {"type":"string"},
+    "primary_action": {"type":"string"},
+    "secondary_action": {"type":["string","null"]},
+    "evidence_freshness": {"type":"string"},
+    "evidence_ref": {"type":["string","null"]},
+    "progress": {"type":["number","null"],"minimum":0,"maximum":100},
+    "authority_required": {"type":"boolean"}
+  },
+  "additionalProperties": true
+}
