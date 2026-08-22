@@ -1,24 +1,5 @@
 {
-  "$schema":"https://json-schema.org/draft/2020-12/schema",
-  "$id":"agent-registration.schema.json",
-  "type":"object",
-  "additionalProperties":false,
-  "required":["id","type","owner","host","role","public_key_or_identity_reference","allowed_inputs","allowed_outputs","allowed_actions","denied_actions","health_endpoint","state","last_seen","version","revocation_state"],
-  "properties":{
-    "id":{"type":"string","pattern":"^[a-z0-9-]+$"},
-    "type":{"type":"string"},
-    "owner":{"type":"string"},
-    "host":{"type":"string"},
-    "role":{"type":"string"},
-    "public_key_or_identity_reference":{"type":"string"},
-    "allowed_inputs":{"type":"array","items":{"type":"string"}},
-    "allowed_outputs":{"type":"array","items":{"type":"string"}},
-    "allowed_actions":{"type":"array","items":{"type":"string"}},
-    "denied_actions":{"type":"array","items":{"type":"string"}},
-    "health_endpoint":{"type":["string","null"]},
-    "state":{"enum":["DORMANT","SEED","INCUBATE","BUILD","VERIFY","READY","THRIVE","SCALE","HOLD","ISOLATE","RETIRE"]},
-    "last_seen":{"type":["string","null"]},
-    "version":{"type":"string"},
-    "revocation_state":{"enum":["ACTIVE","REVOKED","PENDING"]}
-  }
+  "$schema":"https://json-schema.org/draft/2020-12/schema","$id":"agent-registration.schema.json","type":"object","additionalProperties":false,
+  "required":["id","type","owner","host","role","identity_reference","allowed_inputs","allowed_outputs","allowed_actions","denied_actions","health_endpoint","state","last_seen","version","revocation_state"],
+  "properties":{"id":{"type":"string","pattern":"^[a-z0-9-]+$"},"type":{"type":"string"},"owner":{"type":"string"},"host":{"type":"string"},"role":{"type":"string"},"identity_reference":{"type":"string","minLength":1},"public_key_or_identity_reference":{"type":"string"},"allowed_inputs":{"type":"array","items":{"type":"string"}},"allowed_outputs":{"type":"array","items":{"type":"string"}},"allowed_actions":{"type":"array","items":{"type":"string"}},"denied_actions":{"type":"array","items":{"type":"string"}},"health_endpoint":{"type":["string","null"]},"state":{"enum":["DORMANT","SEED","INCUBATE","BUILD","VERIFY","READY","THRIVE","SCALE","HOLD","ISOLATE","RETIRE"]},"last_seen":{"type":["string","null"]},"version":{"type":"string"},"revocation_state":{"enum":["ACTIVE","REVOKED","PENDING"]}}
 }

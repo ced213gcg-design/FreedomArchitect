@@ -1,0 +1,5 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema","$id":"opportunity-event.schema.json","type":"object","additionalProperties":false,
+  "required":["opportunity_id","type","title","source","first_seen","last_verified","status","evidence_refs"],
+  "properties":{"opportunity_id":{"type":"string","minLength":1},"type":{"enum":["EMPLOYMENT","FEDERAL_OPPORTUNITY","CUSTOMER_LEAD","GRANT","HARDWARE_PRICE","MARKET","RESEARCH","OTHER"]},"title":{"type":"string","minLength":1},"source":{"type":"string","minLength":1},"first_seen":{"type":"string","format":"date-time"},"last_verified":{"type":"string","format":"date-time"},"status":{"enum":["SIGNAL","QUALIFIED","HOLD","WON","LOST","DECLINED","EXPIRED","SUPERSEDED"]},"evidence_refs":{"type":"array","items":{"type":"string"}}}
+}
