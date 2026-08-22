@@ -33,6 +33,7 @@ REQUIRED=[
  "config/soc-lab-targets.yaml",
  "scripts/warroom/CCC_HP_SOC_WARROOM_ONE_DROP.sh",
  "scripts/warroom/CCC_DELL_SOC_WARROOM_ONE_DROP.ps1",
+ "scripts/warroom/export_physical_artifacts.py",
 ]
 def main():
     errors=[]
