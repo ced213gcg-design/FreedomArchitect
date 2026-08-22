@@ -1,4 +1,4 @@
-version: 10.0-P0
+version: 10.1-P0
 self_registration: false
 agents:
 - id: github-agent
@@ -6,6 +6,7 @@ agents:
   owner: CCC
   host: github
   role: code-event-source
+  identity_reference: identity-ref:github-agent
   public_key_or_identity_reference: identity-ref:github-agent
   allowed_inputs: [repository-events]
   allowed_outputs: [code-events]
@@ -14,43 +15,62 @@ agents:
   health_endpoint: null
   state: VERIFY
   last_seen: null
-  version: 10.0-P0
+  version: 10.1-P0
   revocation_state: ACTIVE
 - id: codex-agent
   type: service
   owner: CCC
   host: github
   role: implementation-and-repair
+  identity_reference: identity-ref:codex-agent
   public_key_or_identity_reference: identity-ref:codex-agent
-  allowed_inputs: [scoped-prompt, github-issue, pr-review-defect]
+  allowed_inputs: [scoped-prompt, github-issue, pr-review-defect, orchestra-defect-ticket]
   allowed_outputs: [code-change, test-evidence, draft-pr]
   allowed_actions: [read_scoped_repo, edit_scoped_branch, run_tests, report_evidence, open_pr]
   denied_actions: [silent_merge, invent_pass, unscoped_external_action]
   health_endpoint: null
   state: VERIFY
   last_seen: null
-  version: 10.0-P0
+  version: 10.1-P0
   revocation_state: ACTIVE
 - id: slack-sink
   type: sink
   owner: CCC
   host: external
   role: simulation-review-notification
+  identity_reference: identity-ref:slack-sink
   public_key_or_identity_reference: identity-ref:slack-sink
-  allowed_inputs: [sanitized-summary, approval-request]
+  allowed_inputs: [sanitized-summary, approval-request, exception-summary]
   allowed_outputs: []
-  allowed_actions: [receive_sanitized_summary, receive_approval_request]
+  allowed_actions: [receive_sanitized_summary, receive_approval_request, receive_exception_summary]
   denied_actions: [source_of_truth, arbitrary_shell_execution, raw_secret_storage]
   health_endpoint: null
   state: INCUBATE
   last_seen: null
-  version: 10.0-P0
+  version: 10.1-P0
+  revocation_state: ACTIVE
+- id: gmail-channel
+  type: channel
+  owner: CCC
+  host: external
+  role: external-communication-channel
+  identity_reference: identity-ref:gmail-channel
+  public_key_or_identity_reference: identity-ref:gmail-channel
+  allowed_inputs: [approved-report, approved-notification, opportunity-message]
+  allowed_outputs: [delivery-result, opportunity-signal]
+  allowed_actions: [receive_opportunity_message, send_approved_report, send_approved_notification, record_delivery_result]
+  denied_actions: [source_of_truth, claim_delivery_without_evidence, send_unapproved_consequential_message, arbitrary_command_execution]
+  health_endpoint: null
+  state: INCUBATE
+  last_seen: null
+  version: 10.1-P0
   revocation_state: ACTIVE
 - id: hp-dev-agent
   type: host
   owner: CCC
   host: ccc-hp-dev-01
   role: local-development-state
+  identity_reference: identity-ref:hp-dev-agent
   public_key_or_identity_reference: identity-ref:hp-dev-agent
   allowed_inputs: [local-state]
   allowed_outputs: [validated-dev-state]
@@ -59,13 +79,14 @@ agents:
   health_endpoint: null
   state: VERIFY
   last_seen: null
-  version: 10.0-P0
+  version: 10.1-P0
   revocation_state: ACTIVE
 - id: dell-soc-agent
   type: host
   owner: CCC
   host: ccc-dell-compute-01
   role: soc-live-state-reader
+  identity_reference: identity-ref:dell-soc-agent
   public_key_or_identity_reference: identity-ref:dell-soc-agent
   allowed_inputs: [soc-live-state]
   allowed_outputs: [normalized-soc-state]
@@ -74,50 +95,85 @@ agents:
   health_endpoint: null
   state: VERIFY
   last_seen: null
-  version: 10.0-P0
+  version: 10.1-P0
   revocation_state: ACTIVE
 - id: ledger-agent
   type: service
   owner: CCC
   host: ccc-hp-dev-01
   role: evidence-writer
+  identity_reference: identity-ref:ledger-agent
   public_key_or_identity_reference: identity-ref:ledger-agent
-  allowed_inputs: [validated-event]
+  allowed_inputs: [validated-event, validated-exception]
   allowed_outputs: [ledger-event]
   allowed_actions: [append_validated_event, verify_chain, read_evidence]
   denied_actions: [rewrite_history, delete_evidence]
   health_endpoint: null
   state: BUILD
   last_seen: null
-  version: 10.0-P0
+  version: 10.1-P0
   revocation_state: ACTIVE
 - id: orchestra-agent
   type: service
   owner: CCC
   host: ccc-hp-dev-01
   role: integration-release-evaluator
+  identity_reference: identity-ref:orchestra-agent
   public_key_or_identity_reference: identity-ref:orchestra-agent
-  allowed_inputs: [ledger-state, github-state, live-state]
-  allowed_outputs: [release-evaluation, defect-ticket]
-  allowed_actions: [evaluate_state, evaluate_pressure_loss, evaluate_release_gate, return_defect]
+  allowed_inputs: [ledger-state, github-state, live-state, verified-exception]
+  allowed_outputs: [release-evaluation, defect-ticket, exception-route]
+  allowed_actions: [evaluate_state, evaluate_pressure_loss, evaluate_release_gate, route_exception, return_defect]
   denied_actions: [invent_capability, fabricate_evidence]
   health_endpoint: null
   state: BUILD
   last_seen: null
-  version: 10.0-P0
+  version: 10.1-P0
+  revocation_state: ACTIVE
+- id: mission-control-agent
+  type: service
+  owner: CCC
+  host: ccc-hp-dev-01
+  role: pressure-priority-evaluator
+  identity_reference: identity-ref:mission-control-agent
+  public_key_or_identity_reference: identity-ref:mission-control-agent
+  allowed_inputs: [pressure-loss, verified-exception, security-priority]
+  allowed_outputs: [priority-decision-request, next-action]
+  allowed_actions: [read_verified_exception, prioritize_exception, request_human_decision]
+  denied_actions: [execute_consequential_action, invent_priority_evidence]
+  health_endpoint: null
+  state: BUILD
+  last_seen: null
+  version: 10.1-P0
+  revocation_state: ACTIVE
+- id: exception-intelligence-agent
+  type: service
+  owner: CCC
+  host: ccc-hp-dev-01
+  role: sensory-priority-exception-intelligence
+  identity_reference: identity-ref:exception-intelligence-agent
+  public_key_or_identity_reference: identity-ref:exception-intelligence-agent
+  allowed_inputs: [registered-signal, opportunity-message, security-event, market-signal, research-signal]
+  allowed_outputs: [verified-exception, exception-route, freshness-change, capability-gap]
+  allowed_actions: [read_registered_signal, verify_signal, score_exception, evaluate_freshness, route_exception, write_exception_evidence]
+  denied_actions: [fabricate_source, keep_stale_verified, execute_consequential_action, auto_submit_opportunity]
+  health_endpoint: null
+  state: BUILD
+  last_seen: null
+  version: 10.1-P0
   revocation_state: ACTIVE
 - id: dashboard-agent
   type: service
   owner: CCC
   host: ccc-hp-dev-01
   role: read-only-digital-twin
+  identity_reference: identity-ref:dashboard-agent
   public_key_or_identity_reference: identity-ref:dashboard-agent
-  allowed_inputs: [approved-state]
+  allowed_inputs: [approved-state, verified-exception-summary]
   allowed_outputs: [human-readable-state, action-request]
   allowed_actions: [read_approved_state, render_state, submit_action_request]
   denied_actions: [direct_privileged_execution]
   health_endpoint: /api/health
   state: BUILD
   last_seen: null
-  version: 10.0-P0
+  version: 10.1-P0
   revocation_state: ACTIVE
