@@ -82,7 +82,7 @@
     "missing_evidence_state": "UNKNOWN"
   },
   "dashboard": {
-    "p0_endpoints": ["/api/health", "/api/manifest", "/api/hosts", "/api/organs", "/api/mission", "/api/pressure-loss", "/api/soc/state", "/api/ledger/recent", "/api/agents", "/api/sphere", "/api/economics/technology-choice", "/api/action-request"],
+    "p0_endpoints": ["/api/health", "/api/manifest", "/api/hosts", "/api/organs", "/api/mission", "/api/pressure-loss", "/api/soc/state", "/api/ledger/recent", "/api/agents", "/api/sphere", "/api/economics/technology-choice", "/api/economics/revenue-flywheel", "/api/action-request"],
     "modes": ["COACH", "PLAN", "SIMULATE", "PROCEED", "PAUSE", "DIVE", "HALT"],
     "proceed_behavior": "APPROVAL_REQUEST_ONLY"
   },
