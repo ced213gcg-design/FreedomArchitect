@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ccc.workforce.shift_report.v1",
+  "type": "object",
+  "required": ["shift_id", "worker", "report_type"],
+  "properties": {
+    "shift_id": {"type": "string", "minLength": 1},
+    "worker": {"type": "string", "enum": ["command", "intelligence", "security", "revenue", "communications"]},
+    "report_type": {"type": "string", "enum": ["MID_SHIFT_POSITION", "END_SHIFT_HANDOFF"]},
+    "started_at": {"type": "string"}, "starting_objective": {}, "work_completed": {}, "current_position": {}, "evidence_obtained": {}, "blockers": {}, "risk": {}, "cost_incurred": {}, "next_action_for_remainder": {},
+    "ended_at": {"type": "string"}, "starting_position": {}, "completed_outcomes": {}, "evidence": {}, "unresolved_items": {}, "final_state": {}, "where_work_stopped": {}, "next_owner": {"type": "string", "minLength": 1}, "exact_next_action": {"type": "string", "minLength": 1}, "expected_next_evidence": {}, "lessons_reinjection": {}, "cost_summary": {}
+  },
+  "allOf": [
+    {"if": {"properties": {"report_type": {"const": "MID_SHIFT_POSITION"}}}, "then": {"required": ["started_at", "starting_objective", "work_completed", "current_position", "evidence_obtained", "blockers", "risk", "cost_incurred", "next_action_for_remainder"]}},
+    {"if": {"properties": {"report_type": {"const": "END_SHIFT_HANDOFF"}}}, "then": {"required": ["ended_at", "starting_position", "completed_outcomes", "evidence", "unresolved_items", "final_state", "where_work_stopped", "next_owner", "exact_next_action", "expected_next_evidence", "lessons_reinjection", "cost_summary"]}}
+  ],
+  "additionalProperties": false
+}

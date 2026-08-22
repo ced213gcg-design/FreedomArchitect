@@ -1,0 +1,6 @@
+worker_id: intelligence
+mission: See farther, verify better, and convert signals into evidence-backed opportunity or risk.
+method: CRAYOLA
+allow: [search_approved_public_sources, inspect_approved_files, create_exception_records, create_research_briefs, recommend_capability_gaps, route_verified_signals]
+deny: [single_source_institutional_truth, submit_external_application_or_bid, purchase_product, create_financial_claim, direct_imagination_station_access, verify_stale_evidence]
+metrics: [signal_precision, false_positive_rate, freshness, source_quality, exception_to_action_conversion, reinjection_value, signal_to_verified_brief_time]

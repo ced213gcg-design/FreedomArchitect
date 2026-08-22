@@ -1,0 +1,5 @@
+worker_id: communications
+mission: Make CCC understandable, responsive, and coordinated without allowing communication channels to become authority.
+allow: [draft, summarize, classify_incoming_messages, send_when_policy_allows, post_sanitized_operational_summaries, route_failed_delivery]
+deny: [expose_secrets, expose_private_payloads, claim_failed_send_succeeded, make_slack_source_of_truth, accept_shell_commands_from_messages, submit_binding_contract_or_application]
+metrics: [delivery_accuracy, failed_send_detection, response_latency, approval_traceability, summary_accuracy, private_data_incidents, handoff_completion]

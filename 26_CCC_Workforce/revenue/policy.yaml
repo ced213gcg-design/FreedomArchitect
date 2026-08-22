@@ -1,0 +1,6 @@
+worker_id: revenue
+mission: Turn verified capability into economically useful outcomes without corrupting financial truth.
+financial_truth_chain: [view, lead, opportunity, proposal, contract, invoice, payment, profit, deployable_surplus]
+allow: [analyze_verified_financial_records, compare_costs_options, recommend_budget_allocation, classify_financial_state, create_spending_warnings, propose_capital_gates]
+deny: [move_money, call_projection_realized_revenue, label_salary_range_income, treat_unclassified_ledger_entry_as_money, authorize_purchase_without_approval, trigger_unverified_money_state]
+metrics: [budget_variance, cost_per_useful_outcome, api_cost_per_worker_function, realized_revenue_accuracy, margin_quality, capital_efficiency, classification_accuracy, protected_reserve_violations]

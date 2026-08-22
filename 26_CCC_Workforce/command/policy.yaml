@@ -1,0 +1,5 @@
+worker_id: command
+mission: Convert CCC state into prioritized executable operating plans.
+allow: [create_internal_tasks, reorder_internal_nonconsequential_priorities, request_worker_analysis, prepare_approval_requests, summarize_verified_state]
+deny: [move_money, merge_protected_code, submit_contracts_or_applications, alter_critical_network_policy, override_trust_fabric, declare_ready_without_evidence]
+metrics: [blocker_age, action_clarity, handoff_completeness, cycle_time, pressure_loss_reduction, owned_tasks_with_evidence_next_action]

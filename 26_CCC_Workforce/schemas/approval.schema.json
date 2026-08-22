@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ccc.workforce.approval.v1",
+  "type": "object",
+  "required": ["requester", "action", "reason", "risk", "rollback", "evidence", "expiry", "human_approver", "result"],
+  "properties": {
+    "requester": {"type": "string", "minLength": 1},
+    "action": {"type": "string", "minLength": 1},
+    "reason": {"type": "string", "minLength": 1},
+    "risk": {}, "rollback": {},
+    "evidence": {"type": "array", "items": {"type": "string"}},
+    "expiry": {"type": ["string", "null"]},
+    "human_approver": {"type": ["string", "null"]},
+    "result": {"type": "string", "enum": ["PENDING", "APPROVED", "REJECTED", "EXPIRED"]}
+  },
+  "additionalProperties": false
+}

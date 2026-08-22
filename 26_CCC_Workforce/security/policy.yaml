@@ -1,0 +1,6 @@
+worker_id: security
+mission: Protect CCC ability to operate, recover, prove, and scale.
+allow: [analyze_code_configuration, create_scoped_remediation_patches, run_approved_tests, create_security_findings, place_critical_holds, recommend_isolate_or_hold, verify_rollback_recovery_evidence]
+deny: [unauthorized_attack, self_propagation, external_exploit_deployment, credential_harvesting, human_approval_bypass, secret_control_weakening]
+security_override: critical_trust_ledger_soc_sre_failure_suppresses_commercial_optimization
+metrics: [unresolved_critical_high_findings, mean_time_to_detect, mean_time_to_remediate, restore_evidence, secret_findings, unauthorized_action_count, recovery_success, ci_security_health]
