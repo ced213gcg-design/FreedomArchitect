@@ -6,6 +6,12 @@ STAMP="$(date -u +%Y%m%dT%H%M%SZ)"
 STEP="INIT"
 BRIDGE_PID=""
 DASH_PID=""
+EXPORT_PID=""
+
+cleanup() {
+  [[ -z "$EXPORT_PID" ]] || kill "$EXPORT_PID" 2>/dev/null || true
+  [[ -z "$BRIDGE_PID" ]] || kill "$BRIDGE_PID" 2>/dev/null || true
+}
 
 fail() {
   local rc=$?
@@ -19,6 +25,7 @@ fail() {
   exit "$rc"
 }
 trap fail ERR
+trap cleanup EXIT
 
 step() {
   STEP="$1"
@@ -157,7 +164,17 @@ payload={
 Path(os.environ['SESSION_MANIFEST']).write_text(json.dumps(payload,indent=2)+'\n',encoding='utf-8')
 PY
 
-step "DASHBOARD-12" "Start CCC Living Dashboard"
+step "ARTIFACT-12" "Seed and continuously refresh sanitized physical evidence package"
+python scripts/warroom/export_physical_artifacts.py
+python scripts/warroom/export_physical_artifacts.py --watch > runtime/soc/artifact-export.log 2>&1 &
+EXPORT_PID=$!
+sleep 1
+kill -0 "$EXPORT_PID"
+for required in control-gates.json scenario-summary.json scenario-runs.jsonl sensor-inventory.json evidence-index.json sha256sums.txt; do
+  [[ -f "artifacts/soc-live-five/$required" ]]
+done
+
+step "DASHBOARD-13" "Start CCC Living Dashboard"
 python 19_Live_Adaptive_Dashboard/backend/app.py > runtime/soc/dashboard.log 2>&1 &
 DASH_PID=$!
 sleep 1
@@ -169,7 +186,7 @@ with urllib.request.urlopen('http://127.0.0.1:8787/api/health', timeout=3) as r:
     assert r.status==200 and data['status']=='PASS'
 PY
 
-step "REPORT-13" "Print exact operator handoff"
+step "REPORT-14" "Print exact operator handoff"
 echo
 echo "============================================================"
 echo "CCC HP SOC WAR ROOM READY FOR PHYSICAL EVIDENCE"
@@ -187,11 +204,13 @@ else
   echo "HP receiver   : not exposed; network bridge not explicitly enabled or did not pass preflight."
   echo "Dell next     : run scripts/warroom/CCC_DELL_SOC_WARROOM_ONE_DROP.ps1 as Administrator; it will emit a sanitized ccc-soc-bridge-payload.json for FILE_FALLBACK."
 fi
+echo "Evidence dir  : artifacts/soc-live-five/"
 echo "Session file  : artifacts/soc-live-five/session-manifest.json"
+echo "Artifact sync : active PID=$EXPORT_PID; sanitized package refreshes when validated bridge evidence changes."
 echo "Runtime data  : ignored by Git; do not commit raw physical evidence or secrets."
 echo "============================================================"
 echo
-echo "Processes remain active in this terminal session: dashboard PID=$DASH_PID${BRIDGE_PID:+ bridge PID=$BRIDGE_PID}"
+echo "Processes remain active in this terminal session: dashboard PID=$DASH_PID${BRIDGE_PID:+ bridge PID=$BRIDGE_PID} exporter PID=$EXPORT_PID"
 echo "Use Ctrl+C or explicit kill only after evidence review is complete."
 
 wait "$DASH_PID"
