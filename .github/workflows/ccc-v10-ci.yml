@@ -18,7 +18,9 @@ jobs:
       - name: Repository validation
         run: python scripts/validate_ccc_repo.py
       - name: Unit tests
-        run: pytest -q --import-mode=importlib --junitxml=artifacts/pytest-report.xml
+        run: |
+          mkdir -p artifacts
+          pytest -q --import-mode=importlib --junitxml=artifacts/pytest-report.xml
       - name: Bash syntax
         run: |
           if command -v shellcheck >/dev/null 2>&1; then shellcheck scripts/*.sh; else bash -n scripts/*.sh; fi
