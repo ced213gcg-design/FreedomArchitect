@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ccc.soc.detection.run.v1",
+  "title": "CCC SOC Detection Scenario Run",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "scenario_id", "run_id", "trigger_time", "source_host", "target_host",
+    "trigger_class", "sensor", "state", "evidence_refs", "control_gates_satisfied",
+    "notes", "synthetic"
+  ],
+  "properties": {
+    "scenario_id": {"type": "string", "pattern": "^DET-0[1-5]$"},
+    "run_id": {"type": "string", "minLength": 1, "maxLength": 128},
+    "trigger_time": {"type": "string", "format": "date-time"},
+    "source_host": {"type": "string", "minLength": 1, "maxLength": 128},
+    "target_host": {"type": "string", "minLength": 1, "maxLength": 128},
+    "trigger_class": {"type": "string", "minLength": 1, "maxLength": 128},
+    "sensor": {"type": ["string", "null"], "maxLength": 128},
+    "source_event_time": {"type": ["string", "null"], "format": "date-time"},
+    "detection_time": {"type": ["string", "null"], "format": "date-time"},
+    "ledger_time": {"type": ["string", "null"], "format": "date-time"},
+    "dashboard_time": {"type": ["string", "null"], "format": "date-time"},
+    "latency_ms": {"type": ["integer", "number", "null"], "minimum": 0},
+    "trigger_to_sensor_ms": {"type": ["integer", "number", "null"], "minimum": 0},
+    "sensor_to_detection_ms": {"type": ["integer", "number", "null"], "minimum": 0},
+    "detection_to_ledger_ms": {"type": ["integer", "number", "null"], "minimum": 0},
+    "ledger_to_dashboard_ms": {"type": ["integer", "number", "null"], "minimum": 0},
+    "end_to_end_ms": {"type": ["integer", "number", "null"], "minimum": 0},
+    "state": {"enum": ["PASS", "PARTIAL", "HOLD", "HOLD_MISSING_SENSOR", "HOLD_MISSING_MONITORED_PATH", "FAIL", "UNKNOWN", "VERIFY_CLOCK_SKEW"]},
+    "evidence_refs": {"type": "array", "items": {"type": "string", "maxLength": 512}, "maxItems": 64},
+    "control_gates_satisfied": {"type": "array", "items": {"type": "string", "pattern": "^SOC-0[1-5]$"}, "uniqueItems": true},
+    "notes": {"type": "string", "maxLength": 2048},
+    "synthetic": {"const": false}
+  }
+}
