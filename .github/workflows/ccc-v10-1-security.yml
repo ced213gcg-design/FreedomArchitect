@@ -1,0 +1,28 @@
+name: CCC v10.1 Security
+on:
+  push:
+    branches: ['upgrade/ccc-living-dashboard-v10-1']
+  pull_request:
+permissions:
+  contents: read
+  security-events: write
+jobs:
+  codeql:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: github/codeql-action/init@v3
+        with: {languages: 'python,javascript-typescript'}
+      - uses: github/codeql-action/analyze@v3
+  secret-pattern-guard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fail on common committed secret forms
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git grep -nEI '(BEGIN (RSA|OPENSSH|EC) PRIVATE KEY|ghp_[A-Za-z0-9]{30,}|github_pat_[A-Za-z0-9_]{20,}|xox[baprs]-[A-Za-z0-9-]{10,})' -- . ':!docs/**' ':!*.md'; then
+            echo 'Potential committed secret found'; exit 1
+          fi
+          echo 'No matched committed secret patterns.'
