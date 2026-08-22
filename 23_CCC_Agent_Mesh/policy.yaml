@@ -4,3 +4,5 @@ registered_action_types: [PROCEED_REQUEST, RELEASE_REVIEW_REQUEST, SOC_RUNTIME_S
 consequential_actions_require_human_approval: true
 step_up_auth_required: true
 automatic_irreversible_action: false
+unknown_agents_rejected: true
+exception_actions_execute_directly: false

@@ -1,9 +1,13 @@
+version: 10.1-P0
 default_policy: deny
 self_registration: false
 roles:
   github-agent: [read_code, emit_code_events, create_scoped_branch, create_reviewable_pr]
   codex-agent: [read_scoped_repo, edit_scoped_branch, run_tests, report_evidence, open_pr]
   ledger-agent: [append_validated_event, verify_chain, read_evidence]
-  orchestra-agent: [evaluate_state, evaluate_pressure_loss, evaluate_release_gate, return_defect]
+  orchestra-agent: [evaluate_state, evaluate_pressure_loss, evaluate_release_gate, route_exception, return_defect]
+  mission-control-agent: [read_verified_exception, prioritize_exception, request_human_decision]
+  exception-intelligence-agent: [read_registered_signal, verify_signal, score_exception, evaluate_freshness, route_exception, write_exception_evidence]
   dashboard-agent: [read_approved_state, render_state, submit_action_request]
-  slack-sink: [receive_sanitized_summary, receive_approval_request]
+  slack-sink: [receive_sanitized_summary, receive_approval_request, receive_exception_summary]
+  gmail-channel: [receive_opportunity_message, send_approved_report, send_approved_notification, record_delivery_result]

@@ -1,26 +1,16 @@
-version: 10.0-P0
+version: 10.1-P0
 principles:
   default: deny
   self_registration: false
   consequential_actions: explicit_human_approval
 roles:
-  human-command-authority:
-    allowed: [approve, reject, reprioritize, authorize_release, authorize_consequential_action]
-  github-agent:
-    allowed: [read_code, emit_code_events, create_scoped_branch, create_reviewable_pr]
-    denied: [silent_merge, secret_exfiltration]
-  codex-agent:
-    allowed: [read_scoped_repo, edit_scoped_branch, run_tests, report_evidence, open_pr]
-    denied: [silent_merge, invent_pass, unscoped_external_action]
-  ledger-agent:
-    allowed: [append_validated_event, verify_chain, read_evidence]
-    denied: [rewrite_history, delete_evidence]
-  orchestra-agent:
-    allowed: [evaluate_state, evaluate_pressure_loss, evaluate_release_gate, return_defect]
-    denied: [invent_capability, fabricate_evidence]
-  dashboard-agent:
-    allowed: [read_approved_state, render_state, submit_action_request]
-    denied: [direct_privileged_execution]
-  slack-sink:
-    allowed: [receive_sanitized_summary, receive_approval_request]
-    denied: [source_of_truth, arbitrary_shell_execution, raw_secret_storage]
+  human-command-authority: {allowed: [approve, reject, reprioritize, authorize_release, authorize_consequential_action]}
+  github-agent: {allowed: [read_code, emit_code_events, create_scoped_branch, create_reviewable_pr], denied: [silent_merge, secret_exfiltration]}
+  codex-agent: {allowed: [read_scoped_repo, edit_scoped_branch, run_tests, report_evidence, open_pr], denied: [silent_merge, invent_pass, unscoped_external_action]}
+  ledger-agent: {allowed: [append_validated_event, verify_chain, read_evidence], denied: [rewrite_history, delete_evidence]}
+  orchestra-agent: {allowed: [evaluate_state, evaluate_pressure_loss, evaluate_release_gate, route_exception, return_defect], denied: [invent_capability, fabricate_evidence]}
+  mission-control-agent: {allowed: [read_verified_exception, prioritize_exception, request_human_decision], denied: [execute_consequential_action, invent_priority_evidence]}
+  exception-intelligence-agent: {allowed: [read_registered_signal, verify_signal, score_exception, evaluate_freshness, route_exception, write_exception_evidence], denied: [fabricate_source, keep_stale_verified, execute_consequential_action]}
+  dashboard-agent: {allowed: [read_approved_state, render_state, submit_action_request], denied: [direct_privileged_execution]}
+  slack-sink: {allowed: [receive_sanitized_summary, receive_approval_request, receive_exception_summary], denied: [source_of_truth, arbitrary_shell_execution, raw_secret_storage]}
+  gmail-channel: {allowed: [receive_opportunity_message, send_approved_report, send_approved_notification, record_delivery_result], denied: [source_of_truth, claim_delivery_without_evidence, send_unapproved_consequential_message]}

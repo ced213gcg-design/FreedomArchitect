@@ -1,15 +1,21 @@
-version: 10.0-P0
+version: 10.1-P0
 authorities:
   github: CODE_AUTHORITY
   ledger: FACTUAL_EVIDENCE_AUTHORITY
-  orchestra: PLACEMENT_INTEGRATION_RELEASE_AUTHORITY
-  dashboard: HUMAN_DIGITAL_TWIN
+  orchestra: INTEGRATION_PLACEMENT_RELEASE_AUTHORITY
+  mission_control: PRESSURE_PRIORITY_AUTHORITY
+  dashboard: DIGITAL_TWIN_HUMAN_CONTROL_SURFACE
+  exception_intelligence: SENSORY_PRIORITY_ORGAN
   slack: NON_AUTHORITATIVE_NOTIFICATION_SINK
+  gmail: NON_AUTHORITATIVE_EXTERNAL_COMMUNICATION_CHANNEL
 rules:
   schema_validate_events: true
   secrets_in_messages: false
   raw_protected_evidence_to_slack: false
+  raw_protected_evidence_to_gmail: false
   arbitrary_shell_from_slack: false
+  arbitrary_command_from_gmail: false
   direct_control_of_unregistered_nodes: false
   action_requests_require_registration: true
   consequential_actions_require_human_approval: true
+  external_delivery_requires_evidence: true

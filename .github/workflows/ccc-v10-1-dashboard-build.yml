@@ -1,0 +1,39 @@
+name: CCC v10.1 Dashboard Smoke
+on:
+  push:
+    branches: ['upgrade/ccc-living-dashboard-v10-1']
+  pull_request:
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: pip install -r requirements.txt
+      - name: Start API
+        run: |
+          python 19_Live_Adaptive_Dashboard/backend/app.py > /tmp/ccc-dashboard-v10-1.log 2>&1 &
+          echo $! > /tmp/ccc-dashboard-v10-1.pid
+          sleep 2
+      - name: API smoke
+        run: |
+          python - <<'PY'
+          import json, urllib.request
+          paths=['/api/health','/api/manifest','/api/hosts','/api/organs','/api/mission','/api/pressure-loss','/api/soc/state','/api/ledger/recent','/api/agents','/api/exceptions','/api/exceptions/high-priority','/api/sphere','/api/economics/technology-choice','/api/economics/revenue-flywheel']
+          payloads={}
+          for p in paths:
+              with urllib.request.urlopen('http://127.0.0.1:8787'+p) as r:
+                  assert r.status==200,(p,r.status); payloads[p]=json.load(r)
+          assert payloads['/api/health']['version']=='10.1-P0'
+          assert payloads['/api/exceptions']['source_state'] in {'AVAILABLE','UNAVAILABLE'}
+          assert payloads['/api/exceptions/high-priority']['count']>=0
+          assert payloads['/api/sphere']['exception_constellation']['count']>=0
+          flywheel=payloads['/api/economics/revenue-flywheel']
+          assert flywheel['realized_revenue_total'] is None
+          print('v10.1 API smoke PASS')
+          PY
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: node scripts/test_sphere.js
+      - run: node scripts/test_exception_constellation.js

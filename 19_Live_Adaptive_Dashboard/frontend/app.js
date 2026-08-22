@@ -1,54 +1,6 @@
 const get=async p=>(await fetch(p)).json();
-
-function flywheelView(f){
-  return {
-    state:f.state,
-    policy_version:f.policy_version,
-    stream_count:f.stream_count,
-    stage_counts:f.stage_counts,
-    class_counts:f.class_counts,
-    recurring_customer_cycle:f.recurring_customer_cycle,
-    realized_revenue_status:f.realized_revenue_status,
-    realized_revenue_total:f.realized_revenue_total,
-    validation:f.realized_revenue_total_validation,
-    customer_success_gate_present:Boolean(f.customer_success_gate && f.customer_success_gate.rule),
-    diversification_gate_present:Boolean(f.diversification_gate && f.diversification_gate.rule),
-    control_boundaries:f.control_boundaries
-  };
-}
-
-async function refresh(){
-  const [mission,pressure,soc,sphere,flywheel]=await Promise.all([
-    '/api/mission',
-    '/api/pressure-loss',
-    '/api/soc/state',
-    '/api/sphere',
-    '/api/economics/revenue-flywheel'
-  ].map(get));
-  missionEl.textContent=JSON.stringify(mission,null,2);
-  pressureEl.textContent=JSON.stringify(pressure.system_weakest,null,2);
-  socEl.textContent=JSON.stringify(soc,null,2);
-  revenueFlywheelEl.textContent=JSON.stringify(flywheelView(flywheel),null,2);
-  sphereStatus.textContent=CCCSphere.draw(document.getElementById('sphere'),sphere)?'Canvas fallback/data-bound render active':'Canvas unavailable';
-}
-
-const missionEl=document.getElementById('mission'),
-      pressureEl=document.getElementById('pressure'),
-      socEl=document.getElementById('soc'),
-      revenueFlywheelEl=document.getElementById('revenueFlywheel'),
-      sphereStatus=document.getElementById('sphereStatus');
-
-document.querySelectorAll('button[data-mode]').forEach(b=>b.onclick=async()=>{
-  const mode=b.dataset.mode;
-  if(mode==='PROCEED'){
-    const r=await fetch('/api/action-request',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({action_type:'PROCEED_REQUEST',requester:'dashboard-agent',payload:{mode}})
-    });
-    alert(JSON.stringify(await r.json(),null,2));
-  }else alert(`${mode}: non-destructive mode selected`);
-});
-
-refresh();
-setInterval(refresh,5000);
+function flywheelView(f){return {state:f.state,policy_version:f.policy_version,stream_count:f.stream_count,stage_counts:f.stage_counts,class_counts:f.class_counts,recurring_customer_cycle:f.recurring_customer_cycle,realized_revenue_status:f.realized_revenue_status,realized_revenue_total:f.realized_revenue_total,validation:f.realized_revenue_total_validation,customer_success_gate_present:Boolean(f.customer_success_gate&&f.customer_success_gate.rule),diversification_gate_present:Boolean(f.diversification_gate&&f.diversification_gate.rule),control_boundaries:f.control_boundaries};}
+function exceptionView(x){return {state:x.state,source_state:x.source_state,high_priority_count:x.count,validation:x.validation,exceptions:(x.exceptions||[]).map(e=>({exception_id:e.exception_id,type:e.type,title:e.title,source:e.source,last_verified:e.last_verified,freshness_state:e.freshness_state,exception_score:e.exception_score,fit_score:e.fit_score,risk:e.risk,owner:e.owner,next_action:e.next_action,approval_state:e.approval_state}))};}
+async function refresh(){const [mission,pressure,soc,sphere,flywheel,exceptions]=await Promise.all(['/api/mission','/api/pressure-loss','/api/soc/state','/api/sphere','/api/economics/revenue-flywheel','/api/exceptions/high-priority'].map(get)); missionEl.textContent=JSON.stringify(mission,null,2); pressureEl.textContent=JSON.stringify(pressure.system_weakest,null,2); socEl.textContent=JSON.stringify(soc,null,2); exceptionsEl.textContent=JSON.stringify(exceptionView(exceptions),null,2); revenueFlywheelEl.textContent=JSON.stringify(flywheelView(flywheel),null,2); sphereStatus.textContent=CCCSphere.draw(document.getElementById('sphere'),sphere)?'Canvas fallback/data-bound render active':'Canvas unavailable'; exceptionStatus.textContent=CCCExceptionConstellation.draw(document.getElementById('exceptionConstellation'),exceptions)?'Verified exception constellation active':'Exception Canvas unavailable';}
+const missionEl=document.getElementById('mission'),pressureEl=document.getElementById('pressure'),socEl=document.getElementById('soc'),exceptionsEl=document.getElementById('exceptions'),revenueFlywheelEl=document.getElementById('revenueFlywheel'),sphereStatus=document.getElementById('sphereStatus'),exceptionStatus=document.getElementById('exceptionStatus');
+document.querySelectorAll('button[data-mode]').forEach(b=>b.onclick=async()=>{const mode=b.dataset.mode;if(mode==='PROCEED'){const r=await fetch('/api/action-request',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action_type:'PROCEED_REQUEST',requester:'dashboard-agent',payload:{mode}})});alert(JSON.stringify(await r.json(),null,2));}else alert(`${mode}: non-destructive mode selected`);}); refresh();setInterval(refresh,5000);

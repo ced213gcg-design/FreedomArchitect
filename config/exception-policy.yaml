@@ -1,0 +1,23 @@
+version: 10.1-P0
+scoring:
+  weights: {strategic_value: 0.35, time_sensitivity: 0.20, probability: 0.15, economic_upside: 0.10, capability_alignment: 0.10, confidence: 0.05, reinjection_value: 0.05}
+  classifications:
+    critical_opportunity: [90, 100]
+    high_priority: [80, 89.999]
+    qualified: [70, 79.999]
+    watch: [50, 69.999]
+    archive_ignore: [0, 49.999]
+freshness:
+  default: {verified_max_hours: 24, aging_max_hours: 72, stale_archive_after_hours: 168}
+  types:
+    SECURITY: {verified_max_hours: 1, aging_max_hours: 6, stale_archive_after_hours: 24}
+    CVE: {verified_max_hours: 6, aging_max_hours: 24, stale_archive_after_hours: 72}
+    GITHUB_FAILURE: {verified_max_hours: 1, aging_max_hours: 6, stale_archive_after_hours: 24}
+    HARDWARE_PRICE: {verified_max_hours: 24, aging_max_hours: 72, stale_archive_after_hours: 168}
+    MARKET: {verified_max_hours: 12, aging_max_hours: 48, stale_archive_after_hours: 120}
+    EMPLOYMENT: {verified_max_hours: 24, aging_max_hours: 72, stale_archive_after_hours: 168}
+    FEDERAL_OPPORTUNITY: {verified_max_hours: 24, aging_max_hours: 72, stale_archive_after_hours: 168}
+    GRANT: {verified_max_hours: 24, aging_max_hours: 72, stale_archive_after_hours: 168}
+privacy:
+  public_exception_fields: [exception_id, type, title, source, first_seen, last_verified, freshness_state, confidence, strategic_value, time_sensitivity, probability, economic_upside, capability_alignment, reinjection_value, fit_score, exception_score, risk, owner, next_action, approval_required, state]
+  forbidden_public_fields: [applicant_email, applicant_phone, customer_email, customer_phone, credentials, tokens, passwords, raw_financial_credentials]

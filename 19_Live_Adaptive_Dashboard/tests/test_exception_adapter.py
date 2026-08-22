@@ -1,0 +1,10 @@
+from pathlib import Path
+from datetime import datetime,timezone,timedelta
+import importlib.util,json
+BACKEND=Path(__file__).resolve().parents[1]/"backend"; spec=importlib.util.spec_from_file_location("exception_adapter",BACKEND/"exception_adapter.py"); m=importlib.util.module_from_spec(spec); spec.loader.exec_module(m)
+def sample(now):
+    return {"exception_id":"ex-1","type":"EMPLOYMENT","title":"Remote SOC Analyst","source":"source://verified-job","first_seen":now.isoformat(),"last_verified":now.isoformat(),"freshness_state":"VERIFIED","confidence":90,"strategic_value":90,"time_sensitivity":85,"probability":80,"economic_upside":75,"capability_alignment":95,"reinjection_value":90,"risk":"LOW","owner":"CCC-04","next_action":"review requirements","approval_required":True,"state":"VERIFY","evidence_refs":["source://verified-job"],"applicant_email":"private@example.com","fit_components":{"Education":{"score":80,"evidence_refs":["academic://degree"]},"Project Experience":{"score":90,"evidence_refs":["github://project"]},"Technical Match":{"score":90,"evidence_refs":["github://lab"]},"Role Competencies":{"score":85,"evidence_refs":["github://evidence"]},"Domain Match":{"score":90,"evidence_refs":["github://soc"]},"Location / Work Model":{"score":100,"evidence_refs":["source://remote"]},"Evidence Strength":{"score":90,"evidence_refs":["github://portfolio"]}}}
+def test_adapter_sanitizes_and_scores(tmp_path):
+    now=datetime(2026,8,22,tzinfo=timezone.utc); p=tmp_path/"e.jsonl"; p.write_text(json.dumps(sample(now))+"\n"); data=m.get_exceptions(p,Path(__file__).resolve().parents[2]/"config"/"exception-policy.yaml",now); e=data["exceptions"][0]; assert "applicant_email" not in e and e["freshness_state"]=="VERIFIED" and e["exception_score"]["score"]>=80 and e["fit_score"]["components"]
+def test_high_priority_excludes_stale(tmp_path):
+    now=datetime(2026,8,22,tzinfo=timezone.utc); e=sample(now); e["last_verified"]=(now-timedelta(days=10)).isoformat(); p=tmp_path/"e.jsonl"; p.write_text(json.dumps(e)+"\n"); assert m.get_high_priority(p,Path(__file__).resolve().parents[2]/"config"/"exception-policy.yaml",now)["count"]==0
