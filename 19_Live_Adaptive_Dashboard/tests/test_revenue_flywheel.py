@@ -21,6 +21,8 @@ def test_registry_has_diversified_streams():
     out=flywheel()
     assert out["stream_count"] >= 8
     assert len({s["class"] for s in out["streams"]}) >= 6
+    assert len(out["class_counts"]) >= 6
+    assert out["diversification_gate"]["required_views"]
 
 
 def test_realized_revenue_is_not_invented():
@@ -33,7 +35,11 @@ def test_realized_revenue_is_not_invented():
 def test_regenerative_loop_reinjects_next_alpha():
     out=flywheel()
     assert out["closed_loop"][0] == "KNOWLEDGE"
+    assert "CUSTOMER_SUCCESS" in out["closed_loop"]
+    assert "CUSTOMER_LEARNING" in out["closed_loop"]
     assert out["closed_loop"][-1] == "NEXT_ALPHA"
+    assert out["recurring_customer_cycle"][-1] == "IMPROVE_OFFER"
+    assert out["customer_success_gate"]["required_fields"]
     assert out["surplus_gate"]["automatic_money_movement"] is False
     assert out["surplus_gate"]["human_approval_required"] is True
 
@@ -46,4 +52,7 @@ def test_dashboard_endpoint_exposes_evidence_gate():
     payload=json.loads(body)
     assert status == 200
     assert payload["state"] == "VERIFY"
+    assert payload["policy_version"] == 2
+    assert payload["customer_success_gate"]["rule"]
+    assert payload["diversification_gate"]["rule"]
     assert payload["validation"] == "DECLARED_REGISTRY_AND_POLICY_NOT_FINANCIAL_SETTLEMENT"
