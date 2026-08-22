@@ -1,0 +1,31 @@
+name: CCC v10 Dashboard Smoke
+on:
+  push:
+    branches: ['upgrade/**']
+  pull_request:
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: pip install -r requirements.txt
+      - name: Start API
+        run: |
+          python 19_Live_Adaptive_Dashboard/backend/app.py > /tmp/ccc-dashboard.log 2>&1 &
+          echo $! > /tmp/ccc-dashboard.pid
+          sleep 2
+      - name: API smoke
+        run: |
+          python - <<'PY'
+          import json, urllib.request
+          for p in ['/api/health','/api/manifest','/api/hosts','/api/organs','/api/mission','/api/pressure-loss','/api/soc/state','/api/ledger/recent','/api/agents','/api/sphere','/api/economics/technology-choice']:
+              with urllib.request.urlopen('http://127.0.0.1:8787'+p) as r:
+                  assert r.status == 200, (p,r.status)
+                  json.load(r)
+          print('API smoke PASS')
+          PY
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: node scripts/test_sphere.js
