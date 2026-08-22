@@ -31,6 +31,9 @@ jobs:
         run: node scripts/test_sphere.js
       - name: Export machine-readable CI evidence
         if: always()
+        env:
+          CCC_COMMIT_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          CCC_BRANCH: ${{ github.head_ref || github.ref_name }}
         run: |
           python scripts/export_release_evidence.py
           python scripts/render_slack_summary.py
