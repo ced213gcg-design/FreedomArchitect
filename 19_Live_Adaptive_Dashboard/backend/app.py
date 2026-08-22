@@ -18,6 +18,7 @@ def _load(name,path):
 pressure_mod=_load("pressure_loss",repo_path("21_CCC_Orchestra","pressure_loss.py"))
 ledger_mod=_load("ccc_ledger",repo_path("22_CCC_Ledger","ledger.py"))
 approvals_mod=_load("approvals",repo_path("23_CCC_Agent_Mesh","approvals.py"))
+agent_mesh_mod=_load("agent_mesh",repo_path("23_CCC_Agent_Mesh","agent_mesh.py"))
 
 REGISTERED_ACTIONS={"PROCEED_REQUEST","RELEASE_REVIEW_REQUEST","SOC_RUNTIME_START_REQUEST"}
 
@@ -38,6 +39,12 @@ def _sphere():
     return {"dimensions":{"X":"Capability","Y":"Productive Value","W":"Strategic Will / Authorization","S":"Verified Operating State"},"nodes":nodes,"edges":[],"symbolic_heartbeat_ms":963}
 def route_request(method,path,body=None):
     m=manifest()
+    static={"/":"index.html","/index.html":"index.html","/app.js":"app.js","/sphere.js":"sphere.js","/styles.css":"styles.css"}
+    if method=="GET" and path in static:
+        fp=repo_path("19_Live_Adaptive_Dashboard","frontend",static[path])
+        if not fp.exists(): return _json(404,{"error":"frontend_missing"})
+        ctype="text/html; charset=utf-8" if fp.suffix==".html" else "text/javascript; charset=utf-8" if fp.suffix==".js" else "text/css; charset=utf-8"
+        return 200,{"Content-Type":ctype},fp.read_bytes()
     if method=="GET" and path=="/api/health": return _json(200,{"status":"PASS","state":"VERIFY","service":"ccc-living-dashboard","timestamp":datetime.now(timezone.utc).isoformat()})
     if method=="GET" and path=="/api/manifest": return _json(200,m)
     if method=="GET" and path=="/api/hosts": return _json(200,hosts())
@@ -53,6 +60,8 @@ def route_request(method,path,body=None):
         payload=body if isinstance(body,dict) else json.loads(body or "{}")
         action=payload.get("action_type"); requester=payload.get("requester","dashboard-agent")
         if action not in REGISTERED_ACTIONS: return _json(400,{"status":"REJECTED","reason":"unregistered_action_type"})
+        auth=agent_mesh_mod.authorize(requester,"submit_action_request")
+        if not auth["allowed"]: return _json(403,{"status":"REJECTED","reason":"requester_not_authorized","detail":auth["reason"]})
         req=approvals_mod.create_request(action,requester,payload.get("payload",{}))
         event={"event_id":str(uuid.uuid4()),"timestamp":datetime.now(timezone.utc).isoformat(),"source":"living-dashboard","owner":requester,"organ":"mission_control","run_id":req["approval_id"],"event_type":"APPROVAL_REQUEST","previous_state":"VERIFY","new_state":"HOLD","change":action,"validation":"PENDING_HUMAN_APPROVAL","provenance":"POST /api/action-request","artifact_hashes":[],"synthetic":False,"financial_classification":"NON_FINANCIAL","notes":"Request recorded; no consequential action executed."}
         ledger_mod.append_event(ledger_path(),event)
