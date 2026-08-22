@@ -20,10 +20,19 @@ REQUIRED = (
     "repeated_game_effects", "reputation_cooperation_effects", "hard_controls",
     "no_play_option", "evidence_change_trigger"
 )
+NONEMPTY = (
+    "players", "objectives", "information_by_player", "strategies", "likely_response",
+    "second_order_response", "repeated_game_effects", "reputation_cooperation_effects",
+    "no_play_option", "evidence_change_trigger"
+)
 
 
 def _missing(payload: dict) -> list[str]:
-    return [field for field in REQUIRED if field not in payload or payload[field] in (None, "", [], {})]
+    missing=[field for field in REQUIRED if field not in payload or payload[field] is None]
+    for field in NONEMPTY:
+        if field in payload and payload[field] in ("", [], {}):
+            missing.append(field)
+    return sorted(set(missing))
 
 
 def analyze(payload: dict) -> dict:
