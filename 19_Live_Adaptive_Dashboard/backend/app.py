@@ -87,7 +87,7 @@ def route_request(method,path,body=None):
         fp=repo_path("19_Live_Adaptive_Dashboard","frontend",static[path])
         if not fp.exists(): return _json(404,{"error":"frontend_missing"})
         ctype="text/html; charset=utf-8" if fp.suffix==".html" else "text/javascript; charset=utf-8" if fp.suffix==".js" else "text/css; charset=utf-8"; return 200,{"Content-Type":ctype},_frontend_payload(fp,path)
-    if method=="GET" and path=="/api/health": return _json(200,{"status":"PASS","state":"BUILD","service":"ccc-living-dashboard","version":"10.1-P0","release":"CCC-INFINITY-COMPOSITION-v1","physical_patch":"TAPER-ONE-DROP-v1","frozen_physical_candidate_sha":"7bf932c5aac08d31979761e28c5d9218e002f6ad","timestamp":datetime.now(timezone.utc).isoformat()})
+    if method=="GET" and path=="/api/health": return _json(200,{"status":"PASS","state":"BUILD","service":"ccc-living-dashboard","version":"10.1-P0","release":"SOC-LIVE-P0","composition":"CCC-INFINITY-COMPOSITION-v1","physical_patch":"TAPER-ONE-DROP-v1","frozen_physical_candidate_sha":"7bf932c5aac08d31979761e28c5d9218e002f6ad","timestamp":datetime.now(timezone.utc).isoformat()})
     if method=="GET" and path=="/api/manifest": return _json(200,m)
     if method=="GET" and path=="/api/hosts": return _json(200,hosts())
     if method=="GET" and path=="/api/organs": return _json(200,{"organs":m.get("organs",[])})
