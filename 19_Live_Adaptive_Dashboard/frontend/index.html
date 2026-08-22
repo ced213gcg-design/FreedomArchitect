@@ -1,6 +1,141 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CCC Living Intelligence v10.1</title><link rel="stylesheet" href="styles.css"></head><body>
-<header><h1>CCC Living Intelligence v10.1</h1><div id="heartbeat">0011 · 0110 · 1001</div></header>
-<nav><button data-mode="COACH">COACH</button><button data-mode="PLAN">PLAN</button><button data-mode="SIMULATE">SIMULATE</button><button data-mode="DIVE">DIVE</button><button data-mode="PROCEED">PROCEED</button><button data-mode="PAUSE" disabled title="Requires explicit registered-service approval policy">PAUSE</button><button data-mode="HALT" disabled title="Requires explicit registered-service approval policy">HALT</button></nav>
-<main><section class="cards"><article><h2>Mission</h2><pre id="mission">Loading…</pre></article><article><h2>Pressure Loss</h2><pre id="pressure">Loading…</pre></article><article><h2>SOC</h2><pre id="soc">Loading…</pre></article><article><h2>Exception Intelligence</h2><pre id="exceptions">Loading…</pre><p class="evidence-note">Only verified, current evidence may enter the high-priority constellation.</p></article><article><h2>Revenue Flywheel</h2><pre id="revenueFlywheel">Loading…</pre><p class="evidence-note">Opportunities, contracts and invoices are not realized revenue.</p></article></section>
-<section><h2>4D Living Sphere</h2><canvas id="sphere" width="1000" height="520" aria-label="CCC living sphere"></canvas><p id="sphereStatus"></p><h3>Exception Constellation</h3><canvas id="exceptionConstellation" width="1000" height="300" aria-label="CCC exception constellation"></canvas><p id="exceptionStatus"></p></section></main>
-<script src="sphere.js"></script><script src="exception_constellation.js"></script><script src="app.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#05070b">
+  <meta name="color-scheme" content="dark">
+  <title>CCC Living Intelligence v10.1</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="command-header">
+      <div class="brand-lockup">
+        <p class="brand-kicker">Freedom Architect / CCC Living Organism</p>
+        <div class="brand-title-row">
+          <h1 class="brand-title">Living Intelligence</h1>
+          <span class="version-mark">V10.1 // VANGUARD</span>
+        </div>
+        <p class="brand-thesis">FACT → EVIDENCE → EXECUTION · MEASURE → LEARN → REINJECT</p>
+      </div>
+
+      <div class="header-telemetry">
+        <div class="status-capsule" id="systemStateCapsule" data-state="VERIFY" aria-label="Current system state">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span class="status-copy"><strong id="systemState">VERIFY</strong><span>Release state</span></span>
+        </div>
+        <div class="clock-capsule"><time id="localClock" datetime="">--:--:--</time></div>
+        <div class="heartbeat-capsule" id="heartbeat" title="Symbolic UI cadence only">0011 · 0110 · 1001</div>
+      </div>
+    </header>
+
+    <nav class="mode-dock" aria-label="CCC control modes">
+      <button data-mode="COACH">COACH</button>
+      <button data-mode="PLAN">PLAN</button>
+      <button data-mode="SIMULATE">SIMULATE</button>
+      <button data-mode="DIVE">DIVE</button>
+      <button data-mode="PROCEED">PROCEED</button>
+      <button data-mode="PAUSE" disabled title="Requires explicit registered-service approval policy">PAUSE</button>
+      <button data-mode="HALT" disabled title="Requires explicit registered-service approval policy">HALT</button>
+    </nav>
+
+    <main>
+      <section class="dashboard-grid" aria-label="CCC command overview">
+        <article class="surface orbit-stage">
+          <div class="surface-head">
+            <div>
+              <p class="panel-kicker">Digital Twin / Orbital Model</p>
+              <h2>4D Living Sphere</h2>
+              <p class="surface-copy">Capability, productive value, authorization and verified operating state resolved into one navigable field.</p>
+            </div>
+            <span class="surface-badge">Evidence-bound</span>
+          </div>
+          <div class="canvas-wrap">
+            <canvas id="sphere" width="1200" height="620" aria-label="CCC living sphere"></canvas>
+            <p class="canvas-status" id="sphereStatus" aria-live="polite">Initializing orbital model…</p>
+          </div>
+        </article>
+
+        <aside class="command-rail" aria-label="Mission and pressure controls">
+          <article class="intel-card" data-accent="gold">
+            <div class="card-head">
+              <div><p class="panel-kicker">Command State</p><h2>Mission</h2></div>
+              <span class="card-index">01</span>
+            </div>
+            <div class="data-view" id="mission" aria-live="polite"><div class="data-row"><span class="data-key">State</span><span class="data-value">Loading…</span></div></div>
+          </article>
+
+          <article class="intel-card" data-accent="ion">
+            <div class="card-head">
+              <div><p class="panel-kicker">Weakest Dimension</p><h2>Pressure Loss</h2></div>
+              <span class="card-index">02</span>
+            </div>
+            <div class="data-view" id="pressure" aria-live="polite"><div class="data-row"><span class="data-key">State</span><span class="data-value">Loading…</span></div></div>
+          </article>
+        </aside>
+      </section>
+
+      <section class="intelligence-grid" aria-label="CCC intelligence organs">
+        <article class="intel-card" data-accent="ion">
+          <div class="card-head">
+            <div><p class="panel-kicker">Authorized Range</p><h2>SOC State</h2></div>
+            <span class="card-index">03</span>
+          </div>
+          <div class="data-view" id="soc" aria-live="polite"><div class="data-row"><span class="data-key">State</span><span class="data-value">Loading…</span></div></div>
+          <p class="evidence-note">Missing runtime evidence remains UNKNOWN. Green is earned, never decorated.</p>
+        </article>
+
+        <article class="intel-card" data-accent="violet">
+          <div class="card-head">
+            <div><p class="panel-kicker">Sensory Priority</p><h2>Exception Intelligence</h2></div>
+            <span class="card-index">04</span>
+          </div>
+          <div class="data-view" id="exceptions" aria-live="polite"><div class="data-row"><span class="data-key">State</span><span class="data-value">Loading…</span></div></div>
+          <p class="evidence-note">Only verified, current evidence may enter the high-priority constellation.</p>
+        </article>
+
+        <article class="intel-card" data-accent="emerald">
+          <div class="card-head">
+            <div><p class="panel-kicker">Economic Reality Gate</p><h2>Revenue Flywheel</h2></div>
+            <span class="card-index">05</span>
+          </div>
+          <div class="data-view" id="revenueFlywheel" aria-live="polite"><div class="data-row"><span class="data-key">State</span><span class="data-value">Loading…</span></div></div>
+          <p class="evidence-note">Opportunities, contracts and invoices are not realized revenue. Collection and reconciliation remain distinct.</p>
+        </article>
+      </section>
+
+      <section class="surface constellation-stage" aria-label="CCC exception constellation">
+        <div class="surface-head">
+          <div>
+            <p class="panel-kicker">Alpha Events / Verified Anomalies</p>
+            <h2>Exception Constellation</h2>
+            <p class="surface-copy">High-value exceptions surface as spatial signals. Brightness and scale reflect evidence and score, not optimism.</p>
+          </div>
+          <span class="surface-badge">No private payloads</span>
+        </div>
+        <div class="canvas-wrap">
+          <canvas id="exceptionConstellation" width="1200" height="360" aria-label="CCC exception constellation"></canvas>
+          <p class="canvas-status" id="exceptionStatus" aria-live="polite">Scanning verified exceptions…</p>
+        </div>
+        <div class="legend" aria-label="Constellation legend">
+          <span>Verified signal</span>
+          <span class="critical">Critical opportunity</span>
+          <span class="stale">Aging / stale</span>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer-line">
+      <span>GitHub = Code Authority · Ledger = Evidence Authority · Orchestra = Integration Authority</span>
+      <span>Human authority required for consequential action</span>
+    </footer>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"><strong id="toastTitle">CCC</strong><span id="toastBody"></span></div>
+
+  <script src="sphere.js"></script>
+  <script src="exception_constellation.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
