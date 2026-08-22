@@ -1,7 +1,7 @@
 name: CCC v10.1 Dashboard Smoke
 on:
   push:
-    branches: ['upgrade/ccc-living-dashboard-v10-1']
+    branches: ['upgrade/ccc-living-dashboard-v10-1','upgrade/ccc-v10-1-aesthetic-vanguard']
   pull_request:
 jobs:
   smoke:
@@ -16,7 +16,7 @@ jobs:
           python 19_Live_Adaptive_Dashboard/backend/app.py > /tmp/ccc-dashboard-v10-1.log 2>&1 &
           echo $! > /tmp/ccc-dashboard-v10-1.pid
           sleep 2
-      - name: API smoke
+      - name: API + Vanguard shell smoke
         run: |
           python - <<'PY'
           import json, urllib.request
@@ -31,9 +31,18 @@ jobs:
           assert payloads['/api/sphere']['exception_constellation']['count']>=0
           flywheel=payloads['/api/economics/revenue-flywheel']
           assert flywheel['realized_revenue_total'] is None
-          print('v10.1 API smoke PASS')
+          with urllib.request.urlopen('http://127.0.0.1:8787/') as r:
+              shell=r.read().decode('utf-8')
+              assert 'V10.1 // VANGUARD' in shell
+              assert 'id="exceptionConstellation"' in shell
+              assert 'Human authority required for consequential action' in shell
+          print('v10.1 Vanguard API/shell smoke PASS')
           PY
       - uses: actions/setup-node@v4
         with: {node-version: '22'}
-      - run: node scripts/test_sphere.js
-      - run: node scripts/test_exception_constellation.js
+      - name: 4D Vanguard Sphere
+        run: node scripts/test_sphere.js
+      - name: Vanguard Exception Constellation
+        run: node scripts/test_exception_constellation.js
+      - name: Vanguard UI structural/accessibility contract
+        run: node scripts/test_vanguard_ui.js
