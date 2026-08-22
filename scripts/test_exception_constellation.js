@@ -1,1 +1,12 @@
-const fs=require('fs'),vm=require('vm');vm.runInThisContext(fs.readFileSync('19_Live_Adaptive_Dashboard/frontend/exception_constellation.js','utf8'));let text=[];const ctx={clearRect(){},beginPath(){},arc(){},fill(){},fillText(t){text.push(t)},font:''};const canvas={width:800,height:300,getContext(){return ctx}};const ok=CCCExceptionConstellation.draw(canvas,{exceptions:[{type:'EMPLOYMENT',title:'Fixture Role',exception_score:{score:88}}]});if(!ok||!text.some(x=>x.includes('Fixture Role')))process.exit(1);console.log('exception constellation PASS');
+const fs=require('fs'),vm=require('vm');
+vm.runInThisContext(fs.readFileSync('19_Live_Adaptive_Dashboard/frontend/exception_constellation.js','utf8'));
+let text=[],arcs=0;
+const gradient=()=>({addColorStop(){}});
+const ctx={
+  clearRect(){},fillRect(){},beginPath(){},arc(){arcs++},fill(){},stroke(){},moveTo(){},lineTo(){},createLinearGradient:gradient,createRadialGradient:gradient,
+  fillText(t){text.push(String(t))},set font(v){},set fillStyle(v){},set strokeStyle(v){},set lineWidth(v){},set textAlign(v){},set globalAlpha(v){}
+};
+const canvas={width:1200,height:360,getContext(){return ctx}};
+const ok=CCCExceptionConstellation.draw(canvas,{exceptions:[{exception_id:'fixture',type:'EMPLOYMENT',title:'Fixture Role',freshness_state:'VERIFIED',exception_score:{score:88}}]});
+if(!ok||arcs<45||!text.some(x=>x.includes('Fixture Role'))||!text.some(x=>x.includes('88/100'))){console.error('exception Vanguard constellation failed');process.exit(1)}
+console.log('exception Vanguard constellation PASS');
