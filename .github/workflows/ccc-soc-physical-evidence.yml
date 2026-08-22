@@ -1,0 +1,60 @@
+name: CCC SOC Physical Evidence Patch
+on:
+  push:
+    branches: ['hotfix/ccc-soc-five-live-evidence-v1']
+  pull_request:
+    branches: ['upgrade/ccc-v10-1-aesthetic-vanguard']
+permissions:
+  contents: read
+jobs:
+  physical-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r requirements.txt
+      - name: Compile and validate
+        run: |
+          python -m compileall -q 19_Live_Adaptive_Dashboard scripts
+          python scripts/validate_ccc_repo.py
+      - name: Physical evidence unit tests
+        run: pytest -q --import-mode=importlib
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Frontend regression and physical contract
+        run: |
+          node scripts/test_sphere.js
+          node scripts/test_exception_constellation.js
+          node scripts/test_soc_interaction_ui.js
+          node scripts/test_soc_physical_evidence_ui.js
+      - name: ShellCheck HP and guest-local launchers
+        run: |
+          shellcheck --version
+          shellcheck scripts/warroom/CCC_HP_SOC_WARROOM_ONE_DROP.sh scripts/warroom/triggers/*.sh
+      - name: Parse Dell PowerShell launcher
+        shell: pwsh
+        run: |
+          $tokens = $null
+          $parseErrors = $null
+          [System.Management.Automation.Language.Parser]::ParseFile('scripts/warroom/CCC_DELL_SOC_WARROOM_ONE_DROP.ps1',[ref]$tokens,[ref]$parseErrors) | Out-Null
+          if ($parseErrors.Count -gt 0) { $parseErrors | Format-Table | Out-String | Write-Error; exit 1 }
+      - name: Dashboard negative-evidence smoke
+        run: |
+          python 19_Live_Adaptive_Dashboard/backend/app.py >/tmp/ccc-physical.log 2>&1 &
+          sleep 2
+          python - <<'PY'
+          import json,urllib.request
+          base='http://127.0.0.1:8787'
+          def get(p):
+              with urllib.request.urlopen(base+p) as r: return json.load(r)
+          h=get('/api/health'); assert h['version']=='10.1-P0'; assert h['release']=='SOC-LIVE-P0'; assert h['physical_patch']=='TAPER-ONE-DROP-v1'
+          g=get('/api/soc/control-gates'); assert g['count']==5 and g['proven_count']==0 and all(x['state']=='UNKNOWN' for x in g['missions'])
+          s=get('/api/soc/scenarios'); assert s['scenario_count']==5 and s['real_scenario_count']==0 and all(x['state']=='UNKNOWN' for x in s['scenarios'])
+          b=get('/api/soc/bridge'); assert b['state']=='UNKNOWN' and b['mode']=='FILE_FALLBACK'
+          i=get('/api/sensors'); assert i['state']=='UNKNOWN' and i['count']==0
+          with urllib.request.urlopen(base+'/') as r: assert b'soc_physical_evidence.js' in r.read()
+          print('physical negative-evidence smoke PASS')
+          PY
