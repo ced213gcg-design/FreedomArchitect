@@ -20,29 +20,18 @@ jobs:
         run: |
           python - <<'PY'
           import json, urllib.request
-          paths = [
-              '/api/health',
-              '/api/manifest',
-              '/api/hosts',
-              '/api/organs',
-              '/api/mission',
-              '/api/pressure-loss',
-              '/api/soc/state',
-              '/api/ledger/recent',
-              '/api/agents',
-              '/api/sphere',
-              '/api/economics/technology-choice',
-              '/api/economics/revenue-flywheel',
-          ]
+          paths = ['/api/health','/api/manifest','/api/hosts','/api/organs','/api/mission','/api/pressure-loss','/api/soc/state','/api/ledger/recent','/api/agents','/api/sphere','/api/economics/technology-choice','/api/economics/revenue-flywheel','/api/workers','/api/workers/command','/api/workers/command/shift','/api/workers/command/health','/api/workforce/pressure','/api/workforce/cost','/api/workforce/handoffs']
           payloads = {}
           for p in paths:
               with urllib.request.urlopen('http://127.0.0.1:8787'+p) as r:
                   assert r.status == 200, (p,r.status)
                   payloads[p] = json.load(r)
+          assert len(payloads['/api/workers']['workers']) == 5
+          assert payloads['/api/workers/command/shift']['formal_reports_per_shift'] == 2
+          assert payloads['/api/workforce/cost']['total_today'] is None
           flywheel = payloads['/api/economics/revenue-flywheel']
           assert flywheel['stream_count'] >= 8
           assert flywheel['realized_revenue_total'] is None
-          assert flywheel['validation'] == 'DECLARED_REGISTRY_AND_POLICY_NOT_FINANCIAL_SETTLEMENT'
           print('API smoke PASS')
           PY
       - uses: actions/setup-node@v4

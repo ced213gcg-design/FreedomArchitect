@@ -13,6 +13,7 @@ from ledger_adapter import recent as ledger_recent
 from agent_registry import public_view
 from economics_gate import internal_evidence_decision
 from revenue_flywheel import get_revenue_flywheel
+from workforce_adapter import WorkforceAdapter
 
 def _load(name,path):
     s=importlib.util.spec_from_file_location(name,path); m=importlib.util.module_from_spec(s); s.loader.exec_module(m); return m
@@ -20,8 +21,9 @@ pressure_mod=_load("pressure_loss",repo_path("21_CCC_Orchestra","pressure_loss.p
 ledger_mod=_load("ccc_ledger",repo_path("22_CCC_Ledger","ledger.py"))
 approvals_mod=_load("approvals",repo_path("23_CCC_Agent_Mesh","approvals.py"))
 agent_mesh_mod=_load("agent_mesh",repo_path("23_CCC_Agent_Mesh","agent_mesh.py"))
+workforce=WorkforceAdapter()
 
-REGISTERED_ACTIONS={"PROCEED_REQUEST","RELEASE_REVIEW_REQUEST","SOC_RUNTIME_START_REQUEST"}
+REGISTERED_ACTIONS={"PROCEED_REQUEST","RELEASE_REVIEW_REQUEST","SOC_RUNTIME_START_REQUEST","WORKER_APPROVAL_REQUEST","WORKER_TASK_REQUEST"}
 
 def _json(status, payload): return status,{"Content-Type":"application/json; charset=utf-8"},json.dumps(payload,default=str).encode()
 def _organ_scores(organ):
@@ -39,12 +41,13 @@ def _sphere():
         s=_organ_scores(o); nodes.append({"id":o["id"],"label":o["name"],"state":o["state"],"x":idx%5,"y":s["EconomicValue"],"w":100 if o.get("criticality")=="TIER_0" else 60,"s":s["Evidence"],"importance":100 if o.get("criticality")=="TIER_0" else 60,"activity":0,"confidence":s["Evidence"],"data_quality":"DECLARED_CONFIG"})
     return {"dimensions":{"X":"Capability","Y":"Productive Value","W":"Strategic Will / Authorization","S":"Verified Operating State"},"nodes":nodes,"edges":[],"symbolic_heartbeat_ms":963}
 def _revenue_flywheel():
-    return get_revenue_flywheel(
-        repo_path("config","revenue-stream-registry.yaml"),
-        repo_path("22_CCC_Ledger","economics","revenue-flywheel-policy.yaml"),
-    )
+    return get_revenue_flywheel(repo_path("config","revenue-stream-registry.yaml"),repo_path("22_CCC_Ledger","economics","revenue-flywheel-policy.yaml"))
+def _payload(body):
+    return body if isinstance(body,dict) else json.loads(body or "{}")
+def _segments(path): return [s for s in path.split("/") if s]
+
 def route_request(method,path,body=None):
-    m=manifest()
+    m=manifest(); seg=_segments(path)
     static={"/":"index.html","/index.html":"index.html","/app.js":"app.js","/sphere.js":"sphere.js","/styles.css":"styles.css"}
     if method=="GET" and path in static:
         fp=repo_path("19_Live_Adaptive_Dashboard","frontend",static[path])
@@ -63,9 +66,32 @@ def route_request(method,path,body=None):
     if method=="GET" and path=="/api/sphere": return _json(200,_sphere())
     if method=="GET" and path=="/api/economics/technology-choice": return _json(200,internal_evidence_decision(repo_path("22_CCC_Ledger","economics","technology-choice-matrix.yaml")))
     if method=="GET" and path=="/api/economics/revenue-flywheel": return _json(200,_revenue_flywheel())
+    if method=="GET" and path=="/api/workers": return _json(200,{"workers":workforce.list_workers(),"authority":"DECLARED_CONFIG_NOT_RUNTIME"})
+    if method=="GET" and path=="/api/workforce/pressure": return _json(200,workforce.pressure())
+    if method=="GET" and path=="/api/workforce/cost": return _json(200,workforce.cost())
+    if method=="GET" and path=="/api/workforce/handoffs": return _json(200,workforce.handoffs())
+    if method=="GET" and len(seg)==3 and seg[:2]==["api","workers"]:
+        worker=workforce.get_worker(seg[2]); return _json(200,worker) if worker else _json(404,{"error":"worker_not_found"})
+    if method=="GET" and len(seg)==4 and seg[:2]==["api","workers"] and seg[3]=="shift":
+        result=workforce.shift(seg[2]); return _json(200,result) if result else _json(404,{"error":"worker_not_found"})
+    if method=="GET" and len(seg)==4 and seg[:2]==["api","workers"] and seg[3]=="health":
+        result=workforce.health(seg[2]); return _json(200,result) if result else _json(404,{"error":"worker_not_found"})
+    if method=="POST" and len(seg)==4 and seg[:2]==["api","workers"] and seg[3]=="task-request":
+        worker_id=seg[2]; payload=_payload(body); requester=f"ccc-worker-{worker_id}"
+        auth=agent_mesh_mod.authorize(requester,"submit_internal_task_request")
+        if not auth["allowed"]: return _json(403,{"status":"REJECTED","reason":auth["reason"]})
+        result=workforce.task_request(worker_id,payload); return _json(202,result) if result else _json(404,{"error":"worker_not_found"})
+    if method=="POST" and len(seg)==4 and seg[:2]==["api","workers"] and seg[3]=="approval-request":
+        worker_id=seg[2]; payload=_payload(body); requester=f"ccc-worker-{worker_id}"
+        auth=agent_mesh_mod.authorize(requester,"submit_action_request")
+        if not auth["allowed"]: return _json(403,{"status":"REJECTED","reason":auth["reason"]})
+        action=payload.get("action","WORKER_APPROVAL_REQUEST")
+        req=approvals_mod.create_request(action,requester,payload)
+        event={"event_id":str(uuid.uuid4()),"timestamp":datetime.now(timezone.utc).isoformat(),"source":"living-dashboard-workforce","owner":requester,"organ":"mission_control","run_id":req["approval_id"],"event_type":"APPROVAL_REQUEST","previous_state":"INCUBATE","new_state":"HOLD","change":action,"validation":"PENDING_HUMAN_APPROVAL","provenance":f"POST /api/workers/{worker_id}/approval-request","artifact_hashes":[],"synthetic":False,"financial_classification":"NON_FINANCIAL","notes":"Worker approval request recorded; no consequential action executed."}
+        ledger_mod.append_event(ledger_path(),event)
+        return _json(202,{**req,"executed":False})
     if method=="POST" and path=="/api/action-request":
-        payload=body if isinstance(body,dict) else json.loads(body or "{}")
-        action=payload.get("action_type"); requester=payload.get("requester","dashboard-agent")
+        payload=_payload(body); action=payload.get("action_type"); requester=payload.get("requester","dashboard-agent")
         if action not in REGISTERED_ACTIONS: return _json(400,{"status":"REJECTED","reason":"unregistered_action_type"})
         auth=agent_mesh_mod.authorize(requester,"submit_action_request")
         if not auth["allowed"]: return _json(403,{"status":"REJECTED","reason":"requester_not_authorized","detail":auth["reason"]})

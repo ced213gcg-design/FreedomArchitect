@@ -14,7 +14,7 @@ jobs:
           python-version: '3.12'
       - run: pip install -r requirements.txt
       - name: Compile Python
-        run: python -m compileall -q 19_Live_Adaptive_Dashboard 21_CCC_Orchestra 22_CCC_Ledger 23_CCC_Agent_Mesh scripts
+        run: python -m compileall -q 19_Live_Adaptive_Dashboard 21_CCC_Orchestra 22_CCC_Ledger 23_CCC_Agent_Mesh 26_CCC_Workforce scripts
       - name: Repository validation
         run: python scripts/validate_ccc_repo.py
       - name: Unit tests
@@ -42,10 +42,7 @@ jobs:
         env:
           CCC_SLACK_WEBHOOK_URL: ${{ secrets.CCC_SLACK_WEBHOOK_URL }}
         run: |
-          curl --fail --silent --show-error \
-            -H 'Content-Type: application/json' \
-            --data @artifacts/ccc-slack-summary.json \
-            "$CCC_SLACK_WEBHOOK_URL"
+          curl --fail --silent --show-error -H 'Content-Type: application/json' --data @artifacts/ccc-slack-summary.json "$CCC_SLACK_WEBHOOK_URL"
       - uses: actions/upload-artifact@v4
         if: always()
         with:

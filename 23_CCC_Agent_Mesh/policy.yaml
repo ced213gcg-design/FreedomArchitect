@@ -1,6 +1,6 @@
 default: deny
 self_registration: false
-registered_action_types: [PROCEED_REQUEST, RELEASE_REVIEW_REQUEST, SOC_RUNTIME_START_REQUEST]
+registered_action_types: [PROCEED_REQUEST, RELEASE_REVIEW_REQUEST, SOC_RUNTIME_START_REQUEST, WORKER_TASK_REQUEST, WORKER_APPROVAL_REQUEST]
 consequential_actions_require_human_approval: true
 step_up_auth_required: true
 automatic_irreversible_action: false

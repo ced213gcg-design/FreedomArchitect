@@ -1,4 +1,4 @@
-version: 10.0-P0
+version: 10.0-P0-WORKFORCE1
 self_registration: false
 agents:
 - id: github-agent
@@ -120,4 +120,79 @@ agents:
   state: BUILD
   last_seen: null
   version: 10.0-P0
+  revocation_state: ACTIVE
+- id: ccc-worker-command
+  type: workforce
+  owner: CCC
+  host: ccc-hp-dev-01
+  role: command
+  public_key_or_identity_reference: identity-ref:ccc-worker-command
+  allowed_inputs: [approved-state, worker-events]
+  allowed_outputs: [internal-task-request, worker-event, approval-request]
+  allowed_actions: [read_approved_state, emit_worker_event, submit_internal_task_request, submit_action_request]
+  denied_actions: [move_money, protected_merge, submit_binding_contract, override_trust_fabric]
+  health_endpoint: /api/workers/command/health
+  state: INCUBATE
+  last_seen: null
+  version: 1.0
+  revocation_state: ACTIVE
+- id: ccc-worker-intelligence
+  type: workforce
+  owner: CCC
+  host: ccc-hp-dev-01
+  role: intelligence
+  public_key_or_identity_reference: identity-ref:ccc-worker-intelligence
+  allowed_inputs: [approved-state, public-sources, approved-files]
+  allowed_outputs: [research-brief, exception-record, worker-event, approval-request]
+  allowed_actions: [read_approved_state, emit_worker_event, submit_internal_task_request, submit_action_request, research_public_sources]
+  denied_actions: [submit_external_application, purchase_product, create_financial_claim, direct_imagination_station_access]
+  health_endpoint: /api/workers/intelligence/health
+  state: INCUBATE
+  last_seen: null
+  version: 1.0
+  revocation_state: ACTIVE
+- id: ccc-worker-security
+  type: workforce
+  owner: CCC
+  host: ccc-hp-dev-01
+  role: security
+  public_key_or_identity_reference: identity-ref:ccc-worker-security
+  allowed_inputs: [approved-state, code-config, soc-state]
+  allowed_outputs: [security-finding, scoped-remediation, worker-event, approval-request]
+  allowed_actions: [read_approved_state, emit_worker_event, submit_internal_task_request, submit_action_request, run_approved_tests, create_scoped_branch]
+  denied_actions: [unauthorized_attack, external_exploit_deploy, credential_harvest, human_approval_bypass]
+  health_endpoint: /api/workers/security/health
+  state: INCUBATE
+  last_seen: null
+  version: 1.0
+  revocation_state: ACTIVE
+- id: ccc-worker-revenue
+  type: workforce
+  owner: CCC
+  host: ccc-hp-dev-01
+  role: revenue
+  public_key_or_identity_reference: identity-ref:ccc-worker-revenue
+  allowed_inputs: [approved-state, verified-financial-records, cost-records]
+  allowed_outputs: [financial-classification, budget-recommendation, worker-event, approval-request]
+  allowed_actions: [read_approved_state, emit_worker_event, submit_internal_task_request, submit_action_request, analyze_verified_financial_records]
+  denied_actions: [move_money, authorize_purchase, manufacture_realized_revenue, bypass_reserve_policy]
+  health_endpoint: /api/workers/revenue/health
+  state: INCUBATE
+  last_seen: null
+  version: 1.0
+  revocation_state: ACTIVE
+- id: ccc-worker-communications
+  type: workforce
+  owner: CCC
+  host: ccc-hp-dev-01
+  role: communications
+  public_key_or_identity_reference: identity-ref:ccc-worker-communications
+  allowed_inputs: [approved-state, sanitized-worker-reports, approved-message]
+  allowed_outputs: [draft, sanitized-summary, delivery-status, worker-event, approval-request]
+  allowed_actions: [read_approved_state, emit_worker_event, submit_internal_task_request, submit_action_request, send_approved_communication]
+  denied_actions: [expose_secret, claim_failed_send_succeeded, make_slack_source_of_truth, execute_shell_from_message]
+  health_endpoint: /api/workers/communications/health
+  state: INCUBATE
+  last_seen: null
+  version: 1.0
   revocation_state: ACTIVE
