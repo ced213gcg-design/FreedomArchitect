@@ -9,11 +9,18 @@ REQUIRED=[
  "20_CCC_Living_Organism/role-registry.yaml",
  "20_CCC_Living_Organism/schemas/exception-event.schema.json",
  "20_CCC_Living_Organism/schemas/opportunity-event.schema.json",
+ "20_CCC_Living_Organism/schemas/soc-evidence-bridge.schema.json",
+ "20_CCC_Living_Organism/schemas/soc-detection-run.schema.json",
  "23_CCC_Agent_Mesh/registry.yaml",
  "22_CCC_Ledger/ledger.py",
  "22_CCC_Ledger/classify_financial_state.py",
  "19_Live_Adaptive_Dashboard/backend/app.py",
  "19_Live_Adaptive_Dashboard/backend/exception_adapter.py",
+ "19_Live_Adaptive_Dashboard/backend/evidence_bridge.py",
+ "19_Live_Adaptive_Dashboard/backend/soc_mission_adapter.py",
+ "19_Live_Adaptive_Dashboard/backend/soc_scenario_adapter.py",
+ "19_Live_Adaptive_Dashboard/backend/soc_latency.py",
+ "19_Live_Adaptive_Dashboard/frontend/soc_physical_evidence.js",
  "25_CCC_Exception_Intelligence/exception_engine.py",
  "25_CCC_Exception_Intelligence/verifier.py",
  "25_CCC_Exception_Intelligence/fit_score.py",
@@ -21,6 +28,11 @@ REQUIRED=[
  "25_CCC_Exception_Intelligence/routing.py",
  "24_CCC_Communications/gmail-contract.md",
  "config/exception-policy.yaml",
+ "config/soc-five-test-registry.yaml",
+ "config/soc-detection-scenarios.yaml",
+ "config/soc-lab-targets.yaml",
+ "scripts/warroom/CCC_HP_SOC_WARROOM_ONE_DROP.sh",
+ "scripts/warroom/CCC_DELL_SOC_WARROOM_ONE_DROP.ps1",
 ]
 def main():
     errors=[]
@@ -74,6 +86,12 @@ def main():
     if public & forbidden: errors.append("exception-public-private-field-overlap")
     expected={"/api/exceptions","/api/exceptions/high-priority"}
     if not expected.issubset(set((manifest.get("dashboard") or {}).get("p0_endpoints") or [])): errors.append("missing-exception-api-contract")
+    scenario_cfg=yaml.safe_load((ROOT/"config/soc-detection-scenarios.yaml").read_text()) or {}
+    scenario_ids=[s.get("id") for s in scenario_cfg.get("scenarios",[])]
+    if scenario_ids!=["DET-01","DET-02","DET-03","DET-04","DET-05"]: errors.append("invalid-physical-scenario-registry")
+    target_cfg=yaml.safe_load((ROOT/"config/soc-lab-targets.yaml").read_text()) or {}
+    if target_cfg.get("authoritative_range")!="10.69.69.0/24": errors.append("wrong-physical-lab-range")
+    if target_cfg.get("policy",{}).get("require_exact_registered_target") is not True: errors.append("target-exact-match-not-required")
     print(json.dumps({"status":"PASS" if not errors else "FAIL","errors":errors},indent=2))
     return 0 if not errors else 1
 if __name__=="__main__": raise SystemExit(main())
