@@ -2,82 +2,85 @@
 
 ## FACT
 
-CCC v10.1 is implemented as a stacked institutional-control release on `upgrade/ccc-living-dashboard-v10-1`, based on the verified-but-unmerged v10 head `68fe1aefe533a332335ed1cc7c30e0c5773451fa`. It preserves Layers 19-24 and adds Layer 25 CCC Exception Intelligence rather than rebuilding or erasing the v10 lineage.
+CCC v10.1 is implemented as a stacked institutional-control release on `upgrade/ccc-living-dashboard-v10-1`, based on verified-but-unmerged v10 head `68fe1aefe533a332335ed1cc7c30e0c5773451fa`. It preserves Layers 19-24 and adds permanent Layer 25 CCC Exception Intelligence rather than rebuilding or erasing v10 lineage.
 
-Current v10.1 pre-PR head before this report: `b62e64850004b4cb68de9fac25fdf6e5106e90ac`.
+Validated executable-code head: `899775cae5083467ea03011538e2312198bf54b4`.
+
+Draft PR: #2, stacked onto `upgrade/ccc-living-dashboard-v10`.
 
 ## EVIDENCE
 
-Repository comparison against `upgrade/ccc-living-dashboard-v10` shows the v10.1 branch is 10 commits ahead with no inherited baseline commit removed. New/changed controls include:
+GitHub Actions v10.1 run 6 on `899775cae5083467ea03011538e2312198bf54b4` produced:
 
-- Layer 25 Exception Intelligence
-- exception/opportunity JSON Schemas
-- v10.1 manifest/organ/host/role/communication registries
-- Gmail, Mission Control and Exception Intelligence Agent Mesh entries
-- visible exception scoring and fit scoring
-- deterministic freshness transitions
-- Orchestra exception routing
-- financial-state classifier
-- dashboard exception adapter/endpoints
-- Exception Constellation Canvas visualization
-- v10.1 CI/security/dashboard workflows
-- v10.1 architecture, threat, communications, deployment, migration, legacy and ledger-decision documentation
+- **CCC v10.1 CI: SUCCESS**
+- **CCC v10.1 Dashboard Smoke: SUCCESS**
+- **CCC v10.1 Security: SUCCESS**
+- dependency consistency: PASS
+- Python compile: PASS
+- repository/schema/YAML validation: PASS
+- unit tests: **39 passed / 0 failed**
+- Bash/ShellCheck: PASS
+- PowerShell static parse: PASS
+- 4D Sphere fallback: PASS
+- Exception Constellation: PASS
+- CodeQL: PASS
+- committed-secret pattern guard: PASS
 
-Targeted engineering validation performed during implementation:
+Machine-readable CI artifact:
 
-- Exception scoring tests: PASS
-- freshness transition tests: PASS
-- evidence-bound fit scoring tests: PASS
-- exception routing tests: PASS
-- financial-state classification tests: PASS
-- exception adapter privacy/scoring tests: PASS
-- exception API missing-source honesty test: PASS
-- Python compilation of new Exception Intelligence/dashboard modules: PASS during implementation validation
-- Exception Constellation Node/Canvas test: PASS during implementation validation
-- JSON Schema construction/validation: PASS during implementation validation
-- Agent registration schema checks on the generated v10.1 registry: PASS during implementation validation
+- run_id: `cc14ee53-eb0e-448e-ac89-512bc7638d27`
+- branch: `upgrade/ccc-living-dashboard-v10-1`
+- commit_sha: `899775cae5083467ea03011538e2312198bf54b4`
+- tests_total: 39
+- tests_passed: 39
+- tests_failed: 0
+- warnings: 0
+- security_findings: 0
+- state: VERIFY
+- artifact digest: `sha256:cfc514a9015eb5100c4ad7f95c96511bfe98e54e39dd3ef3de3e2bd0760ccd41`
 
-Full repository GitHub Actions evidence is intentionally not claimed until a PR-triggered run executes against the final branch head.
+The first PR CI cycle exposed one exact defect: legacy `test_health.py` still expected manifest schema `ccc.living_organism.manifest.v10`. It failed 1 test with **38 passed / 1 failed**. The test was corrected to require v10.1 schema/version and frontend identity, then CI was rerun to 39/39 PASS. This is the required FIX -> RETEST -> REPORT loop.
+
+A second reconciliation defect was found in this report itself: the earlier headline said 83/100 while its component arithmetic totaled 88. The arithmetic inconsistency is corrected below rather than preserved as institutional fiction.
 
 ## VALUE
 
-v10.1 closes a structural gap in the CCC architecture: unusual signals no longer have to compete with ordinary operational traffic or live as disconnected research notes. Exceptional opportunities/threats can now be verified, aged, scored, evidenced, routed and reinjected into internal capability.
+v10.1 closes a structural control gap: unusual signals no longer have to compete with ordinary operational traffic or remain disconnected research notes. Exceptional opportunities/threats can now be verified, aged, scored, evidenced, routed and reinjected into internal capability.
 
-The reverse-learning mechanism makes lost external opportunities potentially productive by converting requirements into capability gaps, labs/projects, evidence and portfolio assets.
+The reverse-learning mechanism converts external requirements into capability gaps, labs/projects, evidence and portfolio assets even when the external opportunity is not won.
 
 ## RISK
 
-Current material risks:
+Current material risks after green software gates:
 
-1. PR CI/security/dashboard workflows have not yet produced final GitHub evidence for v10.1.
-2. HP/Crostini actual-host dashboard acceptance remains pending from the v10 lineage.
-3. Dell/Hyper-V SOC preflight and live-state evidence remain pending.
-4. Agent identities are configuration references, not hardware-attested identities.
-5. Ledger P0 remains local hash-linked JSONL rather than production HA/DR storage.
-6. Pressure Loss remains based on declared configuration until runtime evidence is ingested.
-7. Legacy `01_Cybersecurity/GitHub` remains a gitlink without proven `.gitmodules` provenance; the missing URL is not invented.
-8. External source quality can poison exception priority if verification discipline is bypassed; current controls therefore keep source/evidence/freshness explicit.
+1. HP/Crostini actual-host dashboard acceptance remains pending.
+2. Dell/Hyper-V SOC preflight and live-state evidence remain pending.
+3. Agent identities are configuration references, not hardware-attested identities.
+4. Ledger P0 remains local hash-linked JSONL rather than production HA/DR storage.
+5. Pressure Loss remains declared-config provisional until runtime evidence is ingested.
+6. Legacy `01_Cybersecurity/GitHub` remains a gitlink without proven `.gitmodules` provenance; no URL is invented.
+7. External source quality can poison exception priority if verification discipline is bypassed; source/evidence/freshness controls therefore remain mandatory.
 
 ## OPTIONS
 
-### Option A: Merge immediately
-REJECT. This violates the required human-review, CI and host acceptance gates.
+### Merge immediately
+REJECT. Green CI does not override host/runtime/human-review hard stops.
 
-### Option B: Hold without PR
-REJECT. It prevents GitHub from producing the release evidence required to finish P0.
+### Hold without review
+REJECT. PR #2 now provides the review/evidence surface required for controlled progression.
 
-### Option C: Open a stacked draft PR against the v10 branch
-SELECTED. This isolates the v10.1 delta for review, triggers v10.1 CI/security/dashboard evidence, preserves v10 lineage and avoids pretending the unmerged v10 foundation already exists on `main`.
+### Continue stacked draft review and host acceptance
+SELECTED. Preserve v10 as the immediate baseline, retain human merge authority, complete HP/Dell evidence, then reassess READY.
 
 ## EXECUTION
 
-Completed sequence:
+Completed P0 sequence:
 
-1. inspected v10 repository state
+1. inspected repository and verified v10 baseline
 2. created `upgrade/ccc-living-dashboard-v10-1`
 3. wrote `docs/UPGRADE_INVENTORY_v10_1.md`
-4. wrote v10.1 architecture/threat model
-5. advanced manifest/schemas/registries
+4. wrote architecture + threat model
+5. advanced v10.1 manifest/schemas/registries
 6. preserved Ledger and added financial-state classification
 7. preserved SOC adapter contract
 8. preserved Mission Control/Pressure Loss
@@ -85,68 +88,89 @@ Completed sequence:
 10. implemented Exception Intelligence
 11. extended Living Dashboard backend
 12. implemented Exception Constellation
-13. preserved 4D Living Sphere fallback
+13. preserved 4D Living Sphere/fallback
 14. added v10.1 GitHub Actions
 15. extended Slack exception contract
 16. added Gmail contract
 17. preserved/extended MIT 14.129 Ledger gate
-18. documented legacy integration
-19. performed targeted implementation tests
-20. generated this report
-
-Next: open stacked draft PR and execute the full GitHub evidence gate.
+18. integrated/documented legacy surfaces
+19. ran full PR tests
+20. fixed failing manifest-version test
+21. reran CI/security/dashboard gates to PASS
+22. generated/amended this report
+23. opened draft PR #2 for human review
 
 ## OWNER
 
-Human authority owns consequential release/merge decisions. GitHub owns code state, Ledger owns factual/evidence state, Orchestra owns integration/release evaluation, Mission Control owns pressure/priority evaluation, Exception Intelligence owns sensory-priority verification/scoring/routing, and external Slack/Gmail channels remain non-authoritative.
+Human authority owns consequential release/merge decisions. GitHub owns code state; Ledger owns factual/evidence state; Orchestra owns integration/release evaluation; Mission Control owns pressure/priority evaluation; Exception Intelligence owns sensory-priority verification/scoring/routing; Slack and Gmail remain non-authoritative channels.
 
 ## ACCEPTANCE
 
-Pre-PR acceptance status:
+Current acceptance state:
 
-- inventory: PASS
+- inventory complete: PASS
 - legacy preserved: PASS
-- v10.1 manifest/schemas/registries created: PASS by targeted validation; final CI pending
-- unknown-agent/default-deny controls: IMPLEMENTED; final CI pending
-- no self-propagation/covert C2: PASS by design review
-- Ledger append/verify inherited from green v10 baseline: PRESERVED; v10.1 full CI pending
-- financial state separation: targeted tests PASS
-- SOC missing evidence -> UNKNOWN: inherited/preserved
-- Pressure Loss algorithm: inherited/preserved; runtime evidence pending
-- exception score formula: targeted tests PASS
-- stale exceptions leave VERIFIED: targeted tests PASS
-- fit score exposes evidence: targeted tests PASS
-- exception APIs: implemented; PR smoke pending
-- action request -> pending approval: inherited/preserved
-- fallback rendering: targeted constellation test PASS; PR smoke pending
-- CI/security/dashboard: PENDING PR RUN
+- v10.1 manifest validates: PASS
+- schemas validate: PASS
+- host/role registries validate: PASS
+- required agents present: PASS
+- unknown-agent/default-deny controls preserved: PASS
+- no self-propagation/covert C2: PASS by design/validator/security review
+- Ledger append/verify inherited and regression-tested in full suite: PASS
+- synthetic/real separation inherited: PASS
+- financial-state separation: PASS
+- SOC missing evidence -> UNKNOWN: PASS/inherited
+- Pressure Loss calculation: PASS algorithmically; runtime evidence pending
+- exception score formula: PASS
+- stale exceptions leave VERIFIED: PASS
+- fit score exposes evidence and zeroes unsupported points: PASS
+- `/api/health`: PASS
+- `/api/manifest`: PASS
+- `/api/hosts`: PASS
+- `/api/organs`: PASS
+- `/api/mission`: PASS
+- `/api/pressure-loss`: PASS
+- `/api/soc/state`: PASS or honest UNKNOWN
+- `/api/ledger/recent`: PASS
+- `/api/agents`: PASS
+- `/api/exceptions`: PASS
+- `/api/exceptions/high-priority`: PASS
+- `/api/sphere`: PASS
+- `/api/economics/technology-choice`: PASS
+- `/api/economics/revenue-flywheel`: PASS
+- action request -> pending approval: PASS/inherited
+- fallback rendering: PASS
+- CI: PASS
+- security/CodeQL/secret guard: PASS
+- rollback documented: PASS
+- report generated: PASS
+- PR opened: PASS
+- human review: PENDING
 - HP dashboard actual-host validation: PENDING
 - Dell SOC runtime evidence: PENDING
-- rollback: DOCUMENTED
-- PR: PENDING CREATION
 
 ## STATE
 
-P0 software construction has reached VERIFY. It has not earned READY because CI and actual-host evidence remain incomplete.
+Software P0 is VERIFIED and reviewable. The release remains HOLD because actual HP/Dell runtime evidence and human review are still required. READY is not claimed and THRIVE is prohibited at P0.
 
 ## CCC SCORE
 
-Provisional executive-control grade before PR CI: **83/100**, subject to hard-stop gates.
+Post-CI software/control grade: **93/100**, subject to hard-stop gates.
 
-- Fact / Evidence / Provenance: 11/15 — strong structural/targeted evidence; final PR and host provenance pending
+- Fact / Evidence / Provenance: 14/15 — machine-readable CI provenance is green; actual-host provenance pending
 - Financial Discipline: 15/15 — opportunity/claim/invoice/collection/reconciliation/surplus distinctions enforced
 - Strategic Value: 10/10 — closes exception-priority and reverse-learning gap
-- Risk + Security: 9/10 — default-deny/privacy/security override implemented; final CodeQL pending
-- Reliability + Recovery: 7/10 — rollback documented; host/HA runtime proof pending
+- Risk + Security: 10/10 — CodeQL, secret guard, default deny, privacy and security override pass
+- Reliability + Recovery: 7/10 — rollback documented; actual-host/HA runtime proof pending
 - Governance + Legal: 9/10 — authority boundaries preserved; external source/legal verification remains contextual
 - Ledger + Data Integrity: 9/10 — hash-linked lineage preserved; P0 storage not HA
-- Market / Productive Value: 5/5 — employment/grant/contract/customer/research signals become reusable capability inputs
+- Market / Productive Value: 5/5 — opportunity and capability signals become governed productive inputs
 - Dependency + Sovereign Optionality: 4/5 — role-driven deployment preserved; stronger identity attestation remains future work
-- Execution Quality: 4/5 — logical commits/tests/contracts present; final CI pending
-- Time-to-Value: 3/3 — stacked release reuses verified v10 instead of wasteful rebuild
-- Reinjection Value: 2/2 — reverse-learning loop is explicit
+- Execution Quality: 5/5 — defects exposed, fixed, retested; full PR gates green
+- Time-to-Value: 3/3 — stacked release reuses verified v10 rather than rebuilding
+- Reinjection Value: 2/2 — reverse-learning loop explicit
 
-Hard-stop rule: this numerical score does not override missing PR CI or actual-host acceptance.
+Hard-stop rule: **93/100 does not override missing HP/Dell runtime evidence or human review.**
 
 ## Architecture before / after
 
@@ -156,7 +180,7 @@ Hard-stop rule: this numerical score does not override missing PR CI or actual-h
 
 ## Files changed
 
-The stacked delta adds/changes v10.1 workflow files, Exception Intelligence code/tests/policy, dashboard exception adapter/API/frontend, registries/schemas/config, financial classification, Gmail/Slack routing, Orchestra exception routing and v10.1 documentation. Exact final changed-file count will be recorded from the PR comparison after the report commit.
+PR #2 stacked delta currently contains **59 changed files**, approximately **1,496 additions / 297 deletions**, across v10.1 workflows, Layer 25 code/tests/policy, dashboard exception APIs/frontend, registries/schemas/config, financial classification, Gmail/Slack routing, Orchestra routing and documentation. The deletions are controlled replacements within modified v10 files, not deletion of legacy numbered systems.
 
 ## Legacy preserved
 
@@ -164,7 +188,7 @@ The stacked delta adds/changes v10.1 workflow files, Exception Intelligence code
 
 ## Tests
 
-Targeted new-organ tests passed during build. Full repository test count and exact PASS/FAIL results remain pending GitHub Actions and will be amended into this report after PR execution.
+Final validated executable-code head produced **39/39 PASS**. First PR run produced **38 PASS / 1 FAIL** because a legacy manifest-version assertion expected v10; that exact defect was corrected and rerun green.
 
 ## Defects found
 
@@ -174,82 +198,83 @@ Targeted new-organ tests passed during build. Full repository test count and exa
 - no evidence-bound exception fit model
 - no high-priority exception endpoints/constellation
 - no Gmail authority/failure contract
-- no mission/exception agents in Agent Mesh
+- no mission/exception/Gmail agents in Agent Mesh
 - no explicit opportunity-to-financial-state classifier
 - HP/future host config lacked exception-intelligence role
+- legacy health test expected v10 manifest after intentional v10.1 schema promotion
+- provisional report score headline did not match its component arithmetic
 
 ## Defects fixed
 
-All structural defects above are implemented in v10.1. Missing/stale evidence is converted to HOLD/AGING/STALE rather than green state. Private application/customer/financial fields are excluded from the public exception adapter by policy.
+All structural defects above are implemented. The legacy manifest test is v10.1-aware and passed on rerun. Report arithmetic is corrected. Missing/stale evidence becomes HOLD/AGING/STALE rather than green; private application/customer/financial fields are excluded from public exception payloads.
 
 ## Defects unresolved
 
-Final PR CI/security/dashboard evidence and actual HP/Dell host evidence remain unresolved. The inherited historical gitlink provenance warning remains unresolved by design rather than being guessed.
+Actual HP/Dell host evidence remains unresolved. The inherited historical gitlink provenance warning remains unresolved by design rather than being guessed. Hardware-attested agent identity and production HA/DR Ledger remain future maturity work.
 
 ## Security assessment
 
-Default deny, explicit registration, revocation, human approval, security-priority override, no self-registration, no arbitrary Slack/Gmail command execution, public field allowlisting and no auto-submission/auto-money-movement boundaries are preserved.
+PASS at software gate. Default deny, explicit registration, revocation, human approval, security-priority override, no self-registration, no arbitrary Slack/Gmail command execution, public-field allowlisting and no auto-submission/auto-money-movement boundaries are enforced. CodeQL and secret-pattern guard passed.
 
 ## Agent Mesh assessment
 
-v10.1 explicitly adds `gmail-channel`, `mission-control-agent`, and `exception-intelligence-agent` while preserving unknown-agent rejection and no self-registration.
+v10.1 adds `gmail-channel`, `mission-control-agent`, and `exception-intelligence-agent` while preserving unknown-agent rejection, revocation and no self-registration. Identity remains config-referenced rather than hardware-attested.
 
 ## Exception Intelligence assessment
 
-BUILD/VERIFY. Scoring, freshness, fit, routing, privacy and constellation components exist with targeted tests. Final CI and runtime usefulness evidence are pending.
+VERIFY. Score formula, freshness, evidence-bound fit, routing, privacy, schema contracts, API adapter and constellation all passed tests/CI. Runtime usefulness/repetition evidence is not yet sufficient for READY/THRIVE promotion.
 
 ## SOC assessment
 
-Existing authoritative surface `C:\CCC\State\ccc-soc-live-state.json` and range `10.69.69.0/24` are unchanged. Missing evidence remains UNKNOWN. Dell runtime acceptance is pending.
+Authoritative surface `C:\CCC\State\ccc-soc-live-state.json` and range `10.69.69.0/24` are unchanged. Missing evidence remains UNKNOWN. Dell runtime acceptance is pending.
 
 ## Living Dashboard assessment
 
-Exception list/high-priority endpoints and constellation are integrated. Full PR smoke and HP-render acceptance are pending.
+PR Dashboard Smoke passed exception list/high-priority APIs, sphere payload, economic endpoints and Canvas/constellation scripts. HP physical-host rendering remains pending.
 
 ## 4D Sphere assessment
 
-Existing sphere semantics/fallback are preserved; v10.1 adds a data-bound Exception Constellation. No decorative event is permitted to masquerade as telemetry.
+Existing sphere semantics/fallback are preserved. v10.1 adds a data-bound Exception Constellation; decorative events are not telemetry.
 
 ## Ledger assessment
 
-Hash-linked append-only evidence architecture is preserved. v10.1 adds a financial-state classification gate so exception/opportunity state cannot silently become revenue state.
+Hash-linked append-only evidence architecture remains appropriate at P0. v10.1 adds financial-state classification so exception/opportunity state cannot silently become realized revenue.
 
 ## MIT 14.129 technology-choice assessment
 
-No new consensus/settlement requirement was proven. Hash-linked/event-sourced P0 evidence storage remains the simpler appropriate architecture. Blockchain is not selected for symbolism.
+No factual consensus/settlement requirement justifies a blockchain migration. Hash-linked/event-sourced trusted-operator storage remains the simpler appropriate P0 architecture. Re-open only when multi-party trust/finality requirements become proven facts.
 
 ## Slack state
 
-NON_AUTHORITATIVE. EXCEPTION message type and `#ccc-exceptions` route are documented; no secrets/private raw evidence/arbitrary commands.
+NON_AUTHORITATIVE. EXCEPTION message type and `#ccc-exceptions` route documented; no secrets/private raw evidence/arbitrary commands.
 
 ## Gmail state
 
-NON_AUTHORITATIVE. Receive opportunity signals, send approved communications, and record delivery results only. Failed/unverified delivery is routed as evidence/exception, never falsely marked delivered.
+NON_AUTHORITATIVE. Opportunity email is a signal only; approved outbound communications require delivery evidence. Failed/unverified delivery becomes a Ledger/Exception event, never a false “delivered” state.
 
 ## Codex state
 
-Scoped implementation/repair role preserved. Read-before-edit, test, capture evidence, no secrets and no self-merge remain governing rules.
+Scoped implementation/repair role preserved. Read-before-edit, tests, evidence capture, no secrets and no self-merge remain governing rules.
 
 ## GitHub Actions state
 
-v10.1 CI, Security and Dashboard Smoke workflow definitions are committed. Final PR execution evidence is pending.
+PASS on validated executable-code head: v10.1 CI, Dashboard Smoke and Security all green. The machine-readable artifact contains 39/39 PASS, zero warnings and exact branch/commit provenance.
 
 ## Rollback
 
-Do not merge on failed gates. v10 remains the immediate stacked rollback baseline and `main` remains the legacy repository baseline. After any future merge, revert commits/merge rather than force-rewriting evidence. Preserve failed-release artifacts and return affected organs to VERIFY/HOLD.
+Do not merge on failed gates. v10 at `68fe1aefe533a332335ed1cc7c30e0c5773451fa` remains the immediate stacked rollback baseline; `main` remains the legacy baseline. After any future merge, revert rather than force-rewrite. Preserve failed-release artifacts and return affected organs to VERIFY/HOLD.
 
 ## Pressure Loss
 
-Current application scoring on declared configuration yields a provisional system floor of **25/100** for INCUBATE organs whose Evidence dimension is not runtime-proven. This is explicitly `DECLARED_CONFIG_NOT_RUNTIME`, not a measured production-health claim. Critical Trust/Ledger/SRE/SOC failures override commercial optimization.
+Current application scoring on declared configuration yields a provisional system floor of **25/100** for INCUBATE organs whose Evidence dimension is not runtime-proven. This is explicitly `DECLARED_CONFIG_NOT_RUNTIME`, not measured production health. Critical Trust/Ledger/SRE/SOC failures override commercial optimization.
 
 ## Next Alpha
 
-1. open stacked draft PR against `upgrade/ccc-living-dashboard-v10`
-2. inspect v10.1 CI/Security/Dashboard Smoke results
-3. fix any exact defect and rerun
-4. reconcile machine-readable CI artifact and amend this report
-5. execute HP/Crostini acceptance
-6. execute Dell SOC preflight/runtime acceptance
-7. reevaluate P0 state under hard-stop rules
+1. allow this report-only amendment to pass the same PR gates
+2. execute HP/Crostini v10.1 acceptance and verify local dashboard/exception endpoints
+3. execute Dell SOC `-PreflightOnly`; only after PASS run authorized lab and verify live-state JSON
+4. feed approved Dell state through the read-only adapter and reconcile with Ledger
+5. complete human review of PR #2
+6. reevaluate READY; do not self-merge or label THRIVE
 
 HOLD_WITH_DEFECTS
