@@ -1,0 +1,123 @@
+version: 10.0-P0
+self_registration: false
+agents:
+- id: github-agent
+  type: service
+  owner: CCC
+  host: github
+  role: code-event-source
+  public_key_or_identity_reference: identity-ref:github-agent
+  allowed_inputs: [repository-events]
+  allowed_outputs: [code-events]
+  allowed_actions: [read_code, emit_code_events, create_scoped_branch, create_reviewable_pr]
+  denied_actions: [silent_merge, secret_exfiltration]
+  health_endpoint: null
+  state: VERIFY
+  last_seen: null
+  version: 10.0-P0
+  revocation_state: ACTIVE
+- id: codex-agent
+  type: service
+  owner: CCC
+  host: github
+  role: implementation-and-repair
+  public_key_or_identity_reference: identity-ref:codex-agent
+  allowed_inputs: [scoped-prompt, github-issue, pr-review-defect]
+  allowed_outputs: [code-change, test-evidence, draft-pr]
+  allowed_actions: [read_scoped_repo, edit_scoped_branch, run_tests, report_evidence, open_pr]
+  denied_actions: [silent_merge, invent_pass, unscoped_external_action]
+  health_endpoint: null
+  state: VERIFY
+  last_seen: null
+  version: 10.0-P0
+  revocation_state: ACTIVE
+- id: slack-sink
+  type: sink
+  owner: CCC
+  host: external
+  role: simulation-review-notification
+  public_key_or_identity_reference: identity-ref:slack-sink
+  allowed_inputs: [sanitized-summary, approval-request]
+  allowed_outputs: []
+  allowed_actions: [receive_sanitized_summary, receive_approval_request]
+  denied_actions: [source_of_truth, arbitrary_shell_execution, raw_secret_storage]
+  health_endpoint: null
+  state: INCUBATE
+  last_seen: null
+  version: 10.0-P0
+  revocation_state: ACTIVE
+- id: hp-dev-agent
+  type: host
+  owner: CCC
+  host: ccc-hp-dev-01
+  role: local-development-state
+  public_key_or_identity_reference: identity-ref:hp-dev-agent
+  allowed_inputs: [local-state]
+  allowed_outputs: [validated-dev-state]
+  allowed_actions: [read_local_state, run_non_destructive_test]
+  denied_actions: [privileged_remote_control]
+  health_endpoint: null
+  state: VERIFY
+  last_seen: null
+  version: 10.0-P0
+  revocation_state: ACTIVE
+- id: dell-soc-agent
+  type: host
+  owner: CCC
+  host: ccc-dell-compute-01
+  role: soc-live-state-reader
+  public_key_or_identity_reference: identity-ref:dell-soc-agent
+  allowed_inputs: [soc-live-state]
+  allowed_outputs: [normalized-soc-state]
+  allowed_actions: [read_soc_state]
+  denied_actions: [write_soc_credentials, unapproved_vm_change]
+  health_endpoint: null
+  state: VERIFY
+  last_seen: null
+  version: 10.0-P0
+  revocation_state: ACTIVE
+- id: ledger-agent
+  type: service
+  owner: CCC
+  host: ccc-hp-dev-01
+  role: evidence-writer
+  public_key_or_identity_reference: identity-ref:ledger-agent
+  allowed_inputs: [validated-event]
+  allowed_outputs: [ledger-event]
+  allowed_actions: [append_validated_event, verify_chain, read_evidence]
+  denied_actions: [rewrite_history, delete_evidence]
+  health_endpoint: null
+  state: BUILD
+  last_seen: null
+  version: 10.0-P0
+  revocation_state: ACTIVE
+- id: orchestra-agent
+  type: service
+  owner: CCC
+  host: ccc-hp-dev-01
+  role: integration-release-evaluator
+  public_key_or_identity_reference: identity-ref:orchestra-agent
+  allowed_inputs: [ledger-state, github-state, live-state]
+  allowed_outputs: [release-evaluation, defect-ticket]
+  allowed_actions: [evaluate_state, evaluate_pressure_loss, evaluate_release_gate, return_defect]
+  denied_actions: [invent_capability, fabricate_evidence]
+  health_endpoint: null
+  state: BUILD
+  last_seen: null
+  version: 10.0-P0
+  revocation_state: ACTIVE
+- id: dashboard-agent
+  type: service
+  owner: CCC
+  host: ccc-hp-dev-01
+  role: read-only-digital-twin
+  public_key_or_identity_reference: identity-ref:dashboard-agent
+  allowed_inputs: [approved-state]
+  allowed_outputs: [human-readable-state, action-request]
+  allowed_actions: [read_approved_state, render_state, submit_action_request]
+  denied_actions: [direct_privileged_execution]
+  health_endpoint: /api/health
+  state: BUILD
+  last_seen: null
+  version: 10.0-P0
+  revocation_state: ACTIVE
