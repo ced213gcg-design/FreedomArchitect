@@ -1,8 +1,10 @@
 from __future__ import annotations
 
 import importlib.util
-from pathlib import Path
 from state_store import repo_path
+
+_RECENT=[]
+_MAX_RECENT=25
 
 
 def _engine():
@@ -14,13 +16,19 @@ def _engine():
 
 
 def analyze(payload: dict) -> dict:
-    return _engine().analyze(payload)
+    result=_engine().analyze(payload)
+    if result.get('analysis_id'):
+        _RECENT.append(result)
+        if len(_RECENT)>_MAX_RECENT:
+            del _RECENT[:-_MAX_RECENT]
+    return result
 
 
 def recent() -> dict:
     return {
-        'state':'NO_RUNTIME_STRATEGIC_ANALYSES_RECORDED',
+        'state':'ADVISORY_RUNTIME_MEMORY' if _RECENT else 'NO_RUNTIME_STRATEGIC_ANALYSES_RECORDED',
         'authority':'ADVISORY_ONLY',
-        'analyses':[],
+        'persistence':'PROCESS_LOCAL_NON_AUTHORITATIVE',
+        'analyses':list(reversed(_RECENT)),
         'note':'Game Theory results do not become Ledger truth without separate evidence validation.'
     }
