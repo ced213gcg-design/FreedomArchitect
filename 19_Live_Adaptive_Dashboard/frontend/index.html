@@ -1,13 +1,6 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CCC Living Intelligence</title><link rel="stylesheet" href="styles.css"></head><body>
-<header><h1>CCC Living Intelligence</h1><div id="heartbeat">0011 · 0110 · 1001</div></header>
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CCC Living Intelligence v10.1</title><link rel="stylesheet" href="styles.css"></head><body>
+<header><h1>CCC Living Intelligence v10.1</h1><div id="heartbeat">0011 · 0110 · 1001</div></header>
 <nav><button data-mode="COACH">COACH</button><button data-mode="PLAN">PLAN</button><button data-mode="SIMULATE">SIMULATE</button><button data-mode="DIVE">DIVE</button><button data-mode="PROCEED">PROCEED</button><button data-mode="PAUSE" disabled title="Requires explicit registered-service approval policy">PAUSE</button><button data-mode="HALT" disabled title="Requires explicit registered-service approval policy">HALT</button></nav>
-<main>
-<section class="cards">
-<article><h2>Mission</h2><pre id="mission">Loading…</pre></article>
-<article><h2>Pressure Loss</h2><pre id="pressure">Loading…</pre></article>
-<article><h2>SOC</h2><pre id="soc">Loading…</pre></article>
-<article><h2>Revenue Flywheel</h2><pre id="revenueFlywheel">Loading…</pre><p class="evidence-note">Evidence-gated. Forecasts and invoices are not counted as realized revenue.</p></article>
-</section>
-<section><h2>4D Living Sphere</h2><canvas id="sphere" width="1000" height="520" aria-label="CCC living sphere"></canvas><p id="sphereStatus"></p></section>
-</main>
-<script src="sphere.js"></script><script src="app.js"></script></body></html>
+<main><section class="cards"><article><h2>Mission</h2><pre id="mission">Loading…</pre></article><article><h2>Pressure Loss</h2><pre id="pressure">Loading…</pre></article><article><h2>SOC</h2><pre id="soc">Loading…</pre></article><article><h2>Exception Intelligence</h2><pre id="exceptions">Loading…</pre><p class="evidence-note">Only verified, current evidence may enter the high-priority constellation.</p></article><article><h2>Revenue Flywheel</h2><pre id="revenueFlywheel">Loading…</pre><p class="evidence-note">Opportunities, contracts and invoices are not realized revenue.</p></article></section>
+<section><h2>4D Living Sphere</h2><canvas id="sphere" width="1000" height="520" aria-label="CCC living sphere"></canvas><p id="sphereStatus"></p><h3>Exception Constellation</h3><canvas id="exceptionConstellation" width="1000" height="300" aria-label="CCC exception constellation"></canvas><p id="exceptionStatus"></p></section></main>
+<script src="sphere.js"></script><script src="exception_constellation.js"></script><script src="app.js"></script></body></html>
