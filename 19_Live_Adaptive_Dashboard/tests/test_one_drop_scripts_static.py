@@ -5,7 +5,7 @@ DELL=ROOT/'scripts'/'warroom'/'CCC_DELL_SOC_WARROOM_ONE_DROP.ps1'
 
 def test_hp_one_drop_has_hard_gates_and_no_secret_commit_path():
     text=HP.read_text(encoding='utf-8')
-    for required in ['git stash push -u','git pull --ff-only','validate_ccc_repo.py','pytest -q','test_sphere.js','test_exception_constellation.js','test_soc_interaction_ui.js','CCC_BRIDGE_TOKEN','FILE_FALLBACK','CCC_SOC_STATE_PATH']:
+    for required in ['git stash push -u','git pull --ff-only','validate_ccc_repo.py','pytest -q','test_sphere.js','test_exception_constellation.js','test_soc_interaction_ui.js','test_soc_physical_evidence_ui.js','CCC_BRIDGE_TOKEN','FILE_FALLBACK','CCC_SOC_STATE_PATH','export_physical_artifacts.py','control-gates.json','scenario-summary.json','scenario-runs.jsonl','sensor-inventory.json','evidence-index.json','sha256sums.txt']:
         assert required in text
     assert 'git push' not in text
 
