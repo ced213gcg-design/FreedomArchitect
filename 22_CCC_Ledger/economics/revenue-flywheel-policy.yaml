@@ -1,10 +1,12 @@
-version: 1
+version: 2
 state: VERIFY
 name: CCC Regenerative Revenue Flywheel Policy
 
 principle: >-
   CCC continuously discovers and tests multiple lawful revenue pathways, but never treats
   forecasts, symbolic language, invoices, contracts, grants, or dashboard estimates as realized revenue.
+  The objective is durable, diversified, evidence-backed cash-flow capacity and productive reinvestment,
+  not a claim of guaranteed or literally infinite returns.
 
 closed_loop:
   - KNOWLEDGE
@@ -14,13 +16,46 @@ closed_loop:
   - FOUNDRY
   - MARKET_DEMAND
   - CONTRACT_OR_SALE
+  - DELIVERY
+  - CUSTOMER_SUCCESS
   - INVOICE
   - COLLECTION
   - REVENUE_ASSURANCE
   - RECONCILED_SURPLUS
   - FREEDOM_ARCHITECT_ALLOCATION
   - PRODUCTIVE_CAPACITY
+  - CUSTOMER_LEARNING
   - NEXT_ALPHA
+
+recurring_customer_cycle:
+  - SALE_READY
+  - ACQUIRE
+  - ONBOARD
+  - DELIVER
+  - MEASURE_OUTCOME
+  - SUPPORT
+  - RENEW_OR_EXPAND
+  - REFER_OR_ADVOCATE
+  - FEEDBACK_TO_FOUNDRY
+  - IMPROVE_OFFER
+
+customer_success_gate:
+  required_fields:
+    - customer_or_segment_reference
+    - offer_reference
+    - onboarding_state
+    - delivery_state
+    - promised_outcome
+    - measured_outcome
+    - sla_or_slo_state
+    - support_state
+    - renewal_or_expansion_signal
+    - customer_feedback
+    - provenance
+  rule: >-
+    A sale is not treated as a healthy recurring revenue stream merely because payment occurred.
+    Customer outcome, delivery quality, support, retention and feedback must be measured and fed back
+    into Product Foundry and the next offer revision.
 
 realized_revenue_gate:
   required_stages:
@@ -63,7 +98,23 @@ allocation_gate:
     - review_point
   priority_rule: >-
     Allocate verified surplus toward the highest evidence-backed productive bottleneck after critical
-    Trust, Ledger, SRE, SOC, legal, compliance, and customer obligations are satisfied.
+    Trust, Ledger, SRE, SOC, legal, compliance, customer and continuity obligations are satisfied.
+
+diversification_gate:
+  rule: >-
+    Prefer multiple independent lawful revenue wells and recurring relationships over dependence on a single
+    customer, employer, grant, product, platform, or speculative asset. Concentration limits are management
+    decisions and must be evidence-based rather than fabricated by the dashboard.
+  required_views:
+    - revenue_by_stream
+    - contribution_margin_by_stream
+    - pipeline_by_stream
+    - recurring_vs_one_time
+    - top_customer_concentration
+    - top_stream_concentration
+    - restricted_vs_unrestricted_funding
+    - collection_risk
+    - renewal_risk
 
 branch_result_gate:
   acceptable_outputs:
@@ -73,6 +124,7 @@ branch_result_gate:
     - VERIFIED_SKILL
     - EVIDENCE
     - CUSTOMER_DEMAND
+    - CUSTOMER_LEARNING
     - COMPLIANCE_READINESS
     - OPERATIONAL_EFFICIENCY
     - PRODUCTIVE_ASSET_VALUE
@@ -85,9 +137,17 @@ branch_result_gate:
 portfolio_metrics:
   - gross_revenue
   - contribution_margin
+  - gross_margin_by_stream
   - recurring_revenue
+  - recurring_revenue_ratio
   - customer_acquisition_cost
   - customer_lifetime_value
+  - collection_cycle_days
+  - renewal_rate
+  - expansion_rate
+  - customer_churn
+  - top_customer_concentration
+  - top_stream_concentration
   - intelligence_to_revenue_conversion
   - knowledge_yield
   - foundry_yield
@@ -105,3 +165,4 @@ control_boundaries:
   - no_release_bypass
   - no_customer_data_cross_tenant_exposure
   - synthetic_and_real_financial_data_must_remain_separate
+  - customer_success_does_not_override_privacy_or_contract_boundaries
