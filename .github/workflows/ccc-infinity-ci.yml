@@ -56,3 +56,10 @@ jobs:
           assert 'ccc_infinity.css' in html and 'infinity_composition.js' in html
           print('Infinity constitutional API smoke PASS')
           PY
+      - name: Export machine-readable Infinity evidence
+        run: python scripts/export_infinity_evidence.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ccc-infinity-evidence
+          path: artifacts/infinity/
+          if-no-files-found: error
