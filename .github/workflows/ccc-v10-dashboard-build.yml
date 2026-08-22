@@ -20,10 +20,29 @@ jobs:
         run: |
           python - <<'PY'
           import json, urllib.request
-          for p in ['/api/health','/api/manifest','/api/hosts','/api/organs','/api/mission','/api/pressure-loss','/api/soc/state','/api/ledger/recent','/api/agents','/api/sphere','/api/economics/technology-choice']:
+          paths = [
+              '/api/health',
+              '/api/manifest',
+              '/api/hosts',
+              '/api/organs',
+              '/api/mission',
+              '/api/pressure-loss',
+              '/api/soc/state',
+              '/api/ledger/recent',
+              '/api/agents',
+              '/api/sphere',
+              '/api/economics/technology-choice',
+              '/api/economics/revenue-flywheel',
+          ]
+          payloads = {}
+          for p in paths:
               with urllib.request.urlopen('http://127.0.0.1:8787'+p) as r:
                   assert r.status == 200, (p,r.status)
-                  json.load(r)
+                  payloads[p] = json.load(r)
+          flywheel = payloads['/api/economics/revenue-flywheel']
+          assert flywheel['stream_count'] >= 8
+          assert flywheel['realized_revenue_total'] is None
+          assert flywheel['validation'] == 'DECLARED_REGISTRY_AND_POLICY_NOT_FINANCIAL_SETTLEMENT'
           print('API smoke PASS')
           PY
       - uses: actions/setup-node@v4
