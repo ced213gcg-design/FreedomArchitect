@@ -1,0 +1,64 @@
+name: CCC SOC Five Live Evidence P0
+on:
+  push:
+    branches: ['hotfix/ccc-soc-five-live-evidence-v1']
+  pull_request:
+    branches: ['upgrade/ccc-v10-1-aesthetic-vanguard']
+permissions:
+  contents: read
+jobs:
+  validate-test-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: pip install -r requirements.txt
+      - name: Compile Python
+        run: python -m compileall -q 19_Live_Adaptive_Dashboard 21_CCC_Orchestra 22_CCC_Ledger 23_CCC_Agent_Mesh scripts
+      - name: Repository validation
+        run: python scripts/validate_ccc_repo.py
+      - name: Python tests
+        run: pytest -q --import-mode=importlib
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Existing Living Sphere regression
+        run: node scripts/test_sphere.js
+      - name: Existing Exception Constellation regression
+        run: node scripts/test_exception_constellation.js
+      - name: SOC interaction structural test
+        run: node scripts/test_soc_interaction_ui.js
+      - name: Bash syntax
+        run: |
+          if command -v shellcheck >/dev/null 2>&1; then shellcheck scripts/*.sh; else bash -n scripts/*.sh; fi
+      - name: Start dashboard
+        run: |
+          python 19_Live_Adaptive_Dashboard/backend/app.py > /tmp/ccc-soc-live-p0.log 2>&1 &
+          echo $! > /tmp/ccc-soc-live-p0.pid
+          sleep 2
+      - name: API honesty smoke
+        run: |
+          python - <<'PY'
+          import json, urllib.request
+          base='http://127.0.0.1:8787'
+          def get(path):
+              with urllib.request.urlopen(base+path) as r:
+                  assert r.status==200,(path,r.status)
+                  return json.load(r)
+          health=get('/api/health')
+          assert health['version']=='10.1-P0'
+          assert health['release']=='SOC-LIVE-P0'
+          missions=get('/api/soc/missions')
+          assert missions['count']==5
+          assert missions['proven_count']==0
+          assert all(m['state']=='UNKNOWN' for m in missions['missions'])
+          assert missions['truth_rule']=='NO_LIVE_EVIDENCE_NO_PASS'
+          vms=get('/api/vms')
+          assert vms['read_only'] is True
+          contract=get('/api/interaction/contract')
+          assert 'REQUEST_SOC_TEST' in contract['consequential_actions']
+          assert 'password' in contract['forbidden_capture']
+          for path in ['/','/ccc_multiverse.css','/ccc_horizon.js','/command_deck.js','/context_lens.js','/object_cards.js','/interaction_telemetry.js']:
+              with urllib.request.urlopen(base+path) as r: assert r.status==200,path
+          print('SOC live-evidence P0 API honesty smoke PASS')
+          PY

@@ -1,0 +1,25 @@
+version: 1
+authoritative_range: 10.69.69.0/24
+targets:
+  - name: CCC-KALI-RED
+    role: authorized_red_team_node
+    range_ip: 10.69.69.10
+    allowed_services: []
+  - name: CCC-SOC-BLUE
+    role: defensive_monitoring_sensor
+    range_ip: null
+    allowed_services:
+      - protocol: tcp
+        ports: [22, 80, 443, 2222]
+    note: Range IP must be explicitly registered before remote scenario helpers may target Blue.
+  - name: CCC-HONEY-TARGET
+    role: honeypot_target
+    range_ip: 10.69.69.30
+    allowed_services:
+      - protocol: tcp
+        ports: [22, 80, 443, 2222]
+    note: Allowed ports are bounded scenario probe ports, not proof that a service is currently listening.
+policy:
+  range_membership_alone_is_insufficient: true
+  require_exact_registered_target: true
+  external_targets_prohibited: true

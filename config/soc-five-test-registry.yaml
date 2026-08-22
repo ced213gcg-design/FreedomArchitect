@@ -1,0 +1,46 @@
+version: 1.0
+state: VERIFY
+registry_authority: HUMAN_APPROVED_MISSION_DEFINITION
+result_authority: DELL_LIVE_STATE_PLUS_LEDGER_EVIDENCE
+missions:
+  - id: SOC-01
+    key: RANGE_REACHABILITY
+    name: Range Reachability
+    objective: Verify the authorized CCC lab nodes can reach the intended isolated range paths required for the mission.
+    authorized_scope: 10.69.69.0/24
+    evidence_required: [run_id, timestamp, source, target, result, validation]
+    default_state: UNKNOWN
+  - id: SOC-02
+    key: SENSOR_VISIBILITY
+    name: Sensor Visibility
+    objective: Verify defensive monitoring can observe authorized lab traffic without assigning a success state from configuration alone.
+    authorized_scope: CCC-SOC-BLUE sensor path
+    evidence_required: [run_id, timestamp, sensor, observed_event, result, validation]
+    default_state: UNKNOWN
+  - id: SOC-03
+    key: DETECTION_PIPELINE
+    name: Detection Pipeline
+    objective: Verify a benign registered test signal produces an expected defensive observation and evidence record.
+    authorized_scope: registered CCC lab path only
+    evidence_required: [run_id, timestamp, test_signal, detection, latency_ms, evidence_ref, validation]
+    default_state: UNKNOWN
+  - id: SOC-04
+    key: HONEYPOT_EVIDENCE
+    name: Honeypot Evidence
+    objective: Verify an authorized benign interaction with the lab honeypot produces attributable evidence and no uncontrolled external effect.
+    authorized_scope: CCC-HONEY-TARGET only
+    evidence_required: [run_id, timestamp, target, event, evidence_ref, validation]
+    default_state: UNKNOWN
+  - id: SOC-05
+    key: EVIDENCE_RECONCILIATION
+    name: Evidence Reconciliation
+    objective: Verify the Dell live-state run, dashboard view, and Ledger references agree on the same mission evidence lineage.
+    authorized_scope: CCC evidence chain
+    evidence_required: [run_id, timestamp, live_state_ref, ledger_ref, dashboard_validation, validation]
+    default_state: UNKNOWN
+rules:
+  code_presence_is_pass: false
+  missing_evidence_state: UNKNOWN
+  stale_evidence_state: VERIFY
+  consequential_execution_requires_human_approval: true
+  no_external_targeting: true

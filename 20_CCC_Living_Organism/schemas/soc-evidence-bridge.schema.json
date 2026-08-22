@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ccc.soc.evidence.bridge.v1",
+  "title": "CCC SOC Evidence Bridge v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "timestamp", "source_host", "run_id", "control_gates", "scenario_runs", "vm_health", "sensor_health", "evidence_refs", "next_action"],
+  "properties": {
+    "schema": {"const": "ccc.soc.evidence.bridge.v1"},
+    "timestamp": {"type": "string", "format": "date-time"},
+    "source_host": {"const": "ccc-dell-compute-01"},
+    "run_id": {"type": "string", "minLength": 1, "maxLength": 128},
+    "control_gates": {"type": "array", "maxItems": 32, "items": {"type": "object"}},
+    "scenario_runs": {"type": "array", "maxItems": 256, "items": {"type": "object"}},
+    "vm_health": {"type": "array", "maxItems": 128, "items": {"type": "object"}},
+    "sensor_health": {"type": "array", "maxItems": 128, "items": {"type": "object"}},
+    "evidence_refs": {"type": "array", "maxItems": 512, "items": {"type": "string", "maxLength": 512}},
+    "next_action": {"type": "string", "minLength": 1, "maxLength": 1024}
+  }
+}

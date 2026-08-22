@@ -5,9 +5,10 @@ def payload(result): return json.loads(result[2])
 def test_health():
     status,_,body=app.route_request("GET","/api/health"); data=json.loads(body)
     assert status==200 and data["status"]=="PASS" and data["version"]=="10.1-P0"
+    assert data.get("release")=="SOC-LIVE-P0"
 def test_manifest():
     status,_,body=app.route_request("GET","/api/manifest"); data=json.loads(body)
     assert status==200 and data["schema"]=="ccc.living_organism.manifest.v10.1" and data["version"]=="10.1-P0"
 def test_frontend_root_served():
     status,headers,body=app.route_request("GET","/")
-    assert status==200 and headers["Content-Type"].startswith("text/html") and b"CCC Living Intelligence v10.1" in body
+    assert status==200 and headers["Content-Type"].startswith("text/html") and b"CCC Living Intelligence" in body and b"SOC LIVE" in body
