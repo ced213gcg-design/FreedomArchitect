@@ -1,12 +1,22 @@
 github:
   authority: CODE
+github_actions:
+  notification_targets: [ledger-agent, slack-sink]
 codex:
   authority: IMPLEMENTATION_REPAIR
 ledger:
   authority: EVIDENCE
 orchestra:
   authority: PLACEMENT_INTEGRATION_RELEASE
+mission_control:
+  authority: PRESSURE_PRIORITY
+exception_intelligence:
+  authority: SENSORY_PRIORITY
 slack:
   authority: NOTIFICATION_ONLY
-  allowed_types: [BUILD, TEST, SIMULATION, SECURITY, RELEASE, APPROVAL_REQUEST, INCIDENT]
-  prohibit: [secrets, credentials, customer_private_data, malware_binary, arbitrary_shell_command]
+  allowed_types: [BUILD, TEST, SIMULATION, SECURITY, RELEASE, EXCEPTION, APPROVAL_REQUEST, INCIDENT]
+  prohibit: [secrets, credentials, customer_private_data, malware_binary, raw_financial_credentials, arbitrary_command_payload]
+gmail:
+  authority: EXTERNAL_COMMUNICATION_ONLY
+  allowed: [receive_opportunity_message, send_approved_report, send_approved_notification, record_delivery_result]
+  prohibit: [source_of_truth, claim_delivery_without_evidence, secrets, credentials, raw_financial_credentials, unapproved_consequential_message]

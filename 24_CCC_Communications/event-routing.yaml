@@ -1,16 +1,15 @@
 routes:
-  github_actions:
-  - slack-sink
-  - ledger-agent
-  orchestra:
-  - dashboard-agent
-  - slack-sink
-  dashboard_action_request:
-  - ledger-agent
-  - human-command-authority
+  github_actions: [slack-sink, ledger-agent]
+  orchestra: [dashboard-agent, slack-sink]
+  dashboard_action_request: [ledger-agent, human-command-authority]
+  verified_exception: [ledger-agent, mission-control-agent, orchestra-agent, dashboard-agent]
+  high_priority_exception: [mission-control-agent, orchestra-agent, slack-sink, dashboard-agent]
+  gmail_opportunity_message: [exception-intelligence-agent]
+  gmail_delivery_result: [ledger-agent]
+  gmail_delivery_failure: [ledger-agent, exception-intelligence-agent, dashboard-agent, slack-sink]
 rules:
   sanitize: true
   secrets: false
-  authoritative_return:
-  - github
-  - ledger
+  arbitrary_commands: false
+  external_channels_authoritative: false
+  authoritative_return: [github, ledger, orchestra]
