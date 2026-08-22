@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ccc://schemas/worker-handoff.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["worker", "phase", "starting_position", "evidence", "current_position", "blockers"],
+  "properties": {
+    "worker": {"enum": ["COMMAND", "INTELLIGENCE", "SECURITY", "REVENUE", "COMMS"]},
+    "phase": {"enum": ["MID_SHIFT", "END_SHIFT"]},
+    "starting_position": {"type": "string"},
+    "work_completed_so_far": {"type": "string"},
+    "work_completed": {"type": "string"},
+    "evidence": {"type": "array", "items": {"type": "string"}},
+    "current_position": {"type": "string"},
+    "blockers": {"type": "array", "items": {"type": "string"}},
+    "immediate_next_action": {"type": "string"},
+    "where_work_stopped": {"type": "string"},
+    "next_owner": {"type": "string"},
+    "exact_next_action": {"type": "string"},
+    "expected_next_evidence": {"type": "array", "items": {"type": "string"}},
+    "authority": {"const": "ADVISORY_TO_LEDGER_AUTHORITY"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"phase": {"const": "MID_SHIFT"}}},
+      "then": {"required": ["work_completed_so_far", "immediate_next_action"]}
+    },
+    {
+      "if": {"properties": {"phase": {"const": "END_SHIFT"}}},
+      "then": {"required": ["work_completed", "where_work_stopped", "next_owner", "exact_next_action", "expected_next_evidence"]}
+    }
+  ]
+}
