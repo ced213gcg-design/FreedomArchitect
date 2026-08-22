@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ccc.action-preview.v1",
+  "type": "object",
+  "required": ["action_type","source","target","expected_effect","risk","authority_required","execution_state"],
+  "properties": {
+    "action_type": {"type":"string"},
+    "source": {"type":"string"},
+    "target": {"type":"string"},
+    "expected_effect": {"type":"string"},
+    "risk": {"type":"string"},
+    "authority_required": {"type":"boolean"},
+    "rollback": {"type":["string","null"]},
+    "execution_state": {"const":"REQUEST_ONLY_NOT_EXECUTED"},
+    "evidence_ref": {"type":["string","null"]},
+    "run_id": {"type":["string","null"]}
+  },
+  "additionalProperties": false
+}
