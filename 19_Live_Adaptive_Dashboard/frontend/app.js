@@ -1,54 +1,8 @@
 const get=async p=>(await fetch(p)).json();
-
-function flywheelView(f){
-  return {
-    state:f.state,
-    policy_version:f.policy_version,
-    stream_count:f.stream_count,
-    stage_counts:f.stage_counts,
-    class_counts:f.class_counts,
-    recurring_customer_cycle:f.recurring_customer_cycle,
-    realized_revenue_status:f.realized_revenue_status,
-    realized_revenue_total:f.realized_revenue_total,
-    validation:f.realized_revenue_total_validation,
-    customer_success_gate_present:Boolean(f.customer_success_gate && f.customer_success_gate.rule),
-    diversification_gate_present:Boolean(f.diversification_gate && f.diversification_gate.rule),
-    control_boundaries:f.control_boundaries
-  };
-}
-
-async function refresh(){
-  const [mission,pressure,soc,sphere,flywheel]=await Promise.all([
-    '/api/mission',
-    '/api/pressure-loss',
-    '/api/soc/state',
-    '/api/sphere',
-    '/api/economics/revenue-flywheel'
-  ].map(get));
-  missionEl.textContent=JSON.stringify(mission,null,2);
-  pressureEl.textContent=JSON.stringify(pressure.system_weakest,null,2);
-  socEl.textContent=JSON.stringify(soc,null,2);
-  revenueFlywheelEl.textContent=JSON.stringify(flywheelView(flywheel),null,2);
-  sphereStatus.textContent=CCCSphere.draw(document.getElementById('sphere'),sphere)?'Canvas fallback/data-bound render active':'Canvas unavailable';
-}
-
-const missionEl=document.getElementById('mission'),
-      pressureEl=document.getElementById('pressure'),
-      socEl=document.getElementById('soc'),
-      revenueFlywheelEl=document.getElementById('revenueFlywheel'),
-      sphereStatus=document.getElementById('sphereStatus');
-
-document.querySelectorAll('button[data-mode]').forEach(b=>b.onclick=async()=>{
-  const mode=b.dataset.mode;
-  if(mode==='PROCEED'){
-    const r=await fetch('/api/action-request',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({action_type:'PROCEED_REQUEST',requester:'dashboard-agent',payload:{mode}})
-    });
-    alert(JSON.stringify(await r.json(),null,2));
-  }else alert(`${mode}: non-destructive mode selected`);
-});
-
-refresh();
-setInterval(refresh,5000);
+const show=v=>(v===null||v===undefined)?'UNKNOWN':String(v);
+function flywheelView(f){return {state:f.state,policy_version:f.policy_version,stream_count:f.stream_count,stage_counts:f.stage_counts,class_counts:f.class_counts,recurring_customer_cycle:f.recurring_customer_cycle,realized_revenue_status:f.realized_revenue_status,realized_revenue_total:f.realized_revenue_total,validation:f.realized_revenue_total_validation,customer_success_gate_present:Boolean(f.customer_success_gate&&f.customer_success_gate.rule),diversification_gate_present:Boolean(f.diversification_gate&&f.diversification_gate.rule),control_boundaries:f.control_boundaries};}
+function renderWorkers(payload){workersBody.innerHTML='';for(const w of payload.workers){const tr=document.createElement('tr');const cells=[w.codename,w.executive_analogue,w.state,w.current_objective,w.progress,w.evidence,w.pressure_loss,w.cost_today,w.last_report,w.blocker,w.next_action,w.next_owner];for(const value of cells){const td=document.createElement('td');td.textContent=show(value);tr.appendChild(td);}workersBody.appendChild(tr);}}
+async function refresh(){const [mission,pressure,soc,sphere,flywheel,workers]=await Promise.all(['/api/mission','/api/pressure-loss','/api/soc/state','/api/sphere','/api/economics/revenue-flywheel','/api/workers'].map(get));missionEl.textContent=JSON.stringify(mission,null,2);pressureEl.textContent=JSON.stringify(pressure.system_weakest,null,2);socEl.textContent=JSON.stringify(soc,null,2);revenueFlywheelEl.textContent=JSON.stringify(flywheelView(flywheel),null,2);renderWorkers(workers);sphereStatus.textContent=CCCSphere.draw(document.getElementById('sphere'),sphere)?'Canvas fallback/data-bound render active':'Canvas unavailable';}
+const missionEl=document.getElementById('mission'),pressureEl=document.getElementById('pressure'),socEl=document.getElementById('soc'),revenueFlywheelEl=document.getElementById('revenueFlywheel'),workersBody=document.getElementById('workersBody'),sphereStatus=document.getElementById('sphereStatus');
+document.querySelectorAll('button[data-mode]').forEach(b=>b.onclick=async()=>{const mode=b.dataset.mode;if(mode==='PROCEED'){const r=await fetch('/api/action-request',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action_type:'PROCEED_REQUEST',requester:'dashboard-agent',payload:{mode}})});alert(JSON.stringify(await r.json(),null,2));}else alert(`${mode}: non-destructive mode selected`);});
+refresh();setInterval(refresh,5000);
