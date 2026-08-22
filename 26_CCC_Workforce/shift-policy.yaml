@@ -1,0 +1,11 @@
+version: 1.0
+formal_reports_per_shift: 2
+continuous_telemetry_allowed: true
+formal_report_types:
+  MID_SHIFT_POSITION:
+    required: [shift_id, worker, started_at, starting_objective, work_completed, current_position, evidence_obtained, blockers, risk, cost_incurred, next_action_for_remainder]
+  END_SHIFT_HANDOFF:
+    required: [shift_id, worker, ended_at, starting_position, completed_outcomes, evidence, unresolved_items, final_state, where_work_stopped, next_owner, exact_next_action, expected_next_evidence, lessons_reinjection, cost_summary]
+end_shift_without_next_state_allowed: false
+prose_is_machine_authority: false
+machine_authority_requires_validation: true

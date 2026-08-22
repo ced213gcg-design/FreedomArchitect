@@ -1,0 +1,14 @@
+version: 1.0
+unbounded_autonomous_loops: false
+cost_accounting_required: [model_provider, input_cost, output_cost, tool_cost, run_id, worker, task, useful_outcome]
+tiers:
+  LOW_COST:
+    tasks: [extraction, classification, formatting, routine_status, freshness_check]
+  STANDARD:
+    tasks: [research_synthesis, normal_operational_planning, report_generation, cross_source_comparison]
+  HIGH:
+    tasks: [executive_architecture, difficult_coding, critical_security_reasoning, major_financial_decision, complex_game_theory, release_blocking_analysis]
+rules:
+  highest_cost_for_every_task: false
+  revenue_monitors_cost_efficiency: true
+  high_tier_requires_material_reason: true

@@ -1,0 +1,35 @@
+version: 1.0
+routes:
+  CODE_CI_FAILURE:
+    primary: security
+    secondary: [command]
+    notify: [communications]
+    conditional: {revenue: material_cost_or_business_impact}
+  JOB_CONTRACT_GRANT_SIGNAL:
+    primary: intelligence
+    secondary: [revenue]
+    conditional: {security: data_or_compliance_implication}
+    prioritize: command
+    package: communications
+  SOC_INCIDENT:
+    primary: security
+    secondary: [command]
+    notify: [communications]
+    conditional: {revenue: business_or_cost_impact}
+  HARDWARE_PURCHASE:
+    primary: revenue
+    secondary: [intelligence, security]
+    schedule: command
+    document: communications
+  RESEARCH_DISCOVERY:
+    primary: intelligence
+    selective: [security, revenue]
+    decide_active_or_seed: command
+    summarize: communications
+    preserve: ledger
+  CUSTOMER_OPPORTUNITY:
+    primary: [intelligence, revenue]
+    secondary: [security]
+    route: command
+    correspondence: communications
+routing_rule: not_every_event_requires_all_five

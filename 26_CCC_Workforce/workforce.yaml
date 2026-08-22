@@ -1,0 +1,49 @@
+version: 1.0
+state: INCUBATE
+one_mind: true
+separate_truths_allowed: false
+default_deny: true
+unbounded_loops_allowed: false
+authorities:
+  canon_manifest: 20_CCC_Living_Organism/ccc.manifest.json
+  ledger: 22_CCC_Ledger
+  orchestra: 21_CCC_Orchestra
+  agent_mesh: 23_CCC_Agent_Mesh
+  communications: 24_CCC_Communications
+state_vocabulary: [OFFLINE, DORMANT, SEED, INCUBATE, ACTIVE, VERIFY, READY, THRIVE, HOLD, ISOLATE]
+workers:
+  - id: command
+    codename: COMMAND
+    executive_analogue: COO / Chief of Staff
+    primary_organs: [orchestra, mission_control]
+    state: INCUBATE
+    identity_ref: identity-ref:ccc-worker-command
+    shift: {timezone: America/Chicago, start: '16:00', mid_report: '22:00', end: '04:00', weekly_responsibility_hours: 84}
+  - id: intelligence
+    codename: INTELLIGENCE
+    executive_analogue: Strategy / Research / Foresight
+    primary_organs: [exception_intelligence, crayola, game_theory]
+    state: INCUBATE
+    identity_ref: identity-ref:ccc-worker-intelligence
+    shift: {timezone: America/Chicago, start: '04:00', mid_report: '10:00', end: '16:00', weekly_responsibility_hours: 84}
+  - id: security
+    codename: SECURITY
+    executive_analogue: CISO / Security Engineering
+    primary_organs: [trust_fabric, soc, sre]
+    state: INCUBATE
+    identity_ref: identity-ref:ccc-worker-security
+    shift: {timezone: America/Chicago, start: '20:00', mid_report: '02:00', end: '08:00', weekly_responsibility_hours: 84}
+  - id: revenue
+    codename: REVENUE
+    executive_analogue: CFO / Revenue Operations
+    primary_organs: [revenue_assurance, freedom_architect, commercial_extraction]
+    state: INCUBATE
+    identity_ref: identity-ref:ccc-worker-revenue
+    shift: {timezone: America/Chicago, start: '10:00', mid_report: '16:00', end: '22:00', weekly_responsibility_hours: 84}
+  - id: communications
+    codename: COMMS
+    executive_analogue: Communications / Executive Operations
+    primary_organs: [communications, gmail, slack, human_handoff]
+    state: INCUBATE
+    identity_ref: identity-ref:ccc-worker-comms
+    shift: {timezone: America/Chicago, start: '08:00', mid_report: '14:00', end: '20:00', weekly_responsibility_hours: 84}
