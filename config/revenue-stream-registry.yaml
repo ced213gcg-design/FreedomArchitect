@@ -1,0 +1,143 @@
+version: 1
+state: VERIFY
+purpose: >-
+  Registry of lawful CCC revenue and value-creation avenues. A stream is not counted as
+  realized revenue until it reaches COLLECTED and RECONCILED with Revenue Assurance evidence.
+
+stages:
+  - SIGNAL
+  - QUALIFIED
+  - BUILD
+  - FOUNDRY
+  - SALE_READY
+  - PIPELINE
+  - CONTRACTED
+  - INVOICED
+  - COLLECTED
+  - RECONCILED
+  - SURPLUS_ELIGIBLE
+  - REINVESTED
+  - HOLD
+
+classes:
+  - EMPLOYMENT_INCOME
+  - CONTRACT_SERVICE
+  - RECURRING_SERVICE
+  - SOFTWARE_MODULE
+  - SAAS
+  - TRAINING_EDUCATION
+  - IP_LICENSE
+  - GRANT_RESTRICTED
+  - FEDERAL_SUBCONTRACT
+  - RETAIL_PRODUCT
+  - ASSET_INCOME
+  - INTERNAL_SAVINGS
+
+streams:
+  - id: remote-cyber-employment
+    name: Remote cybersecurity employment
+    class: EMPLOYMENT_INCOME
+    owner_role: CCC-04
+    stage: QUALIFIED
+    realized_revenue: false
+    reinvestment_path: Freedom Architect after personal/business classification and verified surplus
+    evidence_required: employment offer, compensation terms, and received income evidence
+
+  - id: cyber-contract-services
+    name: Cybersecurity and SOC contract services
+    class: CONTRACT_SERVICE
+    owner_role: CCC-04
+    stage: BUILD
+    realized_revenue: false
+    reinvestment_path: Revenue Assurance -> Freedom Architect -> productive constraint
+    evidence_required: scoped offer, Foundry/quality evidence, contract, invoice, collection, reconciliation
+
+  - id: living-intelligence-custom
+    name: Living Intelligence custom implementations
+    class: SOFTWARE_MODULE
+    owner_role: CCC-03
+    stage: BUILD
+    realized_revenue: false
+    reinvestment_path: Revenue Assurance -> Freedom Architect -> Living Intelligence/Product Foundry capacity
+    evidence_required: working module, Foundry gate, customer acceptance, invoice, collection, reconciliation
+
+  - id: living-intelligence-recurring
+    name: Living Intelligence recurring analytics / SaaS
+    class: SAAS
+    owner_role: CCC-03
+    stage: SIGNAL
+    realized_revenue: false
+    reinvestment_path: Revenue Assurance -> Freedom Architect -> reusable platform capacity
+    evidence_required: tenant isolation, SLOs, pricing, contracted recurring customer, collection, reconciliation
+
+  - id: managed-security-analytics
+    name: Managed security and analytics services
+    class: RECURRING_SERVICE
+    owner_role: CCC-03
+    stage: SIGNAL
+    realized_revenue: false
+    reinvestment_path: Revenue Assurance -> Freedom Architect -> monitoring/delivery capacity
+    evidence_required: service definition, SLA/SLO, customer agreement, delivery evidence, collection, reconciliation
+
+  - id: product-foundry-validation
+    name: Product Foundry and Digital Twin validation service
+    class: CONTRACT_SERVICE
+    owner_role: CCC-05
+    stage: BUILD
+    realized_revenue: false
+    reinvestment_path: Revenue Assurance -> Freedom Architect -> Foundry test capacity
+    evidence_required: repeatable test method, deliverable template, customer demand, collection, reconciliation
+
+  - id: training-education
+    name: Cybersecurity and operational-intelligence training
+    class: TRAINING_EDUCATION
+    owner_role: CCC-05
+    stage: BUILD
+    realized_revenue: false
+    reinvestment_path: Revenue Assurance -> Freedom Architect -> curriculum and lab capability
+    evidence_required: owned curriculum, quality review, delivery model, paid enrollment/contract, reconciliation
+
+  - id: ip-licensing
+    name: Reusable CCC intellectual property licensing
+    class: IP_LICENSE
+    owner_role: CCC-05
+    stage: SIGNAL
+    realized_revenue: false
+    reinvestment_path: Revenue Assurance -> Freedom Architect -> IP protection and productization
+    evidence_required: ownership/provenance, license terms, legal review, executed license, collection, reconciliation
+
+  - id: federal-subcontract
+    name: Federal / prime-contractor subcontract pathway
+    class: FEDERAL_SUBCONTRACT
+    owner_role: CCC-04
+    stage: SIGNAL
+    realized_revenue: false
+    reinvestment_path: Revenue Assurance -> Freedom Architect -> compliance/capability bottleneck
+    evidence_required: solicitation/partner fit, compliance readiness, executed agreement, invoice, collection, reconciliation
+
+  - id: lock-key-grants
+    name: Lock & Key and CCC aligned grant funding
+    class: GRANT_RESTRICTED
+    owner_role: CCC-03
+    stage: SIGNAL
+    realized_revenue: false
+    reinvestment_path: restricted-use allocation only under grant terms; never ordinary unrestricted revenue
+    evidence_required: eligibility, award notice, restrictions, received funds, compliance ledger
+
+  - id: culture-shock-retail
+    name: Culture Shock / approved retail product lanes
+    class: RETAIL_PRODUCT
+    owner_role: CCC-03
+    stage: SIGNAL
+    realized_revenue: false
+    reinvestment_path: Revenue Assurance -> Freedom Architect subject to entity and regulated-product separation
+    evidence_required: lawful product classification, inventory/cost truth, sale, payment, reconciliation
+
+  - id: internal-efficiency
+    name: Verified internal cost avoidance and productivity savings
+    class: INTERNAL_SAVINGS
+    owner_role: CCC-01
+    stage: BUILD
+    realized_revenue: false
+    reinvestment_path: recognized as economic value, not cash revenue; informs capital-allocation decisions
+    evidence_required: measured baseline, measured post-change cost/time, attribution, validation
