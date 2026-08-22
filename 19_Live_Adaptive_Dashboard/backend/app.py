@@ -69,7 +69,7 @@ def route_request(method,path,body=None):
         fp=repo_path("19_Live_Adaptive_Dashboard","frontend",static[path])
         if not fp.exists(): return _json(404,{"error":"frontend_missing"})
         ctype="text/html; charset=utf-8" if fp.suffix==".html" else "text/javascript; charset=utf-8" if fp.suffix==".js" else "text/css; charset=utf-8"; return 200,{"Content-Type":ctype},fp.read_bytes()
-    if method=="GET" and path=="/api/health": return _json(200,{"status":"PASS","state":"VERIFY","service":"ccc-living-dashboard","version":"10.1-SOC-LIVE-P0","timestamp":datetime.now(timezone.utc).isoformat()})
+    if method=="GET" and path=="/api/health": return _json(200,{"status":"PASS","state":"VERIFY","service":"ccc-living-dashboard","version":"10.1-P0","release":"SOC-LIVE-P0","timestamp":datetime.now(timezone.utc).isoformat()})
     if method=="GET" and path=="/api/manifest": return _json(200,m)
     if method=="GET" and path=="/api/hosts": return _json(200,hosts())
     if method=="GET" and path=="/api/organs": return _json(200,{"organs":m.get("organs",[])})
