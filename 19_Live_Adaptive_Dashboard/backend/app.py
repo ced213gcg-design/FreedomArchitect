@@ -68,9 +68,13 @@ def _append_interaction(event):
 def _frontend_payload(fp,path):
     payload=fp.read_bytes()
     if path in {"/","/index.html"}:
-        marker=b'<script src="soc_physical_evidence.js"></script>'
-        if marker not in payload:
-            payload=payload.replace(b"</body>",marker+b"\n</body>")
+        css=b'<link rel="stylesheet" href="ccc_infinity.css">'
+        if css not in payload:
+            payload=payload.replace(b"</head>",css+b"\n</head>")
+        scripts=[b'<script src="soc_physical_evidence.js"></script>',b'<script src="infinity_composition.js"></script>']
+        for marker in scripts:
+            if marker not in payload:
+                payload=payload.replace(b"</body>",marker+b"\n</body>")
     return payload
 
 def route_request(method,path,body=None):
@@ -110,7 +114,7 @@ def route_request(method,path,body=None):
     if method=="GET" and path=="/api/crayola/current": return _json(200,crayola_current())
     if method=="GET" and path=="/api/game-theory/recent": return _json(200,game_theory_recent())
     if method=="GET" and path=="/api/workers/constitutional": return _json(200,constitutional_workers())
-    if method=="GET" and path=="/api/workers/handoffs": return _json(200,constitional_handoffs())
+    if method=="GET" and path=="/api/workers/handoffs": return _json(200,constitutional_handoffs())
     if method=="GET" and path=="/api/interaction/contract": return _json(200,interaction_contract())
     if method=="POST" and path=="/api/game-theory/analyze":
         payload=body if isinstance(body,dict) else json.loads(body or "{}"); result=game_theory_analyze(payload); return _json(200 if result.get("status")!="HOLD" else 422,result)
