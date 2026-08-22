@@ -83,6 +83,7 @@ step "TEST-08" "Run Vanguard and SOC interaction Node tests"
 node scripts/test_sphere.js
 node scripts/test_exception_constellation.js
 node scripts/test_soc_interaction_ui.js
+node scripts/test_soc_physical_evidence_ui.js
 
 step "SESSION-09" "Create local physical evidence workspace"
 mkdir -p runtime/soc artifacts/soc-live-five/{screenshots,normalized,report}
@@ -93,7 +94,8 @@ import secrets
 print(secrets.token_urlsafe(48))
 PY
 chmod 600 "$TOKEN_FILE"
-export CCC_BRIDGE_TOKEN="$(cat "$TOKEN_FILE")"
+CCC_BRIDGE_TOKEN="$(cat "$TOKEN_FILE")"
+export CCC_BRIDGE_TOKEN
 export CCC_SOC_STATE_PATH="$REPO/runtime/soc/ccc-soc-live-state.json"
 export CCC_BRIDGE_PAYLOAD_PATH="$REPO/runtime/soc/ccc-soc-bridge-payload.json"
 
@@ -102,13 +104,16 @@ BRIDGE_MODE="FILE_FALLBACK"
 BRIDGE_ADDRESS=""
 if [[ "${CCC_ENABLE_LAN_BRIDGE:-0}" == "1" ]]; then
   BIND_ADDR="${CCC_BRIDGE_BIND:-0.0.0.0}"
+  BRIDGE_PORT="${CCC_BRIDGE_PORT:-8790}"
   export CCC_BRIDGE_BIND="$BIND_ADDR"
-  python 19_Live_Adaptive_Dashboard/backend/evidence_bridge.py --host "$BIND_ADDR" --port "${CCC_BRIDGE_PORT:-8790}" > runtime/soc/evidence-bridge.log 2>&1 &
+  export CCC_BRIDGE_PORT="$BRIDGE_PORT"
+  python 19_Live_Adaptive_Dashboard/backend/evidence_bridge.py --host "$BIND_ADDR" --port "$BRIDGE_PORT" > runtime/soc/evidence-bridge.log 2>&1 &
   BRIDGE_PID=$!
   sleep 1
   if kill -0 "$BRIDGE_PID" 2>/dev/null && python - <<'PY'
-import json, urllib.request
-with urllib.request.urlopen('http://127.0.0.1:8790/health', timeout=2) as r:
+import json, os, urllib.request
+port=os.environ['CCC_BRIDGE_PORT']
+with urllib.request.urlopen(f'http://127.0.0.1:{port}/health', timeout=2) as r:
     data=json.load(r)
     assert r.status==200 and data['status']=='PASS' and data['mode']=='RECEIVE_ONLY'
 PY
@@ -116,7 +121,7 @@ PY
     LAN_IP="$(hostname -I 2>/dev/null | tr ' ' '\n' | grep -E '^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$' | grep -v '^127\.' | head -n1 || true)"
     if [[ -n "$LAN_IP" ]]; then
       BRIDGE_MODE="HTTP_LAN"
-      BRIDGE_ADDRESS="http://${LAN_IP}:${CCC_BRIDGE_PORT:-8790}/bridge/v1/evidence"
+      BRIDGE_ADDRESS="http://${LAN_IP}:${BRIDGE_PORT}/bridge/v1/evidence"
     else
       kill "$BRIDGE_PID" 2>/dev/null || true
       BRIDGE_PID=""
