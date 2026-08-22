@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ccc://schemas/mechanism-gate-result.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["gate_id", "question", "dimensions", "candidate_technologies", "verified_requirements", "recommendation", "reason", "blockchain_required", "authority", "executed"],
+  "properties": {
+    "gate_id": {"type": "string", "minLength": 1},
+    "question": {"type": "string", "minLength": 1},
+    "dimensions": {
+      "type": "object",
+      "minProperties": 14,
+      "maxProperties": 14,
+      "required": ["authentication_identity", "cryptographic_commitment_integrity", "automated_execution", "state_database_model", "replication_distribution", "consensus_requirement", "settlement_finality", "trusted_third_party_escrow_alternative", "governance", "privacy_confidentiality", "performance_cost", "failure_recovery", "legal_contract_implications", "incentive_mechanism_design"]
+    },
+    "candidate_technologies": {
+      "type": "object",
+      "required": ["A", "B", "C", "D", "E", "F", "G", "H", "I"]
+    },
+    "verified_requirements": {"type": "array", "items": {"type": "string"}},
+    "recommendation": {"type": "array", "minItems": 1, "items": {"enum": ["A", "B", "C", "D", "E", "F", "G", "H", "I"]}},
+    "reason": {"type": "string", "minLength": 1},
+    "blockchain_required": {"type": "boolean"},
+    "documented_rejection": {"enum": ["BLOCKCHAIN_NOT_REQUIRED", "NONE"]},
+    "authority": {"const": "ADVISORY_ONLY"},
+    "executed": {"const": false}
+  }
+}
