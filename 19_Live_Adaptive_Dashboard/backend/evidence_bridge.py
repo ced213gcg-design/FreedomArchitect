@@ -16,6 +16,7 @@ from jsonschema import Draft202012Validator, FormatChecker
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
 SCHEMA_PATH = ROOT / "20_CCC_Living_Organism" / "schemas" / "soc-evidence-bridge.schema.json"
+DETECTION_SCHEMA_PATH = ROOT / "20_CCC_Living_Organism" / "schemas" / "soc-detection-run.schema.json"
 MAX_PAYLOAD = 1024 * 1024
 FORBIDDEN_KEYS = {
     "password", "secret", "token", "api_key", "credential", "private_key",
@@ -49,8 +50,26 @@ def _parse_timestamp(value: str) -> datetime:
     return datetime.fromisoformat(value.replace("Z", "+00:00")).astimezone(timezone.utc)
 
 
-def load_schema() -> dict:
-    return json.loads(SCHEMA_PATH.read_text(encoding="utf-8"))
+def load_schema(path: Path = SCHEMA_PATH) -> dict:
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def validate_sanitized_payload(payload: dict, allowed_source: str = DEFAULT_SOURCE) -> list[str]:
+    errors: list[str] = []
+    forbidden = _contains_forbidden_key(payload)
+    if forbidden:
+        errors.append(f"FORBIDDEN_FIELD:{forbidden}")
+    validator = Draft202012Validator(load_schema(), format_checker=FormatChecker())
+    errors.extend(f"SCHEMA:{e.json_path}:{e.message}" for e in validator.iter_errors(payload))
+    if payload.get("source_host") != allowed_source:
+        errors.append("SOURCE_HOST_NOT_ALLOWED")
+    run_validator = Draft202012Validator(load_schema(DETECTION_SCHEMA_PATH), format_checker=FormatChecker())
+    for idx, run in enumerate(payload.get("scenario_runs", [])):
+        if not isinstance(run, dict):
+            errors.append(f"SCENARIO_RUN:{idx}:OBJECT_REQUIRED")
+            continue
+        errors.extend(f"SCENARIO_RUN:{idx}:{e.json_path}:{e.message}" for e in run_validator.iter_errors(run))
+    return errors
 
 
 def validate_payload(payload: dict, raw: bytes, token: str, signature: str, allowed_source: str = DEFAULT_SOURCE, max_age_seconds: int = 300) -> list[str]:
@@ -61,13 +80,7 @@ def validate_payload(payload: dict, raw: bytes, token: str, signature: str, allo
     supplied = signature.removeprefix("sha256=").strip().lower()
     if not supplied or not hmac.compare_digest(expected, supplied):
         errors.append("INVALID_HMAC")
-    forbidden = _contains_forbidden_key(payload)
-    if forbidden:
-        errors.append(f"FORBIDDEN_FIELD:{forbidden}")
-    validator = Draft202012Validator(load_schema(), format_checker=FormatChecker())
-    errors.extend(f"SCHEMA:{e.json_path}:{e.message}" for e in validator.iter_errors(payload))
-    if payload.get("source_host") != allowed_source:
-        errors.append("SOURCE_HOST_NOT_ALLOWED")
+    errors.extend(validate_sanitized_payload(payload, allowed_source))
     try:
         age = abs((_utc_now() - _parse_timestamp(str(payload.get("timestamp", "")))).total_seconds())
         if age > max_age_seconds:
@@ -77,7 +90,7 @@ def validate_payload(payload: dict, raw: bytes, token: str, signature: str, allo
     return errors
 
 
-def normalize_live_state(payload: dict) -> dict:
+def normalize_live_state(payload: dict, bridge_mode: str = "HTTP_LAN") -> dict:
     evidence: list[dict] = []
     for row in payload.get("control_gates", []):
         if isinstance(row, dict):
@@ -96,7 +109,7 @@ def normalize_live_state(payload: dict) -> dict:
         "evidence": evidence,
         "evidence_refs": payload.get("evidence_refs", []),
         "next_action": payload.get("next_action", "REVIEW_PHYSICAL_EVIDENCE"),
-        "bridge_mode": "HTTP_LAN",
+        "bridge_mode": bridge_mode,
         "bridge_schema": payload.get("schema"),
     }
 
@@ -105,7 +118,7 @@ def persist_payload(payload: dict, bridge_path: Path, state_path: Path) -> None:
     bridge_path.parent.mkdir(parents=True, exist_ok=True)
     state_path.parent.mkdir(parents=True, exist_ok=True)
     bridge_path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
-    state_path.write_text(json.dumps(normalize_live_state(payload), indent=2) + "\n", encoding="utf-8")
+    state_path.write_text(json.dumps(normalize_live_state(payload, "HTTP_LAN"), indent=2) + "\n", encoding="utf-8")
 
 
 class BridgeHandler(BaseHTTPRequestHandler):
@@ -147,13 +160,7 @@ class BridgeHandler(BaseHTTPRequestHandler):
         if not isinstance(payload, dict):
             self._json(400, {"status": "REJECTED", "reason": "OBJECT_REQUIRED"})
             return
-        errors = validate_payload(
-            payload,
-            raw,
-            token,
-            self.headers.get("X-CCC-Signature", ""),
-            self.server.allowed_source,  # type: ignore[attr-defined]
-        )
+        errors = validate_payload(payload, raw, token, self.headers.get("X-CCC-Signature", ""), self.server.allowed_source)  # type: ignore[attr-defined]
         if errors:
             self._json(400, {"status": "REJECTED", "errors": errors})
             return
