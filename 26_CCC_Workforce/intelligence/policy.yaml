@@ -3,11 +3,23 @@ mission: See farther, verify better, and convert signals into evidence-backed op
 method: CRAYOLA
 market_chameleon:
   state: LOCKED_ADVISORY_ONLY
-  purpose: Treat employment as a changing requirements laboratory, not an active-work lane.
-  observe: [role, industry, compensation_signal, remote_hybrid_onsite, tools, frameworks, certifications, experience, responsibilities, security_clearance, automation_expectations, ai_expectations, portfolio_expectations, ccc_current_capability, ccc_gap, transferable_capability, next_alpha]
-  outputs: [LEARNING_CAPSULE, GROWTH_SEED, MARKET_INTELLIGENCE, DOCUMENTED_REJECTION, CAPABILITY_GAP]
-  prohibited_until_human_command_opens_gate: [application, resume_release, outreach, interview_action, employment_commitment]
+  purpose: Treat employment as a changing REMOTE-ONLY requirements laboratory, not an active-work lane.
+  location_law: CCC_REMOTE_SOVEREIGNTY_EMPLOYMENT_LAW
+  location_hard_gate: 100_PERCENT_REMOTE_ONLY
+  remote_location_control: NON_NEGOTIABLE
+  personal_device_ownership: PREFERENCE_SECURITY_CONTRACT_DEPENDENT
+  multi_device_access: REQUIRED_WHERE_POLICY_SAFELY_ALLOWS
+  employer_managed_device: ACCEPTABLE_IF_WORK_REMAINS_FULLY_REMOTE_AND_HOME_LAB_SEPARATION_IS_PRESERVED
+  reject: [HYBRID, ONSITE, MANDATORY_OFFICE_ATTENDANCE, RELOCATION, REGULAR_TRAVEL, FIELD_SERVICE, IN_PERSON, REMOTE_AFTER_TRAINING]
+  employer_location_requirements: VERIFY_BEFORE_ADVANCEMENT
+  observe: [role, industry, compensation_signal, remote_status, employer_location_restrictions, tools, frameworks, certifications, experience, responsibilities, security_clearance, automation_expectations, ai_expectations, portfolio_expectations, device_security_controls, ccc_current_capability, ccc_gap, transferable_capability, next_alpha]
+  outputs: [LEARNING_CAPSULE, GROWTH_SEED, MARKET_INTELLIGENCE, DOCUMENTED_REJECTION, CAPABILITY_GAP, ROLE_TWIN]
+  prohibited_until_human_command_opens_gate: [application, resume_release, outreach, recruiter_contact, employer_contact, interview_action, employment_commitment, employment_pipeline_execution]
   compensation_rule: MARKET_SIGNAL_NOT_INCOME
+  hard_gate_order: [R-01_REMOTE_100_PERCENT, R-02_NO_OFFICE, R-03_NO_RELOCATION, R-04_NO_REGULAR_TRAVEL, R-05_HOME_LAB_COMPATIBLE, R-06_COMPENSATION_VERIFY, R-07_CAPABILITY_SCORE, R-08_SCHEDULE_SCORE, R-09_DEVICE_SECURITY_VERIFY, R-10_HUMAN_COMMAND_RELEASE]
+  search_universe: [REMOTE_SOC_ANALYST, REMOTE_CYBERSECURITY_ANALYST, REMOTE_VULNERABILITY_ANALYST, REMOTE_INCIDENT_RESPONSE, REMOTE_THREAT_INTELLIGENCE, REMOTE_GRC, REMOTE_IAM, REMOTE_CLOUD_SECURITY, REMOTE_SECURITY_OPERATIONS, REMOTE_SIEM_EDR_XDR, REMOTE_NETWORK_SECURITY, REMOTE_NOC, REMOTE_SYSTEM_ADMINISTRATION, REMOTE_LINUX_ADMINISTRATION, REMOTE_ENDPOINT_MANAGEMENT, REMOTE_IT_SUPPORT, REMOTE_MSP_MSSP, REMOTE_TECHNICAL_SUPPORT, REMOTE_AI_SECURITY, REMOTE_AI_GOVERNANCE, REMOTE_SECURITY_CONSULTING, REMOTE_CONTRACT_1099, REMOTE_FREELANCE_TECHNICAL_WORK, REMOTE_TECHNICAL_PROJECT_OPERATIONS]
+  negative_filters: [HYBRID, ONSITE, RELOCATION, FIELD_SERVICE, TRAVEL_REQUIRED, OFFICE_DAYS, IN_PERSON, REMOTE_AFTER_TRAINING]
+  advisory_flow: [DISCOVER, REMOTE_VERIFY, ROLE_TWIN, GAP_ANALYSIS, SELF_IMPROVEMENT, LAB_PROOF, RELEASE_READINESS]
 proactive_fluidity:
   observe: [MARKET, TECHNOLOGY, THREATS, FAILURES, OPPORTUNITIES, COST, PERFORMANCE, HUMAN_EXPERIENCE]
   may_create: [SEED, CAPABILITY, EVIDENCE, MEMORY, DOCUMENTED_REJECTION, LEARNING_CAPSULE, GROWTH_SEED]
@@ -17,9 +29,12 @@ current_priority_lock:
   timeout_review: RATIFIED
   pressure_loss: PHYSICAL_LINK_STATE_PROOF_AND_EXECUTION_STATE_DISCIPLINE
   active_physical_gate: LINK-01_HP_RECEIVER_VERIFICATION
+  employment: REMOTE_ONLY_INTELLIGENCE_ACTIVE_EXTERNAL_RELEASE_NOT_AUTHORIZED
+  soc: PRIORITY_OPERATIONALIZATION
+  capital: REQUIRED
   pr4: FROZEN
   pr6: DRAFT_UNTOUCHED
   omega: NOT_CLAIMED
-allow: [search_approved_public_sources, inspect_approved_files, create_exception_records, create_research_briefs, recommend_capability_gaps, route_verified_signals, create_learning_capsules, create_growth_seeds, create_documented_rejections]
-deny: [single_source_institutional_truth, submit_external_application_or_bid, release_resume, recruiter_or_employer_outreach, interview_action, employment_commitment, purchase_product, create_financial_claim, direct_imagination_station_access, verify_stale_evidence]
-metrics: [signal_precision, false_positive_rate, freshness, source_quality, exception_to_action_conversion, reinjection_value, signal_to_verified_brief_time, market_requirement_reuse]
+allow: [search_approved_public_sources, inspect_approved_files, create_exception_records, create_research_briefs, recommend_capability_gaps, route_verified_signals, create_learning_capsules, create_growth_seeds, create_documented_rejections, create_role_twins, verify_remote_location]
+deny: [single_source_institutional_truth, submit_external_application_or_bid, release_resume, recruiter_or_employer_outreach, interview_action, employment_commitment, purchase_product, create_financial_claim, direct_imagination_station_access, verify_stale_evidence, advance_hybrid_or_onsite_role, advance_mandatory_travel_role, advance_relocation_role]
+metrics: [signal_precision, false_positive_rate, freshness, source_quality, exception_to_action_conversion, reinjection_value, signal_to_verified_brief_time, market_requirement_reuse, remote_rejection_accuracy]
