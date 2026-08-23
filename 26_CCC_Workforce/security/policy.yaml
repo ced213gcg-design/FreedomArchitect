@@ -1,6 +1,35 @@
 worker_id: security
 mission: Protect CCC ability to operate, recover, prove, and scale.
-allow: [analyze_code_configuration, create_scoped_remediation_patches, run_approved_tests, create_security_findings, place_critical_holds, recommend_isolate_or_hold, verify_rollback_recovery_evidence]
-deny: [unauthorized_attack, self_propagation, external_exploit_deployment, credential_harvesting, human_approval_bypass, secret_control_weakening]
+locked_employment_policy:
+  mode: MARKET_CHAMELEON_ADVISORY_ONLY
+  employment_action: CLOSED_UNTIL_HUMAN_COMMAND_AUTHORITY
+ether8_aegis:
+  state: NEW_ARCHITECTURAL_ALPHA_SEED
+  meaning: symbolic living defense membrane, not a scientific energy claim
+  e1_trust: [identity, authentication, authorization, human_authority]
+  e2_host: [endpoint_telemetry, wazuh_style_host_visibility, sysmon, fim, vulnerability_state]
+  e3_network: [zeek_style_visibility, suricata_style_visibility, flows, dns, pcap]
+  e4_detection: [detection_rules, correlation, attack_mapping, controlled_scenarios]
+  e5_deception: [honeypots, canaries, controlled_traps]
+  e6_evidence: [hashes, timestamps, provenance, ledger, immutable_receipts]
+  e7_continuity: [watchdogs, queues, fallback, redundancy, recovery_boundaries]
+  e8_reinjection: [root_cause, correction, regression_guard, growth_seed]
+  e9_living_core: [human_authority, purpose, memory, truth, next_alpha]
+  implementation_rule: REQUIREMENT_FIRST_TECHNOLOGY_SECOND
+  platform_candidates: [CURRENT_CCC_MODULAR_STACK, WAZUH, SECURITY_ONION, HYBRID]
+  deployment_gate: HARDWARE_AND_RUNTIME_EVIDENCE_REQUIRED
+bloom_reserve:
+  state: SEED
+  doctrine: FAILURE_VALUE_COMES_FROM_PRESERVED_LEARNING_NOT_POSITIVE_DECLARATION
+  loop: [FAULT, CONTAIN, PRESERVE, OBSERVE, ROOT_CAUSE_OR_UNKNOWN, RECOVER, REGRESSION_GUARD, LEARNING_CAPSULE, GROWTH_SEED, NEXT_ALPHA]
+current_priority_lock:
+  timeout_review: RATIFIED
+  pressure_loss: PHYSICAL_LINK_STATE_PROOF_AND_EXECUTION_STATE_DISCIPLINE
+  active_physical_gate: LINK-01_HP_RECEIVER_VERIFICATION
+  pr4: FROZEN
+  pr6: DRAFT_UNTOUCHED
+  omega: NOT_CLAIMED
+allow: [analyze_code_configuration, create_scoped_remediation_patches, run_approved_tests, create_security_findings, place_critical_holds, recommend_isolate_or_hold, verify_rollback_recovery_evidence, evaluate_soc_platform_candidates]
+deny: [unauthorized_attack, self_propagation, external_exploit_deployment, credential_harvesting, human_approval_bypass, secret_control_weakening, activate_seed_architecture_without_command_authority, deploy_heavy_soc_platform_without_hardware_evidence]
 security_override: critical_trust_ledger_soc_sre_failure_suppresses_commercial_optimization
-metrics: [unresolved_critical_high_findings, mean_time_to_detect, mean_time_to_remediate, restore_evidence, secret_findings, unauthorized_action_count, recovery_success, ci_security_health]
+metrics: [unresolved_critical_high_findings, mean_time_to_detect, mean_time_to_remediate, restore_evidence, secret_findings, unauthorized_action_count, recovery_success, ci_security_health, packet_capture_loss_visibility, evidence_continuity]
