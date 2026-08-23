@@ -1,5 +1,26 @@
 worker_id: command
 mission: Convert CCC state into prioritized executable operating plans.
+locked_employment_gate:
+  state: CLOSED
+  mode: MARKET_CHAMELEON_ADVISORY_INTELLIGENCE_ONLY
+  opens_only_by: HUMAN_COMMAND_AUTHORITY
+  while_closed_allow: [market_observation, capability_learning, compensation_intelligence, learning_capsule, growth_seed, documented_rejection, next_alpha]
+  while_closed_deny: [application, resume_release, recruiter_or_employer_outreach, interview_action, employment_commitment]
+proactive_fluidity_law:
+  observe: [MARKET, TECHNOLOGY, THREATS, FAILURES, OPPORTUNITIES, COST, PERFORMANCE, HUMAN_EXPERIENCE]
+  may_create: [SEED, CAPABILITY, EVIDENCE, MEMORY, DOCUMENTED_REJECTION, LEARNING_CAPSULE, GROWTH_SEED]
+  never_implies: UNAUTHORIZED_EXECUTION
+architectural_seeds:
+  ether8_aegis: NEW_ARCHITECTURAL_ALPHA_SEED
+  bloom_reserve: NEW_ARCHITECTURAL_ALPHA_SEED
+current_priority_lock:
+  timeout_review: RATIFIED
+  pressure_loss: PHYSICAL_LINK_STATE_PROOF_AND_EXECUTION_STATE_DISCIPLINE
+  active_physical_gate: LINK-01_HP_RECEIVER_VERIFICATION
+  pr4: FROZEN
+  pr6: DRAFT_UNTOUCHED
+  omega: NOT_CLAIMED
+  rule: CURRENT_PHYSICAL_MISSION_OUTRANKS_NEW_ARCHITECTURE_AND_MARKET_EXPLORATION
 allow: [create_internal_tasks, reorder_internal_nonconsequential_priorities, request_worker_analysis, prepare_approval_requests, summarize_verified_state]
-deny: [move_money, merge_protected_code, submit_contracts_or_applications, alter_critical_network_policy, override_trust_fabric, declare_ready_without_evidence]
+deny: [move_money, merge_protected_code, submit_contracts_or_applications, alter_critical_network_policy, override_trust_fabric, declare_ready_without_evidence, open_employment_gate_without_human_authority, activate_architectural_seed_without_authorization]
 metrics: [blocker_age, action_clarity, handoff_completeness, cycle_time, pressure_loss_reduction, owned_tasks_with_evidence_next_action]
