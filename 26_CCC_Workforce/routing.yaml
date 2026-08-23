@@ -1,4 +1,4 @@
-version: 1.1
+version: 1.2
 routes:
   CODE_CI_FAILURE:
     primary: security
@@ -7,9 +7,15 @@ routes:
     conditional: {revenue: material_cost_or_business_impact}
   EMPLOYMENT_MARKET_SIGNAL:
     primary: intelligence
-    mode: MARKET_CHAMELEON_ADVISORY_ONLY
-    learn_from: [role, industry, compensation_signal, work_location_model, tools, frameworks, certifications, experience, responsibilities, clearance, automation_expectations, ai_expectations, portfolio_expectations, ccc_current_capability, ccc_gap, transferable_capability, next_alpha]
-    may_create: [LEARNING_CAPSULE, GROWTH_SEED, MARKET_INTELLIGENCE, DOCUMENTED_REJECTION, CAPABILITY_GAP]
+    mode: MARKET_CHAMELEON_REMOTE_ONLY_ADVISORY
+    location_gate:
+      required: 100_PERCENT_REMOTE
+      reject: [HYBRID, ONSITE, MANDATORY_OFFICE_ATTENDANCE, RELOCATION, REGULAR_TRAVEL, FIELD_SERVICE, IN_PERSON, REMOTE_AFTER_TRAINING]
+      employer_location_requirements: VERIFY_BEFORE_ADVANCEMENT
+      home_lab_compatibility: REQUIRED
+    learn_from: [role, industry, compensation_signal, remote_status, employer_location_restrictions, tools, frameworks, certifications, experience, responsibilities, clearance, automation_expectations, ai_expectations, portfolio_expectations, device_security_controls, ccc_current_capability, ccc_gap, transferable_capability, next_alpha]
+    hard_gate_order: [R-01_REMOTE_100_PERCENT, R-02_NO_OFFICE, R-03_NO_RELOCATION, R-04_NO_REGULAR_TRAVEL, R-05_HOME_LAB_COMPATIBLE, R-06_COMPENSATION_VERIFY, R-07_CAPABILITY_SCORE, R-08_SCHEDULE_SCORE, R-09_DEVICE_SECURITY_VERIFY, R-10_HUMAN_COMMAND_RELEASE]
+    may_create: [ROLE_TWIN, LEARNING_CAPSULE, GROWTH_SEED, MARKET_INTELLIGENCE, DOCUMENTED_REJECTION, CAPABILITY_GAP]
     prohibited_without_human_command_gate: [job_application, resume_release, recruiter_outreach, employer_outreach, interview_action, employment_acceptance, employment_pipeline_execution]
     compensation_classification: MARKET_SIGNAL_NOT_INCOME
     preserve: ledger
@@ -50,7 +56,10 @@ current_priority_lock:
   pressure_loss: PHYSICAL_LINK_STATE_PROOF_AND_EXECUTION_STATE_DISCIPLINE
   active_physical_gate: LINK-01_HP_RECEIVER_VERIFICATION
   ether8: NEW_ARCHITECTURAL_ALPHA_SEED
-  market_chameleon: ADVISORY_INTELLIGENCE_NO_EMPLOYMENT_ACTION
+  market_chameleon: REMOTE_ONLY_ADVISORY_INTELLIGENCE_NO_EMPLOYMENT_ACTION
+  employment_external_release: NOT_AUTHORIZED
+  soc: PRIORITY_OPERATIONALIZATION
+  capital: REQUIRED
   pr4: FROZEN
   pr6: DRAFT_UNTOUCHED
   omega: NOT_CLAIMED
