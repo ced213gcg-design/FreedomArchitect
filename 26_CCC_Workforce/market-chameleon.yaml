@@ -1,0 +1,39 @@
+version: 1.0
+id: CCC_MARKET_CHAMELEON
+state: ADVISORY_INTELLIGENCE_ONLY
+owner: intelligence
+human_command_gate: CLOSED
+purpose: Continuously learn from employment-market demand without activating employment pursuit.
+questions:
+  - WHAT_IS_THE_MARKET_BUILDING
+  - WHAT_IS_IT_BUYING
+  - WHAT_IS_IT_ABANDONING
+  - WHAT_DOES_IT_PAY_FOR
+  - WHAT_TOOLS_KEEP_REPEATING
+  - WHAT_SKILLS_ARE_BECOMING_COMMODITIES
+  - WHAT_SKILLS_ARE_BECOMING_SCARCE
+  - WHAT_PROOF_DO_EMPLOYERS_VALUE
+  - HOW_DOES_CCC_ALREADY_MATCH
+  - WHAT_SHOULD_CCC_LEARN_NEXT
+record_fields:
+  - role
+  - industry
+  - compensation_signal
+  - remote_hybrid_onsite
+  - tools
+  - frameworks
+  - certifications
+  - experience
+  - responsibilities
+  - security_clearance
+  - automation_expectations
+  - ai_expectations
+  - portfolio_expectations
+  - ccc_current_capability
+  - ccc_gap
+  - transferable_capability
+  - next_alpha
+allowed_outputs: [LEARNING_CAPSULE, GROWTH_SEED, MARKET_INTELLIGENCE, DOCUMENTED_REJECTION, CAPABILITY_GAP]
+prohibited_until_human_command_authority_opens_gate: [job_application, resume_release, recruiter_outreach, employer_outreach, interview_action, employment_acceptance, employment_pipeline_execution]
+financial_rule: COMPENSATION_IS_MARKET_SIGNAL_NOT_INCOME
+adaptation_rule: CCC_MAY_ADAPT_CAPABILITY_TO_ENVIRONMENT_BUT_CORE_IDENTITY_EVIDENCE_LAW_AND_HUMAN_AUTHORITY_REMAIN_FIXED
