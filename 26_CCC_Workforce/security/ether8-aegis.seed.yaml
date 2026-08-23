@@ -1,0 +1,48 @@
+version: 1.0
+id: CCC_ETHER8_AEGIS
+name: CCC ETHER-8 AEGIS
+subtitle: Living Defense Membrane
+state: NEW_ARCHITECTURAL_ALPHA_SEED
+symbolic_only: true
+scientific_energy_claim: false
+implementation_authority: HUMAN_COMMAND_REQUIRED
+protected_center:
+  id: E9_LIVING_CORE
+  values: [HUMAN_AUTHORITY, CREATOR_ALIGNMENT, PURPOSE, MEMORY, TRUTH, NEXT_ALPHA]
+ethers:
+  E1_TRUST:
+    function: Who and what is allowed to exist.
+    soc_manifestation: [identity, authentication, authorization, human_authority]
+  E2_HOST:
+    function: Protect the individual cell.
+    soc_manifestation: [endpoint_telemetry, wazuh_style_host_visibility, sysmon, file_integrity_monitoring, vulnerability_state]
+  E3_NETWORK:
+    function: Observe movement between cells.
+    soc_manifestation: [zeek_style_visibility, suricata_style_visibility, flows, dns, pcap]
+  E4_DETECTION:
+    function: Recognize hostile or abnormal behavior.
+    soc_manifestation: [detection_rules, correlation, attack_mapping, scenarios]
+  E5_DECEPTION:
+    function: Make hostile behavior reveal itself.
+    soc_manifestation: [honeypots, canaries, controlled_traps]
+  E6_EVIDENCE:
+    function: Preserve what actually happened.
+    soc_manifestation: [hashes, timestamps, provenance, ledger, immutable_receipts]
+  E7_CONTINUITY:
+    function: Keep the organism alive through faults.
+    soc_manifestation: [watchdogs, queues, fallback, redundancy, recovery_boundaries]
+  E8_REINJECTION:
+    function: Turn pressure into future capability.
+    soc_manifestation: [root_cause, correction, regression_guard, learning_capsule, growth_seed]
+soc_evaluation:
+  principle: REQUIREMENT_FIRST_TECHNOLOGY_SECOND
+  candidates: [CURRENT_CCC_MODULAR_STACK, WAZUH, SECURITY_ONION, HYBRID]
+  deployment_precondition: HARDWARE_AND_RUNTIME_EVIDENCE
+  platform_worship: PROHIBITED
+alpha_path:
+  ALPHA_1_TRUTHFUL_MINIMUM_LAB: [HP_COMMAND_LEDGER_DASHBOARD_ORCHESTRA, AUTHENTICATED_EVIDENCE_LINK, DELL_WINDOWS_ENDPOINT_SENSOR_COMPUTE, AUTHORIZED_GUEST_VMS]
+  ALPHA_2_TELEMETRY_ORGANISM: [HOST, NETWORK, DECEPTION, DETECTION, EVIDENCE]
+  ALPHA_3_SOC_PLATFORM_EVALUATION: [CURRENT_CCC_MODULAR_STACK, WAZUH, SECURITY_ONION, HYBRID]
+priority_guard:
+  active_physical_gate: LINK-01_HP_RECEIVER_VERIFICATION
+  rule: THIS_SEED_MUST_NOT_DISPLACE_CURRENT_PHYSICAL_MISSION
