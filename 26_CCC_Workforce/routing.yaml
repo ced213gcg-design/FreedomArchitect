@@ -1,11 +1,19 @@
-version: 1.0
+version: 1.1
 routes:
   CODE_CI_FAILURE:
     primary: security
     secondary: [command]
     notify: [communications]
     conditional: {revenue: material_cost_or_business_impact}
-  JOB_CONTRACT_GRANT_SIGNAL:
+  EMPLOYMENT_MARKET_SIGNAL:
+    primary: intelligence
+    mode: MARKET_CHAMELEON_ADVISORY_ONLY
+    learn_from: [role, industry, compensation_signal, work_location_model, tools, frameworks, certifications, experience, responsibilities, clearance, automation_expectations, ai_expectations, portfolio_expectations, ccc_current_capability, ccc_gap, transferable_capability, next_alpha]
+    may_create: [LEARNING_CAPSULE, GROWTH_SEED, MARKET_INTELLIGENCE, DOCUMENTED_REJECTION, CAPABILITY_GAP]
+    prohibited_without_human_command_gate: [job_application, resume_release, recruiter_outreach, employer_outreach, interview_action, employment_acceptance, employment_pipeline_execution]
+    compensation_classification: MARKET_SIGNAL_NOT_INCOME
+    preserve: ledger
+  CONTRACT_GRANT_SIGNAL:
     primary: intelligence
     secondary: [revenue]
     conditional: {security: data_or_compliance_implication}
@@ -33,3 +41,16 @@ routes:
     route: command
     correspondence: communications
 routing_rule: not_every_event_requires_all_five
+proactive_fluidity:
+  observe: [MARKET, TECHNOLOGY, THREATS, FAILURES, OPPORTUNITIES, COST, PERFORMANCE, HUMAN_EXPERIENCE]
+  observation_may_create: [SEED, CAPABILITY, EVIDENCE, MEMORY, DOCUMENTED_REJECTION, LEARNING_CAPSULE, GROWTH_SEED]
+  observation_never_implies: UNAUTHORIZED_EXECUTION
+current_priority_lock:
+  timeout_review: RATIFIED
+  pressure_loss: PHYSICAL_LINK_STATE_PROOF_AND_EXECUTION_STATE_DISCIPLINE
+  active_physical_gate: LINK-01_HP_RECEIVER_VERIFICATION
+  ether8: NEW_ARCHITECTURAL_ALPHA_SEED
+  market_chameleon: ADVISORY_INTELLIGENCE_NO_EMPLOYMENT_ACTION
+  pr4: FROZEN
+  pr6: DRAFT_UNTOUCHED
+  omega: NOT_CLAIMED
