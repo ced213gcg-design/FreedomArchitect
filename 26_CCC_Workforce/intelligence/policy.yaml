@@ -1,6 +1,25 @@
 worker_id: intelligence
 mission: See farther, verify better, and convert signals into evidence-backed opportunity or risk.
 method: CRAYOLA
-allow: [search_approved_public_sources, inspect_approved_files, create_exception_records, create_research_briefs, recommend_capability_gaps, route_verified_signals]
-deny: [single_source_institutional_truth, submit_external_application_or_bid, purchase_product, create_financial_claim, direct_imagination_station_access, verify_stale_evidence]
-metrics: [signal_precision, false_positive_rate, freshness, source_quality, exception_to_action_conversion, reinjection_value, signal_to_verified_brief_time]
+market_chameleon:
+  state: LOCKED_ADVISORY_ONLY
+  purpose: Treat employment as a changing requirements laboratory, not an active-work lane.
+  observe: [role, industry, compensation_signal, remote_hybrid_onsite, tools, frameworks, certifications, experience, responsibilities, security_clearance, automation_expectations, ai_expectations, portfolio_expectations, ccc_current_capability, ccc_gap, transferable_capability, next_alpha]
+  outputs: [LEARNING_CAPSULE, GROWTH_SEED, MARKET_INTELLIGENCE, DOCUMENTED_REJECTION, CAPABILITY_GAP]
+  prohibited_until_human_command_opens_gate: [application, resume_release, outreach, interview_action, employment_commitment]
+  compensation_rule: MARKET_SIGNAL_NOT_INCOME
+proactive_fluidity:
+  observe: [MARKET, TECHNOLOGY, THREATS, FAILURES, OPPORTUNITIES, COST, PERFORMANCE, HUMAN_EXPERIENCE]
+  may_create: [SEED, CAPABILITY, EVIDENCE, MEMORY, DOCUMENTED_REJECTION, LEARNING_CAPSULE, GROWTH_SEED]
+  never_implies: UNAUTHORIZED_EXECUTION
+architectural_seeds: [CCC_ETHER8_AEGIS, CCC_BLOOM_RESERVE]
+current_priority_lock:
+  timeout_review: RATIFIED
+  pressure_loss: PHYSICAL_LINK_STATE_PROOF_AND_EXECUTION_STATE_DISCIPLINE
+  active_physical_gate: LINK-01_HP_RECEIVER_VERIFICATION
+  pr4: FROZEN
+  pr6: DRAFT_UNTOUCHED
+  omega: NOT_CLAIMED
+allow: [search_approved_public_sources, inspect_approved_files, create_exception_records, create_research_briefs, recommend_capability_gaps, route_verified_signals, create_learning_capsules, create_growth_seeds, create_documented_rejections]
+deny: [single_source_institutional_truth, submit_external_application_or_bid, release_resume, recruiter_or_employer_outreach, interview_action, employment_commitment, purchase_product, create_financial_claim, direct_imagination_station_access, verify_stale_evidence]
+metrics: [signal_precision, false_positive_rate, freshness, source_quality, exception_to_action_conversion, reinjection_value, signal_to_verified_brief_time, market_requirement_reuse]
