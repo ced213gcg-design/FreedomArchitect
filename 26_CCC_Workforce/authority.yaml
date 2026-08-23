@@ -1,4 +1,4 @@
-version: 1.0
+version: 1.1
 default: deny
 human_authority_final: true
 conflict_resolution_order:
@@ -13,6 +13,10 @@ approval_required:
   - purchase
   - binding_contract
   - external_job_application_submission
+  - resume_release
+  - recruiter_or_employer_outreach
+  - interview_action
+  - employment_acceptance_or_commitment
   - customer_production_change
   - protected_branch_merge_or_release
   - critical_iam_or_network_policy_change
@@ -20,19 +24,30 @@ approval_required:
   - canonical_data_deletion
   - public_publication
   - legally_consequential_communication
+locked_gates:
+  employment:
+    state: CLOSED
+    mode: MARKET_CHAMELEON_ADVISORY_INTELLIGENCE_ONLY
+    opens_only_by: HUMAN_COMMAND_AUTHORITY
+    while_closed_allow: [market_observation, compensation_intelligence, capability_gap_analysis, learning_capsule, growth_seed, documented_rejection, next_alpha_recommendation]
+    while_closed_deny: [application, resume_release, outreach, interview_action, employment_commitment, employment_pipeline_execution]
+proactive_fluidity_law:
+  observe_continuously: [MARKET, TECHNOLOGY, THREATS, FAILURES, OPPORTUNITIES, COST, PERFORMANCE, HUMAN_EXPERIENCE]
+  may_create: [SEED, CAPABILITY, EVIDENCE, MEMORY, DOCUMENTED_REJECTION, LEARNING_CAPSULE, GROWTH_SEED]
+  does_not_create: AUTHORITY_TO_EXECUTE
 workers:
   command:
     allow: [create_internal_task, reorder_nonconsequential_priority, request_worker_analysis, prepare_approval_request, summarize_verified_state]
-    deny: [move_money, protected_merge, submit_contract_or_application, alter_critical_network_policy, override_trust_fabric, declare_ready_without_evidence]
+    deny: [move_money, protected_merge, submit_contract_or_application, alter_critical_network_policy, override_trust_fabric, declare_ready_without_evidence, open_employment_gate_without_human_authority]
   intelligence:
-    allow: [search_approved_public_sources, inspect_approved_files, create_exception_record, create_research_brief, recommend_capability_gap, route_verified_signal]
-    deny: [single_source_institutional_truth, submit_external_application_or_bid, purchase_product, create_financial_claim, access_imagination_station_directly, verify_stale_evidence]
+    allow: [search_approved_public_sources, inspect_approved_files, create_exception_record, create_research_brief, recommend_capability_gap, route_verified_signal, create_learning_capsule, create_growth_seed, create_documented_rejection]
+    deny: [single_source_institutional_truth, submit_external_application_or_bid, release_resume, recruiter_or_employer_outreach, interview_action, employment_commitment, purchase_product, create_financial_claim, access_imagination_station_directly, verify_stale_evidence]
   security:
     allow: [analyze_code_config, create_scoped_remediation_patch, run_approved_test, create_security_finding, place_critical_hold, recommend_isolate_or_hold, verify_recovery_evidence]
-    deny: [unauthorized_attack, self_propagation, external_exploit_deploy, harvest_credentials, bypass_human_approval, weaken_controls_secretly]
+    deny: [unauthorized_attack, self_propagation, external_exploit_deploy, harvest_credentials, bypass_human_approval, weaken_controls_secretly, activate_seed_architecture_without_command_authority]
   revenue:
     allow: [analyze_verified_financial_records, compare_costs, recommend_budget, classify_financial_state, create_spending_warning, propose_capital_gate]
-    deny: [move_money, call_projection_realized_revenue, label_salary_range_income, treat_unclassified_token_as_money, authorize_purchase_without_approval, trigger_unverified_money_state]
+    deny: [move_money, call_projection_realized_revenue, label_salary_range_income, classify_employment_market_signal_as_active_revenue_pipeline, treat_unclassified_token_as_money, authorize_purchase_without_approval, trigger_unverified_money_state]
   communications:
     allow: [draft, summarize, classify_incoming_message, send_when_policy_allows, post_sanitized_summary, route_delivery_failure]
-    deny: [expose_secret, expose_private_payload, claim_failed_send_succeeded, make_slack_truth_source, accept_shell_from_message, submit_binding_contract_or_application]
+    deny: [expose_secret, expose_private_payload, claim_failed_send_succeeded, make_slack_truth_source, accept_shell_from_message, submit_binding_contract_or_application, release_resume, recruiter_or_employer_outreach, interview_action_without_human_gate]
