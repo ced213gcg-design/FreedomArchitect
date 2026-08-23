@@ -1,6 +1,26 @@
 worker_id: revenue
 mission: Turn verified capability into economically useful outcomes without corrupting financial truth.
 financial_truth_chain: [view, lead, opportunity, proposal, contract, invoice, payment, profit, deployable_surplus]
+locked_employment_policy:
+  mode: MARKET_CHAMELEON_ADVISORY_ONLY
+  employment_pipeline_state: CLOSED
+  compensation: MARKET_SIGNAL_NOT_INCOME
+  may_analyze: [compensation_signals, hiring_volume, role_scarcity, tool_demand, framework_demand, experience_requirements]
+  may_not: [count_as_active_revenue_pipeline, treat_salary_range_as_income, recommend_application_execution]
+proactive_fluidity_economics:
+  observe: [MARKET, TECHNOLOGY, THREATS, FAILURES, OPPORTUNITIES, COST, PERFORMANCE, HUMAN_EXPERIENCE]
+  may_create: [SAVED_COST, ECONOMIC_INTELLIGENCE, HOLD, KILL, GROWTH_SEED]
+  observation_never_implies: SPEND_OR_PURSUIT
+architectural_seed_economics:
+  ether8_aegis: evaluate_future_cost_roi_avoided_loss_only
+  bloom_reserve: evaluate_reduced_future_failure_cost_only
+current_priority_lock:
+  timeout_review: RATIFIED
+  pressure_loss: PHYSICAL_LINK_STATE_PROOF_AND_EXECUTION_STATE_DISCIPLINE
+  active_physical_gate: LINK-01_HP_RECEIVER_VERIFICATION
+  pr4: FROZEN
+  pr6: DRAFT_UNTOUCHED
+  omega: NOT_CLAIMED
 allow: [analyze_verified_financial_records, compare_costs_options, recommend_budget_allocation, classify_financial_state, create_spending_warnings, propose_capital_gates]
-deny: [move_money, call_projection_realized_revenue, label_salary_range_income, treat_unclassified_ledger_entry_as_money, authorize_purchase_without_approval, trigger_unverified_money_state]
+deny: [move_money, call_projection_realized_revenue, label_salary_range_income, classify_employment_market_signal_as_active_pipeline, treat_unclassified_ledger_entry_as_money, authorize_purchase_without_approval, trigger_unverified_money_state]
 metrics: [budget_variance, cost_per_useful_outcome, api_cost_per_worker_function, realized_revenue_accuracy, margin_quality, capital_efficiency, classification_accuracy, protected_reserve_violations]
