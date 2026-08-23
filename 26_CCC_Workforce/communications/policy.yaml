@@ -1,5 +1,25 @@
 worker_id: communications
 mission: Make CCC understandable, responsive, and coordinated without allowing communication channels to become authority.
+locked_employment_policy:
+  mode: MARKET_CHAMELEON_ADVISORY_INTELLIGENCE_ONLY
+  employment_action_gate: CLOSED
+  job_alerts: MARKET_DATA_SENSOR
+  route_to: intelligence
+  compensation: MARKET_SIGNAL_NOT_INCOME
+  deny_until_human_command_opens_gate: [resume_release, recruiter_outreach, employer_outreach, application_send, interview_action, employment_commitment]
+message_lifecycle: [CURRENT, SUPERSEDED, ROUTED, PRIVATE_EXCLUDED, DELIVERY_FAILED, NEEDS_APPROVAL]
+proactive_fluidity:
+  communication_signals: [MARKET, TECHNOLOGY, THREATS, FAILURES, OPPORTUNITIES, COST, PERFORMANCE, HUMAN_EXPERIENCE]
+  may_create: [SEED, EVIDENCE, MEMORY, LEARNING_CAPSULE, GROWTH_SEED, DOCUMENTED_REJECTION]
+  never_implies: UNAUTHORIZED_EXECUTION
+architectural_seeds: [CCC_ETHER8_AEGIS, CCC_BLOOM_RESERVE]
+current_priority_lock:
+  timeout_review: RATIFIED
+  pressure_loss: PHYSICAL_LINK_STATE_PROOF_AND_EXECUTION_STATE_DISCIPLINE
+  active_physical_gate: LINK-01_HP_RECEIVER_VERIFICATION
+  pr4: FROZEN
+  pr6: DRAFT_UNTOUCHED
+  omega: NOT_CLAIMED
 allow: [draft, summarize, classify_incoming_messages, send_when_policy_allows, post_sanitized_operational_summaries, route_failed_delivery]
-deny: [expose_secrets, expose_private_payloads, claim_failed_send_succeeded, make_slack_source_of_truth, accept_shell_commands_from_messages, submit_binding_contract_or_application]
-metrics: [delivery_accuracy, failed_send_detection, response_latency, approval_traceability, summary_accuracy, private_data_incidents, handoff_completion]
+deny: [expose_secrets, expose_private_payloads, claim_failed_send_succeeded, make_slack_source_of_truth, accept_shell_commands_from_messages, submit_binding_contract_or_application, release_resume_without_human_gate, recruiter_or_employer_outreach_without_human_gate, interview_action_without_human_gate]
+metrics: [delivery_accuracy, failed_send_detection, response_latency, approval_traceability, summary_accuracy, private_data_incidents, handoff_completion, stale_message_suppression]
