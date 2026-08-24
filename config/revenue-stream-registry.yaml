@@ -1,11 +1,13 @@
-version: 1
+version: 1.1
 state: VERIFY
 purpose: >-
   Registry of lawful CCC revenue and value-creation avenues. A stream is not counted as
   realized revenue until it reaches COLLECTED and RECONCILED with Revenue Assurance evidence.
+  Employment-market intelligence is advisory-only while the Human Command employment release gate is closed.
 
 stages:
   - SIGNAL
+  - ADVISORY
   - QUALIFIED
   - BUILD
   - FOUNDRY
@@ -20,6 +22,7 @@ stages:
   - HOLD
 
 classes:
+  - MARKET_INTELLIGENCE
   - EMPLOYMENT_INCOME
   - CONTRACT_SERVICE
   - RECURRING_SERVICE
@@ -33,20 +36,34 @@ classes:
   - ASSET_INCOME
   - INTERNAL_SAVINGS
 
+employment_policy:
+  mode: MARKET_CHAMELEON_REMOTE_ONLY_ADVISORY
+  external_release_gate: CLOSED
+  opens_only_by: HUMAN_COMMAND_AUTHORITY
+  active_revenue_pipeline_while_closed: false
+  compensation_classification: MARKET_SIGNAL_NOT_INCOME
+  realized_revenue_while_closed: false
+
 streams:
   - id: remote-cyber-employment
-    name: Remote cybersecurity employment
-    class: EMPLOYMENT_INCOME
-    owner_role: CCC-04
-    stage: QUALIFIED
+    name: Remote cybersecurity employment market intelligence
+    class: MARKET_INTELLIGENCE
+    primary_owner: INTELLIGENCE
+    secondary_owner: REVENUE
+    approval_owner: HUMAN_COMMAND_AUTHORITY
+    stage: ADVISORY
     realized_revenue: false
-    reinvestment_path: Freedom Architect after personal/business classification and verified surplus
-    evidence_required: employment offer, compensation terms, and received income evidence
+    remote_only: true
+    external_release_gate: CLOSED
+    reinvestment_path: none while advisory-only; future received income requires personal/business classification and verified surplus
+    evidence_required: remote-sovereignty gates R-01..R-09 for intelligence; R-10 Human Command approval before any external release; actual received-income evidence before financial classification
 
   - id: cyber-contract-services
     name: Cybersecurity and SOC contract services
     class: CONTRACT_SERVICE
-    owner_role: CCC-04
+    primary_owner: REVENUE
+    secondary_owner: SECURITY
+    approval_owner: HUMAN_COMMAND_AUTHORITY
     stage: BUILD
     realized_revenue: false
     reinvestment_path: Revenue Assurance -> Freedom Architect -> productive constraint
@@ -55,7 +72,9 @@ streams:
   - id: living-intelligence-custom
     name: Living Intelligence custom implementations
     class: SOFTWARE_MODULE
-    owner_role: CCC-03
+    primary_owner: REVENUE
+    secondary_owner: INTELLIGENCE
+    approval_owner: HUMAN_COMMAND_AUTHORITY
     stage: BUILD
     realized_revenue: false
     reinvestment_path: Revenue Assurance -> Freedom Architect -> Living Intelligence/Product Foundry capacity
@@ -64,7 +83,9 @@ streams:
   - id: living-intelligence-recurring
     name: Living Intelligence recurring analytics / SaaS
     class: SAAS
-    owner_role: CCC-03
+    primary_owner: REVENUE
+    secondary_owner: SECURITY
+    approval_owner: HUMAN_COMMAND_AUTHORITY
     stage: SIGNAL
     realized_revenue: false
     reinvestment_path: Revenue Assurance -> Freedom Architect -> reusable platform capacity
@@ -73,7 +94,9 @@ streams:
   - id: managed-security-analytics
     name: Managed security and analytics services
     class: RECURRING_SERVICE
-    owner_role: CCC-03
+    primary_owner: REVENUE
+    secondary_owner: SECURITY
+    approval_owner: HUMAN_COMMAND_AUTHORITY
     stage: SIGNAL
     realized_revenue: false
     reinvestment_path: Revenue Assurance -> Freedom Architect -> monitoring/delivery capacity
@@ -82,7 +105,9 @@ streams:
   - id: product-foundry-validation
     name: Product Foundry and Digital Twin validation service
     class: CONTRACT_SERVICE
-    owner_role: CCC-05
+    primary_owner: REVENUE
+    secondary_owner: SECURITY
+    approval_owner: HUMAN_COMMAND_AUTHORITY
     stage: BUILD
     realized_revenue: false
     reinvestment_path: Revenue Assurance -> Freedom Architect -> Foundry test capacity
@@ -91,7 +116,9 @@ streams:
   - id: training-education
     name: Cybersecurity and operational-intelligence training
     class: TRAINING_EDUCATION
-    owner_role: CCC-05
+    primary_owner: REVENUE
+    secondary_owner: INTELLIGENCE
+    approval_owner: HUMAN_COMMAND_AUTHORITY
     stage: BUILD
     realized_revenue: false
     reinvestment_path: Revenue Assurance -> Freedom Architect -> curriculum and lab capability
@@ -100,7 +127,9 @@ streams:
   - id: ip-licensing
     name: Reusable CCC intellectual property licensing
     class: IP_LICENSE
-    owner_role: CCC-05
+    primary_owner: REVENUE
+    secondary_owner: COMMAND
+    approval_owner: HUMAN_COMMAND_AUTHORITY
     stage: SIGNAL
     realized_revenue: false
     reinvestment_path: Revenue Assurance -> Freedom Architect -> IP protection and productization
@@ -109,7 +138,9 @@ streams:
   - id: federal-subcontract
     name: Federal / prime-contractor subcontract pathway
     class: FEDERAL_SUBCONTRACT
-    owner_role: CCC-04
+    primary_owner: INTELLIGENCE
+    secondary_owner: REVENUE
+    approval_owner: HUMAN_COMMAND_AUTHORITY
     stage: SIGNAL
     realized_revenue: false
     reinvestment_path: Revenue Assurance -> Freedom Architect -> compliance/capability bottleneck
@@ -118,7 +149,9 @@ streams:
   - id: lock-key-grants
     name: Lock & Key and CCC aligned grant funding
     class: GRANT_RESTRICTED
-    owner_role: CCC-03
+    primary_owner: INTELLIGENCE
+    secondary_owner: REVENUE
+    approval_owner: HUMAN_COMMAND_AUTHORITY
     stage: SIGNAL
     realized_revenue: false
     reinvestment_path: restricted-use allocation only under grant terms; never ordinary unrestricted revenue
@@ -127,7 +160,9 @@ streams:
   - id: culture-shock-retail
     name: Culture Shock / approved retail product lanes
     class: RETAIL_PRODUCT
-    owner_role: CCC-03
+    primary_owner: REVENUE
+    secondary_owner: COMMAND
+    approval_owner: HUMAN_COMMAND_AUTHORITY
     stage: SIGNAL
     realized_revenue: false
     reinvestment_path: Revenue Assurance -> Freedom Architect subject to entity and regulated-product separation
@@ -136,7 +171,9 @@ streams:
   - id: internal-efficiency
     name: Verified internal cost avoidance and productivity savings
     class: INTERNAL_SAVINGS
-    owner_role: CCC-01
+    primary_owner: REVENUE
+    secondary_owner: COMMAND
+    approval_owner: COMMAND
     stage: BUILD
     realized_revenue: false
     reinvestment_path: recognized as economic value, not cash revenue; informs capital-allocation decisions
