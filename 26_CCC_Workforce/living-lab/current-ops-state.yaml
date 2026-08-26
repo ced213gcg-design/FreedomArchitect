@@ -1,0 +1,46 @@
+version: "1.0"
+state: FULL_OPS
+source: CCC_FULL_OPERATIONS_SOP_UNC_WORLD_v1
+superstate: HOLD
+reason: Material states remain unresolved; disagreement or incomplete machine evidence defaults HOLD.
+authority_state: HUMAN_COMMAND_FINAL
+machine_state:
+  active_physical_gate: LINK-01_HP_RECEIVER_VERIFICATION
+  software_install: NONE
+  money_movement: NONE
+  credential_action: NONE
+evidence_state:
+  ci_latest_known_signal: e106abb_FAILURE
+  ci_security_state: HOLD
+  ci_rule: NO_NEW_MESSAGE_DOES_NOT_EQUAL_PASS
+worker_state:
+  COMMAND: ACTIVE
+  INTELLIGENCE: ACTIVE
+  SECURITY: ACTIVE
+  REVENUE: ACTIVE
+  COMMS: ACTIVE
+  UNC_OVERSIGHT: ACTIVE_NONCONSTITUTIONAL
+employment_state:
+  location: REMOTE_ONLY
+  mode: ADVISORY_INTERNAL_PREPARATION
+  external_release: CLOSED
+private_material_state:
+  credit_signal: MATERIAL
+  classification: PRIVATE_EXCLUDED
+  approval: NEEDS_APPROVAL
+  human_action: REVIEW_THROUGH_KNOWN_OFFICIAL_CHANNEL
+technology_signals:
+  route: INTELLIGENCE
+  architecture_authority: false
+next_action:
+  primary_owner: HUMAN_COMMAND_AUTHORITY
+  action: LINK-01_HP_RECEIVER_VERIFICATION
+parallel_bounded_actions:
+  - owner: SECURITY
+    action: Hold CI trust until exact-head evidence supersedes e106abb.
+  - owner: INTELLIGENCE
+    action: Research AI reliability, autonomous response, and MCP signals under CRAYOLA-Q without architecture promotion.
+  - owner: [REVENUE, COMMS]
+    action: Continue 100-percent-remote employment preparation internally only.
+  - owner: UNC_OVERSIGHT
+    action: Grade resulting evidence, identify one material defect, preserve what worked, and reinject one improvement unless safety requires more.
