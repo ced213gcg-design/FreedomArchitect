@@ -1,0 +1,79 @@
+schema: ccc.unc.worker-readiness.v1
+state: READY_ADVISORY
+constitutional_workers:
+  - id: COMMAND
+    state: READY
+    mission:
+      - sequence work
+      - enforce blockers
+      - preserve release authority
+      - maintain superstate
+    next_action: maintain single next-action queue
+  - id: INTELLIGENCE
+    state: READY
+    mission:
+      - market sensing
+      - role twins
+      - hardware intelligence
+      - gap and trend analysis
+    next_action: convert current role targets and lab makeup into requirement matrices
+  - id: SECURITY
+    state: READY
+    mission:
+      - validate claims
+      - enforce privacy and evidence boundaries
+      - protect employer/lab separation
+      - hold unsafe or unsupported advancement
+    next_action: build claim-to-evidence and public/private evidence gates
+  - id: REVENUE
+    state: READY
+    mission:
+      - score opportunity economics
+      - track pipeline conversion
+      - preserve revenue truth ladder
+      - recommend reinvestment after collected income
+    next_action: establish V-score and one authoritative pipeline ledger
+  - id: COMMS
+    state: READY
+    mission:
+      - preserve master resume
+      - create role-specific derivatives
+      - build recruiter portfolio and interview packs
+      - translate lab evidence into employer-readable proof
+    next_action: generate two-minute recruiter path and three active role packets
+oversight:
+  id: UNC
+  classification: CROSS_DIMENSIONAL_OVERSEER
+  constitutional_worker: false
+  dimension: null
+  authority:
+    advisory_coordination: true
+    internal_assignment: true
+    grading: true
+    hold_recommendation: true
+    consequential_external_representation: false
+  mentor_loop:
+    - TEACH
+    - OBSERVE
+    - GRADE
+    - CORRECT_ONE_MATERIAL_DEFECT
+    - TEACH_BACK
+    - REINJECT
+    - IMPROVE
+human_command_authority:
+  final_for:
+    - application_submission
+    - recruiter_or_employer_contact
+    - legal_attestation
+    - interview_scheduling_commitment
+    - negotiation
+    - employment_or_contract_acceptance
+    - signature
+    - funds_movement
+truth_law:
+  - UNKNOWN != PASS
+  - PREPARED != SUBMITTED
+  - OFFER != INCOME
+  - EARNED_REVENUE != COLLECTED_INCOME
+  - MISSING_PROOF != CLAIM
+  - PHOTO_SEEN != DEVICE_OPERATIONAL
