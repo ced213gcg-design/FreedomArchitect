@@ -1,40 +1,75 @@
-version: 1.2
+version: 1.3
+ops_sop: CCC_FULL_OPERATIONS_SOP_UNC_WORLD_v1.0
+universal_intake_categories: [PRIVATE_MATERIAL, SECURITY_SIGNAL, TECHNOLOGY_SIGNAL, EMPLOYMENT_SIGNAL, REVENUE_SIGNAL, CI_BUILD_SIGNAL, PHYSICAL_LAB_SIGNAL, GENERAL_INFORMATION, UNKNOWN]
+required_intake_fields: [FACT, RISK, ACTION, SOURCE, TIME, OWNER, CHANGE, VALIDATION, PROVENANCE]
 routes:
+  PRIVATE_MATERIAL:
+    primary: security
+    secondary: [communications]
+    human: REQUIRED_WHEN_IDENTITY_CREDIT_OR_CONSEQUENTIAL
+    privacy: MINIMUM_NECESSARY_DISTRIBUTION
+    flow: [COMMS_RECEIVES, SANITIZE, SECURITY_CLASSIFICATION, HUMAN_COMMAND, OFFICIAL_KNOWN_CHANNEL, HUMAN_INSPECTION, SANITIZED_RESULT_ONLY]
   CODE_CI_FAILURE:
     primary: security
     secondary: [command]
     notify: [communications]
     conditional: {revenue: material_cost_or_business_impact}
-  EMPLOYMENT_MARKET_SIGNAL:
+    truth_path: [CI_SIGNAL, EXACT_HEAD, EXACT_WORKFLOW, EXACT_RESULT, MACHINE_EVIDENCE, STATE_UPDATE]
+    silence_rule: NO_NEW_MESSAGE_DOES_NOT_EQUAL_PASS
+  TECHNOLOGY_SIGNAL:
     primary: intelligence
-    mode: MARKET_CHAMELEON_REMOTE_ONLY_ADVISORY
+    secondary: [security]
+    not_authorized_to: ARCHITECTURE_CHANGE
+    checks: [SOURCE_QUALITY, RELEVANCE, CCC_APPLICABILITY, DUPLICATION, SECURITY_RISK, COST, MATURITY, EVIDENCE]
+    outcomes: [EVIDENCE, CAPABILITY, MEMORY, SEED, DOCUMENTED_REJECTION]
+  EMPLOYMENT_SIGNAL:
+    primary: intelligence
+    secondary: [revenue, communications]
+    mode: MARKET_CHAMELEON_REMOTE_ONLY_ADVISORY_INTERNAL_PREPARATION
+    external_release: CLOSED
     location_gate:
       required: 100_PERCENT_REMOTE
       reject: [HYBRID, ONSITE, MANDATORY_OFFICE_ATTENDANCE, RELOCATION, REGULAR_TRAVEL, FIELD_SERVICE, IN_PERSON, REMOTE_AFTER_TRAINING]
       employer_location_requirements: VERIFY_BEFORE_ADVANCEMENT
       home_lab_compatibility: REQUIRED
-    learn_from: [role, industry, compensation_signal, remote_status, employer_location_restrictions, tools, frameworks, certifications, experience, responsibilities, clearance, automation_expectations, ai_expectations, portfolio_expectations, device_security_controls, ccc_current_capability, ccc_gap, transferable_capability, next_alpha]
     hard_gate_order: [R-01_REMOTE_100_PERCENT, R-02_NO_OFFICE, R-03_NO_RELOCATION, R-04_NO_REGULAR_TRAVEL, R-05_HOME_LAB_COMPATIBLE, R-06_COMPENSATION_VERIFY, R-07_CAPABILITY_SCORE, R-08_SCHEDULE_SCORE, R-09_DEVICE_SECURITY_VERIFY, R-10_HUMAN_COMMAND_RELEASE]
-    may_create: [ROLE_TWIN, LEARNING_CAPSULE, GROWTH_SEED, MARKET_INTELLIGENCE, DOCUMENTED_REJECTION, CAPABILITY_GAP]
-    prohibited_without_human_command_gate: [job_application, resume_release, recruiter_outreach, employer_outreach, interview_action, employment_acceptance, employment_pipeline_execution]
+    internal_allowed: [DISCOVER, FILTER, ROLE_TWIN, GAP_MAP, RESUME_DRAFT_INTERNAL, PORTFOLIO_SELECT, INTERVIEW_PREP_INTERNAL, PIPELINE_ANALYSIS_INTERNAL]
+    may_create: [ROLE_TWIN, LEARNING_CAPSULE, GROWTH_SEED, MARKET_INTELLIGENCE, DOCUMENTED_REJECTION, CAPABILITY_GAP, RELEASE_READINESS]
+    prohibited_without_human_command_gate: [APPLICATION_SUBMISSION, RESUME_RELEASE, RECRUITER_CONTACT, EMPLOYER_CONTACT, INTERVIEW_COMMITMENT, NEGOTIATION, ATTESTATION, EMPLOYMENT_ACCEPTANCE, EXTERNAL_PIPELINE_EXECUTION]
     compensation_classification: MARKET_SIGNAL_NOT_INCOME
     preserve: ledger
+  REVENUE_SIGNAL:
+    primary: revenue
+    secondary: [security, communications]
+    human: REQUIRED_WHEN_OFFER_COMMITMENT_OR_CAPITAL_ACTION
+    truth_ladder: [MARKET_SIGNAL, PIPELINE, ENGAGEMENT, QUALIFIED_PIPELINE, COMMITTED_OPPORTUNITY, BOOKED_WORK, EARNED_REVENUE, COLLECTED_INCOME]
+    settled_cash: COLLECTED_INCOME
   CONTRACT_GRANT_SIGNAL:
     primary: intelligence
     secondary: [revenue]
     conditional: {security: data_or_compliance_implication}
     prioritize: command
     package: communications
+  PHYSICAL_LAB_SIGNAL:
+    primary: security
+    secondary: [command]
+    progression: [LINK-01, LINK-02, AUTHENTICATED_TRANSPORT, SENSOR_VISIBILITY, SOC_CONTROL_GATES, DETECTION_SCENARIOS, TIMESTAMP_HASH_RECONCILIATION, LEDGER, DASHBOARD, HUMAN_REVIEW]
+    hard_rules: [NO_PASS_WITHOUT_MACHINE_EVIDENCE, NO_EXTERNAL_TARGETS, NO_SECRET_PROPAGATION, NO_ARBITRARY_COMMAND_CHANNEL, NO_GAMMA_PROMOTION_FROM_CHAT_ALONE]
   SOC_INCIDENT:
     primary: security
     secondary: [command]
     notify: [communications]
     conditional: {revenue: business_or_cost_impact}
+  HARDWARE_DISCOVERY:
+    primary: intelligence
+    secondary: [security, EARTH]
+    human: PURCHASE_OR_DEPLOYMENT
   HARDWARE_PURCHASE:
     primary: revenue
     secondary: [intelligence, security]
     schedule: command
     document: communications
+    human: REQUIRED
   RESEARCH_DISCOVERY:
     primary: intelligence
     selective: [security, revenue]
@@ -46,18 +81,31 @@ routes:
     secondary: [security]
     route: command
     correspondence: communications
+  PUBLIC_COMMUNICATION:
+    primary: communications
+    secondary: [security]
+    human: MATERIAL_RELEASES
 routing_rule: not_every_event_requires_all_five
+comms_materiality:
+  C0: NO_MATERIAL_IMPACT
+  C1: INFORMATIONAL
+  C2: ACTIONABLE_INTERNAL
+  C3: MATERIAL_SECURITY_PRIVATE_REVENUE
+  C4: HUMAN_COMMAND_REQUIRED
+  C5: EMERGENCY_IMMEDIATE_CONTAINMENT
 proactive_fluidity:
-  observe: [MARKET, TECHNOLOGY, THREATS, FAILURES, OPPORTUNITIES, COST, PERFORMANCE, HUMAN_EXPERIENCE]
-  observation_may_create: [SEED, CAPABILITY, EVIDENCE, MEMORY, DOCUMENTED_REJECTION, LEARNING_CAPSULE, GROWTH_SEED]
+  observe: [MARKET, TECHNOLOGY, THREATS, CI, LAB_HEALTH, HARDWARE, COST, PERFORMANCE, EMPLOYMENT, REVENUE, USER_EXPERIENCE]
+  observation_may_create: [SIGNAL, SEED, CAPABILITY, EVIDENCE, MEMORY, DOCUMENTED_REJECTION, LEARNING_CAPSULE, GROWTH_SEED]
   observation_never_implies: UNAUTHORIZED_EXECUTION
+superstate:
+  reconcile: [AUTHORITY_STATE, MACHINE_STATE, EVIDENCE_STATE, WORKER_STATE, NEXT_ACTION]
+  disagreement: HOLD
 current_priority_lock:
-  timeout_review: RATIFIED
-  pressure_loss: PHYSICAL_LINK_STATE_PROOF_AND_EXECUTION_STATE_DISCIPLINE
   active_physical_gate: LINK-01_HP_RECEIVER_VERIFICATION
-  ether8: NEW_ARCHITECTURAL_ALPHA_SEED
-  market_chameleon: REMOTE_ONLY_ADVISORY_INTELLIGENCE_NO_EMPLOYMENT_ACTION
-  employment_external_release: NOT_AUTHORIZED
+  ci_latest_known_signal: e106abb_FAILURE
+  ci_state: HOLD
+  market_chameleon: REMOTE_ONLY_ADVISORY_INTERNAL_PREPARATION
+  employment_external_release: CLOSED
   soc: PRIORITY_OPERATIONALIZATION
   capital: REQUIRED
   pr4: FROZEN
