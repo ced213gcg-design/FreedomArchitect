@@ -1,0 +1,61 @@
+schema: ccc.unc.hardware-optimization.v1
+truth_rule: PHOTO_SEEN != DEVICE_OPERATIONAL
+assets:
+  - id: HP_COMMAND_NODE
+    device: HP Chromebook / Crostini Linux
+    evidence_state: EXISTING_ASSET_LIVE_STATE_REQUIRES_CURRENT_MACHINE_EVIDENCE
+    roles:
+      - command
+      - dashboard
+      - ledger
+      - academy
+      - analytics
+      - portfolio_build
+    optimization:
+      - keep authoritative local evidence separate from public portfolio
+      - reserve heavy VM workloads for Dell unless measured capacity supports otherwise
+  - id: DELL_COMPUTE_NODE
+    device: Dell Latitude 5420
+    evidence_state: EXISTING_ASSET_LIVE_STATE_REQUIRES_CURRENT_MACHINE_EVIDENCE
+    roles:
+      - Windows operations
+      - Hyper-V compute
+      - Blue/Red/Honeypot guest plane
+      - endpoint telemetry
+    optimization:
+      - prioritize compute and physical SOC proof
+      - preserve employer/lab separation for future remote work
+  - id: EXTRAHOP_EDA1200
+    device: ExtraHop EDA 1200
+    evidence_state: PHYSICALLY_OBSERVED_OPERATIONAL_LICENSE_FIRMWARE_STATE_UNKNOWN
+    roles:
+      - passive network sensor candidate
+      - SPAN/TAP telemetry candidate
+      - independent network evidence source candidate
+    constraints:
+      - do not expose serial or credential-adjacent identifiers
+      - verify firmware/license/management state before operational classification
+      - prefer passive observation; no arbitrary inline control
+    combinations:
+      - Dell/VM authorized lab traffic -> SPAN/TAP -> ExtraHop -> sanitized evidence -> HP/Ledger
+  - id: USB_SATA_ENCLOSURE
+    device: USB 3.0 to 2.5-inch SATA HDD/SSD enclosure
+    evidence_state: PRODUCT_IDENTIFIED_STORAGE_MEDIA_AND_PERFORMANCE_UNVERIFIED
+    roles:
+      - evidence vault candidate
+      - backup candidate
+      - sanitized HP-Dell transfer candidate
+      - VM/lab archive candidate
+      - curriculum archive candidate
+    constraints:
+      - not sole copy of critical evidence
+      - encrypt sensitive archives
+      - verify drive, filesystem, hashes, sustained transfer
+optimization_priorities:
+  - prove hardware state before designing dependencies around it
+  - use idle hardware to reduce single-point dependency
+  - separate command, compute, sensor, and archive planes where practical
+  - hash and duplicate material evidence
+  - measure resource pressure before adding large sensor stacks
+  - prefer current assets before purchasing new hardware
+  - map every hardware purchase to a revenue, evidence, training, or continuity outcome
