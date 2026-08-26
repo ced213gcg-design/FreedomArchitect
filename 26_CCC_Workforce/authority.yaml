@@ -1,11 +1,17 @@
-version: 1.2
+version: 1.3
+ops_sop: CCC_FULL_OPERATIONS_SOP_UNC_WORLD_v1.0
 default: deny
 human_authority_final: true
+unc_oversight:
+  constitutional_worker: false
+  override_human_command: false
+  function: [observe, grade, identify_one_material_defect, assign_owner, preserve_what_worked, reinject_lesson]
 conflict_resolution_order:
-  - HARD_SECURITY_LEGAL_HUMAN_AUTHORITY
-  - VERIFIED_LEDGER_LIVE_EVIDENCE
-  - CURRENT_RATIFIED_CANON_MANIFEST
-  - RELEASE_TEST_EVIDENCE
+  - HUMAN_COMMAND_AUTHORITY
+  - SECURITY_LEGAL_HARD_CONTROLS
+  - VERIFIED_LEDGER_MACHINE_EVIDENCE
+  - RATIFIED_CCC_CANON
+  - TEST_RELEASE_EVIDENCE
   - WORKER_ANALYSIS
   - UNVERIFIED_INFERENCE
 approval_required:
@@ -15,7 +21,8 @@ approval_required:
   - external_job_application_submission
   - resume_release
   - recruiter_or_employer_outreach
-  - interview_action
+  - interview_commitment
+  - negotiation_or_attestation
   - employment_acceptance_or_commitment
   - customer_production_change
   - protected_branch_merge_or_release
@@ -27,7 +34,7 @@ approval_required:
 locked_gates:
   employment:
     state: CLOSED
-    mode: MARKET_CHAMELEON_REMOTE_ONLY_ADVISORY_INTELLIGENCE
+    mode: MARKET_CHAMELEON_REMOTE_ONLY_ADVISORY_INTERNAL_PREPARATION
     opens_only_by: HUMAN_COMMAND_AUTHORITY
     location_law: CCC_REMOTE_SOVEREIGNTY_EMPLOYMENT_LAW
     remote_location_control: NON_NEGOTIABLE
@@ -36,25 +43,28 @@ locked_gates:
     employer_managed_device: ACCEPTABLE_IF_WORK_REMAINS_FULLY_REMOTE_AND_HOME_LAB_SEPARATION_IS_PRESERVED
     reject_if: [HYBRID, ONSITE, MANDATORY_OFFICE_ATTENDANCE, RELOCATION, REGULAR_TRAVEL, FIELD_SERVICE, IN_PERSON, REMOTE_AFTER_TRAINING]
     employer_location_requirements: VERIFY_BEFORE_ADVANCEMENT
-    while_closed_allow: [remote_market_observation, compensation_intelligence, role_twin, capability_gap_analysis, learning_capsule, growth_seed, documented_rejection, next_alpha_recommendation, device_security_policy_analysis]
-    while_closed_deny: [application, resume_release, outreach, interview_action, employment_commitment, employment_pipeline_execution]
+    while_closed_allow: [DISCOVER, FILTER, ROLE_TWIN, GAP_MAP, RESUME_DRAFT_INTERNAL, PORTFOLIO_SELECT, INTERVIEW_PREP_INTERNAL, PIPELINE_ANALYSIS_INTERNAL, remote_market_observation, compensation_intelligence, capability_gap_analysis, learning_capsule, growth_seed, documented_rejection, next_alpha_recommendation, device_security_policy_analysis]
+    while_closed_deny: [APPLICATION_SUBMISSION, RESUME_RELEASE, RECRUITER_CONTACT, EMPLOYER_CONTACT, INTERVIEW_COMMITMENT, NEGOTIATION, ATTESTATION, EMPLOYMENT_ACCEPTANCE, EXTERNAL_EMPLOYMENT_PIPELINE_EXECUTION]
 proactive_fluidity_law:
-  observe_continuously: [MARKET, TECHNOLOGY, THREATS, FAILURES, OPPORTUNITIES, COST, PERFORMANCE, HUMAN_EXPERIENCE]
-  may_create: [SEED, CAPABILITY, EVIDENCE, MEMORY, DOCUMENTED_REJECTION, LEARNING_CAPSULE, GROWTH_SEED]
+  observe_continuously: [MARKET, TECHNOLOGY, THREATS, CI, LAB_HEALTH, HARDWARE, COST, PERFORMANCE, EMPLOYMENT, REVENUE, USER_EXPERIENCE]
+  may_create: [SIGNAL, SEED, CAPABILITY, EVIDENCE, MEMORY, DOCUMENTED_REJECTION, LEARNING_CAPSULE, GROWTH_SEED]
   does_not_create: AUTHORITY_TO_EXECUTE
+superstate:
+  reconcile: [AUTHORITY_STATE, MACHINE_STATE, EVIDENCE_STATE, WORKER_STATE, NEXT_ACTION]
+  disagreement: HOLD
 workers:
   command:
     allow: [create_internal_task, reorder_nonconsequential_priority, request_worker_analysis, prepare_approval_request, summarize_verified_state]
     deny: [move_money, protected_merge, submit_contract_or_application, alter_critical_network_policy, override_trust_fabric, declare_ready_without_evidence, open_employment_gate_without_human_authority, waive_remote_only_gate_without_human_authority]
   intelligence:
-    allow: [search_approved_public_sources, inspect_approved_files, create_exception_record, create_research_brief, recommend_capability_gap, route_verified_signal, create_learning_capsule, create_growth_seed, create_documented_rejection, create_role_twin, verify_remote_location]
-    deny: [single_source_institutional_truth, submit_external_application_or_bid, release_resume, recruiter_or_employer_outreach, interview_action, employment_commitment, purchase_product, create_financial_claim, access_imagination_station_directly, verify_stale_evidence, advance_hybrid_or_onsite_role, advance_mandatory_travel_or_relocation_role]
+    allow: [search_approved_public_sources, inspect_approved_files, create_exception_record, create_research_brief, recommend_capability_gap, route_verified_signal, create_learning_capsule, create_growth_seed, create_documented_rejection, create_role_twin, verify_remote_location, prepare_internal_resume_draft, prepare_internal_interview_material, select_portfolio_evidence]
+    deny: [single_source_institutional_truth, submit_external_application_or_bid, release_resume, recruiter_or_employer_outreach, interview_commitment, employment_commitment, purchase_product, create_financial_claim, access_imagination_station_directly, verify_stale_evidence, advance_hybrid_or_onsite_role, advance_mandatory_travel_or_relocation_role]
   security:
-    allow: [analyze_code_config, create_scoped_remediation_patch, run_approved_test, create_security_finding, place_critical_hold, recommend_isolate_or_hold, verify_recovery_evidence, assess_employer_device_security_controls]
+    allow: [analyze_code_config, create_scoped_remediation_patch, run_approved_test, create_security_finding, place_critical_hold, recommend_isolate_or_hold, verify_recovery_evidence, assess_employer_device_security_controls, classify_private_material]
     deny: [unauthorized_attack, self_propagation, external_exploit_deploy, harvest_credentials, bypass_human_approval, weaken_controls_secretly, activate_seed_architecture_without_command_authority, trigger_employment_action]
   revenue:
-    allow: [analyze_verified_financial_records, compare_costs, recommend_budget, classify_financial_state, create_spending_warning, propose_capital_gate, analyze_remote_compensation_signal]
-    deny: [move_money, call_projection_realized_revenue, label_salary_range_income, classify_employment_market_signal_as_active_revenue_pipeline, treat_unclassified_token_as_money, authorize_purchase_without_approval, trigger_unverified_money_state, trigger_employment_pursuit]
+    allow: [analyze_verified_financial_records, compare_costs, recommend_budget, classify_financial_state, create_spending_warning, propose_capital_gate, analyze_remote_compensation_signal, maintain_internal_employment_pipeline_analysis]
+    deny: [move_money, call_projection_realized_revenue, label_salary_range_income, classify_employment_market_signal_as_collected_income, treat_unclassified_token_as_money, authorize_purchase_without_approval, trigger_unverified_money_state, trigger_external_employment_pursuit]
   communications:
-    allow: [draft, summarize, classify_incoming_message, send_when_policy_allows, post_sanitized_summary, route_delivery_failure, classify_job_alert_as_remote_market_signal]
-    deny: [expose_secret, expose_private_payload, claim_failed_send_succeeded, make_slack_truth_source, accept_shell_from_message, submit_binding_contract_or_application, release_resume, recruiter_or_employer_outreach, interview_action_without_human_gate, advance_nonremote_employment_signal]
+    allow: [draft, summarize, classify_incoming_message, send_when_policy_allows, post_sanitized_summary, route_delivery_failure, classify_job_alert_as_remote_market_signal, create_internal_resume_derivative, create_internal_interview_prep, sanitize_private_material]
+    deny: [expose_secret, expose_private_payload, claim_failed_send_succeeded, make_slack_truth_source, accept_shell_from_message, submit_binding_contract_or_application, release_resume, recruiter_or_employer_outreach, interview_commitment_without_human_gate, advance_nonremote_employment_signal]
