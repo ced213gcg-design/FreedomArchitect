@@ -21,7 +21,8 @@ for script in \
   "$BASE/07_Unified_Launcher/scripts/unified-launcher.sh" \
   "$BASE/15_Handshake_Operating_Map/scripts/gate-manager.sh" \
   "$BASE/15_Handshake_Operating_Map/scripts/keychain-presence.sh" \
-  "$BASE/19_Interface_Reference_Lock/interface-gate-check.sh"; do
+  "$BASE/19_Interface_Reference_Lock/interface-gate-check.sh" \
+  "$BASE/19_Interface_Reference_Lock/ratify-interface.sh"; do
   [ -f "$script" ] && chmod +x "$script"
 done
 
@@ -51,4 +52,5 @@ printf '%s\n' "Private doctrine file: $DOCTRINE_FILE"
 printf '%s\n' "Local gate state: $STATE_DIR"
 printf '%s\n' "Use set-private-doctrine.sh to place private doctrine locally without committing it to Git."
 printf '%s\n' "Run interface-gate-check.sh to import canonical runtime evidence into INTERFACE_MATCH."
+printf '%s\n' "Human visual ratification is available only after technical REVIEW."
 printf '%s\n' "Open a new terminal to verify startup."
