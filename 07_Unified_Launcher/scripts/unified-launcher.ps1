@@ -1,5 +1,6 @@
 $Base = if ($env:FA_BASE) { $env:FA_BASE } else { Join-Path $HOME 'FreedomArchitect' }
 function Open-Text([string]$RelativePath) { $Path=Join-Path $Base $RelativePath; if (Test-Path $Path) { Start-Process notepad.exe -ArgumentList @($Path) } else { Write-Host "Missing: $RelativePath" } }
+function Pause-View { [void](Read-Host 'Press Enter to continue') }
 while ($true) {
     Clear-Host
     Write-Host "=============================================================="
@@ -12,8 +13,10 @@ while ($true) {
     Write-Host "5. Keychain Gate Authority"
     Write-Host "6. Revenue Work Box"
     Write-Host "7. Today's Command"
-    Write-Host "8. Mission State folder"
-    Write-Host "9. Repository folder"
+    Write-Host "8. Gate Status"
+    Write-Host "9. Keychain Presence Check"
+    Write-Host "10. Mission State folder"
+    Write-Host "11. Repository folder"
     Write-Host "Q. Exit"
     $Choice=(Read-Host 'Select').Trim().ToUpperInvariant()
     switch ($Choice) {
@@ -24,8 +27,10 @@ while ($true) {
         '5' { Open-Text '15_Handshake_Operating_Map\rules\keychain-gate-authority.md' }
         '6' { Open-Text '17_Revenue_Work_Box\WORK_BOX.md' }
         '7' { Open-Text '06_Daily_Command_Dashboard\today-command.md' }
-        '8' { Start-Process explorer.exe (Join-Path $Base '09_Mission_State_Dashboard') }
-        '9' { Start-Process explorer.exe $Base }
+        '8' { & (Join-Path $Base '15_Handshake_Operating_Map\scripts\gate-manager.ps1') status; Pause-View }
+        '9' { & (Join-Path $Base '15_Handshake_Operating_Map\scripts\keychain-presence.ps1'); Pause-View }
+        '10' { Start-Process explorer.exe (Join-Path $Base '09_Mission_State_Dashboard') }
+        '11' { Start-Process explorer.exe $Base }
         'Q' { break }
         default { Write-Host 'Invalid selection.'; Start-Sleep -Seconds 1 }
     }
