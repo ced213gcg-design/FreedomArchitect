@@ -11,14 +11,13 @@ MARKER_END="# <<< FreedomArchitect Unc's World autostart <<<"
 
 mkdir -p "$STATE_DIR" "$PRIVATE_DIR"
 chmod 700 "$HOME/.config/FreedomArchitect" "$STATE_DIR" "$PRIVATE_DIR" 2>/dev/null || true
-if [ ! -e "$DOCTRINE_FILE" ]; then
-  : > "$DOCTRINE_FILE"
-fi
+if [ ! -e "$DOCTRINE_FILE" ]; then : > "$DOCTRINE_FILE"; fi
 chmod 600 "$DOCTRINE_FILE" 2>/dev/null || true
 
 for script in \
   "$BASE/08_Command_Center_Autostart/scripts/autostart.sh" \
   "$BASE/08_Command_Center_Autostart/scripts/show-preface.sh" \
+  "$BASE/08_Command_Center_Autostart/scripts/set-private-doctrine.sh" \
   "$BASE/07_Unified_Launcher/scripts/unified-launcher.sh" \
   "$BASE/15_Handshake_Operating_Map/scripts/gate-manager.sh" \
   "$BASE/15_Handshake_Operating_Map/scripts/keychain-presence.sh"; do
@@ -49,4 +48,5 @@ PY
 printf '%s\n' "Installed Unc's World opening surface into $BASHRC"
 printf '%s\n' "Private doctrine file: $DOCTRINE_FILE"
 printf '%s\n' "Local gate state: $STATE_DIR"
+printf '%s\n' "Use set-private-doctrine.sh to place private doctrine locally without committing it to Git."
 printf '%s\n' "Open a new terminal to verify startup."
