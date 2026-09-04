@@ -46,7 +46,7 @@ Cybersecurity • Infrastructure • Systems Operations<br><br>
 <b>Background</b><br>
 • U.S. Army Veteran<br>
 • Defensive Security<br>
-• Real-World Lab Execution<br><br>
+• Authorized Lab Execution<br><br>
 
 <b>Location</b><br>
 Austin, TX • Open to Remote
@@ -66,7 +66,7 @@ SOC Workflow:
 - Log Correlation
 - Threat Classification
 - Incident Escalation
-- Containment Execution
+- Containment Planning / Response Recommendation
 
 Network Defense:
 - Traffic Inspection
@@ -120,7 +120,7 @@ System Discipline:
 
 <h2>🎯 Mission</h2>
 
-To operate at a high level in cybersecurity through structured execution, disciplined analysis, and real-world application.
+To operate at a high level in cybersecurity through structured execution, disciplined analysis, and authorized hands-on application.
 
 ---
 
@@ -132,7 +132,7 @@ To operate at a high level in cybersecurity through structured execution, discip
 
 <pre>
 - Cybersecurity Analysis Workflow
-- Real-World Threat Scenarios
+- Authorized Threat Scenarios
 - Structured Problem Solving
 - Incident Response Simulation
 </pre>
