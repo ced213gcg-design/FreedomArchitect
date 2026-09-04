@@ -54,10 +54,20 @@ Supports current portfolio positioning around:
 Recruiter-facing LinkedIn placeholder defect corrected on 2026-09-04. Current link: `https://linkedin.com/in/CedrickGreen`.
 
 ### `python-security-tools`
-Use only for claims that can be traced to actual code/artifacts present in the repository. Do not infer Python security-tool depth from repository name alone.
+Use only for claims that can be traced to actual code/artifacts present in the repository. Current README describes planned tools and growing Python/security-automation capability; repository name alone does not prove completed production-ready utilities.
 
 ### `FreedomArchitect`
 Use for evidence of structured technical production, versioned workflow design, application/evidence routing, and system documentation. Do not present architecture documents as production cybersecurity employment.
+
+## Current Public-Evidence Gaps
+
+A recruiter reviewing the default public GitHub surface can currently see the Wazuh / Suricata / Zeek project names and broad SOC portfolio positioning, but current code search did not expose searchable public artifacts for:
+- MITRE ATT&CK `T1110` detection-validation specifics
+- `STIX` / `TAXII` artifact specifics
+
+`PUBLIC_EVIDENCE_GAP != CAPABILITY_NOT_PERFORMED`
+
+It means the present public recruiter surface does not independently corroborate that level of detail. If actual sanitized artifacts exist, publish the evidence through the normal Define -> Baseline -> Build -> Test -> Measure -> Audit -> Refine process. Never manufacture an artifact merely to support resume wording.
 
 ## Claim Promotion Rule
 
