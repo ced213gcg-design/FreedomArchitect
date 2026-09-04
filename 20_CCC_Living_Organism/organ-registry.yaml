@@ -1,0 +1,22 @@
+version: 10.0-P0
+states: [DORMANT, SEED, INCUBATE, BUILD, VERIFY, READY, THRIVE, SCALE, HOLD, ISOLATE, RETIRE]
+organs:
+  - {id: trust_fabric, owner: CCC, state: INCUBATE, criticality: TIER_0}
+  - {id: ledger, owner: CCC, state: BUILD, criticality: TIER_0}
+  - {id: mission_control, owner: CCC, state: BUILD, criticality: TIER_0}
+  - {id: soc, owner: CCC, state: VERIFY, criticality: TIER_0}
+  - {id: data_kernel, owner: CCC, state: INCUBATE, criticality: TIER_0}
+  - {id: living_intelligence, owner: CCC, state: BUILD, criticality: TIER_0}
+  - {id: revenue_assurance, owner: CCC, state: INCUBATE, criticality: TIER_0}
+  - {id: freedom_architect, owner: CCC, state: INCUBATE, criticality: TIER_0}
+  - {id: sre, owner: CCC, state: INCUBATE, criticality: TIER_0}
+  - {id: game_theory, owner: CCC, state: READY, criticality: TIER_2, maturity: METHOD}
+  - {id: aegis, owner: CCC, state: INCUBATE, criticality: TIER_1}
+  - {id: commercial_extraction, owner: CCC, state: READY, criticality: TIER_2, maturity: METHOD}
+  - {id: foundry, owner: CCC, state: INCUBATE, criticality: TIER_1}
+  - {id: offtake, owner: CCC, state: INCUBATE, criticality: TIER_1}
+  - {id: commercial_organs, owner: CCC, state: INCUBATE, criticality: TIER_1}
+  - {id: customer_success, owner: CCC, state: INCUBATE, criticality: TIER_1}
+  - {id: dominion, owner: CCC, state: INCUBATE, criticality: TIER_2}
+  - {id: legal_ip, owner: CCC, state: INCUBATE, criticality: TIER_1}
+  - {id: legacy, owner: CCC, state: INCUBATE, criticality: TIER_1}

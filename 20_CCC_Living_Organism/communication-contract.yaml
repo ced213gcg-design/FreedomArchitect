@@ -1,0 +1,15 @@
+version: 10.0-P0
+authorities:
+  github: CODE_AUTHORITY
+  ledger: FACTUAL_EVIDENCE_AUTHORITY
+  orchestra: PLACEMENT_INTEGRATION_RELEASE_AUTHORITY
+  dashboard: HUMAN_DIGITAL_TWIN
+  slack: NON_AUTHORITATIVE_NOTIFICATION_SINK
+rules:
+  schema_validate_events: true
+  secrets_in_messages: false
+  raw_protected_evidence_to_slack: false
+  arbitrary_shell_from_slack: false
+  direct_control_of_unregistered_nodes: false
+  action_requests_require_registration: true
+  consequential_actions_require_human_approval: true

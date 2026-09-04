@@ -1,0 +1,27 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"ledger-event.schema.json",
+  "type":"object",
+  "required":["event_id","timestamp","source","owner","organ","run_id","event_type","previous_state","new_state","change","validation","provenance","artifact_hashes","synthetic","financial_classification","notes"],
+  "properties":{
+    "event_id":{"type":"string"},
+    "timestamp":{"type":"string","format":"date-time"},
+    "source":{"type":"string"},
+    "owner":{"type":"string"},
+    "organ":{"type":"string"},
+    "run_id":{"type":"string"},
+    "event_type":{"type":"string"},
+    "previous_state":{"type":["string","null"]},
+    "new_state":{"type":"string"},
+    "change":{"type":"string"},
+    "validation":{"type":"string"},
+    "provenance":{"type":"string"},
+    "artifact_hashes":{"type":"array","items":{"type":"string"}},
+    "synthetic":{"type":"boolean"},
+    "financial_classification":{"type":"string"},
+    "notes":{"type":"string"},
+    "previous_event_hash":{"type":["string","null"]},
+    "event_hash":{"type":"string"}
+  },
+  "additionalProperties":false
+}

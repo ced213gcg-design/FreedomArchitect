@@ -1,0 +1,12 @@
+classes:
+- central-bank money
+- commercial-bank deposits/liabilities
+- cash
+- securities/assets
+- certificates/claims
+- tokens representing claims
+- accounting entries
+- exchange balances
+- ledger representations
+- settlement assets
+rule: Never collapse distinct instruments into a generic money label.

@@ -1,0 +1,34 @@
+version: 10.0-P0
+principle: USE_THE_SIMPLEST_ARCHITECTURE_THAT_SATISFIES_TRUST_AUDIT_SETTLEMENT_GOVERNANCE_PERFORMANCE_AND_ECONOMIC_REQUIREMENTS
+dimensions:
+- authentication_identity
+- cryptographic_commitment_integrity
+- automated_execution
+- state_database_model
+- replication_distribution
+- consensus_requirement
+- settlement_finality
+- trusted_third_party_escrow_alternative
+- governance
+- privacy_confidentiality
+- performance_cost
+- failure_recovery
+- legal_contract_implications
+- incentive_mechanism_design
+choices:
+  A: conventional relational database
+  B: append-only signed/hash-linked event log
+  C: event-sourced database
+  D: replicated database with trusted operators
+  E: permissioned distributed ledger
+  F: public blockchain
+  G: smart-contract execution
+  H: ordinary software automation without consensus
+  I: trusted-third-party / escrow arrangement
+example_decisions:
+  ccc_internal_evidence:
+    question: Do we need a blockchain for CCC internal evidence?
+    recommended: [B, C]
+    state: READY_METHOD
+    reason: Current internal evidence requirement is satisfied by append-only/hash-linked or event-sourced storage. A real multi-party consensus/settlement requirement has not been proven.
+    blockchain_required: false

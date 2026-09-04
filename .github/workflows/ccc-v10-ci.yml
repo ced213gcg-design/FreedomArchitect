@@ -1,0 +1,70 @@
+name: CCC v10 CI
+on:
+  push:
+    branches: ['upgrade/**']
+  pull_request:
+
+jobs:
+  validate-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r requirements.txt
+      - name: Compile Python
+        run: python -m compileall -q 19_Live_Adaptive_Dashboard 21_CCC_Orchestra 22_CCC_Ledger 23_CCC_Agent_Mesh scripts
+      - name: Repository validation
+        run: python scripts/validate_ccc_repo.py
+      - name: Unit tests
+        run: |
+          mkdir -p artifacts
+          pytest -q --import-mode=importlib --junitxml=artifacts/pytest-report.xml
+      - name: Bash syntax
+        run: |
+          if command -v shellcheck >/dev/null 2>&1; then shellcheck scripts/*.sh; else bash -n scripts/*.sh; fi
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Sphere Canvas fallback test
+        run: node scripts/test_sphere.js
+      - name: Export machine-readable CI evidence
+        if: always()
+        env:
+          CCC_COMMIT_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          CCC_BRANCH: ${{ github.head_ref || github.ref_name }}
+        run: |
+          python scripts/export_release_evidence.py
+          python scripts/render_slack_summary.py
+      - name: Optional sanitized Slack notification
+        if: ${{ always() && env.CCC_SLACK_WEBHOOK_URL != '' }}
+        env:
+          CCC_SLACK_WEBHOOK_URL: ${{ secrets.CCC_SLACK_WEBHOOK_URL }}
+        run: |
+          curl --fail --silent --show-error \
+            -H 'Content-Type: application/json' \
+            --data @artifacts/ccc-slack-summary.json \
+            "$CCC_SLACK_WEBHOOK_URL"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ccc-ci-summary
+          path: |
+            artifacts/ccc-ci-summary.json
+            artifacts/ccc-slack-summary.json
+
+  powershell-static:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Parse PowerShell scripts
+        shell: pwsh
+        run: |
+          $errors = @()
+          Get-ChildItem scripts -Filter *.ps1 | ForEach-Object {
+            $tokens = $null; $parseErrors = $null
+            [void][System.Management.Automation.Language.Parser]::ParseFile($_.FullName,[ref]$tokens,[ref]$parseErrors)
+            $errors += $parseErrors
+          }
+          if ($errors.Count -gt 0) { $errors | Format-List; exit 1 }

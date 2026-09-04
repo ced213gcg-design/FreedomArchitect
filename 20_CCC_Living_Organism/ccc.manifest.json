@@ -1,0 +1,99 @@
+{
+  "schema": "ccc.living_organism.manifest.v10",
+  "version": "10.0-P0",
+  "status": "BUILD",
+  "governance": {
+    "heartbeat": {
+      "binary": ["0011", "0110", "1001"],
+      "meaning": ["Fact", "Evidence", "Execution"],
+      "symbolic_ui_cadence_ms": 963,
+      "critical_telemetry_independent": true
+    },
+    "decision_triad": ["FACT", "RISK", "ACTION"],
+    "evidence_sextet": ["SOURCE", "TIME", "OWNER", "CHANGE", "VALIDATION", "PROVENANCE"],
+    "completion_cycle": ["DEFINE", "BASELINE", "ARCHITECT", "BUILD", "TEST", "MEASURE", "AUDIT", "REFINE", "OPERATIONALIZE"],
+    "lifecycle": ["ALPHA", "BETA", "OMEGA", "REINJECTION", "NEXT_ALPHA"],
+    "rules": {
+      "build_is_completion": false,
+      "evidence_earns_state": true,
+      "unknown_is_pass": false,
+      "irreversible_actions_require_human_approval": true
+    }
+  },
+  "state_model": {
+    "allowed": ["DORMANT", "SEED", "INCUBATE", "BUILD", "VERIFY", "READY", "THRIVE", "SCALE", "HOLD", "ISOLATE", "RETIRE"]
+  },
+  "safety": {
+    "authorized_mesh": true,
+    "default_mode": "READ_ONLY_TELEMETRY",
+    "consequential_action": "EXPLICIT_HUMAN_APPROVAL_AND_STEP_UP_AUTH",
+    "prohibited": [
+      "self_propagation",
+      "unauthorized_scanning",
+      "credential_theft",
+      "persistence_on_unregistered_machines",
+      "covert_c2",
+      "third_party_exploit_delivery",
+      "ddos",
+      "destructive_action_outside_authorized_nodes",
+      "malware_execution_outside_isolated_soc_range",
+      "automatic_money_movement",
+      "automatic_contract_submission",
+      "automatic_release_approval",
+      "automatic_critical_network_change"
+    ]
+  },
+  "authority": {
+    "github": "CODE_AUTHORITY",
+    "ledger": "FACTUAL_EVIDENCE_AUTHORITY",
+    "orchestra": "PLACEMENT_INTEGRATION_RELEASE_AUTHORITY",
+    "living_dashboard": "HUMAN_UNDERSTANDABLE_DIGITAL_TWIN"
+  },
+  "organs": [
+    {"id":"trust_fabric","name":"Trust Fabric","role":"cross_cutting_identity_authorization_immune_system","state":"INCUBATE","criticality":"TIER_0"},
+    {"id":"ledger","name":"Ledger AI","role":"institutional_evidence_memory_authority","state":"BUILD","criticality":"TIER_0"},
+    {"id":"game_theory","name":"Game Theory Engine","role":"strategic_response_layer","state":"READY","criticality":"TIER_2"},
+    {"id":"mission_control","name":"Mission Control","role":"pressure_loss_weakness_and_kill_service","state":"BUILD","criticality":"TIER_0"},
+    {"id":"soc","name":"SOC LAB OS","role":"primary_digital_seed","state":"VERIFY","criticality":"TIER_0"},
+    {"id":"aegis","name":"AEGIS Tor Intelligence OS","role":"lawful_external_sensory_system","state":"INCUBATE","criticality":"TIER_1"},
+    {"id":"data_kernel","name":"Universal Data Kernel + Knowledge Graph","role":"connective_data_tissue","state":"INCUBATE","criticality":"TIER_0"},
+    {"id":"commercial_extraction","name":"Commercial Extraction Engine","role":"capability_to_market_candidate_filter","state":"READY","criticality":"TIER_2"},
+    {"id":"foundry","name":"Product Foundry + Digital Twin","role":"product_integrity_separator","state":"INCUBATE","criticality":"TIER_1"},
+    {"id":"living_intelligence","name":"CCC Living Intelligence","role":"central_operational_and_market_interface","state":"BUILD","criticality":"TIER_0"},
+    {"id":"offtake","name":"Demand Distribution & Offtake","role":"market_circulation","state":"INCUBATE","criticality":"TIER_1"},
+    {"id":"commercial_organs","name":"Commercial Organs","role":"commercial_flow","state":"INCUBATE","criticality":"TIER_1"},
+    {"id":"customer_success","name":"Customer Success & Service Delivery","role":"delivery_relationship","state":"INCUBATE","criticality":"TIER_1"},
+    {"id":"revenue_assurance","name":"Revenue Assurance & Accounting","role":"financial_truth_gate","state":"INCUBATE","criticality":"TIER_0"},
+    {"id":"freedom_architect","name":"Freedom Architect","role":"economic_sovereignty_command","state":"INCUBATE","criticality":"TIER_0"},
+    {"id":"dominion","name":"Dominion OS","role":"commercial_federal_capture","state":"INCUBATE","criticality":"TIER_2"},
+    {"id":"sre","name":"Reliability/SRE/Continuity OS","role":"repair_recovery_continuity","state":"INCUBATE","criticality":"TIER_0"},
+    {"id":"legal_ip","name":"Legal/IP/Contract Operations","role":"protective_contract_ip_membrane","state":"INCUBATE","criticality":"TIER_1"},
+    {"id":"legacy","name":"Trust/Legacy/Green Jewel","role":"long_duration_asset_and_governance_layer","state":"INCUBATE","criticality":"TIER_1"}
+  ],
+  "hosts": {
+    "current": ["ccc-hp-dev-01", "ccc-dell-compute-01"],
+    "future": ["ccc-core-01", "ccc-range-01", "ccc-pulse-01"]
+  },
+  "soc": {
+    "state": "VERIFY",
+    "authoritative_range": "10.69.69.0/24",
+    "superseded_ranges": ["10.77.0.0/24"],
+    "live_state_source": "C:\\CCC\\State\\ccc-soc-live-state.json",
+    "missing_evidence_state": "UNKNOWN"
+  },
+  "dashboard": {
+    "p0_endpoints": ["/api/health", "/api/manifest", "/api/hosts", "/api/organs", "/api/mission", "/api/pressure-loss", "/api/soc/state", "/api/ledger/recent", "/api/agents", "/api/sphere", "/api/economics/technology-choice", "/api/economics/revenue-flywheel", "/api/action-request"],
+    "modes": ["COACH", "PLAN", "SIMULATE", "PROCEED", "PAUSE", "DIVE", "HALT"],
+    "proceed_behavior": "APPROVAL_REQUEST_ONLY"
+  },
+  "external_organisms": [
+    {"id":"imagination_station","relationship":"SEPARATE_ORGANISM","outbound_to_ccc":false,"backchannel_allowed":false},
+    {"id":"grand_resistance","state":"DORMANT","inference_allowed":false,"execution_allowed":false}
+  ],
+  "release": {
+    "branch": "upgrade/ccc-living-dashboard-v10",
+    "target_state": "READY_FOR_HUMAN_REVIEW",
+    "thrive_allowed_in_p0": false
+  },
+  "next_action": "P0-03_VALIDATE_MANIFEST_SCHEMAS_HOST_ROLE_REGISTRIES"
+}

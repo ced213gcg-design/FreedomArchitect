@@ -1,0 +1,16 @@
+routes:
+  github_actions:
+  - slack-sink
+  - ledger-agent
+  orchestra:
+  - dashboard-agent
+  - slack-sink
+  dashboard_action_request:
+  - ledger-agent
+  - human-command-authority
+rules:
+  sanitize: true
+  secrets: false
+  authoritative_return:
+  - github
+  - ledger

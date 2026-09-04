@@ -1,0 +1,15 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"host-state.schema.json",
+  "type":"object",
+  "additionalProperties":false,
+  "required":["id","state","observed_at","health","source","validation"],
+  "properties":{
+    "id":{"type":"string"},
+    "state":{"enum":["UNKNOWN","DORMANT","SEED","INCUBATE","BUILD","VERIFY","READY","THRIVE","SCALE","HOLD","ISOLATE","RETIRE"]},
+    "observed_at":{"type":"string","format":"date-time"},
+    "health":{"type":"object"},
+    "source":{"type":"string"},
+    "validation":{"type":"string"}
+  }
+}

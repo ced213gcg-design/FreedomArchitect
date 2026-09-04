@@ -1,0 +1,15 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"organ-state.schema.json",
+  "type":"object",
+  "additionalProperties":false,
+  "required":["organ_id","state","observed_at","scores","evidence","next_action"],
+  "properties":{
+    "organ_id":{"type":"string"},
+    "state":{"enum":["DORMANT","SEED","INCUBATE","BUILD","VERIFY","READY","THRIVE","SCALE","HOLD","ISOLATE","RETIRE"]},
+    "observed_at":{"type":"string","format":"date-time"},
+    "scores":{"type":"object","required":["Progress","Evidence","Compliance","Resilience","EconomicValue"],"additionalProperties":{"type":"number","minimum":0,"maximum":100}},
+    "evidence":{"type":"array"},
+    "next_action":{"type":"string"}
+  }
+}
