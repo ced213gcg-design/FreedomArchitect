@@ -23,6 +23,19 @@ Human Command: Cedrick Green
 - Status: HISTORICAL_PRESERVED
 - Rule: never overwrite or treat as the current application master.
 
+## Job-Specific Derivatives
+
+### CROWDSTRIKE-R26320-v1
+- Employer: CrowdStrike
+- Role: Associate Security Engineer (Remote)
+- Source master: `RESUME_VARIANT_01`
+- File: `Cedrick_Green_CrowdStrike_Associate_Security_Engineer_R26320_v1.docx`
+- Created: 2026-09-04
+- SHA-256: `5514b57901a0214030a8679553fd132b5a30c2919aec3a4ff96fb7b8247c25f6`
+- Status: CREATED_NOT_SUBMITTED
+- Submission reference: NONE
+- Rule: do not promote to SUBMITTED without external receipt/reference.
+
 ## Truth Firewall
 
 Claims are permitted only when Human Command has performed, studied, built, tested, documented, published, or can otherwise support them with evidence.
