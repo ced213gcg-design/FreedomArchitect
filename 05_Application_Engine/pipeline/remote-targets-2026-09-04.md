@@ -6,13 +6,18 @@
 - Source: CrowdStrike Workday careers
 - Posting reference: R26320
 - Location: USA — Remote TX
-- Compensation observed: $70,000 - $95,000/year in current market listing; confirm exact employer-posting compensation at release
+- Employment type: Full time
+- Official U.S. base salary: $70,000 - $95,000/year, plus eligibility for bonuses, equity grants, and benefits
 - Resume route: RESUME_VARIANT_01 — SOC / Cybersecurity Analyst
 - Fit class: CLASS A / HIGH-PRIORITY REVIEW
 - Material employer language: detection writing/testing/tuning, alert triage, event-log analysis, host/network data, scripting/automation, documentation
-- Experience language: 3-5 years in security engineering/SOC/IR or related technical role; employer explicitly states internship or lab experience counts
-- Additional gates: U.S. Citizen or U.S. Permanent Resident; foundational SIEM/log-analysis familiarity; scripting; Windows/Linux/networking; web-security fundamentals
-- Status: `PRIMARY_SOURCE_VERIFIED -> ROLE_TWIN_READY -> DERIVATIVE_PRIORITY`
+- Experience language: 3-5 years in security engineering/SOC/IR or a related technical role; employer explicitly states internship or lab experience counts
+- Additional gates: U.S. Citizen or U.S. Permanent Resident; foundational SIEM/log-analysis familiarity; scripting; Windows/MacOS/Linux/networking; web-security fundamentals
+- Bonus signals: entry-level certifications, CTF/home-lab/open-source participation, basic AWS/Azure/GCP or Docker exposure
+- Current derivative: `Cedrick_Green_CrowdStrike_Associate_Security_Engineer_R26320_v1.docx`
+- Derivative SHA-256: `5514b57901a0214030a8679553fd132b5a30c2919aec3a4ff96fb7b8247c25f6`
+- Submission status: NOT_SUBMITTED
+- Status: `PRIMARY_SOURCE_VERIFIED -> ROLE_TWIN_READY -> RESUME_READY`
 
 ## CORROBORATED LEADS — PRIMARY POSTING STILL REQUIRED BEFORE RELEASE
 
@@ -41,6 +46,11 @@
 - Resume route: RESUME_VARIANT_01 with evidence-qualified cloud language
 - Fit: CLASS A/B boundary due cloud/application scope
 - Status: `CORROBORATED_LEAD -> PRIMARY_POSTING_REQUIRED`
+
+## Dell / Indeed Verification State
+
+- Dell Technologies: no specific current cybersecurity lead supplied in this hard-sync has yet been reconciled to a primary Dell careers posting. `STATUS = UNVERIFIED_LEAD`.
+- Indeed: current Indeed job-board listings are discovery sources for other employers and must not be treated as jobs employed by Indeed. No specific Indeed corporate cybersecurity posting has been primary-source verified in this cycle. `STATUS = UNVERIFIED_CORPORATE_LEAD`.
 
 ## Search Law
 
