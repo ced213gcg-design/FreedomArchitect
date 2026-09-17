@@ -1,0 +1,34 @@
+{
+  "schema": "ccc.system_policy_current.v1",
+  "effective_date": "2026-09-17",
+  "authority": "Human Command",
+  "state": "ACTIVE",
+  "persistence": "UNTIL_EXPLICIT_HUMAN_COMMAND_SUPERSESSION_OR_REVOCATION",
+  "primary_execution_doctrine": "00_Admin_Control/UPPER_ECHELON_EXECUTION_DOCTRINE.md",
+  "mif3_orchestration": "00_Admin_Control/CCC_Hard_Sync/2026-09-17_MIF3_UPPER_ECHELON_ORCHESTRATION_v2.md",
+  "prior_hard_sync": "00_Admin_Control/CCC_Hard_Sync/2026-09-17_CCC_DOCTRINE_FAULT_MIF3_HARD_SYNC.md",
+  "required_pre_execution_resolution": [
+    "Human Command objective",
+    "current doctrine",
+    "current authority",
+    "current verified state",
+    "last proven checkpoint",
+    "material evidence",
+    "MIF-3 truth gate"
+  ],
+  "systemwide_laws": [
+    "EXECUTE_AT_HIGHEST_AVAILABLE_AUTHORIZED_DEGREE",
+    "FULL_PLAN_EXECUTION_WHEN_ORDERED",
+    "FACT_BEFORE_CLAIM",
+    "UNKNOWN_NE_PASS",
+    "NO_LOOP",
+    "NO_MANUFACTURED_INFORMATION",
+    "PRESERVE_VALID_WORK",
+    "FAULT_TO_REGRESSION_TO_REINJECTION",
+    "HUMAN_COMMAND_FINAL_CONSEQUENTIAL_AUTHORITY"
+  ],
+  "silent_expiration": false,
+  "silent_downgrade": false,
+  "silent_authority_expansion": false,
+  "documentation_is_runtime_proof": false
+}
