@@ -1,0 +1,40 @@
+{
+  "schema": "ccc.hard_sync.receipt.v1",
+  "hard_sync_date": "2026-09-17",
+  "repository": "ced213gcg-design/FreedomArchitect",
+  "branch": "main",
+  "master_path": "00_Admin_Control/CCC_Hard_Sync/2026-09-17_CCC_DOCTRINE_FAULT_MIF3_HARD_SYNC.md",
+  "master_commit_sha": "1b75af932112e3845afb8701a14e03a61eadf1cf",
+  "master_blob_sha": "b91e47c505bdcf36042a59cea5c532ec0be15ba1",
+  "read_back_verified": true,
+  "preserved_state": {
+    "doctrine_reconstruction": "HARD_SAVED",
+    "fault_lineage": "HARD_SAVED",
+    "dell_faults": "HARD_SAVED",
+    "false_1000_cycle_claim": "HARD_SAVED_AS_FAULT",
+    "manufactured_information_definition": "HARD_SAVED_CANDIDATE",
+    "mif3_three_ai_firewall": "HARD_SAVED_CANDIDATE",
+    "vision_control_hierarchy": "HARD_SAVED_CANDIDATE",
+    "new_harness_intelligence": "HARD_SAVED_CANDIDATE",
+    "free_token_broker": "HARD_SAVED_CANDIDATE"
+  },
+  "explicit_non_actions": {
+    "canon_promotion": false,
+    "dell_repair": false,
+    "lock_key_transfer": false,
+    "production_commerce_authorization": false
+  },
+  "truth_controls": [
+    "FACT BEFORE CLAIM",
+    "UNKNOWN != PASS",
+    "EXECUTED != VERIFIED",
+    "VERIFIED != RATIFIED",
+    "INTENTION != EVIDENCE",
+    "NO LOOP",
+    "NO MANUFACTURED INFORMATION",
+    "PRESERVE FAULTS",
+    "REINJECT VERIFIED LESSONS",
+    "HUMAN COMMAND REMAINS FINAL CONSEQUENTIAL AUTHORITY"
+  ],
+  "receipt_status": "HARD_SYNC_SAVED_AND_READ_BACK_VERIFIED"
+}
