@@ -1,0 +1,48 @@
+{
+  "schema": "ccc.upper_echelon_mif3.systemwide_receipt.v1",
+  "date": "2026-09-17",
+  "repository": "ced213gcg-design/FreedomArchitect",
+  "branch": "main",
+  "authority": "Human Command",
+  "status": "HARD_SYNC_SAVED_AND_READ_BACK_VERIFIED",
+  "persistence": "UNTIL_EXPLICIT_HUMAN_COMMAND_SUPERSESSION_OR_REVOCATION",
+  "artifacts": [
+    {
+      "path": "00_Admin_Control/UPPER_ECHELON_EXECUTION_DOCTRINE.md",
+      "commit_sha": "43b7f90d4805b8c34de66d29099fbc2428a5ee6e",
+      "blob_sha": "230d50f0a74d67cc8c639d196b0661676ac94a75",
+      "read_back_verified": true
+    },
+    {
+      "path": "00_Admin_Control/CCC_Hard_Sync/2026-09-17_MIF3_UPPER_ECHELON_ORCHESTRATION_v2.md",
+      "commit_sha": "4a5219a3fb03eb711dd88f10e163f9e9f2c7f12c",
+      "blob_sha": "422a3c7b1e9fe0fa5e1d271fbe3c6463bd944f24",
+      "read_back_verified": true
+    },
+    {
+      "path": "00_Admin_Control/SYSTEM_POLICY_CURRENT.json",
+      "commit_sha": "6cd953ba8908443c6759d31ef63ffc91920f4e2e",
+      "blob_sha": "aae8af3a514cf81a535f24a2bac7652ac74fbb72",
+      "read_back_verified": true
+    },
+    {
+      "path": "00_Admin_Control/assistant/daily_review.txt",
+      "commit_sha": "933ee65a6136366c4827fd46ccce358c9f4b00aa",
+      "blob_sha": "090836025e47d198847d2aef9b974881496208af",
+      "read_back_verified": true
+    }
+  ],
+  "systemwide_rules": {
+    "upper_echelon_execution": true,
+    "highest_available_authorized_degree": true,
+    "full_plan_execution_when_ordered": true,
+    "fact_before_claim": true,
+    "no_manufactured_information": true,
+    "no_loop": true,
+    "preserve_valid_work": true,
+    "fault_to_regression_to_reinjection": true,
+    "human_command_final_consequential_authority": true,
+    "documentation_is_runtime_proof": false
+  },
+  "truth_boundary": "This receipt proves repository persistence and read-back of doctrine/policy artifacts. It does not by itself prove every runtime component has software enforcement deployed. Runtime enforcement must be evidenced separately when implemented."
+}
