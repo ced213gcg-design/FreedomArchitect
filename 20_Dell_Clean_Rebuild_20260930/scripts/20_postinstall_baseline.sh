@@ -23,7 +23,8 @@ chmod 0755 "$INSTALL_ROOT/scripts/"*.sh
 systemctl mask ccc-dell-bootstrap.service >/dev/null 2>&1 || true
 systemctl mask ccc-network-restore.service >/dev/null 2>&1 || true
 
-install -m 0644 "$INSTALL_ROOT/systemd/ccc-post-reboot-acceptance.service"   /etc/systemd/system/ccc-post-reboot-acceptance.service
+install -m 0644 "$INSTALL_ROOT/systemd/ccc-post-reboot-acceptance.service" \
+  /etc/systemd/system/ccc-post-reboot-acceptance.service
 
 cat >/usr/local/sbin/RUN <<'EOF'
 #!/usr/bin/env bash
