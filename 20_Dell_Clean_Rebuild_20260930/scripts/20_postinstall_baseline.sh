@@ -15,7 +15,9 @@ STATE_ROOT="/var/lib/ccc-run-dell"
 RECEIPT_ROOT="$STATE_ROOT/receipts"
 
 mkdir -p "$INSTALL_ROOT" "$STATE_ROOT/state" "$RECEIPT_ROOT"
-cp -a "$PACKAGE_ROOT/." "$INSTALL_ROOT/"
+if [[ "$(readlink -f "$PACKAGE_ROOT")" != "$(readlink -f "$INSTALL_ROOT")" ]]; then
+  cp -a "$PACKAGE_ROOT/." "$INSTALL_ROOT/"
+fi
 chmod 0755 "$INSTALL_ROOT/scripts/"*.sh
 
 systemctl mask ccc-dell-bootstrap.service >/dev/null 2>&1 || true
