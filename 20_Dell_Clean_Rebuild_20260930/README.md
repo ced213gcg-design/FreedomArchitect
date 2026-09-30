@@ -41,7 +41,8 @@ The 2026-09-17 fault record stated that the r7.2 reboot-loop defect by itself wa
 7. Run `scripts/25_wifi_configure.sh` if Wi-Fi host management is required.
 8. Type exactly `RUN DELL`.
 9. Dispatcher proves network/PVE boundaries, arms one-shot post-reboot acceptance, and reboots once.
-10. Post-reboot service verifies acceptance and disables itself. No second reboot.\n11. Apply `scripts/50_apply_topology_overlay.sh` only after the topology overlay is evidence-verified.
+10. Post-reboot service verifies acceptance and disables itself. No second reboot.
+11. Apply `scripts/50_apply_topology_overlay.sh` only after the topology overlay is evidence-verified.
 
 ## Topology hold
 
