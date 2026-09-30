@@ -1,0 +1,42 @@
+{
+  "schema": "ccc.dell.clean_rebuild.manifest.v1",
+  "package": "CCC_DELL_CLEAN_REBUILD_v1.0.0_20260930",
+  "version": "1.0.0",
+  "build_date": "2026-09-30",
+  "authority": "Human Command",
+  "github": {
+    "repository": "ced213gcg-design/FreedomArchitect",
+    "branch": "dell-clean-rebuild-20260930",
+    "branch_head_at_manifest": "160dbc6d53d8d410661467655cc3bf11da403caa",
+    "source_main_commit": "cc2565379b28c5a04a8078d176dbb9285f9ce52c"
+  },
+  "validation": {
+    "bash_parse_files": 8,
+    "bash_parse_pass": 8,
+    "bash_parse_fail": 0,
+    "regression_run_count": 13,
+    "regression_pass_count": 13,
+    "regression_fail_count": 0,
+    "regression_status": "PASS",
+    "shellcheck_status": "UNAVAILABLE_NOT_CLAIMED_PASS",
+    "systemd_unit_verify": "PASS",
+    "checksum_readback": "PASS",
+    "validation_receipt": "VALIDATION_RECEIPT.txt"
+  },
+  "state": {
+    "package": "VALIDATED_STATIC_AND_REGRESSION_NOT_DEPLOYED",
+    "save_all": "NOT_EXECUTED",
+    "wipe": "HOLD_SAVE_ALL_REQUIRED",
+    "postinstall": "NOT_EXECUTED",
+    "run_dell": "NOT_EXECUTED_ON_CLEAN_INSTALL",
+    "post_reboot_acceptance": "NOT_EXECUTED",
+    "topology": "HOLD_EXACT_BRIDGE_ADDRESSING_NOT_GITHUB_RECONCILED"
+  },
+  "exclusions": [
+    "No Wi-Fi password or other secret is included.",
+    "No full Dell disk backup is included.",
+    "No stale ccc-dell-bootstrap.service autostart is included.",
+    "No stale ccc-network-restore.service autostart is included.",
+    "No remembered vmbr10/vmbr69 addressing is asserted as current."
+  ]
+}
