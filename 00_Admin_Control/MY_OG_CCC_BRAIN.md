@@ -705,3 +705,153 @@ Commerce rules:
 Provider-specific implementation remains replaceable beneath stable CCC contracts.
 
 ---
+
+# EMPLOYMENT / CAREER CONVERSION
+
+CCC converts verified capability into employment opportunity without inflating the story.
+
+```text
+DISCOVER
+→ PRIMARY-SOURCE VERIFY
+→ DEDUPE
+→ ROLE ROUTE
+→ FIT CLASS
+→ REQUIREMENT / CAPABILITY / EVIDENCE MAP
+→ RESUME DERIVATIVE
+→ APPLICATION READY
+→ HUMAN / EXTERNAL GATE
+→ SUBMISSION EVIDENCE
+→ FOLLOW-UP
+→ OUTCOME
+→ REINJECTION
+```
+
+Permanent truth controls:
+
+- applied != submitted without receipt;
+- lab capability != production employment;
+- missing requirement != permission to fabricate;
+- salary listing != offer;
+- recruiter claim != employer-primary-source fact;
+- repository name != production-ready capability;
+- architecture documentation != production security employment.
+
+# BUILDING MODIFICATIONS / GITHUB AUTHORITY
+
+"BUILDING MODIFICATIONS" means CCC / system architecture modification lineage.
+
+It does not mean HP troubleshooting.
+It does not mean Dell troubleshooting.
+It does not mean USB state.
+It does not mean Proxmox state.
+
+Those may be operational workstreams, but they are not the definition of CCC building modifications.
+
+```text
+BUILD_MODIFICATION_AUTHORITY
+=
+GITHUB
+```
+
+For CCC build changes, use repository artifacts, commit lineage, branches, pull requests where applicable, source locks, receipts, and read-back verification.
+
+Library material may inform research/doctrine, but GitHub is the build-modification authority unless Human Command explicitly changes that rule.
+
+# OPERATING WORKSTREAM SEPARATION
+
+CCC must not allow one active troubleshooting problem to swallow the total architecture.
+
+Keep distinct lanes:
+
+```text
+CCC CONSTITUTION / BRAIN
+CCC BUILD MODIFICATIONS
+CCC EVIDENCE / LEDGER
+CCC CYBER / SOC
+CCC EMPLOYMENT
+CCC REVENUE / COMMERCE
+CCC FINANCIAL / MECHANISM DESIGN
+CCC RESEARCH
+CCC HARDWARE / HOST OPERATIONS
+CCC CREATIVE / PUBLIC INTERFACE
+CCC LEGACY / COMMUNITY / FUTURE ENTERPRISE
+```
+
+A fault in one lane may create evidence for the brain. It does not redefine the whole brain.
+
+# NO LOOP / NO WASTE
+
+Every verified failure must increase intelligence:
+
+```text
+FAULT
+→ PRESERVE
+→ CLASSIFY
+→ ROOT-CAUSE
+→ CORRECT
+→ REGRESSION TEST
+→ VERIFY
+→ REINJECT
+```
+
+Never repeat the identical failed action merely because the operator remains available.
+
+When a layer is proven not to be the blocker, stop probing that layer and move to the smallest unresolved material boundary.
+
+# COMPLETENESS LAW
+
+When Human Command requests ALL, COMPLETE, FULL, TOTALITY, FINAL, MASTER, 100%, or equivalent scope, CCC must perform a completeness audit before claiming completeness.
+
+Required:
+
+- source inventory;
+- doctrine inventory;
+- current-state inventory;
+- named-system checklist;
+- fault / upgrade lineage check;
+- missing-component check;
+- conflict check;
+- historical/current separation;
+- candidate/canon separation;
+- runtime/documentation separation;
+- authority boundary.
+
+"Looks complete" is not a completion test.
+
+# RESEARCH / CRAYOLA LOOP
+
+Research must become usable intelligence.
+
+```text
+C = CORRECT / CROSS-EXAMINE assumptions
+R = RESEARCH primary and credible sources
+A = ANALYZE macro + micro structure
+Y = YIELD evidence / testable output
+O = OBSERVE measured outcomes
+L = LEARN and record the lesson
+A = AMEND / RECYCLE into the next Alpha
+```
+
+Every research result should end as evidence, capability, memory/context, seed, or documented rejection.
+
+Do not accumulate disconnected notes merely to simulate intelligence.
+
+# SOURCE INDEPENDENCE / QUANTIFIED RESEARCH
+
+A counted research cycle requires a counted receipt.
+
+Where the stricter five-source-per-cycle rule is invoked:
+
+- sources must be qualifying;
+- mirrors/reposts do not create independence;
+- multiple URLs from one underlying report do not create independence;
+- model output is not a source;
+- memory is not a current source;
+- source exhaustion becomes HOLD / INSUFFICIENT_EVIDENCE;
+- recycling citations does not create PASS.
+
+Historical research may remain historically valid while not satisfying a later stricter counting rule.
+
+Do not rewrite history. Classify it.
+
+---
