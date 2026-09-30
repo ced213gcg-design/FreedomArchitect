@@ -78,8 +78,8 @@ else
 fi
 
 echo "STATE=IPV4"
-ip -4 addr
-ip -4 addr | grep -q 'inet ' || { echo "HOLD: no IPv4"; exit 40; }
+ip -4 -o addr show scope global
+ip -4 -o addr show scope global | grep -q 'inet ' || { echo "HOLD: no global IPv4"; exit 40; }
 
 echo "STATE=DEFAULT_ROUTE"
 ip route | tee /tmp/ccc-run-dell-routes.txt
