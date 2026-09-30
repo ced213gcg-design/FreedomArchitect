@@ -34,7 +34,7 @@ systemctl is-enabled ccc-network-restore.service 2>/dev/null | grep -qx masked |
   exit 51
 }
 
-ip -4 addr | grep -q 'inet ' || { echo "POST_REBOOT_ACCEPTANCE=FAIL_NO_IPV4"; exit 52; }
+ip -4 -o addr show scope global | grep -q 'inet ' || { echo "POST_REBOOT_ACCEPTANCE=FAIL_NO_GLOBAL_IPV4"; exit 52; }
 ip route | grep -q '^default ' || { echo "POST_REBOOT_ACCEPTANCE=FAIL_NO_DEFAULT_ROUTE"; exit 53; }
 getent ahostsv4 pve.proxmox.com >/dev/null || { echo "POST_REBOOT_ACCEPTANCE=FAIL_DNS"; exit 54; }
 timeout 8s bash -c '</dev/tcp/1.1.1.1/443' || { echo "POST_REBOOT_ACCEPTANCE=FAIL_TCP443"; exit 55; }
