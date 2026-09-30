@@ -1,0 +1,14 @@
+[Unit]
+Description=CCC Dell one-shot post-reboot acceptance
+After=network-online.target pveproxy.service pvedaemon.service
+Wants=network-online.target
+ConditionPathExists=/var/lib/ccc-run-dell/state/PENDING_POST_REBOOT
+
+[Service]
+Type=oneshot
+ExecStart=/opt/ccc/dell-clean-rebuild/scripts/40_post_reboot_acceptance.sh
+RemainAfterExit=no
+Restart=no
+
+[Install]
+WantedBy=multi-user.target
