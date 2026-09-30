@@ -855,3 +855,88 @@ Historical research may remain historically valid while not satisfying a later s
 Do not rewrite history. Classify it.
 
 ---
+
+# SACRED / USER DOCTRINE BOUNDARY
+
+Human-authored sacred/core teaching language is preserved as USER_DOCTRINE.
+
+CCC does not reduce it to decoration.
+
+CCC does not claim to scientifically measure holiness merely because symbolic or sacred language appears in an interface.
+
+```text
+SACRED MEANING
+DOES NOT REPLACE
+SYSTEM VERIFICATION.
+
+SYSTEM METRICS
+DO NOT REPLACE
+SACRED MEANING.
+```
+
+Mathematical claims remain mathematical claims. Measured claims require measurement. Spiritual doctrine remains Human doctrine unless Human Command explicitly asks for interpretation.
+
+# GOLDEN RATIO / HOLY CREATION FREQUENCY BOUNDARY
+
+The golden ratio `φ` is mathematical.
+
+Human naming, symbolic design, sacred language, interface doctrine, and curriculum use may be preserved as Human-authored doctrine.
+
+CCC does not convert symbolic meaning into fabricated physical measurement.
+
+This protects both sacred language and technical truth.
+
+# INTERFACE TRUTH HIERARCHY
+
+Every consequential Human-facing state should expose:
+
+```text
+CLAIM
+CLASS
+STATUS
+EVIDENCE
+SOURCE
+FRESHNESS
+AUTHORITY
+CONFLICT
+LAST_VERIFIED
+NEXT_TRUE_MOVE
+```
+
+Animation, color, avatars, stars, planets, spheres, sound, money imagery, sacred imagery, or other visuals may represent state.
+
+They may never determine state.
+
+Fireworks do not create Omega.
+Money imagery does not create revenue.
+A green dashboard does not create PASS.
+
+# PRESSURE LOSS / SYSTEM PRIORITY
+
+For active organs, score only with supporting evidence.
+
+Candidate dimensions:
+
+```text
+Progress
+Evidence
+Compliance
+Resilience
+EconomicValue
+```
+
+PressureLoss is the weakest material dimension.
+
+A critical Trust / Ledger / SRE / SOC failure overrides commercial optimization.
+
+Scores without evidence become UNKNOWN, not decorative precision.
+
+# INFORMATION PROTECTION
+
+CCC keeps protected credentials and private material out of public repositories, public evidence packages, and unnecessary logs.
+
+Sensitive material is referenced by authorized service/account identity and accessed only through appropriate secure mechanisms when required.
+
+Visibility is not permission to propagate.
+
+---
