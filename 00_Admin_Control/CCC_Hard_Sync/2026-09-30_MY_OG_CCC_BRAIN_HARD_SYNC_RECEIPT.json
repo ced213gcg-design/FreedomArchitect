@@ -1,0 +1,61 @@
+{
+  "schema": "ccc.my_og_ccc_brain.hard_sync_receipt.v1",
+  "date": "2026-09-30",
+  "authority": "Human Command",
+  "repository": "ced213gcg-design/FreedomArchitect",
+  "branch": "main",
+  "status": "GITHUB_HARD_SYNC_SAVED_AND_READ_BACK_VERIFIED",
+  "brain": {
+    "path": "00_Admin_Control/MY_OG_CCC_BRAIN.md",
+    "version": "1.0.0",
+    "final_commit_sha": "5a4adc8aacf799e54f830dd9287c1c16238e73f2",
+    "blob_sha": "9f0aadc36abb871f3ca1a70aaeca29833477529a",
+    "read_back_verified": true
+  },
+  "current_policy": {
+    "path": "00_Admin_Control/SYSTEM_POLICY_CURRENT.json",
+    "commit_sha": "00cded0e7ef9fcab83d24daab18c625fc211b6eb",
+    "blob_sha": "5c13ed1cb5f2da24d4fbe311ef4c84560d7060ba",
+    "brain_pointer_active": true,
+    "read_back_verified": true
+  },
+  "daily_review": {
+    "path": "00_Admin_Control/assistant/daily_review.txt",
+    "commit_sha": "93702fb2b0ace7098b714445bbabcdacd945df81",
+    "blob_sha": "37ad9f1639321194651960e3ee91d4c1876b490a",
+    "brain_load_required": true,
+    "read_back_verified": true
+  },
+  "locked_controls": [
+    "FACT_BEFORE_CLAIM",
+    "UNKNOWN_NE_PASS",
+    "NO_MANUFACTURED_INFORMATION",
+    "MIF3_THREE_AI_TRUTH_AND_EXECUTION_FIREWALL",
+    "JARVIS_BOUNDED_ORCHESTRATION_NOT_SOVEREIGN_TRUTH",
+    "HERMES_PARALLELISM_REQUIRES_INTEGRATION_REVIEW",
+    "GROK_CAPABILITY_ABSENT_MEANS_HOLD_NOT_INVENT",
+    "MAKER_CHECKER_WORKER_SEPARATION",
+    "MIT_BLOCKCHAIN_GAME_THEORY_MECHANISM_DESIGN_REQUIRED_ANALYTICAL_GATE",
+    "MIT_RESEARCH_NOT_LEGAL_AUTHORITY",
+    "NO_GUARANTEED_PROFIT_OR_LOSSLESSNESS_CLAIM",
+    "BUILD_MODIFICATION_AUTHORITY_IS_GITHUB",
+    "REVENUE_REQUIRES_REALIZED_RECONCILED_EVIDENCE",
+    "SACRED_USER_DOCTRINE_PRESERVED_WITH_MACHINE_MEASUREMENT_BOUNDARY",
+    "NO_LOOP_FAULT_TO_REGRESSION_TO_REINJECTION"
+  ],
+  "source_families": {
+    "github_authority": true,
+    "user_library_research": true,
+    "connected_external_intelligence": true,
+    "current_runtime_evidence_required_for_runtime_claims": true
+  },
+  "hp_local_copy": {
+    "state": "NOT_WRITTEN",
+    "reason": "Remote Desktop Commander HP device offline during hard-sync closure",
+    "manufactured_pass_prohibited": true
+  },
+  "persistence": "UNTIL_EXPLICIT_HUMAN_COMMAND_SUPERSESSION_OR_REVOCATION",
+  "silent_expiration": false,
+  "silent_downgrade": false,
+  "documentation_is_runtime_proof": false
+}
