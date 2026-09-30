@@ -84,7 +84,9 @@ for RELATIVE_PATH in etc root home opt usr/local var/lib/pve-cluster var/lib/vz/
 done
 (( ${#CONFIG_PATHS[@]} > 0 )) || { echo "HOLD: no configuration paths resolved"; exit 30; }
 
-tar --xattrs --acls --numeric-owner -C "$ROOT_MOUNT"   -cpf "$SAVE_DIR/config/critical-config.tar" "${CONFIG_PATHS[@]}"   2>"$SAVE_DIR/config/tar-warnings.log"
+tar --xattrs --acls --numeric-owner -C "$ROOT_MOUNT" \
+  -cpf "$SAVE_DIR/config/critical-config.tar" "${CONFIG_PATHS[@]}" \
+  2>"$SAVE_DIR/config/tar-warnings.log"
 
 IMAGE_PATH="$SAVE_DIR/dell-internal-disk.raw"
 echo "FULL_DISK_IMAGE_BEGIN=$(date -Is)" | tee -a "$SAVE_DIR/SAVE_ALL.log"
