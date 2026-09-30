@@ -1,0 +1,20 @@
+{
+  "schema": "ccc.my_og_ccc_brain.receipt.v1",
+  "date": "2026-09-30",
+  "authority": "Human Command",
+  "branch": "main",
+  "brain_path": "00_Admin_Control/MY_OG_CCC_BRAIN.md",
+  "brain_version": "1.0.0",
+  "brain_commit_sha": "5a4adc8aacf799e54f830dd9287c1c16238e73f2",
+  "brain_blob_sha": "9f0aadc36abb871f3ca1a70aaeca29833477529a",
+  "brain_read_back_verified": true,
+  "policy_commit_sha": "00cded0e7ef9fcab83d24daab18c625fc211b6eb",
+  "policy_blob_sha": "5c13ed1cb5f2da24d4fbe311ef4c84560d7060ba",
+  "daily_review_commit_sha": "1de9786c45bb1404098e276c1505394ed991c611",
+  "daily_review_blob_sha": "992435cce7e7cc9ae8296ad5f80b7ffd6fed9d9",
+  "required_pre_execution_context": true,
+  "mit_game_theory_gate": true,
+  "persistence": "UNTIL_EXPLICIT_HUMAN_COMMAND_SUPERSESSION_OR_REVOCATION",
+  "hp_terminal_copy": "NOT_EXECUTED_REMOTE_AGENT_OFFLINE",
+  "status": "GITHUB_HARD_SYNC_SAVED_AND_READ_BACK_VERIFIED"
+}
