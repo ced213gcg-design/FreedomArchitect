@@ -28,13 +28,27 @@ if ! findmnt -no OPTIONS "$ROOT_MOUNT" 2>/dev/null | tr ',' '\n' | grep -qx ro; 
   exit 26
 fi
 
+DEST_SOURCE="$(findmnt -no SOURCE -T "$DESTINATION" | xargs)"
+DEST_FSTYPE="$(findmnt -no FSTYPE -T "$DESTINATION" | xargs)"
+case "$DEST_FSTYPE" in
+  overlay|tmpfs|ramfs|squashfs|vfat|msdos)
+    echo "HOLD: unsuitable SAVE-ALL destination filesystem: $DEST_FSTYPE"
+    exit 27
+    ;;
+esac
+
+if [[ "$DEST_SOURCE" == "$INTERNAL_DISK" || "$DEST_SOURCE" == "$INTERNAL_DISK"* ]]; then
+  echo "HOLD: backup destination resolves to the Dell internal disk"
+  exit 28
+fi
+
 DISK_BYTES="$(lsblk -b -dn -o SIZE "$INTERNAL_DISK" | xargs)"
 AVAILABLE_BYTES="$(df -B1 --output=avail "$DESTINATION" | tail -n1 | xargs)"
 REQUIRED_BYTES=$((DISK_BYTES + 5368709120))
 if (( AVAILABLE_BYTES < REQUIRED_BYTES )); then
   echo "HOLD: backup destination lacks capacity"
   echo "DISK_BYTES=$DISK_BYTES AVAILABLE_BYTES=$AVAILABLE_BYTES REQUIRED_BYTES=$REQUIRED_BYTES"
-  exit 27
+  exit 29
 fi
 
 TIMESTAMP="$(date -u +%Y%m%dT%H%M%SZ)"
@@ -43,6 +57,8 @@ mkdir -p "$SAVE_DIR/metadata" "$SAVE_DIR/config"
 
 echo "=== CCC SAVE-ALL START ===" | tee "$SAVE_DIR/SAVE_ALL.log"
 echo "INTERNAL_DISK=$INTERNAL_DISK" | tee -a "$SAVE_DIR/SAVE_ALL.log"
+echo "DEST_SOURCE=$DEST_SOURCE" | tee -a "$SAVE_DIR/SAVE_ALL.log"
+echo "DEST_FSTYPE=$DEST_FSTYPE" | tee -a "$SAVE_DIR/SAVE_ALL.log"
 echo "DISK_BYTES=$DISK_BYTES" | tee -a "$SAVE_DIR/SAVE_ALL.log"
 
 lsblk -o NAME,PATH,TYPE,TRAN,RM,SIZE,FSTYPE,LABEL,UUID,MOUNTPOINTS,MODEL >"$SAVE_DIR/metadata/lsblk.txt"
@@ -60,10 +76,15 @@ if command -v sgdisk >/dev/null 2>&1; then
 fi
 vgcfgbackup -f "$SAVE_DIR/metadata/pve-vgcfgbackup.conf" pve
 
-tar --xattrs --acls --numeric-owner -C "$ROOT_MOUNT" -cpf "$SAVE_DIR/config/critical-config.tar"   etc root home opt usr/local var/lib/pve-cluster var/lib/vz/dump 2>"$SAVE_DIR/config/tar-warnings.log" || {
-    echo "HOLD: critical configuration archive failed" | tee -a "$SAVE_DIR/SAVE_ALL.log"
-    exit 28
-  }
+CONFIG_PATHS=()
+for RELATIVE_PATH in etc root home opt usr/local var/lib/pve-cluster var/lib/vz/dump; do
+  if [[ -e "$ROOT_MOUNT/$RELATIVE_PATH" ]]; then
+    CONFIG_PATHS+=("$RELATIVE_PATH")
+  fi
+done
+(( ${#CONFIG_PATHS[@]} > 0 )) || { echo "HOLD: no configuration paths resolved"; exit 30; }
+
+tar --xattrs --acls --numeric-owner -C "$ROOT_MOUNT"   -cpf "$SAVE_DIR/config/critical-config.tar" "${CONFIG_PATHS[@]}"   2>"$SAVE_DIR/config/tar-warnings.log"
 
 IMAGE_PATH="$SAVE_DIR/dell-internal-disk.raw"
 echo "FULL_DISK_IMAGE_BEGIN=$(date -Is)" | tee -a "$SAVE_DIR/SAVE_ALL.log"
@@ -72,7 +93,7 @@ sync
 echo "FULL_DISK_IMAGE_END=$(date -Is)" | tee -a "$SAVE_DIR/SAVE_ALL.log"
 
 IMAGE_BYTES="$(stat -c %s "$IMAGE_PATH")"
-[[ "$IMAGE_BYTES" -eq "$DISK_BYTES" ]] || { echo "HOLD: image size mismatch"; exit 29; }
+[[ "$IMAGE_BYTES" -eq "$DISK_BYTES" ]] || { echo "HOLD: image size mismatch"; exit 31; }
 
 echo "SOURCE_SHA256_BEGIN=$(date -Is)" | tee -a "$SAVE_DIR/SAVE_ALL.log"
 SOURCE_SHA256="$(sha256sum "$INTERNAL_DISK" | awk '{print $1}')"
@@ -80,7 +101,7 @@ IMAGE_SHA256="$(sha256sum "$IMAGE_PATH" | awk '{print $1}')"
 echo "SOURCE_SHA256=$SOURCE_SHA256" | tee -a "$SAVE_DIR/SAVE_ALL.log"
 echo "IMAGE_SHA256=$IMAGE_SHA256" | tee -a "$SAVE_DIR/SAVE_ALL.log"
 
-[[ "$SOURCE_SHA256" == "$IMAGE_SHA256" ]] || { echo "SAVE_ALL=FAIL_HASH_MISMATCH"; exit 30; }
+[[ "$SOURCE_SHA256" == "$IMAGE_SHA256" ]] || { echo "SAVE_ALL=FAIL_HASH_MISMATCH"; exit 32; }
 
 (
   cd "$SAVE_DIR"
@@ -93,6 +114,8 @@ TIMESTAMP=$TIMESTAMP
 INTERNAL_DISK=$INTERNAL_DISK
 DISK_BYTES=$DISK_BYTES
 IMAGE_BYTES=$IMAGE_BYTES
+DEST_SOURCE=$DEST_SOURCE
+DEST_FSTYPE=$DEST_FSTYPE
 SOURCE_SHA256=$SOURCE_SHA256
 IMAGE_SHA256=$IMAGE_SHA256
 CONFIG_ARCHIVE=critical-config.tar
