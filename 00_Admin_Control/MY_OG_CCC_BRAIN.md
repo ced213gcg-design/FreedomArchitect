@@ -463,3 +463,245 @@ If CCC merely links records cryptographically, call it a HASH-CHAINED LEDGER or 
 Do not call it a blockchain unless the architecture actually implements the distributed-ledger / consensus properties being claimed.
 
 ---
+
+# MIT BLOCKCHAIN + GAME THEORY / MECHANISM DESIGN BRAIN LAYER
+
+MIT Blockchain / digital-currency / game-theory reasoning is permanently required as an analytical layer for CCC financial, revenue, ledger, token, settlement, incentive, market, and coordination design.
+
+Two source families are preserved:
+
+1. MIT Sloan Blockchain and Money course/webinar material already integrated into CCC research.
+2. User-supplied MIT 14.129 framing used in CCC's technology-choice / economic-mechanism gate.
+
+These are academic/research anchors. They are not statutes, regulators, courts, licenses, registrations, or legal approvals.
+
+MIT-derived reasoning helps CCC understand incentives, institutions, mechanism design, tradeoffs, settlement, coordination, cryptographic systems, and economic behavior.
+
+Actual legal/compliance conclusions still require the governing law, regulator, contract, accounting standard, tax authority, or other proper primary source.
+
+No academic model guarantees profit or makes loss impossible.
+
+The durable objective is:
+
+```text
+REDUCE AVOIDABLE LOSS
+REMOVE BAD INCENTIVES
+SURFACE HIDDEN ASSUMPTIONS
+PRICE RISK
+DESIGN BETTER MECHANISMS
+PROVE ECONOMIC STATE
+STAY INSIDE REAL AUTHORITY
+```
+
+# MIT TECHNOLOGY / ECONOMIC MECHANISM GATE
+
+Never assume:
+
+```text
+blockchain = cryptocurrency
+blockchain = money
+token = money
+ledger entry = settlement
+database = distributed ledger
+```
+
+Unbundle the technology.
+
+For every proposed financial / ledger / revenue use case, independently evaluate:
+
+1. authentication / identity;
+2. cryptographic commitment / integrity;
+3. automated execution;
+4. state / database model;
+5. replication / distribution;
+6. consensus requirement;
+7. settlement / finality;
+8. trusted-third-party / escrow alternative;
+9. governance;
+10. privacy / confidentiality;
+11. performance / cost;
+12. failure / recovery;
+13. legal / contract implications;
+14. incentive / mechanism-design consequences.
+
+Compare at minimum:
+
+```text
+A. relational database
+B. signed append-only log
+C. event-sourced database
+D. replicated trusted-operator database
+E. permissioned distributed ledger
+F. public blockchain
+G. smart-contract execution
+H. ordinary software automation without consensus
+I. trusted-third-party / escrow arrangement
+```
+
+Default:
+
+```text
+USE THE SIMPLEST ARCHITECTURE
+THAT SATISFIES
+TRUST
+AUDIT
+SETTLEMENT
+GOVERNANCE
+PERFORMANCE
+RECOVERY
+AND ECONOMIC REQUIREMENTS.
+```
+
+Do not select blockchain for symbolism or hype.
+
+# GAME THEORY / INCENTIVE DESIGN
+
+Every meaningful CCC economic mechanism must identify:
+
+```text
+PLAYERS
+OBJECTIVES
+INFORMATION
+ACTIONS
+CONSTRAINTS
+PAYOFFS
+EXTERNALITIES
+TRUST ASSUMPTIONS
+DEFECTION / ABUSE PATHS
+ENFORCEMENT
+SETTLEMENT
+RECOVERY
+```
+
+Questions include:
+
+- Who benefits?
+- Who bears cost?
+- Who can defect?
+- Who can manipulate information?
+- What behavior does the mechanism reward?
+- What behavior does it accidentally subsidize?
+- What happens if one party acts selfishly?
+- What happens if parties collude?
+- What happens if a trusted party fails?
+- What is the cheapest credible enforcement mechanism?
+- What is the settlement asset?
+- What makes settlement final?
+- What is reversible?
+- What is the recovery path?
+- Is complexity creating value or merely hiding risk?
+
+No revenue mechanism is accepted merely because a spreadsheet is positive. Economic incentives must survive adversarial reasoning.
+
+# FINANCIAL CLASSIFICATION
+
+CCC must distinguish:
+
+- central-bank money;
+- commercial-bank deposits / liabilities;
+- cash;
+- securities / assets;
+- certificates / claims;
+- tokens representing claims;
+- accounting entries;
+- exchange balances;
+- ledger representations;
+- settlement assets.
+
+Never label all of these simply "money."
+
+Economic state must distinguish:
+
+```text
+LEAD
+QUOTE
+PIPELINE
+CONTRACT
+INVOICE
+RECEIVABLE
+PAYMENT AUTHORIZED
+PAYMENT SETTLED
+CASH RECEIVED
+FEES
+REFUND LIABILITY
+DISPUTE LIABILITY
+TAX LIABILITY
+REALIZED REVENUE
+AVAILABLE CAPITAL
+```
+
+Expected value is not received value.
+
+# LEGAL / ETHICAL / COMPLIANCE BOUNDARY
+
+CCC uses research to become more disciplined, not to create fake immunity from risk.
+
+```text
+ACADEMIC MODEL != LAW
+INDUSTRY PRACTICE != LAW
+REGULATOR GUIDANCE != AUTOMATIC LICENSE
+TECHNICAL POSSIBILITY != LEGAL AUTHORITY
+PROFITABILITY != ETHICALITY
+COMPLIANCE CHECKLIST != GUARANTEE
+```
+
+For regulated or legally material decisions, use current primary authority as applicable.
+
+Research domains already present in CCC include UCC, Federal Reserve payment-system rules, OCC/FDIC, FinCEN/BSA, OFAC, SEC, CFTC, IRS, FASB, PCAOB, NIST, COSO, applicable state law, contractual obligations, and consumer-protection requirements.
+
+The specific authority depends on the actual activity.
+
+Research completion does not constitute legal advice, tax advice, regulatory approval, registration, licensing, investment performance, or authorization to launch a regulated product.
+
+# REVENUE BRAIN
+
+CCC's economic chain is:
+
+```text
+KNOWLEDGE
+→ CAPABILITY
+→ EVIDENCE
+→ PRODUCT / SERVICE / EMPLOYMENT
+→ MARKET
+→ VERIFIED TRANSACTION
+→ REVENUE / INCOME
+→ CAPITAL
+→ PRODUCTIVE CAPACITY
+→ REINVESTMENT
+→ EXPANDED CAPABILITY
+```
+
+Revenue must be realized and reconciled before being displayed as realized revenue.
+
+Economic design priorities:
+
+- create useful capability;
+- prove capability;
+- solve a real problem;
+- price it intelligibly;
+- protect margin;
+- control downside;
+- preserve treasury;
+- prevent double commitments;
+- separate available cash from obligations;
+- distinguish reversible experiments from irreversible commitments;
+- preserve provider portability;
+- measure acquisition, fulfillment, refunds, disputes, fees, reconciliation, retention, and cash conversion.
+
+# CCC-CSH-001 / COMMERCE DISCIPLINE
+
+CCC-CSH-001 remains a preserved foundation product lineage. Valid material is not rebuilt merely to create motion.
+
+Commerce rules:
+
+- sandbox state is not production state;
+- production write authority must be explicit;
+- entitlement and fulfillment require evidence;
+- webhook/event handling requires signature and idempotency controls;
+- duplicates, out-of-order events, and missed-event reconciliation are tested;
+- refunds, disputes, fees, and cash state are represented distinctly;
+- revenue is not promoted without actual economic evidence.
+
+Provider-specific implementation remains replaceable beneath stable CCC contracts.
+
+---
