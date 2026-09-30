@@ -44,3 +44,11 @@ WORKER TEAM LAW
 
 If evidence is missing, downgrade the claim, not reality.
 If execution is available and authorized, do not downgrade the mission to plan-only.
+
+
+MY OG CCC BRAIN REQUIRED LAW
+- MY_OG_CCC_BRAIN is required pre-execution context for material CCC work.
+- For financial, revenue, ledger, token, settlement, incentive, or economic design: load MIT / GAME THEORY / MECHANISM DESIGN gate plus current legal/regulatory primary sources.
+- BUILD_MODIFICATION_AUTHORITY = GITHUB.
+- Worker/model agreement is advisory; evidence remains authority.
+- Capability absent means HOLD_EXACT_DEFECT, never manufactured capability.
