@@ -234,3 +234,232 @@ Worker routing is earned through accuracy, evidence quality, rework rate, latenc
 A disconnected worker cannot claim live operation.
 
 ---
+
+# MIRROR
+
+Mirror is the epistemic state and provenance layer. Mirror does not invent missing evidence.
+
+A material claim should be representable with:
+
+```text
+CLAIM_ID
+MISSION_ID
+CLAIM_TEXT
+CLASS
+SOURCE_IDS
+EVIDENCE_IDS
+OBSERVED_AT
+FRESH_UNTIL
+CONTRADICTIONS
+AI1_RESULT
+AI2_RESULT
+AI3_RESULT
+AUTHORITY_STATE
+PROMOTION_STATE
+PREVIOUS_STATE
+BLOCK_REASON
+LAST_VERIFIED_AT
+```
+
+Mirror answers what is claimed, what proves it, how fresh it is, what conflicts with it, who had authority, and whether the claim may be promoted.
+
+Mirror is not sovereign. Human Command remains sovereign.
+
+# GREEN JEWEL
+
+Green Jewel is alignment / drift / correction intelligence.
+
+Permanent drift classes:
+
+```text
+MANUFACTURED_INFORMATION_DRIFT
+=
+CLAIM / STATUS EXCEEDS AVAILABLE PROOF
+
+EXECUTION_DEGRADATION_DRIFT
+=
+SYSTEM OPERATES BELOW THE HIGHEST AUTHORIZED EXECUTABLE DEGREE
+WITHOUT A REAL REASON
+```
+
+Manufactured-information response:
+
+```text
+BLOCK
+DOWNGRADE
+CORRECT
+REGRESSION
+REINJECT
+```
+
+Execution-degradation response:
+
+```text
+REMOVE USELESS FRICTION
+RETURN TO PROVEN STATE
+SELECT STRONGER VERIFIED ROUTE
+EXECUTE
+```
+
+Neither response bypasses consequential Human authority.
+
+# Dr.D — DISTINCTIVELY / DO / DID / DONE
+
+Dr.D preserves completion semantics.
+
+```text
+DISTINCTIVELY
+=
+objective
++ context
++ authority
++ current state
++ claim class
++ required evidence
++ execution magnitude
+
+DO
+=
+authorized action actually initiated
+
+DID
+=
+action physically / digitally occurred
++ receipt
+
+DONE
+=
+DID
++ independent boundary verification
++ MIF-3 truth pass
++ required authority
++ no unresolved material conflict
++ committed receipt
+```
+
+No AI self-promotes DO → DID or DID → DONE.
+
+# 3-6-9
+
+3-6-9 governs movement and truth processing.
+
+## THREE
+
+```text
+FACT
+RISK
+ACTION
+```
+
+## SIX
+
+```text
+SOURCE
+TIME
+OWNER
+CHANGE
+VALIDATION
+PROVENANCE
+```
+
+## NINE
+
+```text
+DEFINE
+OBSERVE
+RECORD
+TEST
+VERIFY
+CORRELATE
+PACKAGE
+MAP
+REINJECT
+```
+
+3-6-9 must not become ceremonial delay. When no Human gate is required, much of the cycle may be computationally internal.
+
+# INFINITY 13D OPERATIONAL STATE SPACE
+
+CCC 13D is a project-defined operational state space. It is not a claim about physical spacetime dimensions.
+
+```text
+D01 IDENTITY
+D02 ACCESS
+D03 RUNTIME
+D04 NETWORK
+D05 DATA
+D06 SECRETS
+D07 EVIDENCE
+D08 SOC
+D09 PERFORMANCE
+D10 STORAGE
+D11 APPLICATION
+D12 REVENUE
+D13 CONTINUITY
+```
+
+MIF-3 operates across 13D. Manufactured-information prevention is not a fictional D14.
+
+# SENTINEL / MERLIN / DEFENSIVE INTELLIGENCE
+
+Sentinel and Merlin remain bounded defensive capability layers under Human Command and CCC doctrine.
+
+Permanent controls:
+
+- offensive-capability material remains authorized-lab bounded;
+- LAB_ONLY content does not auto-run;
+- tool catalogs require explicit role and isolation;
+- capability does not equal authority;
+- demonstration does not equal production use;
+- security claims require evidence;
+- secrets do not enter public evidence packages;
+- public portfolio evidence is synthetic or sanitized where required.
+
+# ASSEP
+
+ASSEP supports bounded internal improvement so Human Command does not have to manually approve every reversible routine correction.
+
+ASSEP does not authorize itself to expand scope, change doctrine, make irreversible consequential decisions, move production money, create legal obligations, publish unsupported external claims, change credential/security authority, or promote UNKNOWN to PASS.
+
+Bounded improvement must remain observable, reversible where required, and evidence-producing.
+
+# LEDGER — APPEND-ONLY EVIDENCE AUTHORITY
+
+CCC's evidence ledger is not "blockchain by default."
+
+Phase-1 preferred structure:
+
+- append-only JSONL or SQLite/PostgreSQL;
+- canonical event hashing;
+- previous-event hash where appropriate;
+- chain verification;
+- source / time / owner / change / validation / provenance;
+- synthetic / real separation;
+- operational / financial classification.
+
+Minimum event fields:
+
+```text
+event_id
+timestamp
+source
+owner
+organ
+run_id
+event_type
+previous_state
+new_state
+change
+validation
+provenance
+artifact_hashes
+synthetic
+financial_classification
+notes
+```
+
+If CCC merely links records cryptographically, call it a HASH-CHAINED LEDGER or TAMPER-EVIDENT LEDGER.
+
+Do not call it a blockchain unless the architecture actually implements the distributed-ledger / consensus properties being claimed.
+
+---
