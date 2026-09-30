@@ -1,6 +1,6 @@
 {
   "schema": "ccc.system_policy_current.v1",
-  "effective_date": "2026-09-17",
+  "effective_date": "2026-09-30",
   "authority": "Human Command",
   "state": "ACTIVE",
   "persistence": "UNTIL_EXPLICIT_HUMAN_COMMAND_SUPERSESSION_OR_REVOCATION",
@@ -8,6 +8,7 @@
   "mif3_orchestration": "00_Admin_Control/CCC_Hard_Sync/2026-09-17_MIF3_UPPER_ECHELON_ORCHESTRATION_v2.md",
   "prior_hard_sync": "00_Admin_Control/CCC_Hard_Sync/2026-09-17_CCC_DOCTRINE_FAULT_MIF3_HARD_SYNC.md",
   "required_pre_execution_resolution": [
+    "My OG CCC Brain active context",
     "Human Command objective",
     "current doctrine",
     "current authority",
@@ -25,10 +26,16 @@
     "NO_MANUFACTURED_INFORMATION",
     "PRESERVE_VALID_WORK",
     "FAULT_TO_REGRESSION_TO_REINJECTION",
-    "HUMAN_COMMAND_FINAL_CONSEQUENTIAL_AUTHORITY"
+    "HUMAN_COMMAND_FINAL_CONSEQUENTIAL_AUTHORITY",
+    "OG_CCC_BRAIN_REQUIRED_PRE_EXECUTION_CONTEXT",
+    "MIT_GAME_THEORY_MECHANISM_DESIGN_REQUIRED_FOR_FINANCIAL_ECONOMIC_DESIGN",
+    "BUILD_MODIFICATION_AUTHORITY_IS_GITHUB"
   ],
   "silent_expiration": false,
   "silent_downgrade": false,
   "silent_authority_expansion": false,
-  "documentation_is_runtime_proof": false
+  "documentation_is_runtime_proof": false,
+  "og_ccc_brain": "00_Admin_Control/MY_OG_CCC_BRAIN.md",
+  "og_ccc_brain_state": "ACTIVE_REQUIRED_PRE_EXECUTION_CONTEXT",
+  "og_ccc_brain_persistence": "UNTIL_EXPLICIT_HUMAN_COMMAND_SUPERSESSION_OR_REVOCATION"
 }
