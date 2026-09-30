@@ -1,0 +1,49 @@
+{
+  "schema": "ccc.dell.clean_rebuild.source_lock.v1",
+  "package": "CCC_DELL_CLEAN_REBUILD_v1.0.0_20260930",
+  "authority": "Human Command",
+  "repository": "ced213gcg-design/FreedomArchitect",
+  "branch_source": "main",
+  "source_commit": "cc2565379b28c5a04a8078d176dbb9285f9ce52c",
+  "sources": [
+    {
+      "path": "00_Admin_Control/SYSTEM_POLICY_CURRENT.json",
+      "blob_sha": "aae8af3a514cf81a535f24a2bac7652ac74fbb72"
+    },
+    {
+      "path": "00_Admin_Control/UPPER_ECHELON_EXECUTION_DOCTRINE.md",
+      "blob_sha": "230d50f0a74d67cc8c639d196b0661676ac94a75"
+    },
+    {
+      "path": "00_Admin_Control/CCC_Hard_Sync/2026-09-17_MIF3_UPPER_ECHELON_ORCHESTRATION_v2.md",
+      "blob_sha": "422a3c7b1e9fe0fa5e1d271fbe3c6463bd944f24"
+    },
+    {
+      "path": "00_Admin_Control/CCC_Hard_Sync/2026-09-17_COMM3_CONTROL_STATE_AND_RESEARCH_RULE.md",
+      "blob_sha": "62a99e120f06d8338af5ecb6ee38963eb71255aa"
+    },
+    {
+      "path": "00_Admin_Control/CCC_Hard_Sync/2026-09-17_COMM3_UPPER_ECHELON_RESET_v2.md",
+      "blob_sha": "4ac2817a89b21096989aa72f1a04eb6085b12eae"
+    },
+    {
+      "path": "00_Admin_Control/CCC_Hard_Sync/2026-09-17_CCC_DOCTRINE_FAULT_MIF3_HARD_SYNC.md",
+      "blob_sha": "b91e47c505bdcf36042a59cea5c532ec0be15ba1"
+    },
+    {
+      "path": "00_Admin_Control/CCC_Hard_Sync/2026-09-17_CCC_HARD_SYNC_RECEIPT.json",
+      "blob_sha": "337cfadf9f91458edd36479baf39da40e26b58f9"
+    }
+  ],
+  "truth_controls": [
+    "FACT BEFORE CLAIM",
+    "UNKNOWN != PASS",
+    "NO LOOP",
+    "NO MANUFACTURED INFORMATION",
+    "PRESERVE VALID WORK",
+    "HUMAN COMMAND FINAL CONSEQUENTIAL AUTHORITY"
+  ],
+  "package_status": "BUILT_NOT_DEPLOYED",
+  "wipe_status": "HOLD_SAVE_ALL_REQUIRED",
+  "topology_status": "HOLD_EXACT_BRIDGE_ADDRESSING_NOT_GITHUB_RECONCILED"
+}
