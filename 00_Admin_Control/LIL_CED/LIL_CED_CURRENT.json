@@ -2,9 +2,9 @@
   "schema": "ccc.lilced.current.v1",
   "date": "2026-09-30",
   "authority": "Human Command",
-  "state": "FULL_ALPHA_PASS",
+  "state": "FULL_ALPHA_PASS_PROVIDER_ALL_PASS",
   "current_spec": "00_Admin_Control/LIL_CED/LIL_CED_ALPHA_CURRENT_v0.8.md",
-  "runtime_bundle": "00_Admin_Control/LIL_CED/runtime_v0.8/",
+  "runtime_bundle": "00_Admin_Control/LIL_CED/runtime_v0.9_provider_all/",
   "source": "Human-supplied LIL_CED_FULL_ALPHA_DRAFT_v0.7.pdf",
   "source_status": "PRESERVED",
   "chatgpt_dependency": "NONE_BY_ARCHITECTURE",
@@ -28,5 +28,21 @@
   "model_provider": "Anthropic",
   "model_id": "claude-sonnet-5-5",
   "model_credential": "NOT_CONFIGURED",
-  "runtime_mode": "SAFE_NO_MODEL"
+  "runtime_mode": "SAFE_NO_MODEL",
+  "runtime_version": "0.9-provider-all",
+  "provider_mode": "all",
+  "registered_providers": [
+    "anthropic",
+    "openai",
+    "google",
+    "xai",
+    "compatible",
+    "ollama"
+  ],
+  "provider_all_acceptance": "19/19 PASS",
+  "provider_all_runtime_commit": "1ec115976231b5242872882d7baa417366f2d7e8",
+  "provider_credentials": "NONE_CONFIGURED",
+  "one_model_call_at_a_time": true,
+  "provider_all_off_hp_recovery": "PASS_GITHUB_RUNTIME_COMMIT",
+  "drive_baseline_backup": "PASS_V0.8_FULL_ALPHA"
 }
