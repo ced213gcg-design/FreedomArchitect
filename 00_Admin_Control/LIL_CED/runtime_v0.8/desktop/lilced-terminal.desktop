@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Lil Ced Terminal
+Comment=Private standalone Lil Ced / Dr.D operator terminal
+Exec=/home/ced213gcg/LilCed/app/.venv/bin/python /home/ced213gcg/LilCed/app/lilced_terminal.py
+Terminal=true
+Icon=utilities-terminal
+Categories=Utility;Development;

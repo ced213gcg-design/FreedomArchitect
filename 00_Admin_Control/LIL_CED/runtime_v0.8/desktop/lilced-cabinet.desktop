@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Lil Ced Cabinet
+Comment=Open the separate Lil Ced documentation cabinet
+Exec=xdg-open /home/ced213gcg/LIL_CED_CABINET
+Terminal=false
+Icon=folder-documents
+Categories=Utility;

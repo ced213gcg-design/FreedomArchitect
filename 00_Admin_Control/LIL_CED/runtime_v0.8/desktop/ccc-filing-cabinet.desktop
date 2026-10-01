@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=CCC Filing Cabinet
+Comment=Open the CCC filing cabinet
+Exec=xdg-open /home/ced213gcg/CCC_FILING_CABINET
+Terminal=false
+Icon=folder-documents
+Categories=Utility;

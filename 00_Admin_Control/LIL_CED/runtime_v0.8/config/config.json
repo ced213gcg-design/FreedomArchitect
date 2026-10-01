@@ -1,0 +1,42 @@
+{
+  "schema": "lilced.alpha.config.v1",
+  "version": "0.8-alpha",
+  "model_provider": "anthropic",
+  "model_id": "claude-sonnet-5-5",
+  "model_api_key_env": "ANTHROPIC_API_KEY",
+  "spend_cap_task_usd": 0.25,
+  "spend_cap_day_usd": 2,
+  "max_inflight_model_calls": 1,
+  "workspace": "/home/ced213gcg/LilCed/workspace",
+  "separate_cabinet": "/home/ced213gcg/LIL_CED_CABINET",
+  "ccc_mirror": "/home/ced213gcg/CCC_FILING_CABINET/14_LIL_CED",
+  "socket": "/home/ced213gcg/.local/state/lilced/lilced.sock",
+  "secrets_file": "/home/ced213gcg/.config/lilced/secrets.env",
+  "read_roots": [
+    "/home/ced213gcg/LilCed/workspace",
+    "/home/ced213gcg/LIL_CED_CABINET",
+    "/home/ced213gcg/CCC_FILING_CABINET",
+    "/home/ced213gcg/.config/lilced"
+  ],
+  "tools": [
+    "read",
+    "workspace-write",
+    "hash",
+    "status"
+  ],
+  "shell_enabled": false,
+  "closed_lanes": [
+    "Letta",
+    "Open Interpreter",
+    "Goose",
+    "OpenHands",
+    "CrewAI",
+    "Microsoft Agent Framework",
+    "n8n",
+    "Hermes",
+    "OpenClaw",
+    "voice",
+    "HUD",
+    "local LLM"
+  ]
+}

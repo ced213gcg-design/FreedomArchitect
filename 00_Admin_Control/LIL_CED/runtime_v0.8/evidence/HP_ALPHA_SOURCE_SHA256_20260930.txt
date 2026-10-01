@@ -1,0 +1,14 @@
+b181d8bc3e856dab13bef393b8756b61a15ab7894ad6578f14ddd03d66a65c76        6920  /home/ced213gcg/LilCed/app/lilced_core.py
+001c8ade43f3d52d980a4893c18769e9614b857a30c508d992d00d824b81069f        1166  /home/ced213gcg/LilCed/app/lilced_terminal.py
+3ba4e8353e6227749c6761b7180526f874efc794faaa00a13a273f6c5235ba47        1646  /home/ced213gcg/LilCed/app/lilced_graph.py
+d1ea96fd8b480b0e98fd7c6356afd7d235f8985b404359d615e974dff6dcf98a        1477  /home/ced213gcg/LilCed/app/lilced_model.py
+0315ba14d8a0c90a1bc5bcf5e7859c273946bb936f4e0cdd10eb6267779fd641        1073  /home/ced213gcg/LilCed/app/config.json
+103630880178d4202ff9fb223d67d4d3a5ed29f8ea0b3d9b21feefb0c845a818        2194  /home/ced213gcg/LilCed/app/setup_alpha.sh
+e6c6e57f9abe541805a6e806d801f32f2fa16f09ba8acdbd4fd1db7ad3c8d90a        3854  /home/ced213gcg/LilCed/tests/alpha_acceptance.py
+39435940efcf6f332c21e104ab6da51248a289453c108b6c8f560d6c71437c21         407  /home/ced213gcg/.config/systemd/user/lilced-core.service
+436331044b2a1efd82b17ea3cbc8b63038b7da9a71743fd391a95da83a6f8b24         280  /home/ced213gcg/.local/share/applications/lilced-terminal.desktop
+46c55fe95c5d6eccde4e0052f30edbacb853c89f3cd2c0fbb4790be4ea629e6e         213  /home/ced213gcg/.local/share/applications/lilced-cabinet.desktop
+2a420348b5931003f93f2cc521cba685c56ed44103ff22c98e511ebe45179192         199  /home/ced213gcg/.local/share/applications/ccc-filing-cabinet.desktop
+ed3249044ee0b97dae80b42b615285201ad0bc04c49c054c716865c4b3636b0a        1137  /home/ced213gcg/LIL_CED_CABINET/03_MIT_GATE/worksheet.md
+7cde8ad10d46b10a3a1398fc22ed1520b6925dd3275088eb6677e5aebba09d4e         392  /home/ced213gcg/LIL_CED_CABINET/08_LANES_REGISTERED/LANES.md
+8a78052c7a5ce7311893f0e39d7842616436e4254fe9e79c6cdacec7ad16b0f1         764  /home/ced213gcg/LIL_CED_CABINET/04_SOURCE_AND_DEPENDENCIES/requirements.lock.txt

@@ -1,0 +1,16 @@
+[Unit]
+Description=Lil Ced Standalone Dr.D Alpha Core
+After=default.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/ced213gcg/LilCed/app
+Environment=ANTHROPIC_API_KEY=
+EnvironmentFile=-/home/ced213gcg/.config/lilced/secrets.env
+ExecStart=/home/ced213gcg/LilCed/app/.venv/bin/python /home/ced213gcg/LilCed/app/lilced_core.py
+Restart=on-failure
+RestartSec=2
+UMask=0077
+
+[Install]
+WantedBy=default.target
