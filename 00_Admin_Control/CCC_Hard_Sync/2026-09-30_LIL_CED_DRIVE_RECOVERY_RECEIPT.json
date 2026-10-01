@@ -1,0 +1,23 @@
+{
+  "schema": "ccc.lilced.drive_recovery_receipt.v1",
+  "date": "2026-09-30",
+  "authority": "Human Command",
+  "folder_name": "LILCED_BACKUP",
+  "folder_id": "1NZCZoR3dce43wgEYs4tkW4cUx3dra_9g",
+  "uploaded": [
+    "LIL_CED_FULL_ALPHA_DRAFT_v0.7.pdf",
+    "LIL_CED_STANDALONE_DRD_EXECUTION_PLAN_v0.3_REPAIRED.pdf",
+    "LIL_CED_STANDALONE_DRD_EXECUTION_PLAN_v0.5.pdf"
+  ],
+  "runtime_source": "FreedomArchitect commit 4aec592738d4104452992486171549c47b90f378",
+  "hp_tarball": {
+    "path": "/home/ced213gcg/LIL_CED_BACKUP_EXPORT/LILCED_BACKUP_20260930.tar.gz",
+    "size_bytes": 6443225,
+    "sha256": "ed189397d036d88782b7fa7df8933be0e4da9cbdedfdfd817e4ea084d4afea2f",
+    "secret_exclusion": "PASS",
+    "transfer_state": "PENDING"
+  },
+  "pve_usb": "DETECTED_BUT_NOT_MODIFIED",
+  "state": "DRIVE_RECOVERY_SET_PASS_TARBALL_TRANSFER_PENDING",
+  "truth_boundary": "Drive contains recovery documents and GitHub contains the full runtime source/evidence bundle. Full off-container cabinet backup remains open until the verified HP tarball is copied to Drive or separate writable USB."
+}
