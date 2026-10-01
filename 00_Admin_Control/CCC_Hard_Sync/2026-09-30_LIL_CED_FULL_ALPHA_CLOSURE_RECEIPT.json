@@ -1,0 +1,31 @@
+{
+  "schema": "ccc.lilced.full_alpha_closure_receipt.v1",
+  "date": "2026-09-30",
+  "authority": "Human Command",
+  "state": "FULL_ALPHA_PASS",
+  "hp": {
+    "service": "active",
+    "socket_mode": "0600",
+    "acceptance": "14/14 PASS",
+    "cold_starts": "5/5 PASS",
+    "h2": 1,
+    "brain_integrity": "PASS",
+    "runtime_mode": "SAFE_NO_MODEL"
+  },
+  "backup": {
+    "drive_folder_id": "1NZCZoR3dce43wgEYs4tkW4cUx3dra_9g",
+    "archive_file_id": "1Cgbb4Xh7tfMYqNWX0dOe41YmEjszM653",
+    "archive": "LILCED_14_LIL_CED_20260930.tar.gz",
+    "size_bytes": 4860,
+    "source_sha256": "fa08e18efc43392a87aabd33393b0844054f0a14978f5bd3128ba3729237c922",
+    "drive_readback_sha256": "fa08e18efc43392a87aabd33393b0844054f0a14978f5bd3128ba3729237c922",
+    "readback": "PASS",
+    "secret_content_scan": "PASS"
+  },
+  "model": {
+    "provider": "Anthropic",
+    "model_id": "claude-sonnet-5-5",
+    "credential": "NOT_CONFIGURED"
+  },
+  "truth_boundary": "The adopted v0.8 alpha stop line is closed. Closed post-alpha lanes remain closed and no Anthropic secret was invented."
+}
