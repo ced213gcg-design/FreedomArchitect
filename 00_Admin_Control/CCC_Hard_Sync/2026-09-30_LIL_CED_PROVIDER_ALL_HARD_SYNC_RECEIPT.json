@@ -1,0 +1,35 @@
+{
+  "schema": "ccc.lilced.provider_all_hard_sync.v1",
+  "date": "2026-09-30",
+  "authority": "Human Command",
+  "instruction": "Provider = ALL",
+  "state": "PROVIDER_ALL_PASS",
+  "version": "0.9-provider-all",
+  "runtime_commit": "1ec115976231b5242872882d7baa417366f2d7e8",
+  "registered_providers": [
+    "anthropic",
+    "openai",
+    "google",
+    "xai",
+    "compatible",
+    "ollama"
+  ],
+  "routing_mode": "all",
+  "fanout_per_prompt": false,
+  "max_inflight_model_calls": 1,
+  "acceptance": "19/19 PASS",
+  "sdk_versions": {
+    "anthropic": "1.11.0",
+    "openai": "3.22.1",
+    "google_genai": "2.26.0",
+    "langgraph": "1.2.12"
+  },
+  "credentials": "NONE_CONFIGURED",
+  "live_mode": "SAFE_NO_MODEL",
+  "secret_file": "0600 / empty",
+  "brain_integrity": "PASS",
+  "provider_source_sha256": "f5073e0d45f10309187214519248937294727a6c8eb7eeebb2140de3ff2c5976",
+  "core_sha256": "e2903bc975f4790156cc35f58648bb33e4299423a907d15136850e1ff8e5ec7c",
+  "requirements_lock_sha256": "fb8fc5cdf748a9a7cde0d7259101a624433a0d2831761632b312ed4037f5a05b",
+  "truth_boundary": "Provider-All means all registered providers are selectable. It does not fabricate credentials, make unconfigured providers reachable, or fan out every prompt to every billable provider."
+}
