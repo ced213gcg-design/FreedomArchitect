@@ -1,0 +1,77 @@
+{
+  "schema": "lilced.provider_all.acceptance.v1",
+  "version": "0.9-provider-all",
+  "tests": {
+    "service_active": true,
+    "version": true,
+    "provider_mode_all": true,
+    "provider_set_exact": true,
+    "all_unconfigured_without_secrets": true,
+    "safe_no_model": true,
+    "brain_integrity": true,
+    "socket_0600": true,
+    "secret_0600": true,
+    "secret_empty": true,
+    "one_call_rule": true,
+    "configuration_detection": true,
+    "select_anthropic": true,
+    "select_openai": true,
+    "select_google": true,
+    "select_xai": true,
+    "select_compatible": true,
+    "select_ollama": true,
+    "select_all": true
+  },
+  "provider_status": {
+    "anthropic": {
+      "provider": "anthropic",
+      "state": "UNCONFIGURED",
+      "model": "claude-sonnet-5-5",
+      "adapter": "anthropic",
+      "base_url": null,
+      "credential_env": "ANTHROPIC_API_KEY"
+    },
+    "openai": {
+      "provider": "openai",
+      "state": "UNCONFIGURED",
+      "model": "gpt-6-astra",
+      "adapter": "openai",
+      "base_url": null,
+      "credential_env": "OPENAI_API_KEY"
+    },
+    "google": {
+      "provider": "google",
+      "state": "UNCONFIGURED",
+      "model": "gemini-3.8-flash",
+      "adapter": "google",
+      "base_url": null,
+      "credential_env": "GEMINI_API_KEY"
+    },
+    "xai": {
+      "provider": "xai",
+      "state": "UNCONFIGURED",
+      "model": "grok-4.7",
+      "adapter": "openai_compatible",
+      "base_url": "https://api.x.ai/v1",
+      "credential_env": "XAI_API_KEY"
+    },
+    "compatible": {
+      "provider": "compatible",
+      "state": "UNCONFIGURED",
+      "model": null,
+      "adapter": "openai_compatible",
+      "base_url": null,
+      "credential_env": "COMPAT_API_KEY"
+    },
+    "ollama": {
+      "provider": "ollama",
+      "state": "UNCONFIGURED",
+      "model": null,
+      "adapter": "ollama",
+      "base_url": "http://127.0.0.1:11434",
+      "credential_env": null
+    }
+  },
+  "final_provider_mode": "all",
+  "state": "PASS"
+}

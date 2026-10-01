@@ -1,0 +1,76 @@
+{
+  "schema": "lilced.provider_all.config.v1",
+  "version": "0.9-provider-all",
+  "provider_mode": "all",
+  "provider_policy": "all registered providers allowed; one model call at a time; first configured provider by routing priority unless Human Command selects a provider",
+  "providers": {
+    "anthropic": {
+      "key_env": "ANTHROPIC_API_KEY",
+      "model_env": "ANTHROPIC_MODEL",
+      "default_model": "claude-sonnet-5-5"
+    },
+    "openai": {
+      "key_env": "OPENAI_API_KEY",
+      "model_env": "OPENAI_MODEL",
+      "default_model": "gpt-6-astra"
+    },
+    "google": {
+      "key_env": "GEMINI_API_KEY",
+      "model_env": "GEMINI_MODEL",
+      "default_model": "gemini-3.8-flash"
+    },
+    "xai": {
+      "key_env": "XAI_API_KEY",
+      "model_env": "XAI_MODEL",
+      "default_model": "grok-4.7",
+      "base_url": "https://api.x.ai/v1"
+    },
+    "compatible": {
+      "key_env": "COMPAT_API_KEY",
+      "model_env": "COMPAT_MODEL",
+      "base_url_env": "COMPAT_BASE_URL"
+    },
+    "ollama": {
+      "model_env": "OLLAMA_MODEL",
+      "base_url_env": "OLLAMA_BASE_URL",
+      "default_base_url": "http://127.0.0.1:11434"
+    }
+  },
+  "routing_priority": [
+    "anthropic",
+    "openai",
+    "google",
+    "xai",
+    "compatible",
+    "ollama"
+  ],
+  "spend_cap_task_usd": 0.25,
+  "spend_cap_day_usd": 2,
+  "max_inflight_model_calls": 1,
+  "workspace": "/home/ced213gcg/LilCed/workspace",
+  "separate_cabinet": "/home/ced213gcg/LIL_CED_CABINET",
+  "ccc_mirror": "/home/ced213gcg/CCC_FILING_CABINET/14_LIL_CED",
+  "socket": "/home/ced213gcg/.local/state/lilced/lilced.sock",
+  "secrets_file": "/home/ced213gcg/.config/lilced/secrets.env",
+  "shell_enabled": false,
+  "tools": [
+    "read",
+    "workspace-write",
+    "hash",
+    "status"
+  ],
+  "closed_lanes": [
+    "Letta",
+    "Open Interpreter",
+    "Goose",
+    "OpenHands",
+    "CrewAI",
+    "Microsoft Agent Framework",
+    "n8n",
+    "Hermes",
+    "OpenClaw",
+    "voice",
+    "HUD",
+    "local LLM"
+  ]
+}

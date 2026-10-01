@@ -1,0 +1,51 @@
+{
+  "schema": "lilced.provider_all.deployment.v1",
+  "date": "2026-09-30",
+  "authority": "Human Command",
+  "state": "PROVIDER_ALL_PASS",
+  "version": "0.9-provider-all",
+  "provider_mode": "all",
+  "registered_providers": [
+    "anthropic",
+    "openai",
+    "google",
+    "xai",
+    "compatible",
+    "ollama"
+  ],
+  "routing_policy": "all registered providers eligible; single-call routing; no fan-out by default",
+  "routing_priority": [
+    "anthropic",
+    "openai",
+    "google",
+    "xai",
+    "compatible",
+    "ollama"
+  ],
+  "sdk_versions": {
+    "anthropic": "1.11.0",
+    "openai": "3.22.1",
+    "google_genai": "2.26.0",
+    "langgraph": "1.2.12"
+  },
+  "acceptance": "19/19 PASS",
+  "no_credential_behavior": "SAFE_NO_MODEL",
+  "provider_configuration_detection": "PASS",
+  "secret_file": {
+    "path": "~/.config/lilced/secrets.env",
+    "mode": "0600",
+    "size_bytes": 0
+  },
+  "official_api_grounding": {
+    "openai": "https://developers.openai.com/api/docs",
+    "google": "https://ai.google.dev/api/generate-content",
+    "xai": "https://docs.x.ai/developers/rest-api-reference/inference"
+  },
+  "hashes": {
+    "requirements_lock": "fb8fc5cdf748a9a7cde0d7259101a624433a0d2831761632b312ed4037f5a05b",
+    "provider_source": "f5073e0d45f10309187214519248937294727a6c8eb7eeebb2140de3ff2c5976",
+    "core": "e2903bc975f4790156cc35f58648bb33e4299423a907d15136850e1ff8e5ec7c",
+    "config": "c9647f59a16f51910666ef97ad3b18db7a201e0ce47f877deb02cc28c379ee7b"
+  },
+  "truth_boundary": "Provider-All architecture is installed and verified. Individual cloud providers remain UNCONFIGURED until their own local credentials are supplied. Installed does not mean credentialed or billable."
+}
