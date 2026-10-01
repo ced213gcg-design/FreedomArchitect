@@ -14,7 +14,11 @@
   "cold_start_sample": "5/5",
   "h2": 1,
   "github_runtime_commit": "4aec592738d4104452992486171549c47b90f378",
-  "off_container_backup": "PENDING_DRIVE_OR_USB",
-  "full_alpha_closure": "HOLD_BACKUP_GATE",
-  "explicit_human_command": "ADOPT ALL / INTEGRATE AND ADOPT ALL; HP connected, document in terminal, CCC, separate Lil Ced cabinet, and GitHub; continue all."
+  "off_container_backup": "PARTIAL_RECOVERY_SET_PASS_TARBALL_TRANSFER_PENDING",
+  "full_alpha_closure": "HOLD_TARBALL_OFF_CONTAINER_COPY",
+  "explicit_human_command": "ADOPT ALL / INTEGRATE AND ADOPT ALL; HP connected, document in terminal, CCC, separate Lil Ced cabinet, and GitHub; continue all.",
+  "google_drive_backup_folder": "1NZCZoR3dce43wgEYs4tkW4cUx3dra_9g",
+  "google_drive_recovery_docs": "PASS",
+  "hp_backup_export_sha256": "ed189397d036d88782b7fa7df8933be0e4da9cbdedfdfd817e4ea084d4afea2f",
+  "hp_backup_export_size_bytes": 6443225
 }
