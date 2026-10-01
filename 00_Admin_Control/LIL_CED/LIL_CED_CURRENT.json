@@ -1,0 +1,14 @@
+{
+  "schema": "ccc.lilced.current.v1",
+  "date": "2026-09-30",
+  "authority": "Human Command",
+  "state": "ADOPTED_ALPHA_CURRENT",
+  "current_spec": "00_Admin_Control/LIL_CED/LIL_CED_ALPHA_CURRENT_v0.8.md",
+  "source": "Human-supplied LIL_CED_FULL_ALPHA_DRAFT_v0.7.pdf",
+  "source_status": "PRESERVED",
+  "chatgpt_dependency": "NONE_BY_ARCHITECTURE",
+  "dell": "OUT_OF_SCOPE",
+  "hp_local_sync": "PENDING_REMOTE_ENDPOINT",
+  "runtime_execution": "NOT_CLAIMED_BY_THIS_ADOPTION",
+  "explicit_human_command": "ADOPT ALL / INTEGRATE AND ADOPT ALL"
+}
