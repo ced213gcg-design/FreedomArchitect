@@ -1,0 +1,28 @@
+{
+  "schema": "ccc.lilced.hp_runtime_sync_receipt.v1",
+  "date": "2026-09-30",
+  "authority": "Human Command",
+  "host": "penguin",
+  "state": "HP_RUNTIME_SYNC_PASS",
+  "runtime_commit": "4aec592738d4104452992486171549c47b90f378",
+  "service": "active",
+  "socket_mode": "0600",
+  "separate_cabinet": "/home/ced213gcg/LIL_CED_CABINET",
+  "ccc_mirror": "/home/ced213gcg/CCC_FILING_CABINET/14_LIL_CED",
+  "acceptance": {
+    "tests_passed": 14,
+    "five_cold_starts": "PASS",
+    "h2": 1,
+    "mit_off": "PASS",
+    "mit_on_hold": "PASS",
+    "shell_denied": "PASS",
+    "workspace_escape_denied": "PASS",
+    "brain_integrity": "PASS"
+  },
+  "model_id": "claude-sonnet-5-5",
+  "model_key_state": "NOT_CONFIGURED",
+  "chatgpt_runtime_dependency": "NONE",
+  "off_container_backup": "PENDING_DRIVE_OR_USB",
+  "full_alpha_closure": "HOLD_BACKUP_GATE",
+  "truth_boundary": "HP runtime and GitHub sync are PASS. Full alpha closure remains HOLD until the explicit off-container backup gate is satisfied."
+}
