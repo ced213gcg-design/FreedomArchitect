@@ -4,11 +4,17 @@
   "authority": "Human Command",
   "state": "ADOPTED_ALPHA_CURRENT",
   "current_spec": "00_Admin_Control/LIL_CED/LIL_CED_ALPHA_CURRENT_v0.8.md",
+  "runtime_bundle": "00_Admin_Control/LIL_CED/runtime_v0.8/",
   "source": "Human-supplied LIL_CED_FULL_ALPHA_DRAFT_v0.7.pdf",
   "source_status": "PRESERVED",
   "chatgpt_dependency": "NONE_BY_ARCHITECTURE",
-  "dell": "OUT_OF_SCOPE",
-  "hp_local_sync": "PENDING_REMOTE_ENDPOINT",
-  "runtime_execution": "NOT_CLAIMED_BY_THIS_ADOPTION",
-  "explicit_human_command": "ADOPT ALL / INTEGRATE AND ADOPT ALL"
+  "hp_local_sync": "PASS",
+  "hp_runtime_service": "ACTIVE",
+  "hp_local_acceptance": "PASS",
+  "cold_start_sample": "5/5",
+  "h2": 1,
+  "github_runtime_commit": "4aec592738d4104452992486171549c47b90f378",
+  "off_container_backup": "PENDING_DRIVE_OR_USB",
+  "full_alpha_closure": "HOLD_BACKUP_GATE",
+  "explicit_human_command": "ADOPT ALL / INTEGRATE AND ADOPT ALL; HP connected, document in terminal, CCC, separate Lil Ced cabinet, and GitHub; continue all."
 }
